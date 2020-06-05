@@ -4,7 +4,7 @@ HISTSIZE=10000
 
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/jaczac/.config/oh-my-zsh"
+export ZSH="$HOME/.config/oh-my-zsh"
 
 # Path to anaconda
 # export PATH="/usr/local/anaconda3/bin:$PATH"
@@ -45,9 +45,10 @@ export UPDATE_ZSH_DAYS=10
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
+# uncomment vim-mod to unable it
 plugins=(
 git
-vi-mode
+# vi-mode
 zsh-syntax-highlighting
 zsh-autosuggestions
 )
@@ -73,8 +74,9 @@ export EDITOR='vim'
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 
-#hide and show desktop
-alias showD="defaults write com.apple.finder CreateDesktop -bool true;killall Finder"
-alias hideD="defaults write com.apple.finder CreateDesktop -bool false;killall Finder"
+#hideD and showD are to hide and show desktop uncomment them to unable 
+#alias showD="defaults write com.apple.finder CreateDesktop -bool true;killall Finder"
+#alias hideD="defaults write com.apple.finder CreateDesktop -bool false;killall Finder"
+
 alias l='ls -lFh'
 alias Firefox="cd /Applications;open Firefox.app;cd"
