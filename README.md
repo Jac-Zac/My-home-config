@@ -21,7 +21,7 @@ sudo bash root_script.sh
 ```
 
 
-**I suggest to install also anaconda**
+**I suggest to install also** [anaconda](https://docs.anaconda.com/anaconda/install/mac-os/)
 
 ###### to have my same theme go to https://github.com/arcticicestudio/nord-terminal-app
 ###### to have my same font go to https://github.com/tonsky/FiraCode
