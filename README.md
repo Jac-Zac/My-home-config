@@ -7,11 +7,11 @@ this configuration repo contain everything to set up my termianal from scrach in
 ## Motivation
 I mainly craeted this to always have my config with me, but I would really be happy if anybody wanted to try it. And also If I can help someone with this I think it is worth to share it. 
 
-## example of what my terminal look like
+## Example of what my terminal look like
 
 ![showcase](https://github.com/Jac-Zac/My-home-config/blob/master/my_terminal.png)
 
-# installation
+# Installation
 
 ###### you have to be in zsh shell for this installation
 
@@ -38,6 +38,8 @@ sudo bash root_script.sh
 
 **I suggest to install also** [anaconda](https://docs.anaconda.com/anaconda/install/mac-os/)
 
-###### to have my same theme go to https://github.com/arcticicestudio/nord-terminal-app
-###### to have my same font go to https://github.com/tonsky/FiraCode
+**Other thing I suggest to have the same terminla style and look:**
+
+- If you want my same color theme go to -> https://github.com/arcticicestudio/nord-terminal-app
+- If you want to have my same font go to -> https://github.com/tonsky/FiraCode
 
