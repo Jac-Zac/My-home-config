@@ -2,7 +2,6 @@
 
 HISTSIZE=10000
 
-
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.config/oh-my-zsh"
 
@@ -19,7 +18,7 @@ ZSH_THEME=robbyrussell
 DISABLE_AUTO_UPDATE="true"
 
 # Uncomment the following line to automatically update without prompting.
-# DISABLE_UPDATE_PROMPT="true"
+DISABLE_UPDATE_PROMPT="true"
 
 # Uncomment the following line to change how often to auto-update (in days).
 export UPDATE_ZSH_DAYS=10
@@ -33,19 +32,12 @@ export UPDATE_ZSH_DAYS=10
 # Uncomment the following line to display red dots whilst waiting for completion.
 # COMPLETION_WAITING_DOTS="true"
 
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
 # Which plugins would you like to load?
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-# uncomment vim-mod to unable it
+# uncomment vi-mode to have a vim-like mode on terminal
 plugins=(
 git
 # vi-mode
@@ -74,9 +66,14 @@ export EDITOR='vim'
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 
-#hideD and showD are to hide and show desktop uncomment them to unable 
-#alias showD="defaults write com.apple.finder CreateDesktop -bool true;killall Finder"
-#alias hideD="defaults write com.apple.finder CreateDesktop -bool false;killall Finder"
+# alias to open Firefox
+# alias Firefox="cd /Applications;open Firefox.app;cd"
 
+# hide and show desktop
+# alias showD="defaults write com.apple.finder CreateDesktop -bool true;killall Finder"
+# alias hideD="defaults write com.apple.finder CreateDesktop -bool false;killall Finder"
+
+# make things BETTER
 alias l='ls -lFh'
-alias Firefox="cd /Applications;open Firefox.app;cd"
+alias cp='cp -v'
+alias mv='mv -v'
