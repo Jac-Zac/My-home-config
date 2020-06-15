@@ -51,3 +51,4 @@ sudo bash root_script.sh
 - You can change the .vimrc file
 - You can delete the .hushlogin (to decide see info when the terminal start, I think theat if you enable neofetch that is enough)
 - You can use the file ```My_config_nord.terminal ``` to have my same colors and font
+- You can also ```brew install lolcat``` -> you can pipe comnads and make them look rainbow-like
