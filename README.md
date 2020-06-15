@@ -42,5 +42,6 @@ sudo bash root_script.sh
 
 - If you want my same color theme go to -> https://github.com/arcticicestudio/nord-terminal-app
 - If you want gotop you can run ```brew install gotop ```
+- I got the theme from -> https://github.com/arcticicestudio/nord-terminal-app
 - If you want neofetch just run ```brew install neofetch ```
 
