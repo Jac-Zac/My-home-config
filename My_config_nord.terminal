@@ -358,8 +358,6 @@
 	</data>
 	<key>BackgroundSettingsForInactiveWindows</key>
 	<true/>
-	<key>CommandString</key>
-	<string>neofetch</string>
 	<key>CursorBlink</key>
 	<true/>
 	<key>CursorColor</key>
@@ -385,7 +383,7 @@
 	<key>ProfileCurrentVersion</key>
 	<real>2.0699999999999998</real>
 	<key>RunCommandAsShell</key>
-	<false/>
+	<true/>
 	<key>SelectionColor</key>
 	<data>
 	YnBsaXN0MDDUAQIDBAUGBwpYJHZlcnNpb25ZJGFyY2hpdmVyVCR0b3BYJG9iamVjdHMS

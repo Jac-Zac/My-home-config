@@ -45,3 +45,9 @@ sudo bash root_script.sh
 - I got the theme from -> https://github.com/arcticicestudio/nord-terminal-app
 - If you want neofetch just run ```brew install neofetch ```
 
+## Customizations
+
+- You can change the .zshrc and I suggest to follow the commnets
+- You can change the .vimrc file
+- You can delete the .hushlogin (to decide see info when the terminal start, I think theat if you enable neofetch that is enough)
+- You can use the file ```My_config_nord.terminal ``` to have my same colors and font
