@@ -66,6 +66,7 @@ export EDITOR='vim'
 alias l='ls -lFh'
 alias cp='cp -v'
 alias mv='mv -v'
+# alias make='time make' # i suggest to uncomment this to have make be always timed
 
 # command to run when starting the terminal
 # uncomment the command to have it work 
