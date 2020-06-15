@@ -3,6 +3,4 @@
 brew update && brew upgrade
 echo "brew installed"
 chmod +x root_script.sh
-brew install figlet
-brew install neofetch
 echo "run next script as root"

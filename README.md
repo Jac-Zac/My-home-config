@@ -41,5 +41,6 @@ sudo bash root_script.sh
 **Other thing I suggest to have the same terminla style and look:**
 
 - If you want my same color theme go to -> https://github.com/arcticicestudio/nord-terminal-app
-- If you want to have my same font go to -> https://github.com/tonsky/FiraCode
+- If you want gotop you can run ```brew install gotop ```
+- If you want neofetch just run ```brew install neofetch ```
 

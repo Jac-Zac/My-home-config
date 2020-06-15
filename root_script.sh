@@ -1,5 +1,5 @@
 #!/bin/bash
-echo "welcome it will take a little bit of time"
+echo "Welcome it will take a little bit of time"
 if [[ $EUID -ne 0 ]]; then
   echo "This script must be run as root"
   exit 1
@@ -14,4 +14,4 @@ sudo cp vimrc $HOME/.config/vimrc
 
 sudo rm -r My-home-config
 
-figlet "Made by: Jac-Zac"
+echo "Made by: Jac-Zac"
