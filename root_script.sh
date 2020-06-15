@@ -11,6 +11,7 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.conf
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.config/oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 sudo cp zshrc $HOME/.zshrc
 sudo cp vimrc $HOME/.config/vimrc
+sudo cp  My\ Nord\ configuration\ .terminal $HOME/Desktop
 
 sudo rm -r My-home-config
 
