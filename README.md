@@ -50,5 +50,7 @@ sudo bash root_script.sh
 - You can change the .zshrc and I suggest to follow the commnets
 - You can change the .vimrc file
 - You can delete the .hushlogin (to decide see info when the terminal start, I think theat if you enable neofetch that is enough)
-- You can use the file ```My_config_nord.terminal ``` to have my same colors and font
 - You can also ```brew install lolcat``` -> you can pipe comnads and make them look rainbow-like
+- To have my font ```brew tap homebrew/cask-font``` and then ```brew cask install font-hack-nerd-font```
+- I suggest to uncomment some stuff in the .zshrc -> but do not forget to ```brew install lsd```
+- I also suggest to use iTerm2, there is a file with my theme -> you also shuold use it in minimal mode 
