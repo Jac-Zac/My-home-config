@@ -53,4 +53,4 @@ sudo bash root_script.sh
 - To have my font ```brew tap homebrew/cask-font``` and then ```brew cask install font-hack-nerd-font```
 - I suggest to uncomment some stuff in the .zshrc -> but do not forget to ```brew install lsd```
 - I also suggest to use iTerm2, there is a file with my theme -> you also shuold use it in minimal mode 
-- Beautiful dynamic wallpapers [first](https://dynamicwallpaper.club/wallpaper/6df38eo4nym) [second](https://dynamicwallpaper.club/wallpaper/jculsb683ok)
+- Beautiful dynamic wallpapers -> [First](https://dynamicwallpaper.club/wallpaper/6df38eo4nym),[Second](https://dynamicwallpaper.club/wallpaper/jculsb683ok)
