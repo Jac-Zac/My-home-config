@@ -11,7 +11,7 @@ I mainly craeted this to always have my config with me, but I would really be ha
 
 ![showcase](https://github.com/Jac-Zac/My-home-config/blob/master/my_terminal.png)
 
-# Installation
+# Installation (Noob proof)
 
 ###### you have to be in zsh shell for this installation
 
@@ -42,11 +42,10 @@ sudo bash root_script.sh
 
 - If you want my same color theme go to -> https://github.com/arcticicestudio/nord-terminal-app
 - If you want gotop you can run ```brew install gotop ```
-- I got the theme from -> https://github.com/arcticicestudio/nord-terminal-app
-- If you want neofetch just run ```brew install neofetch ```
 
 ## Customizations
 
+- If you want neofetch just run ```brew install neofetch ```
 - You can change the .zshrc and I suggest to follow the commnets
 - You can change the .vimrc file
 - You can delete the .hushlogin (to decide see info when the terminal start, I think theat if you enable neofetch that is enough)
@@ -54,3 +53,4 @@ sudo bash root_script.sh
 - To have my font ```brew tap homebrew/cask-font``` and then ```brew cask install font-hack-nerd-font```
 - I suggest to uncomment some stuff in the .zshrc -> but do not forget to ```brew install lsd```
 - I also suggest to use iTerm2, there is a file with my theme -> you also shuold use it in minimal mode 
+- Beautiful dynamic wallpapers [first](https://dynamicwallpaper.club/wallpaper/6df38eo4nym) [second](https://dynamicwallpaper.club/wallpaper/jculsb683ok)

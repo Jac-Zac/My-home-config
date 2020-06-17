@@ -19,14 +19,9 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:
 # my configurations
 sudo cp zshrc $HOME/.zshrc
 sudo cp vimrc $HOME/.config/vimrc
-sudo cp  My\ Nord\ configuration\ .terminal $HOME/Desktop
-sudo cp  My_iTerm_config.json $HOME/Desktop
 
 # create config file for login
 cd $HOME
 touch .hushlogin
-
-# clen things thet are not useful anymore
-sudo rm -r My-home-config
 
 echo "Made by: Jac-Zac"
