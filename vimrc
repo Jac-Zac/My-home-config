@@ -1,8 +1,4 @@
-call plug#begin()
-Plug 'arcticiestudio/nord-vim'
-call plug#end()
-
-colorscheme nord
+syntax on
 filetype indent on
 set smartindent
 set ai
