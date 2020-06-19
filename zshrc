@@ -66,7 +66,7 @@ export EDITOR='vim'
 alias l='ls -lFh'
 alias cp='cp -v'
 alias mv='mv -v'
-alias v='vim'
+# alias v='vim'
 # alias make='time make' # i suggest to uncomment this to have make be always timed
 # alias ls='lsd' 
 #
@@ -74,4 +74,4 @@ alias v='vim'
 # uncomment the command to have it work 
 # this will show some stat but you have to install neofetch before using brew 
 
-# neofetch | lolcat 
+# neofetch 

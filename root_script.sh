@@ -18,10 +18,7 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:
 
 # my configurations
 sudo cp zshrc $HOME/.zshrc
-sudo cp vimrc $HOME/.config/vimrc
-
-# create config file for login
-cd $HOME
-touch .hushlogin
+sudo cp -r vim $HOME/.vim
+sudo mv viminfo $HOME/.vim
 
 echo "Made by: Jac-Zac"
