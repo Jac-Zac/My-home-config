@@ -1,0 +1,18 @@
+" change the location of viminfo 
+" ! uncommnet the line below to and run move the .viminfo file to
+" ~/vim/viminfo
+
+" set viminfo+=n~/.vim/viminfo
+
+syntax on
+
+filetype indent on
+set smartindent
+set expandtab
+set ai
+
+set number relativenumber
+set hlsearch
+set ruler
+
+" posso creare azioni che vengono svolte dopo che ho salvato un file
