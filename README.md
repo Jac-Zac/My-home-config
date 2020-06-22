@@ -9,7 +9,8 @@ I mainly craeted this to always have my config with me, but I would really be ha
 
 ## Example of what my terminal look like
 
-![showcase](https://github.com/Jac-Zac/My-home-config/blob/master/my_terminal.png)
+![showcase](https://github.com/Jac-Zac/My-home-config/blob/master/first_desktop.png)
+![showcase](https://github.com/Jac-Zac/My-home-config/blob/master/second_desktop.png)
 
 # Installation (Noob proof)
 
@@ -45,10 +46,10 @@ sudo bash root_script.sh
 
 ## Customizations
 
-- If you want neofetch just run ```brew install neofetch ```
+- If you want neofetch just run ```brew install neofetch ``` and I suggest to add lolcat ```brew install lolcat ```
 - You can change the .zshrc and I suggest to follow the commnets
 - You can change the .vimrc file
-- To have my font ```brew tap homebrew/cask-font``` and then ```brew cask install font-hack-nerd-font```
 - I suggest to uncomment some stuff in the .zshrc -> but do not forget to ```brew install lsd```
-- I also suggest to use iTerm2, there is a file with my theme -> you also shuold use it in minimal mode 
+- You have to allow Alacritty terminal to work on your mac
 - Beautiful dynamic wallpapers -> [First](https://dynamicwallpaper.club/wallpaper/6df38eo4nym),[Second](https://dynamicwallpaper.club/wallpaper/jculsb683ok)
+- I also suggest to Automatically Hide & Show the Menu Bar
