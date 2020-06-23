@@ -49,7 +49,7 @@ sudo bash root_script.sh
 - If you want neofetch just run ```brew install neofetch ``` and I suggest to add lolcat ```brew install lolcat ```
 - You can change the .zshrc and I suggest to follow the commnets
 - You can change the .vimrc file
-- I suggest to uncomment some stuff in the .zshrc -> but do not forget to ```brew install lsd```
-- You have to allow Alacritty terminal to work on your mac
+- I suggest to uncomment some stuff in the .zshrc -> but do not forget to ```brew install lsd``` and also install nerd font
+- You have to allow Alacritty terminal to work on your mac or you can use iTerm
 - Beautiful dynamic wallpapers -> [First](https://dynamicwallpaper.club/wallpaper/6df38eo4nym),[Second](https://dynamicwallpaper.club/wallpaper/jculsb683ok)
-- I also suggest to Automatically Hide & Show the Menu Bar
+- I also suggest to Automatically Hide & Show the Menu Bar and i also suggest to show scroll bar in all the application only when scrolling (system Preferences -> General)
