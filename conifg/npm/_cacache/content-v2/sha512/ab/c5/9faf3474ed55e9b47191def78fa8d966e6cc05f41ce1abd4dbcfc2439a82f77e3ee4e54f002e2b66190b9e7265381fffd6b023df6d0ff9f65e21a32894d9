@@ -1,0 +1,1 @@
+{"name":"lru-queue","dist-tags":{"latest":"0.1.0"},"versions":{"0.1.0":{"name":"lru-queue","version":"0.1.0","dependencies":{"es5-ext":"~0.10.2"},"devDependencies":{"tad":"~0.1.21"},"dist":{"shasum":"2738bd9f0d3cf4f84490c5736c48699ac632cda3","tarball":"https://registry.npmjs.org/lru-queue/-/lru-queue-0.1.0.tgz"}}},"modified":"2014-04-26T19:12:12.042Z"}
