@@ -1,18 +1,32 @@
-" change the location of viminfo 
-" ! uncommnet the line below to and run move the .viminfo file to
-" ~/vim/viminfo
+"call plug#begin()
+"Plug 'arcticicestudio/nord-vim'
+"Plug 'jremmen/vim-ripgrep'
+"Plug 'tpope/vim-fugitive'
+"Plug 'leafgarland/typescript-vim'
+"Plug 'vim-utils/vim-man'
+"Plug 'lyuts/vim-rtags'
+" Plug 'git@github.com:Valloric/YouCompleteMe.git'
+"Plug 'mbbill/undotree'
+"call plug#end()
 
-" set viminfo+=n~/.vim/viminfo
+"colorscheme nord
+
+" change the location of viminfo
+set viminfo+=n~/.vim/viminfo
 
 syntax on
-
-filetype indent on
+set tabstop=4 softtabstop=4
 set smartindent
-set expandtab
-set ai
 
+set nowrap
+set incsearch
+
+
+" set number how I like them 
 set number relativenumber
 set hlsearch
 set ruler
+
+set syntax=markdown
 
 " posso creare azioni che vengono svolte dopo che ho salvato un file

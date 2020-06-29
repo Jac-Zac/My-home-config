@@ -1,0 +1,298 @@
+0 info it worked if it ends with ok
+1 verbose cli [
+1 verbose cli   '/usr/local/Cellar/node/13.8.0/bin/node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'i',
+1 verbose cli   'lwip@0.0.9'
+1 verbose cli ]
+2 info using npm@6.13.7
+3 info using node@v13.8.0
+4 verbose npm-session 0b221b9b19fb47b0
+5 silly install loadCurrentTree
+6 silly install readLocalPackageData
+7 http fetch GET 200 https://registry.npmjs.org/lwip 966ms
+8 http fetch GET 200 https://registry.npmjs.org/lwip/-/lwip-0.0.9.tgz 2306ms
+9 silly pacote version manifest for lwip@0.0.9 fetched in 3291ms
+10 timing stage:loadCurrentTree Completed in 3331ms
+11 silly install loadIdealTree
+12 silly install cloneCurrentTreeToIdealTree
+13 timing stage:loadIdealTree:cloneCurrentTree Completed in 1ms
+14 silly install loadShrinkwrap
+15 timing stage:loadIdealTree:loadShrinkwrap Completed in 1ms
+16 silly install loadAllDepsIntoIdealTree
+17 silly resolveWithNewModule lwip@0.0.9 checking installable status
+18 http fetch GET 200 https://registry.npmjs.org/async 64ms
+19 http fetch GET 200 https://registry.npmjs.org/nan 180ms
+20 http fetch GET 200 https://registry.npmjs.org/bindings 185ms
+21 http fetch GET 200 https://registry.npmjs.org/async/-/async-2.6.3.tgz 118ms
+22 silly pacote range manifest for async@^2.0.0-rc.5 fetched in 209ms
+23 silly resolveWithNewModule async@2.6.3 checking installable status
+24 http fetch GET 200 https://registry.npmjs.org/bindings/-/bindings-1.5.0.tgz 45ms
+25 silly pacote range manifest for bindings@^1.2.1 fetched in 251ms
+26 silly resolveWithNewModule bindings@1.5.0 checking installable status
+27 http fetch GET 200 https://registry.npmjs.org/nan/-/nan-2.14.0.tgz 66ms
+28 silly pacote range manifest for nan@^2.3.2 fetched in 257ms
+29 silly resolveWithNewModule nan@2.14.0 checking installable status
+30 http fetch GET 200 https://registry.npmjs.org/decree 889ms
+31 http fetch GET 200 https://registry.npmjs.org/decree/-/decree-0.0.6.tgz 828ms
+32 silly pacote version manifest for decree@0.0.6 fetched in 1723ms
+33 silly resolveWithNewModule decree@0.0.6 checking installable status
+34 http fetch GET 304 https://registry.npmjs.org/lodash 49ms (from cache)
+35 silly pacote range manifest for lodash@^4.17.14 fetched in 50ms
+36 silly resolveWithNewModule lodash@4.17.15 checking installable status
+37 http fetch GET 200 https://registry.npmjs.org/file-uri-to-path 64ms
+38 http fetch GET 200 https://registry.npmjs.org/file-uri-to-path/-/file-uri-to-path-1.0.0.tgz 43ms
+39 silly pacote version manifest for file-uri-to-path@1.0.0 fetched in 113ms
+40 silly resolveWithNewModule file-uri-to-path@1.0.0 checking installable status
+41 http fetch GET 200 https://registry.npmjs.org/lodash-node 789ms
+42 http fetch GET 200 https://registry.npmjs.org/lodash-node/-/lodash-node-2.4.1.tgz 1450ms
+43 silly pacote range manifest for lodash-node@^2.4.1 fetched in 2244ms
+44 warn deprecated lodash-node@2.4.1: This package is discontinued. Use lodash@^4.0.0.
+45 silly resolveWithNewModule lodash-node@2.4.1 checking installable status
+46 timing stage:loadIdealTree:loadAllDepsIntoIdealTree Completed in 4157ms
+47 timing stage:loadIdealTree Completed in 4179ms
+48 silly currentTree lwip2@1.0.14
+49 silly idealTree lwip2@1.0.14
+49 silly idealTree ├── async@2.6.3
+49 silly idealTree ├── bindings@1.5.0
+49 silly idealTree ├── decree@0.0.6
+49 silly idealTree ├── file-uri-to-path@1.0.0
+49 silly idealTree ├── lodash-node@2.4.1
+49 silly idealTree ├── lodash@4.17.15
+49 silly idealTree ├── lwip@0.0.9
+49 silly idealTree └── nan@2.14.0
+50 silly install generateActionsToTake
+51 timing stage:generateActionsToTake Completed in 9ms
+52 silly diffTrees action count 8
+53 silly diffTrees add file-uri-to-path@1.0.0
+54 silly diffTrees add lodash@4.17.15
+55 silly diffTrees add lodash-node@2.4.1
+56 silly diffTrees add async@2.6.3
+57 silly diffTrees add bindings@1.5.0
+58 silly diffTrees add decree@0.0.6
+59 silly diffTrees add nan@2.14.0
+60 silly diffTrees add lwip@0.0.9
+61 silly decomposeActions action count 64
+62 silly decomposeActions fetch file-uri-to-path@1.0.0
+63 silly decomposeActions extract file-uri-to-path@1.0.0
+64 silly decomposeActions preinstall file-uri-to-path@1.0.0
+65 silly decomposeActions build file-uri-to-path@1.0.0
+66 silly decomposeActions install file-uri-to-path@1.0.0
+67 silly decomposeActions postinstall file-uri-to-path@1.0.0
+68 silly decomposeActions finalize file-uri-to-path@1.0.0
+69 silly decomposeActions refresh-package-json file-uri-to-path@1.0.0
+70 silly decomposeActions fetch lodash@4.17.15
+71 silly decomposeActions extract lodash@4.17.15
+72 silly decomposeActions preinstall lodash@4.17.15
+73 silly decomposeActions build lodash@4.17.15
+74 silly decomposeActions install lodash@4.17.15
+75 silly decomposeActions postinstall lodash@4.17.15
+76 silly decomposeActions finalize lodash@4.17.15
+77 silly decomposeActions refresh-package-json lodash@4.17.15
+78 silly decomposeActions fetch lodash-node@2.4.1
+79 silly decomposeActions extract lodash-node@2.4.1
+80 silly decomposeActions preinstall lodash-node@2.4.1
+81 silly decomposeActions build lodash-node@2.4.1
+82 silly decomposeActions install lodash-node@2.4.1
+83 silly decomposeActions postinstall lodash-node@2.4.1
+84 silly decomposeActions finalize lodash-node@2.4.1
+85 silly decomposeActions refresh-package-json lodash-node@2.4.1
+86 silly decomposeActions fetch async@2.6.3
+87 silly decomposeActions extract async@2.6.3
+88 silly decomposeActions preinstall async@2.6.3
+89 silly decomposeActions build async@2.6.3
+90 silly decomposeActions install async@2.6.3
+91 silly decomposeActions postinstall async@2.6.3
+92 silly decomposeActions finalize async@2.6.3
+93 silly decomposeActions refresh-package-json async@2.6.3
+94 silly decomposeActions fetch bindings@1.5.0
+95 silly decomposeActions extract bindings@1.5.0
+96 silly decomposeActions preinstall bindings@1.5.0
+97 silly decomposeActions build bindings@1.5.0
+98 silly decomposeActions install bindings@1.5.0
+99 silly decomposeActions postinstall bindings@1.5.0
+100 silly decomposeActions finalize bindings@1.5.0
+101 silly decomposeActions refresh-package-json bindings@1.5.0
+102 silly decomposeActions fetch decree@0.0.6
+103 silly decomposeActions extract decree@0.0.6
+104 silly decomposeActions preinstall decree@0.0.6
+105 silly decomposeActions build decree@0.0.6
+106 silly decomposeActions install decree@0.0.6
+107 silly decomposeActions postinstall decree@0.0.6
+108 silly decomposeActions finalize decree@0.0.6
+109 silly decomposeActions refresh-package-json decree@0.0.6
+110 silly decomposeActions fetch nan@2.14.0
+111 silly decomposeActions extract nan@2.14.0
+112 silly decomposeActions preinstall nan@2.14.0
+113 silly decomposeActions build nan@2.14.0
+114 silly decomposeActions install nan@2.14.0
+115 silly decomposeActions postinstall nan@2.14.0
+116 silly decomposeActions finalize nan@2.14.0
+117 silly decomposeActions refresh-package-json nan@2.14.0
+118 silly decomposeActions fetch lwip@0.0.9
+119 silly decomposeActions extract lwip@0.0.9
+120 silly decomposeActions preinstall lwip@0.0.9
+121 silly decomposeActions build lwip@0.0.9
+122 silly decomposeActions install lwip@0.0.9
+123 silly decomposeActions postinstall lwip@0.0.9
+124 silly decomposeActions finalize lwip@0.0.9
+125 silly decomposeActions refresh-package-json lwip@0.0.9
+126 silly install executeActions
+127 silly doSerial global-install 64
+128 verbose correctMkdir /Users/jaczac/.npm/_locks correctMkdir not in flight; initializing
+129 verbose lock using /Users/jaczac/.npm/_locks/staging-e03ea9c3b88e63fd.lock for /Users/jaczac/node_modules/lwip2/node_modules/.staging
+130 silly doParallel extract 8
+131 silly extract file-uri-to-path@1.0.0
+132 silly extract lodash@4.17.15
+133 silly extract lodash-node@2.4.1
+134 silly extract async@2.6.3
+135 silly extract bindings@1.5.0
+136 silly extract decree@0.0.6
+137 silly extract nan@2.14.0
+138 silly extract lwip@0.0.9
+139 silly tarball trying file-uri-to-path@1.0.0 by hash: sha512-0Zt+s3L7Vf1biwWZ29aARiVYLx7iMGnEUl9x33fbB/j3jR81u/O2LbqK+Bm1CDSNDKVtJ/YjwY7TUd5SkeLQLw==
+140 silly tarball trying lodash@^4.17.14 by hash: sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
+141 silly tarball trying lodash-node@^2.4.1 by hash: sha1-6oL3sQDHM9GkKvdoAeUGEF4qgOw=
+142 silly tarball trying async@^2.0.0-rc.5 by hash: sha512-zflvls11DCy+dQWzTW2dzuilv8Z5X/pjfmZOWba6TNIVDm+2UDaJmXSOXlasHKfNBs8oo3M0aT50fDEWfKZjXg==
+143 silly tarball trying bindings@^1.2.1 by hash: sha512-p2q/t/mhvuOj/UeLlV6566GD/guowlr0hHxClI0W9m7MWYkL1F0hLo+0Aexs9HSPCtR1SXQ0TD3MMKrXZajbiQ==
+144 silly tarball trying decree@0.0.6 by hash: sha1-R+/vDtYA1ybqhkA0XcSWHQ+lTN0=
+145 silly tarball trying nan@^2.3.2 by hash: sha512-INOFj37C7k3AfaNTtX8RhsTw7qRy7eLET14cROi9+5HAVbbHuIWUHEauBv5qT4Av2tWasiTY1Jw6puUNqRJXQg==
+146 silly tarball trying lwip@0.0.9 by hash: sha1-KLQWmDXSfKKTJedf0biDrje1D8w=
+147 silly extract bindings@^1.2.1 extracted to /Users/jaczac/node_modules/lwip2/node_modules/.staging/bindings-7106e684 (205ms)
+148 silly extract file-uri-to-path@1.0.0 extracted to /Users/jaczac/node_modules/lwip2/node_modules/.staging/file-uri-to-path-20821990 (218ms)
+149 silly extract decree@0.0.6 extracted to /Users/jaczac/node_modules/lwip2/node_modules/.staging/decree-f817f10d (276ms)
+150 timing audit submit Completed in 343ms
+151 http fetch POST 200 https://registry.npmjs.org/-/npm/v1/security/audits/quick 344ms
+152 timing audit body Completed in 1ms
+153 silly extract nan@^2.3.2 extracted to /Users/jaczac/node_modules/lwip2/node_modules/.staging/nan-869c6777 (345ms)
+154 silly extract async@^2.0.0-rc.5 extracted to /Users/jaczac/node_modules/lwip2/node_modules/.staging/async-e6d323f0 (443ms)
+155 silly extract lodash-node@^2.4.1 extracted to /Users/jaczac/node_modules/lwip2/node_modules/.staging/lodash-node-9d48b412 (931ms)
+156 silly extract lwip@0.0.9 extracted to /Users/jaczac/node_modules/lwip2/node_modules/.staging/lwip-6655dbab (1121ms)
+157 silly extract lodash@^4.17.14 extracted to /Users/jaczac/node_modules/lwip2/node_modules/.staging/lodash-0201fb8f (1332ms)
+158 timing action:extract Completed in 1335ms
+159 silly doReverseSerial unbuild 64
+160 silly doSerial remove 64
+161 silly doSerial move 64
+162 silly doSerial finalize 64
+163 silly finalize /Users/jaczac/node_modules/lwip2/node_modules/file-uri-to-path
+164 silly finalize /Users/jaczac/node_modules/lwip2/node_modules/lodash
+165 silly finalize /Users/jaczac/node_modules/lwip2/node_modules/lodash-node
+166 silly finalize /Users/jaczac/node_modules/lwip2/node_modules/async
+167 silly finalize /Users/jaczac/node_modules/lwip2/node_modules/bindings
+168 silly finalize /Users/jaczac/node_modules/lwip2/node_modules/decree
+169 silly finalize /Users/jaczac/node_modules/lwip2/node_modules/nan
+170 silly finalize /Users/jaczac/node_modules/lwip2/node_modules/lwip
+171 timing action:finalize Completed in 13ms
+172 silly doParallel refresh-package-json 8
+173 silly refresh-package-json /Users/jaczac/node_modules/lwip2/node_modules/file-uri-to-path
+174 silly refresh-package-json /Users/jaczac/node_modules/lwip2/node_modules/lodash
+175 silly refresh-package-json /Users/jaczac/node_modules/lwip2/node_modules/lodash-node
+176 silly refresh-package-json /Users/jaczac/node_modules/lwip2/node_modules/async
+177 silly refresh-package-json /Users/jaczac/node_modules/lwip2/node_modules/bindings
+178 silly refresh-package-json /Users/jaczac/node_modules/lwip2/node_modules/decree
+179 silly refresh-package-json /Users/jaczac/node_modules/lwip2/node_modules/nan
+180 silly refresh-package-json /Users/jaczac/node_modules/lwip2/node_modules/lwip
+181 timing action:refresh-package-json Completed in 45ms
+182 silly doParallel preinstall 8
+183 silly preinstall file-uri-to-path@1.0.0
+184 info lifecycle file-uri-to-path@1.0.0~preinstall: file-uri-to-path@1.0.0
+185 silly preinstall lodash@4.17.15
+186 info lifecycle lodash@4.17.15~preinstall: lodash@4.17.15
+187 silly preinstall lodash-node@2.4.1
+188 info lifecycle lodash-node@2.4.1~preinstall: lodash-node@2.4.1
+189 silly preinstall async@2.6.3
+190 info lifecycle async@2.6.3~preinstall: async@2.6.3
+191 silly preinstall bindings@1.5.0
+192 info lifecycle bindings@1.5.0~preinstall: bindings@1.5.0
+193 silly preinstall decree@0.0.6
+194 info lifecycle decree@0.0.6~preinstall: decree@0.0.6
+195 silly preinstall nan@2.14.0
+196 info lifecycle nan@2.14.0~preinstall: nan@2.14.0
+197 silly preinstall lwip@0.0.9
+198 info lifecycle lwip@0.0.9~preinstall: lwip@0.0.9
+199 timing action:preinstall Completed in 3ms
+200 silly doSerial build 64
+201 silly build file-uri-to-path@1.0.0
+202 info linkStuff file-uri-to-path@1.0.0
+203 silly linkStuff file-uri-to-path@1.0.0 has /Users/jaczac/node_modules/lwip2/node_modules as its parent node_modules
+204 silly build lodash@4.17.15
+205 info linkStuff lodash@4.17.15
+206 silly linkStuff lodash@4.17.15 has /Users/jaczac/node_modules/lwip2/node_modules as its parent node_modules
+207 silly build lodash-node@2.4.1
+208 info linkStuff lodash-node@2.4.1
+209 silly linkStuff lodash-node@2.4.1 has /Users/jaczac/node_modules/lwip2/node_modules as its parent node_modules
+210 silly build async@2.6.3
+211 info linkStuff async@2.6.3
+212 silly linkStuff async@2.6.3 has /Users/jaczac/node_modules/lwip2/node_modules as its parent node_modules
+213 silly build bindings@1.5.0
+214 info linkStuff bindings@1.5.0
+215 silly linkStuff bindings@1.5.0 has /Users/jaczac/node_modules/lwip2/node_modules as its parent node_modules
+216 silly build decree@0.0.6
+217 info linkStuff decree@0.0.6
+218 silly linkStuff decree@0.0.6 has /Users/jaczac/node_modules/lwip2/node_modules as its parent node_modules
+219 silly build nan@2.14.0
+220 info linkStuff nan@2.14.0
+221 silly linkStuff nan@2.14.0 has /Users/jaczac/node_modules/lwip2/node_modules as its parent node_modules
+222 silly build lwip@0.0.9
+223 info linkStuff lwip@0.0.9
+224 silly linkStuff lwip@0.0.9 has /Users/jaczac/node_modules/lwip2/node_modules as its parent node_modules
+225 timing action:build Completed in 3ms
+226 silly doSerial global-link 64
+227 silly doParallel update-linked 0
+228 silly doSerial install 64
+229 silly install file-uri-to-path@1.0.0
+230 info lifecycle file-uri-to-path@1.0.0~install: file-uri-to-path@1.0.0
+231 silly install lodash@4.17.15
+232 info lifecycle lodash@4.17.15~install: lodash@4.17.15
+233 silly install lodash-node@2.4.1
+234 info lifecycle lodash-node@2.4.1~install: lodash-node@2.4.1
+235 silly install async@2.6.3
+236 info lifecycle async@2.6.3~install: async@2.6.3
+237 silly install bindings@1.5.0
+238 info lifecycle bindings@1.5.0~install: bindings@1.5.0
+239 silly install decree@0.0.6
+240 info lifecycle decree@0.0.6~install: decree@0.0.6
+241 silly install nan@2.14.0
+242 info lifecycle nan@2.14.0~install: nan@2.14.0
+243 silly install lwip@0.0.9
+244 info lifecycle lwip@0.0.9~install: lwip@0.0.9
+245 verbose lifecycle lwip@0.0.9~install: unsafe-perm in lifecycle true
+246 verbose lifecycle lwip@0.0.9~install: PATH: /usr/local/lib/node_modules/npm/node_modules/npm-lifecycle/node-gyp-bin:/Users/jaczac/node_modules/lwip2/node_modules/lwip/node_modules/.bin:/Users/jaczac/node_modules/lwip2/node_modules/.bin:/Users/jaczac/node_modules/.bin:/usr/local/lib/node_modules/npm/node_modules/npm-lifecycle/node-gyp-bin:/Users/jaczac/node_modules/lwip2/node_modules/.bin:/Users/jaczac/node_modules/.bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+247 verbose lifecycle lwip@0.0.9~install: CWD: /Users/jaczac/node_modules/lwip2/node_modules/lwip
+248 silly lifecycle lwip@0.0.9~install: Args: [ '-c', 'node-gyp rebuild' ]
+249 silly lifecycle lwip@0.0.9~install: Returned: code: 1  signal: null
+250 info lifecycle lwip@0.0.9~install: Failed to exec install script
+251 timing action:install Completed in 6769ms
+252 verbose unlock done using /Users/jaczac/.npm/_locks/staging-e03ea9c3b88e63fd.lock for /Users/jaczac/node_modules/lwip2/node_modules/.staging
+253 timing stage:rollbackFailedOptional Completed in 259ms
+254 timing stage:runTopLevelLifecycles Completed in 15978ms
+255 silly saveTree lwip2@1.0.14
+255 silly saveTree └─┬ lwip@0.0.9
+255 silly saveTree   ├─┬ async@2.6.3
+255 silly saveTree   │ └── lodash@4.17.15
+255 silly saveTree   ├─┬ bindings@1.5.0
+255 silly saveTree   │ └── file-uri-to-path@1.0.0
+255 silly saveTree   ├─┬ decree@0.0.6
+255 silly saveTree   │ └── lodash-node@2.4.1
+255 silly saveTree   └── nan@2.14.0
+256 verbose stack Error: lwip@0.0.9 install: `node-gyp rebuild`
+256 verbose stack Exit status 1
+256 verbose stack     at EventEmitter.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/npm-lifecycle/index.js:332:16)
+256 verbose stack     at EventEmitter.emit (events.js:321:20)
+256 verbose stack     at ChildProcess.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/npm-lifecycle/lib/spawn.js:55:14)
+256 verbose stack     at ChildProcess.emit (events.js:321:20)
+256 verbose stack     at maybeClose (internal/child_process.js:1026:16)
+256 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:286:5)
+257 verbose pkgid lwip@0.0.9
+258 verbose cwd /Users/jaczac/node_modules/lwip2
+259 verbose Darwin 19.3.0
+260 verbose argv "/usr/local/Cellar/node/13.8.0/bin/node" "/usr/local/bin/npm" "i" "lwip@0.0.9"
+261 verbose node v13.8.0
+262 verbose npm  v6.13.7
+263 error code ELIFECYCLE
+264 error errno 1
+265 error lwip@0.0.9 install: `node-gyp rebuild`
+265 error Exit status 1
+266 error Failed at the lwip@0.0.9 install script.
+266 error This is probably not a problem with npm. There is likely additional logging output above.
+267 verbose exit [ 1, true ]

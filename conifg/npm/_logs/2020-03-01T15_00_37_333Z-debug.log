@@ -1,0 +1,697 @@
+0 info it worked if it ends with ok
+1 verbose cli [
+1 verbose cli   '/usr/local/Cellar/node/13.8.0/bin/node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   'ascii-video'
+1 verbose cli ]
+2 info using npm@6.13.7
+3 info using node@v13.8.0
+4 verbose config Skipping project config: /Users/jaczac/.npmrc. (matches userconfig)
+5 verbose npm-session c23be09662a821ec
+6 silly install loadCurrentTree
+7 silly install readLocalPackageData
+8 http fetch GET 304 https://registry.npmjs.org/ascii-video 988ms (from cache)
+9 silly pacote tag manifest for ascii-video@latest fetched in 1000ms
+10 timing stage:loadCurrentTree Completed in 1253ms
+11 silly install loadIdealTree
+12 silly install cloneCurrentTreeToIdealTree
+13 timing stage:loadIdealTree:cloneCurrentTree Completed in 1ms
+14 silly install loadShrinkwrap
+15 timing stage:loadIdealTree:loadShrinkwrap Completed in 56ms
+16 silly install loadAllDepsIntoIdealTree
+17 silly resolveWithNewModule ascii-video@0.1.2 checking installable status
+18 http fetch GET 304 https://registry.npmjs.org/image-to-ascii 768ms (from cache)
+19 silly pacote range manifest for image-to-ascii@^3.0.5 fetched in 772ms
+20 silly resolveWithNewModule image-to-ascii@3.0.12 checking installable status
+21 http fetch GET 304 https://registry.npmjs.org/image-parser 782ms (from cache)
+22 silly pacote range manifest for image-parser@^1.0.0 fetched in 785ms
+23 silly resolveWithNewModule image-parser@1.2.7 checking installable status
+24 http fetch GET 304 https://registry.npmjs.org/imgpx 862ms (from cache)
+25 silly pacote range manifest for imgpx@^1.0.2 fetched in 864ms
+26 silly resolveWithNewModule imgpx@1.0.12 checking installable status
+27 http fetch GET 304 https://registry.npmjs.org/lwipify 779ms (from cache)
+28 silly pacote range manifest for lwipify@^2.0.0 fetched in 780ms
+29 silly resolveWithNewModule lwipify@2.0.12 checking installable status
+30 http fetch GET 304 https://registry.npmjs.org/lwip2 799ms (from cache)
+31 silly pacote range manifest for lwip2@^1.0.0 fetched in 801ms
+32 silly resolveWithNewModule lwip2@1.0.14 checking installable status
+33 http fetch GET 304 https://registry.npmjs.org/gm-installed 790ms (from cache)
+34 silly pacote range manifest for gm-installed@^1.0.0 fetched in 791ms
+35 silly resolveWithNewModule gm-installed@1.0.9 checking installable status
+36 http fetch GET 304 https://registry.npmjs.org/prgm-installed 788ms (from cache)
+37 silly pacote range manifest for prgm-installed@^1.0.1 fetched in 789ms
+38 silly resolveWithNewModule prgm-installed@1.0.10 checking installable status
+39 timing stage:loadIdealTree:loadAllDepsIntoIdealTree Completed in 4915ms
+40 timing stage:loadIdealTree Completed in 5030ms
+41 silly currentTree jaczac
+41 silly currentTree ├── ansi-escapes@1.4.0
+41 silly currentTree ├── ansi-regex@2.1.1
+41 silly currentTree ├── ansi-styles@3.2.1
+41 silly currentTree ├── ansy@1.0.14
+41 silly currentTree ├── argparse@1.0.10
+41 silly currentTree ├── array-parallel@0.1.3
+41 silly currentTree ├── array-series@0.1.5
+41 silly currentTree ├── asciify-pixel-matrix@1.0.13
+41 silly currentTree ├── asciify-pixel@1.2.13
+41 silly currentTree ├── assured@1.0.14
+41 silly currentTree ├── balanced-match@1.0.0
+41 silly currentTree ├── brace-expansion@1.1.11
+41 silly currentTree ├── cb-buffer@2.1.8
+41 silly currentTree ├── cli-color@1.4.0
+41 silly currentTree ├── cli-cursor@1.0.2
+41 silly currentTree ├── color-convert@1.9.3
+41 silly currentTree ├── color-name@1.1.3
+41 silly currentTree ├── commander@2.20.3
+41 silly currentTree ├── compute-size@1.0.12
+41 silly currentTree ├── concat-map@0.0.1
+41 silly currentTree ├── couleurs@6.0.10
+41 silly currentTree ├── cross-spawn@4.0.2
+41 silly currentTree ├── custom-return@1.0.11
+41 silly currentTree ├── d@1.0.1
+41 silly currentTree ├── debug@3.2.6
+41 silly currentTree ├── deffy@2.2.3
+41 silly currentTree ├── err@1.1.1
+41 silly currentTree ├── es5-ext@0.10.53
+41 silly currentTree ├── es6-iterator@2.0.3
+41 silly currentTree ├── es6-symbol@3.1.3
+41 silly currentTree ├── es6-weak-map@2.0.3
+41 silly currentTree ├── esprima@4.0.1
+41 silly currentTree ├── event-emitter@0.3.5
+41 silly currentTree ├── exit-hook@1.1.1
+41 silly currentTree ├─┬ ext@1.4.0
+41 silly currentTree │ └── type@2.0.0
+41 silly currentTree ├── fixed-or-percent@1.0.11
+41 silly currentTree ├── follow-redirects@1.10.0
+41 silly currentTree ├── fs.realpath@1.0.0
+41 silly currentTree ├── function.name@1.0.12
+41 silly currentTree ├── glob@7.1.6
+41 silly currentTree ├── gm-tools@1.0.11
+41 silly currentTree ├── gm@1.23.1
+41 silly currentTree ├── has-flag@1.0.0
+41 silly currentTree ├── inflight@1.0.6
+41 silly currentTree ├── inherits@2.0.4
+41 silly currentTree ├── interpret@1.2.0
+41 silly currentTree ├── is-percent@1.0.11
+41 silly currentTree ├── is-promise@2.1.0
+41 silly currentTree ├── is-ssh@1.3.1
+41 silly currentTree ├── is-windows@0.1.1
+41 silly currentTree ├── isexe@2.0.0
+41 silly currentTree ├── iterate-object@1.3.3
+41 silly currentTree ├── js-yaml@3.13.1
+41 silly currentTree ├── last-char@1.3.10
+41 silly currentTree ├── lodash@4.17.15
+41 silly currentTree ├── log-update@1.0.2
+41 silly currentTree ├── lru-cache@4.1.5
+41 silly currentTree ├── lru-queue@0.1.0
+41 silly currentTree ├── lwip-pixels@1.1.9
+41 silly currentTree ├── map-o@2.0.9
+41 silly currentTree ├── memoizee@0.4.14
+41 silly currentTree ├── minimatch@3.0.4
+41 silly currentTree ├── ms@2.1.2
+41 silly currentTree ├── next-tick@1.0.0
+41 silly currentTree ├── noop6@1.0.8
+41 silly currentTree ├── obj-def@1.0.7
+41 silly currentTree ├── once@1.4.0
+41 silly currentTree ├── one-by-one@3.2.7
+41 silly currentTree ├── onetime@1.1.0
+41 silly currentTree ├── parse-url@1.3.11
+41 silly currentTree ├── path-is-absolute@1.0.1
+41 silly currentTree ├── path-parse@1.0.6
+41 silly currentTree ├── percent-value@1.0.8
+41 silly currentTree ├── pixel-bg@1.0.9
+41 silly currentTree ├── pixel-class@1.0.8
+41 silly currentTree ├── pixel-white-bg@1.0.8
+41 silly currentTree ├── pngjs@2.3.1
+41 silly currentTree ├── protocols@1.4.7
+41 silly currentTree ├── pseudomap@1.0.2
+41 silly currentTree ├── rechoir@0.6.2
+41 silly currentTree ├── resolve@1.15.1
+41 silly currentTree ├── restore-cursor@1.0.1
+41 silly currentTree ├─┬ same-time@2.3.4
+41 silly currentTree │ └── deffy@2.0.0
+41 silly currentTree ├── shelljs@0.7.8
+41 silly currentTree ├── sliced@1.0.1
+41 silly currentTree ├── sprintf-js@1.0.3
+41 silly currentTree ├── supports-color@3.2.3
+41 silly currentTree ├── terminal-char-width@1.0.9
+41 silly currentTree ├── timers-ext@0.1.7
+41 silly currentTree ├── tinyreq@3.4.1
+41 silly currentTree ├── type@1.2.0
+41 silly currentTree ├── typpy@2.3.11
+41 silly currentTree ├── ul@5.2.14
+41 silly currentTree ├── url-local@1.1.8
+41 silly currentTree ├── url-remote@1.1.8
+41 silly currentTree ├── which@1.3.1
+41 silly currentTree ├── wrappy@1.0.2
+41 silly currentTree └── yallist@2.1.2
+42 silly idealTree jaczac
+42 silly idealTree ├── ansi-escapes@1.4.0
+42 silly idealTree ├── ansi-regex@2.1.1
+42 silly idealTree ├── ansi-styles@3.2.1
+42 silly idealTree ├── ansy@1.0.14
+42 silly idealTree ├── argparse@1.0.10
+42 silly idealTree ├── array-parallel@0.1.3
+42 silly idealTree ├── array-series@0.1.5
+42 silly idealTree ├── ascii-video@0.1.2
+42 silly idealTree ├── asciify-pixel-matrix@1.0.13
+42 silly idealTree ├── asciify-pixel@1.2.13
+42 silly idealTree ├── assured@1.0.14
+42 silly idealTree ├── balanced-match@1.0.0
+42 silly idealTree ├── brace-expansion@1.1.11
+42 silly idealTree ├── cb-buffer@2.1.8
+42 silly idealTree ├── cli-color@1.4.0
+42 silly idealTree ├── cli-cursor@1.0.2
+42 silly idealTree ├── color-convert@1.9.3
+42 silly idealTree ├── color-name@1.1.3
+42 silly idealTree ├── commander@2.20.3
+42 silly idealTree ├── compute-size@1.0.12
+42 silly idealTree ├── concat-map@0.0.1
+42 silly idealTree ├── couleurs@6.0.10
+42 silly idealTree ├── cross-spawn@4.0.2
+42 silly idealTree ├── custom-return@1.0.11
+42 silly idealTree ├── d@1.0.1
+42 silly idealTree ├── debug@3.2.6
+42 silly idealTree ├── deffy@2.2.3
+42 silly idealTree ├── err@1.1.1
+42 silly idealTree ├── es5-ext@0.10.53
+42 silly idealTree ├── es6-iterator@2.0.3
+42 silly idealTree ├── es6-symbol@3.1.3
+42 silly idealTree ├── es6-weak-map@2.0.3
+42 silly idealTree ├── esprima@4.0.1
+42 silly idealTree ├── event-emitter@0.3.5
+42 silly idealTree ├── exit-hook@1.1.1
+42 silly idealTree ├─┬ ext@1.4.0
+42 silly idealTree │ └── type@2.0.0
+42 silly idealTree ├── fixed-or-percent@1.0.11
+42 silly idealTree ├── follow-redirects@1.10.0
+42 silly idealTree ├── fs.realpath@1.0.0
+42 silly idealTree ├── function.name@1.0.12
+42 silly idealTree ├── glob@7.1.6
+42 silly idealTree ├── gm-installed@1.0.9
+42 silly idealTree ├── gm-tools@1.0.11
+42 silly idealTree ├── gm@1.23.1
+42 silly idealTree ├── has-flag@1.0.0
+42 silly idealTree ├── image-parser@1.2.7
+42 silly idealTree ├── image-to-ascii@3.0.12
+42 silly idealTree ├── imgpx@1.0.12
+42 silly idealTree ├── inflight@1.0.6
+42 silly idealTree ├── inherits@2.0.4
+42 silly idealTree ├── interpret@1.2.0
+42 silly idealTree ├── is-percent@1.0.11
+42 silly idealTree ├── is-promise@2.1.0
+42 silly idealTree ├── is-ssh@1.3.1
+42 silly idealTree ├── is-windows@0.1.1
+42 silly idealTree ├── isexe@2.0.0
+42 silly idealTree ├── iterate-object@1.3.3
+42 silly idealTree ├── js-yaml@3.13.1
+42 silly idealTree ├── last-char@1.3.10
+42 silly idealTree ├── lodash@4.17.15
+42 silly idealTree ├── log-update@1.0.2
+42 silly idealTree ├── lru-cache@4.1.5
+42 silly idealTree ├── lru-queue@0.1.0
+42 silly idealTree ├── lwip-pixels@1.1.9
+42 silly idealTree ├── lwip2@1.0.14
+42 silly idealTree ├── lwipify@2.0.12
+42 silly idealTree ├── map-o@2.0.9
+42 silly idealTree ├── memoizee@0.4.14
+42 silly idealTree ├── minimatch@3.0.4
+42 silly idealTree ├── ms@2.1.2
+42 silly idealTree ├── next-tick@1.0.0
+42 silly idealTree ├── noop6@1.0.8
+42 silly idealTree ├── obj-def@1.0.7
+42 silly idealTree ├── once@1.4.0
+42 silly idealTree ├── one-by-one@3.2.7
+42 silly idealTree ├── onetime@1.1.0
+42 silly idealTree ├── parse-url@1.3.11
+42 silly idealTree ├── path-is-absolute@1.0.1
+42 silly idealTree ├── path-parse@1.0.6
+42 silly idealTree ├── percent-value@1.0.8
+42 silly idealTree ├── pixel-bg@1.0.9
+42 silly idealTree ├── pixel-class@1.0.8
+42 silly idealTree ├── pixel-white-bg@1.0.8
+42 silly idealTree ├── pngjs@2.3.1
+42 silly idealTree ├── prgm-installed@1.0.10
+42 silly idealTree ├── protocols@1.4.7
+42 silly idealTree ├── pseudomap@1.0.2
+42 silly idealTree ├── rechoir@0.6.2
+42 silly idealTree ├── resolve@1.15.1
+42 silly idealTree ├── restore-cursor@1.0.1
+42 silly idealTree ├─┬ same-time@2.3.4
+42 silly idealTree │ └── deffy@2.0.0
+42 silly idealTree ├── shelljs@0.7.8
+42 silly idealTree ├── sliced@1.0.1
+42 silly idealTree ├── sprintf-js@1.0.3
+42 silly idealTree ├── supports-color@3.2.3
+42 silly idealTree ├── terminal-char-width@1.0.9
+42 silly idealTree ├── timers-ext@0.1.7
+42 silly idealTree ├── tinyreq@3.4.1
+42 silly idealTree ├── type@1.2.0
+42 silly idealTree ├── typpy@2.3.11
+42 silly idealTree ├── ul@5.2.14
+42 silly idealTree ├── url-local@1.1.8
+42 silly idealTree ├── url-remote@1.1.8
+42 silly idealTree ├── which@1.3.1
+42 silly idealTree ├── wrappy@1.0.2
+42 silly idealTree └── yallist@2.1.2
+43 silly install generateActionsToTake
+44 timing stage:generateActionsToTake Completed in 9ms
+45 silly diffTrees action count 8
+46 silly diffTrees add prgm-installed@1.0.10
+47 silly diffTrees add gm-installed@1.0.9
+48 silly diffTrees add lwip2@1.0.14
+49 silly diffTrees add lwipify@2.0.12
+50 silly diffTrees add image-parser@1.2.7
+51 silly diffTrees add imgpx@1.0.12
+52 silly diffTrees add image-to-ascii@3.0.12
+53 silly diffTrees add ascii-video@0.1.2
+54 silly decomposeActions action count 64
+55 silly decomposeActions fetch prgm-installed@1.0.10
+56 silly decomposeActions extract prgm-installed@1.0.10
+57 silly decomposeActions preinstall prgm-installed@1.0.10
+58 silly decomposeActions build prgm-installed@1.0.10
+59 silly decomposeActions install prgm-installed@1.0.10
+60 silly decomposeActions postinstall prgm-installed@1.0.10
+61 silly decomposeActions finalize prgm-installed@1.0.10
+62 silly decomposeActions refresh-package-json prgm-installed@1.0.10
+63 silly decomposeActions fetch gm-installed@1.0.9
+64 silly decomposeActions extract gm-installed@1.0.9
+65 silly decomposeActions preinstall gm-installed@1.0.9
+66 silly decomposeActions build gm-installed@1.0.9
+67 silly decomposeActions install gm-installed@1.0.9
+68 silly decomposeActions postinstall gm-installed@1.0.9
+69 silly decomposeActions finalize gm-installed@1.0.9
+70 silly decomposeActions refresh-package-json gm-installed@1.0.9
+71 silly decomposeActions fetch lwip2@1.0.14
+72 silly decomposeActions extract lwip2@1.0.14
+73 silly decomposeActions preinstall lwip2@1.0.14
+74 silly decomposeActions build lwip2@1.0.14
+75 silly decomposeActions install lwip2@1.0.14
+76 silly decomposeActions postinstall lwip2@1.0.14
+77 silly decomposeActions finalize lwip2@1.0.14
+78 silly decomposeActions refresh-package-json lwip2@1.0.14
+79 silly decomposeActions fetch lwipify@2.0.12
+80 silly decomposeActions extract lwipify@2.0.12
+81 silly decomposeActions preinstall lwipify@2.0.12
+82 silly decomposeActions build lwipify@2.0.12
+83 silly decomposeActions install lwipify@2.0.12
+84 silly decomposeActions postinstall lwipify@2.0.12
+85 silly decomposeActions finalize lwipify@2.0.12
+86 silly decomposeActions refresh-package-json lwipify@2.0.12
+87 silly decomposeActions fetch image-parser@1.2.7
+88 silly decomposeActions extract image-parser@1.2.7
+89 silly decomposeActions preinstall image-parser@1.2.7
+90 silly decomposeActions build image-parser@1.2.7
+91 silly decomposeActions install image-parser@1.2.7
+92 silly decomposeActions postinstall image-parser@1.2.7
+93 silly decomposeActions finalize image-parser@1.2.7
+94 silly decomposeActions refresh-package-json image-parser@1.2.7
+95 silly decomposeActions fetch imgpx@1.0.12
+96 silly decomposeActions extract imgpx@1.0.12
+97 silly decomposeActions preinstall imgpx@1.0.12
+98 silly decomposeActions build imgpx@1.0.12
+99 silly decomposeActions install imgpx@1.0.12
+100 silly decomposeActions postinstall imgpx@1.0.12
+101 silly decomposeActions finalize imgpx@1.0.12
+102 silly decomposeActions refresh-package-json imgpx@1.0.12
+103 silly decomposeActions fetch image-to-ascii@3.0.12
+104 silly decomposeActions extract image-to-ascii@3.0.12
+105 silly decomposeActions preinstall image-to-ascii@3.0.12
+106 silly decomposeActions build image-to-ascii@3.0.12
+107 silly decomposeActions install image-to-ascii@3.0.12
+108 silly decomposeActions postinstall image-to-ascii@3.0.12
+109 silly decomposeActions finalize image-to-ascii@3.0.12
+110 silly decomposeActions refresh-package-json image-to-ascii@3.0.12
+111 silly decomposeActions fetch ascii-video@0.1.2
+112 silly decomposeActions extract ascii-video@0.1.2
+113 silly decomposeActions preinstall ascii-video@0.1.2
+114 silly decomposeActions build ascii-video@0.1.2
+115 silly decomposeActions install ascii-video@0.1.2
+116 silly decomposeActions postinstall ascii-video@0.1.2
+117 silly decomposeActions finalize ascii-video@0.1.2
+118 silly decomposeActions refresh-package-json ascii-video@0.1.2
+119 silly install executeActions
+120 silly doSerial global-install 64
+121 verbose correctMkdir /Users/jaczac/.npm/_locks correctMkdir not in flight; initializing
+122 verbose lock using /Users/jaczac/.npm/_locks/staging-46391aae5971a0b6.lock for /Users/jaczac/node_modules/.staging
+123 silly doParallel extract 8
+124 silly extract prgm-installed@1.0.10
+125 silly extract gm-installed@1.0.9
+126 silly extract lwip2@1.0.14
+127 silly extract lwipify@2.0.12
+128 silly extract image-parser@1.2.7
+129 silly extract imgpx@1.0.12
+130 silly extract image-to-ascii@3.0.12
+131 silly extract ascii-video@0.1.2
+132 silly tarball trying prgm-installed@^1.0.1 by hash: sha512-Oany6sOxHvgZSuSkWvcEE+ZynHhKF3Sqc/BC/c9X5bBu5p959gbPjgIs/rrEZXQ8IWf+VP+EJDOlrwiuFUSq+Q==
+133 silly tarball trying lwip2@^1.0.0 by hash: sha512-Oi6csNdNZrc3JmJ7occby0wnK63mCw4cCryyGy0UA7UZLHibg5QExMWy2Sj26vjtCiN8DrHJxisxYGnhUbZCrw==
+134 silly tarball trying gm-installed@^1.0.0 by hash: sha512-VHuNQJLEBq7M/bA6zlF2JT3aX1REnMD7MD/xlcaUw9QV7enQUGFQWIfYr/EymVxWgj4n0lD/0siNoQ65fuq9PA==
+135 silly tarball trying lwipify@^2.0.0 by hash: sha512-98gWnBT6BXCcja6DfR2JHj6UzGFugfREEHefTDjCtXnXRUpEPt3DKmOIgJ1hmIeNzKLHnTvU7oi6Uv8m6fVw7Q==
+136 silly tarball trying image-parser@^1.0.0 by hash: sha512-5izhZwkuJ+8BP9g0XBApxGRHSrcQB2uDls8PrDII0ScuqI/vn89Gc2YGJQQMFlixNlc35Au9oroNmG4EHy1dSQ==
+137 silly tarball trying imgpx@^1.0.2 by hash: sha512-Vnh5NQxma7JdkL5RGGkbJkB9hEntIpttebbc+Bltd0TtkWa1mT9n1nGd2Kf3FO7xxNTtjSzGEu5+zt5mA6vUXQ==
+138 silly tarball trying image-to-ascii@^3.0.5 by hash: sha512-uPm9iwXWTMdDj4ftQkQvvp2HO6a1Z3XtCVc5hfJbxe5mKozWGC+Jq9jDD/XzwhM+T25SJlYfVYEk+psbK2ruqw==
+139 silly tarball trying ascii-video@latest by hash: sha512-iS2lRfBrCw0yhKLEpSRoJl4pvXzfAXo50bWG73U3keA29YdQxoF4vFvDtxKWGsL1irc/TZ9lfZxgoeIbgWcSdQ==
+140 silly extract ascii-video@latest extracted to /Users/jaczac/node_modules/.staging/ascii-video-eba42909 (42ms)
+141 silly extract prgm-installed@^1.0.1 extracted to /Users/jaczac/node_modules/.staging/prgm-installed-ac33f0bb (44ms)
+142 silly extract gm-installed@^1.0.0 extracted to /Users/jaczac/node_modules/.staging/gm-installed-d448f988 (45ms)
+143 silly extract imgpx@^1.0.2 extracted to /Users/jaczac/node_modules/.staging/imgpx-7e2544a9 (44ms)
+144 silly extract lwip2@^1.0.0 extracted to /Users/jaczac/node_modules/.staging/lwip2-ca1663c5 (45ms)
+145 silly extract image-parser@^1.0.0 extracted to /Users/jaczac/node_modules/.staging/image-parser-4a42f724 (45ms)
+146 silly extract lwipify@^2.0.0 extracted to /Users/jaczac/node_modules/.staging/lwipify-dbe3efc2 (45ms)
+147 silly extract image-to-ascii@^3.0.5 extracted to /Users/jaczac/node_modules/.staging/image-to-ascii-5cc2e637 (44ms)
+148 timing action:extract Completed in 48ms
+149 silly doReverseSerial unbuild 64
+150 silly doSerial remove 64
+151 silly doSerial move 64
+152 silly doSerial finalize 64
+153 silly finalize /Users/jaczac/node_modules/prgm-installed
+154 silly finalize /Users/jaczac/node_modules/gm-installed
+155 silly finalize /Users/jaczac/node_modules/lwip2
+156 silly finalize /Users/jaczac/node_modules/lwipify
+157 silly finalize /Users/jaczac/node_modules/image-parser
+158 silly finalize /Users/jaczac/node_modules/imgpx
+159 silly finalize /Users/jaczac/node_modules/image-to-ascii
+160 silly finalize /Users/jaczac/node_modules/ascii-video
+161 timing action:finalize Completed in 14ms
+162 silly doParallel refresh-package-json 8
+163 silly refresh-package-json /Users/jaczac/node_modules/prgm-installed
+164 silly refresh-package-json /Users/jaczac/node_modules/gm-installed
+165 silly refresh-package-json /Users/jaczac/node_modules/lwip2
+166 silly refresh-package-json /Users/jaczac/node_modules/lwipify
+167 silly refresh-package-json /Users/jaczac/node_modules/image-parser
+168 silly refresh-package-json /Users/jaczac/node_modules/imgpx
+169 silly refresh-package-json /Users/jaczac/node_modules/image-to-ascii
+170 silly refresh-package-json /Users/jaczac/node_modules/ascii-video
+171 timing action:refresh-package-json Completed in 21ms
+172 silly doParallel preinstall 8
+173 silly preinstall prgm-installed@1.0.10
+174 info lifecycle prgm-installed@1.0.10~preinstall: prgm-installed@1.0.10
+175 silly preinstall gm-installed@1.0.9
+176 info lifecycle gm-installed@1.0.9~preinstall: gm-installed@1.0.9
+177 silly preinstall lwip2@1.0.14
+178 info lifecycle lwip2@1.0.14~preinstall: lwip2@1.0.14
+179 silly preinstall lwipify@2.0.12
+180 info lifecycle lwipify@2.0.12~preinstall: lwipify@2.0.12
+181 silly preinstall image-parser@1.2.7
+182 info lifecycle image-parser@1.2.7~preinstall: image-parser@1.2.7
+183 silly preinstall imgpx@1.0.12
+184 info lifecycle imgpx@1.0.12~preinstall: imgpx@1.0.12
+185 silly preinstall image-to-ascii@3.0.12
+186 info lifecycle image-to-ascii@3.0.12~preinstall: image-to-ascii@3.0.12
+187 silly preinstall ascii-video@0.1.2
+188 info lifecycle ascii-video@0.1.2~preinstall: ascii-video@0.1.2
+189 timing action:preinstall Completed in 2ms
+190 silly doSerial build 64
+191 silly build prgm-installed@1.0.10
+192 info linkStuff prgm-installed@1.0.10
+193 silly linkStuff prgm-installed@1.0.10 has /Users/jaczac/node_modules as its parent node_modules
+194 silly build gm-installed@1.0.9
+195 info linkStuff gm-installed@1.0.9
+196 silly linkStuff gm-installed@1.0.9 has /Users/jaczac/node_modules as its parent node_modules
+197 silly build lwip2@1.0.14
+198 info linkStuff lwip2@1.0.14
+199 silly linkStuff lwip2@1.0.14 has /Users/jaczac/node_modules as its parent node_modules
+200 silly build lwipify@2.0.12
+201 info linkStuff lwipify@2.0.12
+202 silly linkStuff lwipify@2.0.12 has /Users/jaczac/node_modules as its parent node_modules
+203 silly build image-parser@1.2.7
+204 info linkStuff image-parser@1.2.7
+205 silly linkStuff image-parser@1.2.7 has /Users/jaczac/node_modules as its parent node_modules
+206 silly build imgpx@1.0.12
+207 info linkStuff imgpx@1.0.12
+208 silly linkStuff imgpx@1.0.12 has /Users/jaczac/node_modules as its parent node_modules
+209 silly build image-to-ascii@3.0.12
+210 info linkStuff image-to-ascii@3.0.12
+211 silly linkStuff image-to-ascii@3.0.12 has /Users/jaczac/node_modules as its parent node_modules
+212 silly build ascii-video@0.1.2
+213 info linkStuff ascii-video@0.1.2
+214 silly linkStuff ascii-video@0.1.2 has /Users/jaczac/node_modules as its parent node_modules
+215 verbose linkBins [
+215 verbose linkBins   { 'ascii-video': 'main.js' },
+215 verbose linkBins   '/Users/jaczac/node_modules/.bin',
+215 verbose linkBins   false
+215 verbose linkBins ]
+216 timing action:build Completed in 8ms
+217 silly doSerial global-link 64
+218 silly doParallel update-linked 0
+219 silly doSerial install 64
+220 silly install prgm-installed@1.0.10
+221 info lifecycle prgm-installed@1.0.10~install: prgm-installed@1.0.10
+222 silly install gm-installed@1.0.9
+223 info lifecycle gm-installed@1.0.9~install: gm-installed@1.0.9
+224 silly install lwip2@1.0.14
+225 info lifecycle lwip2@1.0.14~install: lwip2@1.0.14
+226 verbose lifecycle lwip2@1.0.14~install: unsafe-perm in lifecycle true
+227 verbose lifecycle lwip2@1.0.14~install: PATH: /usr/local/lib/node_modules/npm/node_modules/npm-lifecycle/node-gyp-bin:/Users/jaczac/node_modules/lwip2/node_modules/.bin:/Users/jaczac/node_modules/.bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+228 verbose lifecycle lwip2@1.0.14~install: CWD: /Users/jaczac/node_modules/lwip2
+229 silly lifecycle lwip2@1.0.14~install: Args: [ '-c', 'node lib/install.js' ]
+230 timing audit submit Completed in 351ms
+231 http fetch POST 200 https://registry.npmjs.org/-/npm/v1/security/audits/quick 351ms
+232 timing audit body Completed in 1ms
+233 silly lifecycle lwip2@1.0.14~install: Returned: code: 1  signal: null
+234 info lifecycle lwip2@1.0.14~install: Failed to exec install script
+235 timing action:install Completed in 8178ms
+236 verbose unlock done using /Users/jaczac/.npm/_locks/staging-46391aae5971a0b6.lock for /Users/jaczac/node_modules/.staging
+237 timing stage:rollbackFailedOptional Completed in 22ms
+238 timing stage:runTopLevelLifecycles Completed in 14644ms
+239 silly saveTree jaczac
+239 silly saveTree ├── ansi-escapes@1.4.0
+239 silly saveTree ├── ansi-regex@2.1.1
+239 silly saveTree ├─┬ ansi-styles@3.2.1
+239 silly saveTree │ └─┬ color-convert@1.9.3
+239 silly saveTree │   └── color-name@1.1.3
+239 silly saveTree ├─┬ ansy@1.0.14
+239 silly saveTree │ ├─┬ custom-return@1.0.11
+239 silly saveTree │ │ └── noop6@1.0.8
+239 silly saveTree │ ├─┬ supports-color@3.2.3
+239 silly saveTree │ │ └── has-flag@1.0.0
+239 silly saveTree │ └─┬ ul@5.2.14
+239 silly saveTree │   ├─┬ deffy@2.2.3
+239 silly saveTree │   │ └─┬ typpy@2.3.11
+239 silly saveTree │   │   └── function.name@1.0.12
+239 silly saveTree │   └── typpy@2.3.11
+239 silly saveTree ├─┬ argparse@1.0.10
+239 silly saveTree │ └── sprintf-js@1.0.3
+239 silly saveTree ├── array-parallel@0.1.3
+239 silly saveTree ├── array-series@0.1.5
+239 silly saveTree ├─┬ ascii-video@0.1.2
+239 silly saveTree │ ├─┬ cli-color@1.4.0
+239 silly saveTree │ │ ├─┬ d@1.0.1
+239 silly saveTree │ │ │ ├─┬ es5-ext@0.10.53
+239 silly saveTree │ │ │ │ ├─┬ es6-iterator@2.0.3
+239 silly saveTree │ │ │ │ │ └─┬ es6-symbol@3.1.3
+239 silly saveTree │ │ │ │ │   └─┬ ext@1.4.0
+239 silly saveTree │ │ │ │ │     └── type@2.0.0
+239 silly saveTree │ │ │ │ ├── es6-symbol@3.1.3
+239 silly saveTree │ │ │ │ └── next-tick@1.0.0
+239 silly saveTree │ │ │ └── type@1.2.0
+239 silly saveTree │ │ ├── es5-ext@0.10.53
+239 silly saveTree │ │ ├── es6-iterator@2.0.3
+239 silly saveTree │ │ ├─┬ memoizee@0.4.14
+239 silly saveTree │ │ │ ├── es6-weak-map@2.0.3
+239 silly saveTree │ │ │ ├── event-emitter@0.3.5
+239 silly saveTree │ │ │ ├── is-promise@2.1.0
+239 silly saveTree │ │ │ ├── lru-queue@0.1.0
+239 silly saveTree │ │ │ └── timers-ext@0.1.7
+239 silly saveTree │ │ └── timers-ext@0.1.7
+239 silly saveTree │ ├── commander@2.20.3
+239 silly saveTree │ ├─┬ gm@1.23.1
+239 silly saveTree │ │ ├─┬ cross-spawn@4.0.2
+239 silly saveTree │ │ │ ├─┬ lru-cache@4.1.5
+239 silly saveTree │ │ │ │ ├── pseudomap@1.0.2
+239 silly saveTree │ │ │ │ └── yallist@2.1.2
+239 silly saveTree │ │ │ └─┬ which@1.3.1
+239 silly saveTree │ │ │   └── isexe@2.0.0
+239 silly saveTree │ │ └─┬ debug@3.2.6
+239 silly saveTree │ │   └── ms@2.1.2
+239 silly saveTree │ ├─┬ image-to-ascii@3.0.12
+239 silly saveTree │ │ ├─┬ asciify-pixel-matrix@1.0.13
+239 silly saveTree │ │ │ └─┬ asciify-pixel@1.2.13
+239 silly saveTree │ │ │   ├─┬ couleurs@6.0.10
+239 silly saveTree │ │ │   │ └── iterate-object@1.3.3
+239 silly saveTree │ │ │   ├─┬ pixel-bg@1.0.9
+239 silly saveTree │ │ │   │ └── pixel-class@1.0.8
+239 silly saveTree │ │ │   ├── pixel-class@1.0.8
+239 silly saveTree │ │ │   └── pixel-white-bg@1.0.8
+239 silly saveTree │ │ ├─┬ compute-size@1.0.12
+239 silly saveTree │ │ │ ├─┬ fixed-or-percent@1.0.11
+239 silly saveTree │ │ │ │ ├─┬ is-percent@1.0.11
+239 silly saveTree │ │ │ │ │ └── last-char@1.3.10
+239 silly saveTree │ │ │ │ └── percent-value@1.0.8
+239 silly saveTree │ │ │ └── map-o@2.0.9
+239 silly saveTree │ │ ├─┬ image-parser@1.2.7
+239 silly saveTree │ │ │ ├── cb-buffer@2.1.8
+239 silly saveTree │ │ │ ├── err@1.1.1
+239 silly saveTree │ │ │ ├─┬ gm-tools@1.0.11
+239 silly saveTree │ │ │ │ ├── pngjs@2.3.1
+239 silly saveTree │ │ │ │ └─┬ same-time@2.3.4
+239 silly saveTree │ │ │ │   └── deffy@2.0.0
+239 silly saveTree │ │ │ └─┬ lwipify@2.0.12
+239 silly saveTree │ │ │   ├─┬ lwip2@1.0.14
+239 silly saveTree │ │ │   │ └─┬ gm-installed@1.0.9
+239 silly saveTree │ │ │   │   └── prgm-installed@1.0.10
+239 silly saveTree │ │ │   ├─┬ tinyreq@3.4.1
+239 silly saveTree │ │ │   │ ├─┬ assured@1.0.14
+239 silly saveTree │ │ │   │ │ └── sliced@1.0.1
+239 silly saveTree │ │ │   │ └── follow-redirects@1.10.0
+239 silly saveTree │ │ │   └─┬ url-remote@1.1.8
+239 silly saveTree │ │ │     └─┬ url-local@1.1.8
+239 silly saveTree │ │ │       └─┬ parse-url@1.3.11
+239 silly saveTree │ │ │         ├─┬ is-ssh@1.3.1
+239 silly saveTree │ │ │         │ └── protocols@1.4.7
+239 silly saveTree │ │ │         └── protocols@1.4.7
+239 silly saveTree │ │ ├─┬ imgpx@1.0.12
+239 silly saveTree │ │ │ └── lwip-pixels@1.1.9
+239 silly saveTree │ │ ├─┬ one-by-one@3.2.7
+239 silly saveTree │ │ │ └── obj-def@1.0.7
+239 silly saveTree │ │ └─┬ terminal-char-width@1.0.9
+239 silly saveTree │ │   └── is-windows@0.1.1
+239 silly saveTree │ ├─┬ js-yaml@3.13.1
+239 silly saveTree │ │ └── esprima@4.0.1
+239 silly saveTree │ ├── lodash@4.17.15
+239 silly saveTree │ ├─┬ log-update@1.0.2
+239 silly saveTree │ │ └─┬ cli-cursor@1.0.2
+239 silly saveTree │ │   └─┬ restore-cursor@1.0.1
+239 silly saveTree │ │     ├── exit-hook@1.1.1
+239 silly saveTree │ │     └── onetime@1.1.0
+239 silly saveTree │ └─┬ shelljs@0.7.8
+239 silly saveTree │   ├─┬ glob@7.1.6
+239 silly saveTree │   │ ├── fs.realpath@1.0.0
+239 silly saveTree │   │ ├─┬ inflight@1.0.6
+239 silly saveTree │   │ │ ├─┬ once@1.4.0
+239 silly saveTree │   │ │ │ └── wrappy@1.0.2
+239 silly saveTree │   │ │ └── wrappy@1.0.2
+239 silly saveTree │   │ ├── inherits@2.0.4
+239 silly saveTree │   │ ├─┬ minimatch@3.0.4
+239 silly saveTree │   │ │ └─┬ brace-expansion@1.1.11
+239 silly saveTree │   │ │   ├── balanced-match@1.0.0
+239 silly saveTree │   │ │   └── concat-map@0.0.1
+239 silly saveTree │   │ ├── once@1.4.0
+239 silly saveTree │   │ └── path-is-absolute@1.0.1
+239 silly saveTree │   ├── interpret@1.2.0
+239 silly saveTree │   └─┬ rechoir@0.6.2
+239 silly saveTree │     └─┬ resolve@1.15.1
+239 silly saveTree │       └── path-parse@1.0.6
+239 silly saveTree ├── asciify-pixel-matrix@1.0.13
+239 silly saveTree ├── asciify-pixel@1.2.13
+239 silly saveTree ├── assured@1.0.14
+239 silly saveTree ├── balanced-match@1.0.0
+239 silly saveTree ├── brace-expansion@1.1.11
+239 silly saveTree ├── cb-buffer@2.1.8
+239 silly saveTree ├── cli-color@1.4.0
+239 silly saveTree ├── cli-cursor@1.0.2
+239 silly saveTree ├── color-convert@1.9.3
+239 silly saveTree ├── color-name@1.1.3
+239 silly saveTree ├── commander@2.20.3
+239 silly saveTree ├── compute-size@1.0.12
+239 silly saveTree ├── concat-map@0.0.1
+239 silly saveTree ├── couleurs@6.0.10
+239 silly saveTree ├── cross-spawn@4.0.2
+239 silly saveTree ├── custom-return@1.0.11
+239 silly saveTree ├── d@1.0.1
+239 silly saveTree ├── debug@3.2.6
+239 silly saveTree ├── deffy@2.2.3
+239 silly saveTree ├── err@1.1.1
+239 silly saveTree ├── es5-ext@0.10.53
+239 silly saveTree ├── es6-iterator@2.0.3
+239 silly saveTree ├── es6-symbol@3.1.3
+239 silly saveTree ├── es6-weak-map@2.0.3
+239 silly saveTree ├── esprima@4.0.1
+239 silly saveTree ├── event-emitter@0.3.5
+239 silly saveTree ├── exit-hook@1.1.1
+239 silly saveTree ├── ext@1.4.0
+239 silly saveTree ├── fixed-or-percent@1.0.11
+239 silly saveTree ├── follow-redirects@1.10.0
+239 silly saveTree ├── fs.realpath@1.0.0
+239 silly saveTree ├── function.name@1.0.12
+239 silly saveTree ├── glob@7.1.6
+239 silly saveTree ├── gm-tools@1.0.11
+239 silly saveTree ├── gm@1.23.1
+239 silly saveTree ├── has-flag@1.0.0
+239 silly saveTree ├── inflight@1.0.6
+239 silly saveTree ├── inherits@2.0.4
+239 silly saveTree ├── interpret@1.2.0
+239 silly saveTree ├── is-percent@1.0.11
+239 silly saveTree ├── is-promise@2.1.0
+239 silly saveTree ├── is-ssh@1.3.1
+239 silly saveTree ├── is-windows@0.1.1
+239 silly saveTree ├── isexe@2.0.0
+239 silly saveTree ├── iterate-object@1.3.3
+239 silly saveTree ├── js-yaml@3.13.1
+239 silly saveTree ├── last-char@1.3.10
+239 silly saveTree ├── lodash@4.17.15
+239 silly saveTree ├── log-update@1.0.2
+239 silly saveTree ├── lru-cache@4.1.5
+239 silly saveTree ├── lru-queue@0.1.0
+239 silly saveTree ├── lwip-pixels@1.1.9
+239 silly saveTree ├── map-o@2.0.9
+239 silly saveTree ├── memoizee@0.4.14
+239 silly saveTree ├── minimatch@3.0.4
+239 silly saveTree ├── ms@2.1.2
+239 silly saveTree ├── next-tick@1.0.0
+239 silly saveTree ├── noop6@1.0.8
+239 silly saveTree ├── obj-def@1.0.7
+239 silly saveTree ├── once@1.4.0
+239 silly saveTree ├── one-by-one@3.2.7
+239 silly saveTree ├── onetime@1.1.0
+239 silly saveTree ├── parse-url@1.3.11
+239 silly saveTree ├── path-is-absolute@1.0.1
+239 silly saveTree ├── path-parse@1.0.6
+239 silly saveTree ├── percent-value@1.0.8
+239 silly saveTree ├── pixel-bg@1.0.9
+239 silly saveTree ├── pixel-class@1.0.8
+239 silly saveTree ├── pixel-white-bg@1.0.8
+239 silly saveTree ├── pngjs@2.3.1
+239 silly saveTree ├── protocols@1.4.7
+239 silly saveTree ├── pseudomap@1.0.2
+239 silly saveTree ├── rechoir@0.6.2
+239 silly saveTree ├── resolve@1.15.1
+239 silly saveTree ├── restore-cursor@1.0.1
+239 silly saveTree ├── same-time@2.3.4
+239 silly saveTree ├── shelljs@0.7.8
+239 silly saveTree ├── sliced@1.0.1
+239 silly saveTree ├── sprintf-js@1.0.3
+239 silly saveTree ├── supports-color@3.2.3
+239 silly saveTree ├── terminal-char-width@1.0.9
+239 silly saveTree ├── timers-ext@0.1.7
+239 silly saveTree ├── tinyreq@3.4.1
+239 silly saveTree ├── type@1.2.0
+239 silly saveTree ├── typpy@2.3.11
+239 silly saveTree ├── ul@5.2.14
+239 silly saveTree ├── url-local@1.1.8
+239 silly saveTree ├── url-remote@1.1.8
+239 silly saveTree ├── which@1.3.1
+239 silly saveTree ├── wrappy@1.0.2
+239 silly saveTree └── yallist@2.1.2
+240 warn notsup Unsupported engine for ascii-video@0.1.2: wanted: {"node":"6.10.0","npm":"4.0.5"} (current: {"node":"13.8.0","npm":"6.13.7"})
+241 warn notsup Not compatible with your version of node/npm: ascii-video@0.1.2
+242 verbose notsup Not compatible with your version of node/npm: ascii-video@0.1.2
+242 verbose notsup Required: {"node":"6.10.0","npm":"4.0.5"}
+242 verbose notsup Actual:   {"npm":"6.13.7","node":"13.8.0"}
+243 warn enoent ENOENT: no such file or directory, open '/Users/jaczac/package.json'
+244 verbose enoent This is related to npm not being able to find a file.
+245 warn jaczac No description
+246 warn jaczac No repository field.
+247 warn jaczac No README data
+248 warn jaczac No license field.
+249 verbose stack Error: lwip2@1.0.14 install: `node lib/install.js`
+249 verbose stack Exit status 1
+249 verbose stack     at EventEmitter.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/npm-lifecycle/index.js:332:16)
+249 verbose stack     at EventEmitter.emit (events.js:321:20)
+249 verbose stack     at ChildProcess.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/npm-lifecycle/lib/spawn.js:55:14)
+249 verbose stack     at ChildProcess.emit (events.js:321:20)
+249 verbose stack     at maybeClose (internal/child_process.js:1026:16)
+249 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:286:5)
+250 verbose pkgid lwip2@1.0.14
+251 verbose cwd /Users/jaczac
+252 verbose Darwin 19.3.0
+253 verbose argv "/usr/local/Cellar/node/13.8.0/bin/node" "/usr/local/bin/npm" "install" "ascii-video"
+254 verbose node v13.8.0
+255 verbose npm  v6.13.7
+256 error code ELIFECYCLE
+257 error errno 1
+258 error lwip2@1.0.14 install: `node lib/install.js`
+258 error Exit status 1
+259 error Failed at the lwip2@1.0.14 install script.
+259 error This is probably not a problem with npm. There is likely additional logging output above.
+260 verbose exit [ 1, true ]
