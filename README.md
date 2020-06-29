@@ -12,7 +12,7 @@ I mainly craeted this to always have my config with me, but I would really be ha
 ![showcase](https://github.com/Jac-Zac/My-home-config/blob/master/first_desktop.png)
 ![showcase](https://github.com/Jac-Zac/My-home-config/blob/master/second_desktop.png)
 
-# Installation (Noob proof)
+# Installation
 
 ###### you have to be in zsh shell for this installation
 
@@ -36,20 +36,25 @@ bash installer.sh
 ```
 sudo bash root_script.sh
 ```
+## CLOSE YOUR TERMINAL WINDOWS AND OPEN A NEW ONE
 
 **I suggest to install also** [anaconda](https://docs.anaconda.com/anaconda/install/mac-os/)
 
 **Other thing I suggest to have the same terminla style and look:**
 
 - If you want my same color theme go to -> https://github.com/arcticicestudio/nord-terminal-app
-- If you want gotop you can run ```brew install gotop ```
+- I have also install gotop
 
 ## Customizations
 
-- If you want neofetch just run ```brew install neofetch ``` and I suggest to add lolcat ```brew install lolcat ```
-- You can change the .zshrc and I suggest to follow the commnets
-- You can change the .vimrc file
-- I suggest to uncomment some stuff in the .zshrc -> but do not forget to ```brew install lsd``` and also install nerd font
-- You have to allow Alacritty terminal to work on your mac or you can use iTerm
+- I suggest to add lolcat ```brew install lolcat ``` which can be used with neofetch 
+- If you want you can go to ~/.config/zsh to edit your .zshrc -> and you can uncomment lines 
+- You can change the .vimrc file located inside the .vim folder in the home directoty 
+- If you want to use ```lsd``` as your ```ls``` uncomment the alias in the zshrc and do not forget to to use a nerd font 
+- You have to allow Alacritty terminal to work on your mac or you can use iTerm in minimal mode with tab bar on the bootom 
 - Beautiful dynamic wallpapers -> [First](https://dynamicwallpaper.club/wallpaper/6df38eo4nym),[Second](https://dynamicwallpaper.club/wallpaper/jculsb683ok)
-- I also suggest to Automatically Hide & Show the Menu Bar and i also suggest to show scroll bar in all the application only when scrolling (system Preferences -> General)
+- I also suggest to Automatically Hide & Show the Menu Bar and also set show scroll bar in all the application only when scrolling (system Preferences -> General)
+
+## Other things
+
+**I also use ohmyzsh** to learn more and support them go to -> https://ohmyz.sh/
