@@ -7,9 +7,14 @@ if [[ $EUID -ne 0 ]]; then
   exit 1
 fi
 
+# Install ohmyzsh
+sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+
 
 # download and clean up 
-mv config $HOME/.config
+sudo mv config $HOME/.config
+sudo mv ohmyzsh $HOME/.config
 sudo cp profile $HOME/.profile
 sudo cp zprofile $HOME/.zprofile
 sudo cp -r vim $HOME/.vim
