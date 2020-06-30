@@ -1,9 +1,10 @@
 # If you come from bash you might have to change your $PATH.
 
 # History in cache directory:
-HISTSIZE=10000
-SAVEHIST=10000
 HISTFILE=~/.cache/zsh/history
+HISTSIZE=20000
+SAVEHIST=10000
+
 
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/zshnameddirrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/zshnameddirrc"
 
@@ -33,7 +34,7 @@ export UPDATE_ZSH_DAYS=10
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
 git
-vi-mode
+# vi-mode
 web-search
 zsh-syntax-highlighting
 zsh-autosuggestions
