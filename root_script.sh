@@ -28,11 +28,6 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:
 # my terminal of choise 
 # brew cask install alacritty
 
-# install things to make yuor rice look like mine
-brew install tty-clock
-brew install gotop
-brew install lsd
-
 # fonts
 cd ~/Library/Fonts && curl -fLo "Droid Sans Mono for Powerline Nerd Font Complete.otf" https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/DroidSansMono/complete/Droid%20Sans%20Mono%20Nerd%20Font%20Complete.otf
 
