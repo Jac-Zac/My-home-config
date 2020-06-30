@@ -15,6 +15,7 @@ sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools
 # download and clean up 
 sudo mv config $HOME/.config
 sudo mv ohmyzsh $HOME/.config
+mkdir .cache
 mkdir .cache/zsh
 sudo cp profile $HOME/.profile
 sudo cp zprofile $HOME/.zprofile
@@ -37,4 +38,5 @@ cd ~/Library/Fonts && curl -fLo "Droid Sans Mono for Powerline Nerd Font Complet
 
 # back home
 cd
+
 echo "Made by: Jac-Zac"
