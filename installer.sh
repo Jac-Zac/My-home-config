@@ -4,6 +4,7 @@ brew update && brew upgrade
 echo "brew installed"
 
  # install things to make yuor rice look like mine
+brew install wget
 brew install tty-clock
 brew install gotop
 brew install lsd

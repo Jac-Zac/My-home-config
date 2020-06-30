@@ -1,7 +1,7 @@
 # My-home-config
 
 ## Synopsis
-this configuration repo contain everything to set up my termianal from scrach in a single script
+this configuration repo contains everything to set up my termianal from scrach in two scripts
 ###### (It is made for mac)
 
 ## Motivation
@@ -16,11 +16,11 @@ I mainly craeted this to always have my config with me, but I would really be ha
 
 ###### you have to be in zsh shell for this installation
 
-###### clone the reposiotry
+###### clone the repository
 ```
 git clone https://github.com/Jac-Zac/My-home-config.git
 ```
-###### change in to the correct directory
+###### go to the correct directory
 ```
 cd My-home-config
 ```
