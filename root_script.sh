@@ -15,13 +15,14 @@ sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools
 # download and clean up 
 sudo mv config $HOME/.config
 sudo mv ohmyzsh $HOME/.config
+mkdir .cache/zsh
 sudo cp profile $HOME/.profile
 sudo cp zprofile $HOME/.zprofile
 sudo cp -r vim $HOME/.vim
 
 # plugins
-# git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.config/oh-my-zsh/custom}/plugins/zsh-autosuggestions
-# git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.config/oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.config/oh-my-zsh/custom}/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.config/oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
 # my terminal of choise 
 # brew cask install alacritty
