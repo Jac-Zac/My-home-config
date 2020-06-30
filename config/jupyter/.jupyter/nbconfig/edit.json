@@ -1,0 +1,8 @@
+{
+  "Editor": {
+    "codemirror_options": {
+      "vimMode": true,
+      "keyMap": "vim"
+    }
+  }
+}
