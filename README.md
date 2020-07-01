@@ -42,8 +42,8 @@ sudo bash root_script.sh
 
 **Other thing I suggest to have the same terminla style and look:**
 
-- If you want my same color theme go to -> https://github.com/arcticicestudio/nord-terminal-app
-- I have also install gotop
+- If you want my same color theme go to -> https://github.com/arcticicestudio/nord-iterm2 
+- I suggest to go to -> http://terminal.sexy (to decide the color palette)
 
 ## Customizations
 
@@ -51,7 +51,8 @@ sudo bash root_script.sh
 - If you want you can go to ~/.config/zsh to edit your .zshrc -> and you can uncomment lines 
 - You can change the .vimrc file located inside the .vim folder in the home directoty 
 - If you want to use ```lsd``` as your ```ls``` uncomment the alias in the zshrc and do not forget to to use a nerd font 
-- You have to allow Alacritty terminal to work on your mac or you can use iTerm in minimal mode with tab bar on the bootom 
+- To install SF Mono nerd font go to ```https://github.com/epk/SF-Mono-Nerd-Font``` and follow the install
+- I use iTerm in minimal mode with tab bar on the bootom 
 - Beautiful dynamic wallpapers -> [First](https://dynamicwallpaper.club/wallpaper/6df38eo4nym),[Second](https://dynamicwallpaper.club/wallpaper/jculsb683ok)
 - I also suggest to Automatically Hide & Show the Menu Bar and also set show scroll bar in all the application only when scrolling (system Preferences -> General)
 
