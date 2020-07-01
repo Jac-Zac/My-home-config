@@ -12,9 +12,10 @@ sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools
 
 # download and clean up 
 sudo cp -r config $HOME/.config
-sudo mv ohmyzsh $HOME/.config
+sudo mv .oh-my-zsh $HOME/.config/oh-my-zsh
 mkdir .cache
 mkdir .cache/zsh
+mkdir .cache/wget
 sudo cp profile $HOME/.profile
 sudo cp zprofile $HOME/.zprofile
 sudo cp -r vim $HOME/.vim
