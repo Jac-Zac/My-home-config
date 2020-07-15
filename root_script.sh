@@ -21,9 +21,9 @@ sudo cp zprofile $HOME/.zprofile
 sudo cp -r vim $HOME/.vim
 
 # changing owneriship 
-sudo chown $USER .vim
-sudo chown $USER .profile
-sudo chown $USER .zprofile
+sudo chown -R $USER:staff .vim
+sudo chown $USER:staff .profile
+sudo chown $USER:staff .zprofile
 
 # plugins
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.config/oh-my-zsh/custom}/plugins/zsh-autosuggestions
