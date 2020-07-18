@@ -1,11 +1,11 @@
 # My-home-config
 
 ## Synopsis
-this configuration repo contains everything to set up my termianal from scrach in two scripts
+this configuration repo contains everything to set up my terminal from search in two scripts
 ###### (It is made for mac)
 
 ## Motivation
-I mainly craeted this to always have my config with me, but I would really be happy if anybody wanted to try it. And also If I can help someone with this I think it is worth to share it. 
+I mainly created this to always have my config with me, but I would really be happy if anybody wanted to try it. And also If I can help someone with this I think it is worth to share it. 
 
 ## Example of what my terminal look like
 
@@ -24,7 +24,7 @@ git clone https://github.com/Jac-Zac/My-home-config.git
 ```
 cd My-home-config
 ```
-###### this command give excecute permission to the script
+###### this command give execute permission to the script
 ```
 chmod +x installer.sh 
 ```
@@ -38,12 +38,19 @@ sudo bash root_script.sh
 ```
 ## CLOSE YOUR TERMINAL WINDOWS AND OPEN A NEW ONE
 
+###### if you use nvim do ... 
+```
+vim ~/.config/nvim/init.vim
+```
+###### And then run the command :PlugInstall
+
 **I suggest to install also** [anaconda](https://docs.anaconda.com/anaconda/install/mac-os/)
 
 **Other thing I suggest to have the same terminla style and look:**
 
 - If you want my same color theme go to -> https://github.com/arcticicestudio/nord-iterm2 
 - I suggest to go to -> http://terminal.sexy (to decide the color palette)
+- I have also installed ytop
 
 ## Customizations
 
