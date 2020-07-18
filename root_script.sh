@@ -20,8 +20,9 @@ sudo cp profile $HOME/.profile
 sudo cp zprofile $HOME/.zprofile
 sudo cp -r vim $HOME/.vim
 
-# changing owneriship 
-sudo chown -R $USER:staff .vim
+# changing ownership
+cd
+sudo chown -R $USER:staff .config
 sudo chown $USER:staff .profile
 sudo chown $USER:staff .zprofile
 

@@ -3,11 +3,13 @@
 brew update && brew upgrade
 echo "brew installed"
 
- # install things to make yuor rice look like mine
+ # install things to make your rice look like mine
 brew install zsh
 brew install wget
+brew install neovim
 brew install tty-clock
-brew install gotop
+brew tap cjbassi/ytop
+brew install ytop
 brew install lsd
 
 chmod +x root_script.sh
