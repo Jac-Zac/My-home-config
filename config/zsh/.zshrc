@@ -51,6 +51,7 @@ alias cp="cp -iv"
 alias mv="mv -iv"
 alias rm="rm -v"
 alias wget="wget --hsts-file ~/.cache/wget/wget-hsts"
+alias vim="nvim"
 # alias ls="lsd"
 
 # command to run when I start a zsh instance
