@@ -1,18 +1,18 @@
 # My-home-config
 
-## Synopsis
+## Synopsis 📄
 this configuration repo contains everything to set up my terminal from search in two scripts
 ###### (It is made for mac)
 
-## Motivation
+## Motivation 💭
 I mainly created this to always have my config with me, but I would really be happy if anybody wanted to try it. And also If I can help someone with this I think it is worth to share it. 
 
-## Example of what my terminal look like
+## Example of what my terminal look like 🌇
 
 ![showcase](https://github.com/Jac-Zac/My-home-config/blob/master/first_desktop.png)
 ![showcase](https://github.com/Jac-Zac/My-home-config/blob/master/second_desktop.png)
 
-# Installation
+# Installation ⚙️
 
 ###### you have to be in zsh shell for this installation
 
@@ -36,7 +36,9 @@ bash installer.sh
 ```
 sudo bash root_script.sh
 ```
-## CLOSE YOUR TERMINAL WINDOWS AND OPEN A NEW ONE
+## How to use it and customize it 🔎
+
+###### CLOSE YOUR TERMINAL WINDOWS AND OPEN A NEW ONE
 
 ###### if you use nvim do ... 
 ```
@@ -52,7 +54,7 @@ vim ~/.config/nvim/init.vim
 - I suggest to go to -> http://terminal.sexy (to decide the color palette)
 - I have also installed ytop
 
-## Customizations
+## Customizations 🔧
 
 - I suggest to add lolcat ```brew install lolcat ``` which can be used with neofetch 
 - If you want you can go to ~/.config/zsh to edit your .zshrc -> and you can uncomment lines 
@@ -63,6 +65,6 @@ vim ~/.config/nvim/init.vim
 - Beautiful dynamic wallpapers -> [First](https://dynamicwallpaper.club/wallpaper/6df38eo4nym),[Second](https://dynamicwallpaper.club/wallpaper/jculsb683ok)
 - I also suggest to Automatically Hide & Show the Menu Bar and also set show scroll bar in all the application only when scrolling (system Preferences -> General)
 
-## Other things
+## Other things 📚
 
 **I also use ohmyzsh** to learn more and support them go to -> https://ohmyz.sh/
