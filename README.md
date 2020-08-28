@@ -1,4 +1,4 @@
-# My-home-config
+# My-home-config ⚙️
 
 ## Synopsis 📄
 this configuration repo contains everything to set up my terminal from search in two scripts
@@ -12,11 +12,11 @@ I mainly created this to always have my config with me, but I would really be ha
 ![showcase](https://github.com/Jac-Zac/My-home-config/blob/master/first_desktop.png)
 ![showcase](https://github.com/Jac-Zac/My-home-config/blob/master/second_desktop.png)
 
-# Installation ⚙️
+# Installation 💻
 
 ###### you have to be in zsh shell for this installation
 
-###### clone the repository
+###### clone the repository ⏳ 
 ```
 git clone https://github.com/Jac-Zac/My-home-config.git
 ```
