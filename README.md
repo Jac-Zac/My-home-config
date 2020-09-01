@@ -9,8 +9,8 @@ I mainly created this to always have my config with me, but I would really be ha
 
 ## Example of what my terminal look like 🌇
 
-![showcase](https://github.com/Jac-Zac/My-home-config/blob/master/first_desktop.png)
-![showcase](https://github.com/Jac-Zac/My-home-config/blob/master/second_desktop.png)
+![showcase](https://github.com/Jac-Zac/My-home-config/blob/master/first_desktop.jpg)
+![showcase](https://github.com/Jac-Zac/My-home-config/blob/master/second_desktop.jpg)
 
 # Installation 💻
 
@@ -73,4 +73,4 @@ Now I also have a configuration for my rasberry pi 4 runnging Arch with dwm as a
 
 ##### This is what it looks like 
 
-![showcase](https://github.com/Jac-Zac/My-home-config/blob/master/Arch_rice.png)
+![showcase](https://github.com/Jac-Zac/My-home-config/blob/master/Arch_rice.jpg)
