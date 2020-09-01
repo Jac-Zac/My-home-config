@@ -68,3 +68,9 @@ vim ~/.config/nvim/init.vim
 ## Other things 📚
 
 **I also use ohmyzsh** to learn more and support them go to -> https://ohmyz.sh/
+
+Now I also have a configuration for my rasberry pi 4 runnging Arch with dwm as a WM and I'm loving it so far, thus I'm thinking of posting that too in the future 
+
+##### This is what it looks like 
+
+![showcase](https://github.com/Jac-Zac/My-home-config/blob/master/Arch_linux_config.png)
