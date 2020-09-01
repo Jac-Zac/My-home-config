@@ -73,4 +73,4 @@ Now I also have a configuration for my rasberry pi 4 runnging Arch with dwm as a
 
 ##### This is what it looks like 
 
-![showcase](https://github.com/Jac-Zac/My-home-config/blob/master/Arch_linux_config.png)
+![showcase](https://github.com/Jac-Zac/My-home-config/blob/master/Arch_linux_config.jpg)
