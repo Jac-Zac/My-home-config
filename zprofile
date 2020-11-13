@@ -9,8 +9,8 @@ export EDITOR="nvim"
 export ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh"
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.config/oh-my-zsh"
-# Path to anaconda
-export PATH="/usr/local/anaconda3/bin:$PATH"
+# Path to anaconda -> uncomment if you are using anaconda 
+# export PATH="/usr/local/anaconda3/bin:$PATH"
 
 
 # This is the list for lf icons:
