@@ -22,5 +22,10 @@ mkdir .cache
 mkdir .cache/zsh
 mkdir .cache/wget
 
+# download and clean up 
+cp -r config $HOME/.config
+cp profile $HOME/.profile
+cp zprofile $HOME/.zprofile
+
 chmod +x root_script.sh
 echo "run next script as root"

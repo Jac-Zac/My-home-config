@@ -47,6 +47,7 @@ vim ~/.config/nvim/init.vim
 ###### And then run the command :PlugInstall
 
 **I suggest to install also** [anaconda](https://docs.anaconda.com/anaconda/install/mac-os/)
+-> If you do you also have to uncomment 1 line in the .zprofile 
 
 **Other thing I suggest to have the same terminla style and look:**
 
