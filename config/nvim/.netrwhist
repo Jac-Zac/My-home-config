@@ -1,6 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =4
-let g:netrw_dirhist_4='/Users/jaczac/GitHub/AI_Tria 2.0/AI_Tria 2.0'
-let g:netrw_dirhist_3='/Users/jaczac/.config/nvim/plugged/youcompleteme'
-let g:netrw_dirhist_2='/Users/jaczac/GitHub/AI_Tria 2.0/AI_Tria 2.0'
-let g:netrw_dirhist_1='/Users/jaczac/.bash_sessions'

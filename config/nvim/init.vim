@@ -1,6 +1,7 @@
 call plug#begin()
 Plug 'arcticicestudio/nord-vim'
 Plug 'vim-airline/vim-airline'
+Plug 'suan/vim-instant-markdown'
 call plug#end()
 
 colorscheme nord
