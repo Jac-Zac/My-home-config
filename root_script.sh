@@ -14,9 +14,10 @@ sudo chown $USER:staff .profile
 sudo chown $USER:staff .zprofile
 sudo mv .oh-my-zsh $HOME/.config/oh-my-zsh
 
-# plugins
+# plugins and themes 
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.config/oh-my-zsh/custom}/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.config/oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+sudo git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.config/oh-my-zsh/}/themes/powerlevel10k
 
 cd
 
