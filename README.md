@@ -53,16 +53,16 @@ vim ~/.config/nvim/init.vim
 
 - If you want my same color theme go to -> https://github.com/arcticicestudio/nord-iterm2 
 - I suggest to go to -> http://terminal.sexy (to decide the color palette)
-- I have also installed ytop
+- I have also installed gtop
+- Install also everything in -> https://www.piratefache.ch/chunkwm-is-dead-reborn-as-yabai/
 
 ## Customizations 🔧
 
 - I suggest to add lolcat ```brew install lolcat ``` which can be used with neofetch 
 - If you want you can go to ~/.config/zsh to edit your .zshrc -> and you can uncomment lines 
-- You can change the .vimrc file located inside the .vim folder in the home directoty 
 - If you want to use ```lsd``` as your ```ls``` uncomment the alias in the zshrc and do not forget to to use a nerd font 
 - To install SF Mono nerd font go to ```https://github.com/epk/SF-Mono-Nerd-Font``` and follow the install
-- I use iTerm in minimal mode with tab bar on the bootom 
+- I use iTerm in minimal mode with tab bar on the bootom, and add borderless -> https://github.com/jaredculp/iterm2-borderless-padding.git
 - Beautiful dynamic wallpapers -> [First](https://dynamicwallpaper.club/wallpaper/6df38eo4nym),[Second](https://dynamicwallpaper.club/wallpaper/jculsb683ok)
 - I also suggest to Automatically Hide & Show the Menu Bar and also set show scroll bar in all the application only when scrolling (system Preferences -> General)
 
