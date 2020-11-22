@@ -14,7 +14,9 @@ I mainly created this to always have my config with me, but I would really be ha
 
 # Installation ⌘
 
+###### This script is not completely working as of now 
 ###### you have to be in zsh shell for this installation
+
 
 ###### clone the repository ⏳ 
 ```
