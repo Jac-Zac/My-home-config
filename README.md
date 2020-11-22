@@ -12,7 +12,7 @@ I mainly created this to always have my config with me, but I would really be ha
 ![showcase](https://github.com/Jac-Zac/My-home-config/blob/master/first_desktop.jpg)
 ![showcase](https://github.com/Jac-Zac/My-home-config/blob/master/second_desktop.jpg)
 
-# Installation 💻
+# Installation ⌘
 
 ###### you have to be in zsh shell for this installation
 
@@ -46,23 +46,20 @@ vim ~/.config/nvim/init.vim
 ```
 ###### And then run the command :PlugInstall
 
-**I suggest to install also** [anaconda](https://docs.anaconda.com/anaconda/install/mac-os/)
--> If you do you also have to uncomment 1 line in the .zprofile 
-
-**Other thing I suggest to have the same terminla style and look:**
+## This is my new configuration since I got the M1 Macbook pro 💻
 
 - If you want my same color theme go to -> https://github.com/arcticicestudio/nord-iterm2 
-- I suggest to go to -> http://terminal.sexy (to decide the color palette)
 - I have also installed gtop
-- Install also everything in -> https://www.piratefache.ch/chunkwm-is-dead-reborn-as-yabai/
+- My window manager is [Amethyst](https://github.com/ianyh/Amethyst)
+- I also use [Thor](https://apps.apple.com/us/app/thor/id1120999687?mt=12) and [Alfred](https://www.alfredapp.com)
 
 ## Customizations 🔧
 
 - I suggest to add lolcat ```brew install lolcat ``` which can be used with neofetch 
 - If you want you can go to ~/.config/zsh to edit your .zshrc -> and you can uncomment lines 
 - If you want to use ```lsd``` as your ```ls``` uncomment the alias in the zshrc and do not forget to to use a nerd font 
-- To install SF Mono nerd font go to ```https://github.com/epk/SF-Mono-Nerd-Font``` and follow the install
-- I use iTerm in minimal mode with tab bar on the bootom, and add borderless -> https://github.com/jaredculp/iterm2-borderless-padding.git
+- To install Inconsolata nerd font go to ```https://github.com/epk/SF-Mono-Nerd-Font``` and follow the install
+- I use iTerm in minimal mode with tab bar on the bootom, and add borderless 
 - Beautiful dynamic wallpapers -> [First](https://dynamicwallpaper.club/wallpaper/6df38eo4nym),[Second](https://dynamicwallpaper.club/wallpaper/jculsb683ok)
 - I also suggest to Automatically Hide & Show the Menu Bar and also set show scroll bar in all the application only when scrolling (system Preferences -> General)
 

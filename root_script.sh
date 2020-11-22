@@ -12,7 +12,6 @@ cd
 sudo chown -R $USER:staff .config
 sudo chown $USER:staff .profile
 sudo chown $USER:staff .zprofile
-sudo mv .oh-my-zsh $HOME/.config/oh-my-zsh
 
 # plugins and themes 
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.config/oh-my-zsh/custom}/plugins/zsh-autosuggestions
