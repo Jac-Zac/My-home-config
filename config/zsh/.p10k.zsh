@@ -1606,9 +1606,8 @@
   # Type `p10k help segment` for documentation and a more sophisticated example.
  
   d=$(date "+%A %X") # date 
-  t=$(date "+%I:%M") # time
   function prompt_example() {
-	  p10k segment -b 0 -f 4 -i '📅 '$d' ⏱  '$t''
+	  p10k segment -b 0 -f 4 -i '📅 '$d''
   }
 
   # User-defined prompt segments may optionally provide an instant_prompt_* function. Its job
