@@ -54,6 +54,7 @@ vim ~/.config/nvim/init.vim
 - I have also installed gtop
 - My window manager is [Amethyst](https://github.com/ianyh/Amethyst)
 - I also use [Thor](https://apps.apple.com/us/app/thor/id1120999687?mt=12) and [Alfred](https://www.alfredapp.com)
+- I take notes with the tool that you can find following this [tutorial](http://flennerhag.com/2017-01-14-latex/)
 
 ## Customizations 🔧
 
