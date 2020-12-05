@@ -52,9 +52,10 @@ vim ~/.config/nvim/init.vim
 
 - If you want my same color theme go to -> https://github.com/arcticicestudio/nord-iterm2 
 - I have also installed gtop
+- I use Iterm, as a terminal emulator, in the minimal style and with 20 padding.
 - My window manager is [Amethyst](https://github.com/ianyh/Amethyst)
 - I also use [Thor](https://apps.apple.com/us/app/thor/id1120999687?mt=12) and [Alfred](https://www.alfredapp.com)
-- I added a few novim configurations to take better notes and also use Latex! 
+- I added a few neovim configurations to take better notes and also use Latex! 
 
 ## Customizations 🔧
 
