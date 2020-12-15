@@ -1,6 +1,6 @@
 #!/bin/bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"i
-echo "brew installed"
+#/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"i
+#echo "brew installed"
 
  # install things to make your rice look like mine
 brew install zsh
