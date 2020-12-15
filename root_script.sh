@@ -8,15 +8,9 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 # changing ownership
-cd
 sudo chown -R $USER:staff .config
 sudo chown $USER:staff .profile
 sudo chown $USER:staff .zprofile
-
-# plugins and themes 
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.config/oh-my-zsh/custom}/plugins/zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.config/oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-sudo git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.config/oh-my-zsh/}/themes/powerlevel10k
 
 cd
 
