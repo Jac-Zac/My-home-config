@@ -17,7 +17,7 @@ I mainly created this to always have my config with me, but I would really be ha
 The possible installation options are made for different types of operating system, not all of them are completely working correctly, but none of them will create any damage to your system
 #### The are 3 operating system configurations
 
-* [**1 - M1 Mac**](#option-1-download-and-install-manually)
+* [**1 - M1 Mac**](#option-1-Installation-on-M1-macbook)
 * [**2 - x86_64 Mac**](#option-2-Installation-on-x86_64-Mac)
 * [**3 - Arch Linux**](#option-3-Installation-on-Arch-Linux)
 
@@ -47,7 +47,7 @@ vim ~/.config/nvim/init.vim
 - Beautiful dynamic wallpapers -> [First](https://dynamicwallpaper.club/wallpaper/6df38eo4nym),[Second](https://dynamicwallpaper.club/wallpaper/jculsb683ok)
 - I also suggest to Automatically Hide & Show the Menu Bar and also set show scroll bar in all the application only when scrolling (system Preferences -> General)
 
-### `Option 1: Download and Install Manually`
+### `Option 1: Installation on M1 macbook`
 
 ###### clone the repository ⏳ 
 ```
