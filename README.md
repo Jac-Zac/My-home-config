@@ -127,11 +127,13 @@ sudo bash root_script.sh
 
 ![showcase](https://github.com/Jac-Zac/My-home-config/blob/master/Arch_rice.jpg)
 
-Now I also have a configuration for my rasberry pi 4 runnging Arch with dwm as a WM and I'm loving it so far, thus I'm thinking of posting that too in the future 
+Now I also have a configuration for my rasberry pi 4 running Arch with dwm as a WM and I'm loving it so far, thus I'm thinking of posting that too in the future.
+I think I will do it but I don't have a date.
 
 ## Other things 📚
 
 **I also use ohmyzsh** to learn more and support them go to -> https://ohmyz.sh/
+Now I will be focusing on other things but also better my configuration for m1 Mac
 
 
 
