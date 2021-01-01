@@ -46,6 +46,8 @@ vim ~/.config/nvim/init.vim
 - I use iTerm in minimal mode with tab bar on the bootom, and add borderless 
 - Beautiful dynamic wallpapers -> [First](https://dynamicwallpaper.club/wallpaper/6df38eo4nym),[Second](https://dynamicwallpaper.club/wallpaper/jculsb683ok)
 - I also suggest to Automatically Hide & Show the Menu Bar and also set show scroll bar in all the application only when scrolling (system Preferences -> General)
+- I also have started using tmux quite a bit
+
 
 ### `Option 1: Installation on M1 macbook`
 

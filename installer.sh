@@ -1,4 +1,8 @@
 !/bin/bash
+
+# allow you to execute the root_script
+chmod +x root_script.sh
+
 # Install ohmyzsh
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
@@ -17,24 +21,27 @@ cp -r config $HOME/.config
 cp profile $HOME/.profile
 cp zprofile $HOME/.zprofile
 
-############################ Uncomment this if you use M1 macbook ###################################
-echo "brew installed"																				#
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"   #   
-#####################################################################################################
+# tmux nord config 
 
+cd $HOME/.config/tmux/themes 
+git clone https://github.com/arcticicestudio/nord-tmux.git
+
+############################ Uncomment this if you use an Intel macbook ###################################
+# echo "brew installed"																				#
+# /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)" #   
+#####################################################################################################
 
  # install things to make your rice look like mine
 brew install zsh
 brew install wget
 brew install neovim
-brew install tty-clock
-brew tap cjbassi/ytop
-brew install ytop
 brew install lsd
 brew install figlet
+brew install node
+brew install tmux
 
-
-chmod +x root_script.sh
+nmp -g install gtop
+npm -g install instant-markdown-d
 
 cd
 
