@@ -45,6 +45,7 @@ vim ~/.config/nvim/init.vim
 - To install Inconsolata nerd font go to ```https://github.com/epk/SF-Mono-Nerd-Font``` and follow the install
 - I use iTerm in minimal mode with tab bar on the bootom, and add borderless 
 - Beautiful dynamic wallpapers -> [First](https://dynamicwallpaper.club/wallpaper/6df38eo4nym),[Second](https://dynamicwallpaper.club/wallpaper/jculsb683ok)
+- Wallpaper I used in the second screenshot was taken from this -> [Third](https://www.reddit.com/r/unixporn/comments/i901nk/bspwm_life_in_the_forest/)
 - I also suggest to Automatically Hide & Show the Menu Bar and also set show scroll bar in all the application only when scrolling (system Preferences -> General)
 - I also have started using tmux quite a bit
 
