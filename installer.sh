@@ -21,14 +21,15 @@ cp -r config $HOME/.config
 cp profile $HOME/.profile
 cp zprofile $HOME/.zprofile
 
-# tmux nord config 
 
+# tmux configuration with nord theme 
 cd $HOME/.config/tmux/themes 
 git clone https://github.com/arcticicestudio/nord-tmux.git
 
-############################ Uncomment this if you use an Intel macbook ###################################
+######################### Uncomment this if you use an Intel macbook ################################
 # echo "brew installed"																				#
 # /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)" #   
+#echo "export PATH=/opt/homebrew/bin:$PATH" >> ~/.config/zsh/.zshrc									@
 #####################################################################################################
 
  # install things to make your rice look like mine
