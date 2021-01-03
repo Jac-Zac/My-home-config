@@ -24,12 +24,11 @@ The possible installation options are made for different types of operating syst
 ### New configurations for my M1 Macbook pro 💻 
 
 - If you want my same color theme go to -> https://github.com/arcticicestudio/nord-iterm2 
-- I have also installed gtop using npm
 - I use Iterm, as a terminal emulator, in the minimal style and with 20 padding.
 - My window manager is [Amethyst](https://github.com/ianyh/Amethyst)
 - I also use [Thor](https://apps.apple.com/us/app/thor/id1120999687?mt=12) and [Alfred](https://www.alfredapp.com)
-- I added a few neovim configurations to take better notes and also use Latex! 
-- To make neovim work on apple silicon (as of now) you can take a look at [this](https://github.com/neovim/neovim/pull/12624)
+- I added a few neovim configurations to take better notes and also use Latex integrated with markdown! 
+- To make neovim work on Apple Silicon (as of now) you can take a look at [this](https://github.com/neovim/neovim/pull/12624)
 
 ###### if you use nvim do ... 
 ```
@@ -80,10 +79,6 @@ sudo chown -R $(whoami) /opt/homebrew
 ######  Download and unzip Homebrew. This command can be found at https://docs.brew.sh/Installation.
 ```
 curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C homebrew
-```
-######  Add the Homebrew bin directory to the PATH. If you don't use zsh, you'll need to do this yourself.
-```
-echo "export PATH=/opt/homebrew/bin:$PATH" >> ~/.config/zsh/.zshrc
 ```
 ###### run the first script
 ```
