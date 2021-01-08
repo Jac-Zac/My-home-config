@@ -29,6 +29,8 @@ The possible installation options are made for different types of operating syst
 - I also use [Thor](https://apps.apple.com/us/app/thor/id1120999687?mt=12) and [Alfred](https://www.alfredapp.com)
 - I added a few neovim configurations to take better notes and also use Latex integrated with markdown! 
 - To make neovim work on Apple Silicon (as of now) you can take a look at [this](https://github.com/neovim/neovim/pull/12624)
+- I use radare2 as a decompiler and it works with apple silicon, It can easly be installed with brew
+- Absolutely disable wallpaper tinting in windows inside system preferences > general on macOS Big Sur 
 
 ###### if you use nvim do ... 
 ```
