@@ -29,19 +29,19 @@ git clone https://github.com/arcticicestudio/nord-tmux.git
 ######################### Uncomment this if you use an Intel macbook ################################
 # echo "brew installed"																				#
 # /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)" #   
-#echo "export PATH=/opt/homebrew/bin:$PATH" >> ~/.config/zsh/.zshrc									@
+# echo "export PATH=/opt/homebrew/bin:$PATH" >> ~/.config/zsh/.zshrc								#
+# brew install neovim																				#	
 #####################################################################################################
 
  # install things to make your rice look like mine
-brew install zsh
 brew install wget
-brew install neovim
 brew install lsd
 brew install figlet
 brew install node
 brew install tmux
+brew install htop
+brew install bpytop
 
-nmp -g install gtop
 npm -g install instant-markdown-d
 
 cd
