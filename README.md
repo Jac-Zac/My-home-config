@@ -1,11 +1,11 @@
 # My-home-config ⚙️
 
 ## Synopsis 📄
-this configuration repo contains everything to set up my terminal from search in two scripts
+this configuration repo contains everything to set up my terminal from scratch in two scripts
 ###### (It is made for mac)
 
 ## Motivation 💭
-I mainly created this to always have my config with me, but I would really be happy if anybody wanted to try it. And also If I can help someone with this I think it is worth to share it. 
+I mainly created this to always have my config with me, but I would really be happy if anybody wanted to try it. Furthermore I think that if I can help someone with this it is worth shearing it. 
 
 ## Example of what my terminal look like 🌇
 
@@ -24,12 +24,11 @@ The possible installation options are made for different types of operating syst
 ### New configurations for my M1 Macbook pro 💻 
 
 - If you want my same color theme go to -> https://github.com/arcticicestudio/nord-iterm2 
-- I use Iterm, as a terminal emulator, in the minimal style and with 20 padding.
+- I use iTerm in minimal mode with tab bar on the bottom, and add borderless and with 20 padding
 - My window manager is [Amethyst](https://github.com/ianyh/Amethyst)
 - I also use [Thor](https://apps.apple.com/us/app/thor/id1120999687?mt=12) and [Alfred](https://www.alfredapp.com)
 - I added a few neovim configurations to take better notes and also use Latex integrated with markdown! 
 - To make neovim work on Apple Silicon (as of now) you can take a look at [this](https://github.com/neovim/neovim/pull/12624)
-- I use radare2 as a decompiler and it works with apple silicon, It can easly be installed with brew
 - Absolutely disable wallpaper tinting in windows inside system preferences > general on macOS Big Sur 
 
 ###### if you use nvim do ... 
@@ -40,16 +39,15 @@ vim ~/.config/nvim/init.vim
 
 ### Customizations 🔧
 
-- I suggest to add lolcat ```brew install lolcat ``` which can be used with neofetch 
+- I use neofetch, when I start a new shell because I just think it looks great. 
 - If you want you can go to ~/.config/zsh to edit your .zshrc -> and you can uncomment lines 
 - If you want to use ```lsd``` as your ```ls``` uncomment the alias in the zshrc and do not forget to to use a nerd font, to install it use cargo
 - To install Inconsolata nerd font go to ```https://github.com/epk/SF-Mono-Nerd-Font``` and follow the install
-- I use iTerm in minimal mode with tab bar on the bootom, and add borderless 
 - Beautiful dynamic wallpapers -> [First](https://dynamicwallpaper.club/wallpaper/6df38eo4nym),[Second](https://dynamicwallpaper.club/wallpaper/jculsb683ok)
 - Wallpaper I used in the second screenshot was taken from this -> [Third](https://www.reddit.com/r/unixporn/comments/i901nk/bspwm_life_in_the_forest/)
 - I also suggest to Automatically Hide & Show the Menu Bar and also set show scroll bar in all the application only when scrolling (system Preferences -> General)
 - I also have started using tmux quite a bit
-
+- I also have aliased top to bpytop to have a nicer looking top
 
 ### `Option 1: Installation on M1 macbook`
 
