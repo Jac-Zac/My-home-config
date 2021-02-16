@@ -21,6 +21,30 @@ The possible installation options are made for different types of operating syst
 * [**2 - x86_64 Mac**](#option-2-Installation-on-x86_64-Mac)
 * [**3 - Arch Linux**](#option-3-Installation-on-Arch-Linux)
 
+### Updating 🔝
+
+##### Have you already installed everything but your version lack behind ?
+
+**Solution :**
+If you wish to update your current configuration to the latest updates you can just follow the simple instructions that follows.
+- You have to go to the "My-home-config" directory
+```
+cd My-home-config
+```
+- Pull the updates from Github latest version  
+```
+git pull
+```
+- This command give execute permission to the script
+```
+chmod +x update.sh 
+```
+- This command run the update script
+```
+bash installer.sh 
+```
+
+
 ### New configurations for my M1 Macbook pro 💻 
 
 - If you want my same color theme go to -> https://github.com/arcticicestudio/nord-iterm2 
