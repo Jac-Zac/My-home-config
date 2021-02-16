@@ -18,7 +18,7 @@ let g:nord_underline = 1
 let g:airline_powerline_fonts = 1
 
 " vim instant markdown configuration 
-let g:instant_markdown_open_to_the_world = 1 " open the markdown to people on my same network
+" let g:instant_markdown_open_to_the_world = 1 " open the markdown to people on my same network
 let g:instant_markdown_mathjax = 1 " allows you to render Latex (this is essential)
 
 set tabstop=4 
