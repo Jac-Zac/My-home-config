@@ -23,7 +23,7 @@ The possible installation options are made for different types of operating syst
 
 ### Updating 🔝
 
-##### Have you already installed everything but your version lack behind ?
+**Have you already installed everything but your version lack behind ?**
 
 **Solution :**
 If you wish to update your current configuration to the latest updates you can just follow the simple instructions that follows.
