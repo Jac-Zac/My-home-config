@@ -1,8 +1,8 @@
 # My-home-config ⚙️
 
 ## Synopsis 📄
-this configuration repo contains everything to set up my terminal from scratch in two scripts
-###### (It is made for mac)
+This configuration repo contains everything to set up my terminal from scratch in two scripts. It also has a very easy way to update your old configuration to keep it up to date.
+###### (It is made for mac, and perhaps GNU\Linux in the future)
 
 ## Motivation 💭
 I mainly created this to always have my config with me, but I would really be happy if anybody wanted to try it. Furthermore I think that if I can help someone with this it is worth shearing it. 
@@ -21,9 +21,11 @@ The possible installation options are made for different types of operating syst
 * [**2 - x86_64 Mac**](#option-2-Installation-on-x86_64-Mac)
 * [**3 - Arch Linux**](#option-3-Installation-on-Arch-Linux)
 
-### Updating 🔝
+### Updating 📅
 
 **Have you already installed everything but your version lack behind ?**
+
+You should always keep your configuration up to date, luckily there is a straightforward and Skid (Script Kiddie) proof solution.
 
 **Solution :**
 If you wish to update your current configuration to the latest updates you can just follow the simple instructions that follows.
@@ -75,73 +77,71 @@ vim ~/.config/nvim/init.vim
 
 ### `Option 1: Installation on M1 macbook`
 
-###### clone the repository ⏳ 
+1. This is to clone the repository ⏳ 
 ```
 git clone https://github.com/Jac-Zac/My-home-config.git
 ```
-###### go to the correct directory
+2. This allows you to go to the correct directory
 ```
 cd My-home-config
 ```
-###### this command give execute permission to the script
+3. This command give execute permission to the script
 ```
 chmod +x installer.sh 
 ```
-
-###### Now you should uncomment the brew installation in installer.sh and install it yourself if you do not have it already. M1 homebrew will be installed in the opt directory 
+4. Now you should uncomment the brew installation in installer.sh and install it yourself if you do not have it already. M1 homebrew will be installed in the opt directory 
 ```
 cd /opt
 ```
-######  Create a directory for Homebrew. This requires root permissions.
+5. Create a directory for Homebrew. This requires root permissions.
 ```
 sudo mkdir homebrew
 ```
-######  Make us the owner of the directory so that we no longer require root permissions.
+6.  Make us the owner of the directory so that we no longer require root permissions.
 ```
 sudo chown -R $(whoami) /opt/homebrew
 ```
-######  Download and unzip Homebrew. This command can be found at https://docs.brew.sh/Installation.
+7.  Download and unzip Homebrew. This command can be found at https://docs.brew.sh/Installation.
 ```
 curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C homebrew
 ```
-###### run the first script
+8. Run the first script
 ```
 bash installer.sh 
 ```
-###### run the second script
+9. Run the second script
 ```
 sudo bash root_script.sh
 ```
 
-###### You should close your terminal windows and open a new one
-
+10. ###### You should close your terminal windows and open a new one, to reload the configurations
 
 ### `Option 2: Installation on x86_64 Mac`
 
 ###### you have to be in zsh shell for this installation, if you are running an old version of macOS you might need to switch away from bash
 
-###### clone the repository ⏳ 
+1. clone the repository ⏳ 
 ```
 git clone https://github.com/Jac-Zac/My-home-config.git
 ```
-###### go to the correct directory
+2. This allows you to go to the correct directory
 ```
 cd My-home-config
 ```
-###### this command give execute permission to the script, but you should also install brew and avoid using the default installer in installer.sh for brew 
+3. This command give execute permission to the script, but you should also install brew and avoid using the default installer in installer.sh for brew 
 ```
 chmod +x installer.sh 
 ```
-###### run the first script
+4. Run the first script
 ```
 bash installer.sh 
 ```
-###### run the second script
+5. Run the second script
 ```
 sudo bash root_script.sh
 ```
 
-###### You should close your terminal windows and open a new one
+6. ###### You should close your terminal windows and open a new one, to reload the configurations
 
 ### `Option 3: Installation on Arch Linux`
 
@@ -157,5 +157,5 @@ I think I will do it but I don't have a date.
 **I also use ohmyzsh** to learn more and support them go to -> https://ohmyz.sh/
 Now I will be focusing on other things but also better my configuration for m1 Mac
 
-
-
+### Problems ❌
+If you happen to run into some problems you can just open an issue, I'll try to solve it as soon as possible.
