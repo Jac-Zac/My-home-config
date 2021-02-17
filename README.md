@@ -158,4 +158,4 @@ I think I will do it but I don't have a date.
 Now I will be focusing on other things but also better my configuration for m1 Mac
 
 ### Problems ❌
-If you happen to run into some problems you can just open an issue, I'll try to solve it as soon as possible.
+If you happen to run into some problems you can just open an issue, I'll try to solve it as soon as possible. Othewise you can contact me by sending me an email. 
