@@ -2,7 +2,7 @@
 
 ## Synopsis 📄
 This configuration repo contains everything to set up my terminal from scratch in two scripts. It also has a very easy way to update your old configuration to keep it up to date.
-###### (It is made for mac, and perhaps GNU\Linux in the future)
+> It is made for mac, and perhaps GNU\Linux in the future
 
 ## Motivation 💭
 I mainly created this to always have my config with me, but I would really be happy if anybody wanted to try it. Furthermore I think that if I can help someone with this it is worth shearing it. 
@@ -46,7 +46,6 @@ chmod +x update.sh
 bash installer.sh 
 ```
 
-
 ### New configurations for my M1 Macbook pro 💻 
 
 - If you want my same color theme go to -> https://github.com/arcticicestudio/nord-iterm2 
@@ -57,11 +56,12 @@ bash installer.sh
 - To make neovim work on Apple Silicon (as of now) you can take a look at [this](https://github.com/neovim/neovim/pull/12624)
 - Absolutely disable wallpaper tinting in windows inside system preferences > general on macOS Big Sur 
 
-###### if you use nvim do ... 
+### My nvim configuration if you want to load them
 ```
 vim ~/.config/nvim/init.vim
 ```
-###### And then run the command :PlugInstall
+##### And then run the command 
+	:PlugInstall
 
 ### Customizations 🔧
 
@@ -114,13 +114,15 @@ bash installer.sh
 sudo bash root_script.sh
 ```
 
-10. ###### You should close your terminal windows and open a new one, to reload the configurations
+##### Installation Completed
+
+> You should close your terminal windows and open a new one, to reload the configurations
 
 ### `Option 2: Installation on x86_64 Mac`
 
-###### you have to be in zsh shell for this installation, if you are running an old version of macOS you might need to switch away from bash
+> You have to be in zsh shell for this installation, if you are running an old version of macOS you might need to switch away from bash
 
-1. clone the repository ⏳ 
+1. Clone the repository ⏳ 
 ```
 git clone https://github.com/Jac-Zac/My-home-config.git
 ```
@@ -141,7 +143,9 @@ bash installer.sh
 sudo bash root_script.sh
 ```
 
-6. ###### You should close your terminal windows and open a new one, to reload the configurations
+##### Installation Completed
+
+> You should close your terminal windows and open a new one, to reload the configurations
 
 ### `Option 3: Installation on Arch Linux`
 
