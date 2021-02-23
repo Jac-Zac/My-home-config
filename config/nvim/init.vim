@@ -6,13 +6,13 @@ Plug 'suan/vim-instant-markdown'
 Plug 'preservim/nerdtree'
 call plug#end()
 
-colorscheme nord " set color schema to nord
-
 " Nord customizations
 let g:nord_cursor_line_number_background = 1
 let g:nord_italic = 1
 let g:nord_italic_comments = 1
 let g:nord_underline = 1
+
+colorscheme nord " set color schema to nord
 
 " air-line
 let g:airline_powerline_fonts = 1
