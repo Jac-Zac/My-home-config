@@ -45,10 +45,10 @@ alias wget="wget --hsts-file ~/.cache/wget/wget-hsts"
 alias vim="nvim"
 alias python="python3"
 alias locate_update="sudo /usr/libexec/locate.updatedb"
-alias ibrew='arch -x86_64 /usr/local/bin/brew'
 alias top='bpytop'
 
-# command to run when I start a zsh instance
+# Load fzf configurations
+[ -f ~/.config/fzf/fzf.zsh ] && source ~/.config/fzf/fzf.zsh
 
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
 [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
