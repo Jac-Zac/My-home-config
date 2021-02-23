@@ -54,8 +54,9 @@ If you wish to update your current configuration to the latest updates you can j
 - My window manager is [Amethyst](https://github.com/ianyh/Amethyst)
 - I also use [Thor](https://apps.apple.com/us/app/thor/id1120999687?mt=12) and [Alfred](https://www.alfredapp.com)
 - I added a few neovim configurations to take better notes and also use Latex integrated with markdown! 
-- To make neovim work on Apple Silicon (as of now) you can take a look at [this](https://github.com/neovim/neovim/pull/12624)
 - Absolutely disable wallpaper tinting in windows inside system preferences > general on macOS Big Sur 
+- I have added my new tmux configuration if anybody is interested 
+- I also have aliased top to bpytop to have a nicer looking top
 
 ### My nvim configuration if you want to load them
 
@@ -69,52 +70,38 @@ If you wish to update your current configuration to the latest updates you can j
 
 - I use neofetch, when I start a new shell because I just think it looks great. 
 - If you want you can go to ~/.config/zsh to edit your .zshrc -> and you can uncomment lines 
-- If you want to use ```lsd``` as your ```ls``` uncomment the alias in the zshrc and do not forget to to use a nerd font, to install it use cargo
-- To install Inconsolata nerd font go to ```https://github.com/epk/SF-Mono-Nerd-Font``` and follow the install
-- Beautiful dynamic wallpapers -> [First](https://dynamicwallpaper.club/wallpaper/6df38eo4nym),[Second](https://dynamicwallpaper.club/wallpaper/jculsb683ok)
+- If you want to use ``lsd`` as your  ``ls`` uncomment the alias in the zshrc and do not forget to to use a nerd font, to install it use cargo
+- To install Inconsolata nerd font go to ``https://github.com/epk/SF-Mono-Nerd-Font`` and follow the install
+- Beautiful dynamic wallpapers -> [First](https://dynamicwallpaper.club/wallpaper/6df38eo4nym), [Second](https://dynamicwallpaper.club/wallpaper/jculsb683ok)
 - Wallpaper I used in the second screenshot was taken from this -> [Third](https://www.reddit.com/r/unixporn/comments/i901nk/bspwm_life_in_the_forest/)
 - I also suggest to Automatically Hide & Show the Menu Bar and also set show scroll bar in all the application only when scrolling (system Preferences -> General)
-- I also have started using tmux quite a bit
-- I also have aliased top to bpytop to have a nicer looking top
 
 ### `Option 1: Installation on M1 macbook`
 
 1. This is to clone the repository ⏳ 
+
 ```
 git clone https://github.com/Jac-Zac/My-home-config.git
 ```
+
 2. This allows you to go to the correct directory
+
 ```
 cd My-home-config
 ```
+
 3. This command give execute permission to the script
+
 ```
 chmod +x installer.sh 
 ```
-4. Now you should uncomment the brew installation in installer.sh and install it yourself if you do not have it already. M1 homebrew will be installed in the opt directory 
-```
-cd /opt
-```
-5. Create a directory for Homebrew. This requires root permissions.
-```
-sudo mkdir homebrew
-```
-6.  Make us the owner of the directory so that we no longer require root permissions.
-```
-sudo chown -R $(whoami) /opt/homebrew
-```
-7.  Download and unzip Homebrew. This command can be found at https://docs.brew.sh/Installation.
-```
-curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C homebrew
-```
-8. Run the first script
+
+4. Run the first script
+
 ```
 bash installer.sh 
 ```
-9. Run the second script
-```
-sudo bash root_script.sh
-```
+> You might need to insert your sudo password to install brew in /opt 
 
 ##### Installation Completed
 
@@ -125,24 +112,27 @@ sudo bash root_script.sh
 > You have to be in zsh shell for this installation, if you are running an old version of macOS you might need to switch away from bash
 
 1. Clone the repository ⏳ 
+
 ```
 git clone https://github.com/Jac-Zac/My-home-config.git
 ```
+
 2. This allows you to go to the correct directory
+
 ```
 cd My-home-config
 ```
-3. This command give execute permission to the script, but you should also install brew and avoid using the default installer in installer.sh for brew 
+
+3. This command give execute permission to the script 
+
 ```
 chmod +x installer.sh 
 ```
+
 4. Run the first script
+
 ```
 bash installer.sh 
-```
-5. Run the second script
-```
-sudo bash root_script.sh
 ```
 
 ##### Installation Completed
@@ -155,13 +145,14 @@ sudo bash root_script.sh
 
 ![showcase](https://github.com/Jac-Zac/My-home-config/blob/master/Arch_rice.jpg)
 
-Now I also have a configuration for my rasberry pi 4 running Arch with dwm as a WM and I'm loving it so far, thus I'm thinking of posting that too in the future.
+Now I also have a configuration for my Raspberry pi 4 running Arch with dwm as a WM and I'm loving it so far, thus I'm thinking of posting that too in the future.
 I think I will do it but I don't have a date.
 
 ## Other things 📚
 
 **I also use ohmyzsh** to learn more and support them go to -> https://ohmyz.sh/
-Now I will be focusing on other things but also better my configuration for m1 Mac
+Now I will be focusing on other things but also better my configuration for M1 Mac
 
 ### Problems ❌
-If you happen to run into some problems you can just open an issue, I'll try to solve it as soon as possible. Othewise you can contact me by sending me an email. 
+If you happen to run into some problems you can just open an issue, I'll try to solve it as soon as possible. Otherwise you can contact me by sending me an email. 
+> It is not been tested for a bit. Therefore feedbacks are appreciated 
