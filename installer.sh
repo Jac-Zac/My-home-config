@@ -57,6 +57,7 @@ brew install node
 brew install tmux
 brew install htop
 brew install bpytop
+brew install fzf
 brew install neovim																				#	
 
 npm -g install instant-markdown-d

@@ -57,6 +57,7 @@ _If you wish to update your current configuration to the latest updates you can 
 - Absolutely disable wallpaper tinting in windows inside system preferences > general on macOS Big Sur 
 - I have added my new tmux configuration if anybody is interested 
 - I also have aliased top to bpytop to have a nicer looking top
+- I have also configure end installed fzf with the nord color theme
 
 ### My nvim configuration if you want to load them
 
