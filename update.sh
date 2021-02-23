@@ -11,7 +11,7 @@ cd $HOME/.config/oh-my-zsh/themes/powerlevel10k && git pull
 cd $HOME/.config/oh-my-zsh/custom/plugins/zsh-autosuggestions && git pull
 cd $HOME/.config/oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 
- # install things to make your rice look like mine
+# install things to make your rice look like mine
 brew update && brew upgrade
 
 cd
