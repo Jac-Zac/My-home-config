@@ -28,7 +28,7 @@ The possible installation options are made for different types of operating syst
 _You should always keep your configuration up to date, luckily there is a straightforward and Skid (Script Kiddie) proof solution._
 
 **Solution :**
-If you wish to update your current configuration to the latest updates you can just follow the simple instructions that follows.
+_If you wish to update your current configuration to the latest updates you can just follow the simple instructions that follows._
 
 - You have to go to the "My-home-config" directory
 
