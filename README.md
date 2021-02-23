@@ -29,22 +29,23 @@ You should always keep your configuration up to date, luckily there is a straigh
 
 **Solution :**
 If you wish to update your current configuration to the latest updates you can just follow the simple instructions that follows.
+
 - You have to go to the "My-home-config" directory
-```
-cd My-home-config
-```
+
+	  cd My-home-config
+
 - Pull the updates from Github latest version  
-```
-git pull
-```
+
+	  git pull
+
 - This command give execute permission to the script
-```
-chmod +x update.sh 
-```
+
+	  chmod +x update.sh 
+
 - This command run the update script
-```
-bash installer.sh 
-```
+
+	  bash update.sh 
+
 
 ### New configurations for my M1 Macbook pro 💻 
 
@@ -57,10 +58,11 @@ bash installer.sh
 - Absolutely disable wallpaper tinting in windows inside system preferences > general on macOS Big Sur 
 
 ### My nvim configuration if you want to load them
-```
-vim ~/.config/nvim/init.vim
-```
+
+	vim ~/.config/nvim/init.vim
+
 ##### And then run the command 
+
 	:PlugInstall
 
 ### Customizations 🔧
