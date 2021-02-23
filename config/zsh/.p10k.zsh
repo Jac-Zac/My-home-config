@@ -11,7 +11,7 @@
 #
 # Tip: Looking for a nice color? Here's a one-liner to print colormap.
 #
-#  for i in {0..255}; do print -Pn "%K{$i}  %k%F{$i}${(l:3::0:)i}%f " ${${(M)$((i%6)):#3}:+$'\n'}; done
+# for i in {0..255}; do print -Pn "%K{$i}  %k%F{$i}${(l:3::0:)i}%f " ${${(M)$((i%6)):#3}:+$'\n'}; done
 
 # Temporarily change options.
 'builtin' 'local' '-a' 'p10k_config_opts'
@@ -33,13 +33,14 @@
   # The list of segments shown on the left. Fill it with the most important segments.
   typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
     # =========================[ Line #1 ]=========================
-#    os_icon                 # os identifier
-    example               # example user-defined segment (see prompt_example function below)
+	# os_icon               # os identifier
+    # example               # example user-defined segment (see prompt_example function below)
+	# time					# current time
     dir                     # current directory
     vcs                     # git status
     # =========================[ Line #2 ]=========================
     newline                 # \n
-    # prompt_char           # prompt symbol
+    prompt_char           # prompt symbol
   )
 
   # The list of segments shown on the right. Fill it with less important segments.
@@ -95,7 +96,7 @@
     ip                    # ip address and bandwidth usage for a specified network interface
 	load                  # CPU load
     # disk_usage            # disk usage
-    ram						# free RAM
+    #  ram						# free RAM
     # swap                  # used swap
     todo                    # todo items (https://github.com/todotxt/todo.txt-cli)
     timewarrior             # timewarrior tracking status (https://timewarrior.net/)
@@ -104,7 +105,6 @@
 	
     # =========================[ Line #2 ]=========================
     newline
-	# time					# current time
     command_execution_time  # duration of the last command
     # public_ip             # public IP address
     proxy                 # system-wide http/https/ftp proxy
@@ -190,9 +190,9 @@
   # Transparent background.
   typeset -g POWERLEVEL9K_PROMPT_CHAR_BACKGROUND=
   # Green prompt symbol if the last command succeeded.
-  typeset -g POWERLEVEL9K_PROMPT_CHAR_OK_{VIINS,VICMD,VIVIS,VIOWR}_FOREGROUND=76
+  typeset -g POWERLEVEL9K_PROMPT_CHAR_OK_{VIINS,VICMD,VIVIS,VIOWR}_FOREGROUND=02
   # Red prompt symbol if the last command failed.
-  typeset -g POWERLEVEL9K_PROMPT_CHAR_ERROR_{VIINS,VICMD,VIVIS,VIOWR}_FOREGROUND=196
+  typeset -g POWERLEVEL9K_PROMPT_CHAR_ERROR_{VIINS,VICMD,VIVIS,VIOWR}_FOREGROUND=01
   # Default prompt symbol.
   typeset -g POWERLEVEL9K_PROMPT_CHAR_{OK,ERROR}_VIINS_CONTENT_EXPANSION='❯'
   # Prompt symbol in command vi mode.
@@ -1585,16 +1585,16 @@
 
   ####################################[ time: current time ]####################################
   # Current time color.
-  # typeset -g POWERLEVEL9K_TIME_FOREGROUND=0
-  # typeset -g POWERLEVEL9K_TIME_BACKGROUND=7
+  typeset -g POWERLEVEL9K_TIME_FOREGROUND=4
+  typeset -g POWERLEVEL9K_TIME_BACKGROUND=0
   # Format for the current time: 09:51:02. See `man 3 strftime`.
-  typeset -g POWERLEVEL9K_TIME_FORMAT='%D{%H:%M:%S}'
+  typeset -g POWERLEVEL9K_TIME_FORMAT='%D{%H:%M}'
   # If set to true, time will update when you hit enter. This way prompts for the past
   # commands will contain the start times of their commands as opposed to the default
   # behavior where they contain the end times of their preceding commands.
   typeset -g POWERLEVEL9K_TIME_UPDATE_ON_COMMAND=false
   # Custom icon.
-  # typeset -g POWERLEVEL9K_TIME_VISUAL_IDENTIFIER_EXPANSION='⭐'
+  typeset -g POWERLEVEL9K_TIME_VISUAL_IDENTIFIER_EXPANSION=''
   # Custom prefix.
   # typeset -g POWERLEVEL9K_TIME_PREFIX='at '
 
@@ -1604,8 +1604,7 @@
   # greeting the user.
   #
   # Type `p10k help segment` for documentation and a more sophisticated example.
- 
-  d=$(date "+%A %X") # date 
+  d=$(date "+%a")
   function prompt_example() {
 	  p10k segment -b 0 -f 4 -i '📅 '$d''
   }
