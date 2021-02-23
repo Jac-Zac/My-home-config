@@ -25,7 +25,7 @@ The possible installation options are made for different types of operating syst
 
 **Have you already installed everything but your version lack behind ?**
 
-You should always keep your configuration up to date, luckily there is a straightforward and Skid (Script Kiddie) proof solution.
+_You should always keep your configuration up to date, luckily there is a straightforward and Skid (Script Kiddie) proof solution._
 
 **Solution :**
 If you wish to update your current configuration to the latest updates you can just follow the simple instructions that follows.
