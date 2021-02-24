@@ -55,7 +55,7 @@ _If you wish to update your current configuration to the latest updates you can 
 - I also use [`Thor`](https://apps.apple.com/us/app/thor/id1120999687?mt=12) and [`Alfred`](https://www.alfredapp.com)
 - I added a few [`neovim`](https://github.com/neovim/neovim) configurations to take better notes and also use Latex integrated with markdown! 
 - Absolutely disable wallpaper tinting in windows inside system preferences > general on macOS Big Sur 
-- I have added my new `tmux` configuration if anybody is interested 
+- I have added my new [`tmux`](https://github.com/tmux/tmux) configuration if anybody is interested 
 - I also have aliased top to [`bpytop`](https://github.com/aristocratos/bpytop) to have a nicer looking top
 - I have also configure end installed [`fzf`](https://github.com/junegunn/fzf) with the nord color theme
 
@@ -63,12 +63,12 @@ _If you wish to update your current configuration to the latest updates you can 
 
 	vim ~/.config/nvim/init.vim
 
-##### And then run the command `:PlugInstall`
+##### And then run the command ``:PlugInstall``
 
 ### Customizations 🔧
 
 - I use [`neofetch`](https://github.com/dylanaraps/neofetch), when I start a new shell because I just think it looks great. 
-- If you want you can go to [`~/.config/zsh`](~/.config/zsh) to edit your [`.zshrc`](.zshrc) and you can uncomment lines.
+- If you want you can go to [`~/.config/zsh`](/config/zsh) to edit your [`.zshrc`](config/zsh/.zshrc) and you can uncomment lines.
 - I also have aliased `ls` to `lsd` just because I think it looks better. 
 - To install Inconsolata nerd font go to [`Font`](https://github.com/epk/SF-Mono-Nerd-Font) and follow the install
 - Beautiful dynamic wallpapers [`First`](https://dynamicwallpaper.club/wallpaper/6df38eo4nym), [`Second`](https://dynamicwallpaper.club/wallpaper/jculsb683ok)
