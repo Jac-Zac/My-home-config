@@ -58,6 +58,7 @@ _If you wish to update your current configuration to the latest updates you can 
 - I have added my new [`tmux`](https://github.com/tmux/tmux) configuration if anybody is interested 
 - I also have aliased top to [`bpytop`](https://github.com/aristocratos/bpytop) to have a nicer looking top
 - I have also configure end installed [`fzf`](https://github.com/junegunn/fzf) with the nord color theme
+- I have Firefox Nightly as a web browser 
 
 ### My nvim configuration if you want to load them
 
@@ -72,7 +73,7 @@ _If you wish to update your current configuration to the latest updates you can 
 - I also have aliased `ls` to `lsd` just because I think it looks better. 
 - To install Inconsolata nerd font go to [`Font`](https://github.com/epk/SF-Mono-Nerd-Font) and follow the install
 - Beautiful dynamic wallpapers [`First`](https://dynamicwallpaper.club/wallpaper/6df38eo4nym), [`Second`](https://dynamicwallpaper.club/wallpaper/jculsb683ok)
-- Wallpaper I used in the second screenshot was taken from this -> [`Third`](https://www.reddit.com/r/unixporn/comments/i901nk/bspwm_life_in_the_forest/)
+- Wallpaper I used was this [`Third`](https://www.reddit.com/r/unixporn/comments/i901nk/bspwm_life_in_the_forest/)
 - I also suggest to Automatically Hide & Show the Menu Bar and also set show scroll bar in all the application only when scrolling (system Preferences -> General)
 
 ### `Option 1: Installation on M1 macbook`

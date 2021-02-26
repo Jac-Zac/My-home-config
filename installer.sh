@@ -25,7 +25,7 @@ git clone https://github.com/arcticicestudio/nord-tmux.git
 ######################################## INSTALLING BREW FOR DIFFERENT ARCHITECTURES ######################################## 
 
 # Apple Silicon
-if [ "$(uname - p)" = "arm" ] ; then
+if [ "$(uname - m)" = "arm64" ] ; then
 			echo "Installing brew"
 			# First you should follow the steps to install Homebrew
 			cd /opt
@@ -37,10 +37,9 @@ if [ "$(uname - p)" = "arm" ] ; then
 			curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C homebrew
 			# Back home 
 			cd ~
-fi
 
-# Intel i386
-if [ "$(uname - p)" = "i386" ] ; then
+# Intel x86_64
+else
 			echo "Installing brew"
 			/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 			echo "export PATH=/opt/homebrew/bin:$PATH" >> ~/.config/zsh/.zshrc
