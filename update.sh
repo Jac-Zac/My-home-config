@@ -2,8 +2,8 @@
 
 # Updating config
 cp -r config $HOME/.config
-cp profile $HOME/.profile
-cp zprofile $HOME/.zprofile
+cp .profile $HOME/.profile
+cp .zprofile $HOME/.zprofile
 
 # Updating oh-my-zsh related stuff
 cd $HOME/.config/oh-my-zsh && git pull
