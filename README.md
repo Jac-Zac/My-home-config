@@ -5,10 +5,12 @@
 </p>
 
 ## Synopsis 📄
+
 This configuration repo contains everything to set up my terminal from scratch in two scripts. It also has a very easy way to update your old configuration to keep it up to date.
 > It is made for mac, and perhaps GNU\Linux in the future
 
 ## Motivation 💭
+
 I mainly created this to always have my config with me, but I would really be happy if anybody wanted to try it. Furthermore I think that if I can help someone with this it is worth shearing it. 
 
 ## Example of what my terminal look like 🌇
@@ -19,6 +21,7 @@ I mainly created this to always have my config with me, but I would really be ha
 ## Installation Options ⌘
 
 The possible installation options are made for different types of operating system, not all of them are completely working correctly, but none of them will create any damage to your system
+
 #### The are 3 operating system configurations
 
 * [**1 - M1 Mac**](#option-1-Installation-on-M1-macbook)
@@ -34,7 +37,6 @@ The possible installation options are made for different types of operating syst
 + **Editor**: [`Neovim`](https://github.com/neovim/neovim/) configurations to take better notes and also use Latex integrated with markdown! 
 + **Theme**: [`Nord`](https://github.com/arcticicestudio/nord-iterm2)
 + **Font**: [`Inconsolata Nerd`](https://github.com/ryanoasis/nerd-fonts)
-+ **Ls**: 
 + **System information**: [`neofetch`](https://github.com/dylanaraps/neofetch)
 + **Fuzzy finder**: [`fzf`](https://github.com/junegunn/fzf) and I also watch YouTube from the terminal thanks to [`ytfzf`](https://github.com/pystardust/ytfzf)
 + **Launcher**: [`Thor`](https://apps.apple.com/us/app/thor/id1120999687?mt=12) and [`Alfred`](https://www.alfredapp.com)
@@ -63,6 +65,7 @@ The possible installation options are made for different types of operating syst
 _You should always keep your configuration up to date, luckily there is a straightforward and Skid (Script Kiddie) proof solution._
 
 **Solution :**
+
 _If you wish to update your current configuration to the latest updates you can just follow the simple instructions that follows._
 
 - You have to go to the "My-home-config" directory
