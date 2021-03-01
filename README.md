@@ -1,7 +1,7 @@
 # My-home-config ⚙️
 
 <p align="center">
-  <img width="50%" src="https://github.com/Jac-Zac/My-home-config/blob/master/.assets/Configuration.gif"/>
+  <img width="50%" src="https://github.com/Jac-Zac/My-home-config/blob/master/.assets/logo.png"/>
 </p>
 
 ## Synopsis 📄
@@ -16,7 +16,7 @@ I mainly created this to always have my config with me, but I would really be ha
 ![showcase](https://github.com/Jac-Zac/My-home-config/blob/master/.assets/first_desktop.jpg)
 ![showcase](https://github.com/Jac-Zac/My-home-config/blob/master/.assets/second_desktop.jpg)
 
-## Installation ⌘
+## Installation Options ⌘
 
 The possible installation options are made for different types of operating system, not all of them are completely working correctly, but none of them will create any damage to your system
 #### The are 3 operating system configurations
@@ -24,6 +24,37 @@ The possible installation options are made for different types of operating syst
 * [**1 - M1 Mac**](#option-1-Installation-on-M1-macbook)
 * [**2 - x86_64 Mac**](#option-2-Installation-on-x86_64-Mac)
 * [**3 - Arch Linux**](#option-3-Installation-on-Arch-Linux)
+
+### Here are some details about my setup: 💻
+
++ **OS**: `MacOS/Arch Linux` 
++ **WM**: [`Amethyst`](https://github.com/ianyh/Amethyst)
++ **Shell**: [`ohmyzsh`](https://ohmyz.sh/) with theme -> [`powerlevel10k`](https://github.com/romkatv/powerlevel10k)
++ **Terminal**: [`iTerm`](https://iterm2.com/) which I use in minimal mode with tab bar on the bottom, and add borderless and with 20 padding
++ **Editor**: [`Neovim`](https://github.com/neovim/neovim/) configurations to take better notes and also use Latex integrated with markdown! 
++ **Theme**: [`Nord`](https://github.com/arcticicestudio/nord-iterm2)
++ **Font**: [`Inconsolata Nerd`](https://github.com/ryanoasis/nerd-fonts)
++ **Ls**: 
++ **System information**: [`neofetch`](https://github.com/dylanaraps/neofetch)
++ **Fuzzy finder**: [`fzf`](https://github.com/junegunn/fzf) and I also watch YouTube from the terminal thanks to [`ytfzf`](https://github.com/pystardust/ytfzf)
++ **Launcher**: [`Thor`](https://apps.apple.com/us/app/thor/id1120999687?mt=12) and [`Alfred`](https://www.alfredapp.com)
++ **Rerminal multiplexer**: [`tmux`](https://github.com/tmux/tmux)
++ **Resource monitor**: [`bpytop`](https://github.com/aristocratos/bpytop) which I have aliased to top
++ **Browser**: [`Firefox Nightly`](https://github.com/pystardust/ytfzf)
++ **Wallpapers**: [`First`](https://dynamicwallpaper.club/wallpaper/6df38eo4nym), [`Second`](https://dynamicwallpaper.club/wallpaper/jculsb683ok), [`Third`](https://www.reddit.com/r/unixporn/comments/i901nk/bspwm_life_in_the_forest/)
+
+### Customizations 🔧
+
+- If you want you can go to [`~/.config/zsh`](/config/zsh) to edit your [`.zshrc`](config/zsh/.zshrc) and you can uncomment lines.
+- I have aliased `ls` to `lsd` just because I think it looks better. 
+- I also suggest to Automatically Hide & Show the Menu Bar and also set show scroll bar in all the application only when scrolling (system Preferences -> General)
+- Absolutely disable wallpaper tinting in windows inside system preferences > general on macOS Big Sur 
+
+### My nvim configuration if you want to load them
+
+	vim ~/.config/nvim/init.vim
+
+##### And then run the command ``:PlugInstall``
 
 ### Updating 📅
 
@@ -50,35 +81,7 @@ _If you wish to update your current configuration to the latest updates you can 
 
 	  bash update.sh 
 
-
-### New configurations for my M1 Macbook pro 💻 
-
-- If you want my same color theme go to -> [`Nord`](https://github.com/arcticicestudio/nord-iterm2)
-- I use iTerm in minimal mode with tab bar on the bottom, and add borderless and with 20 padding
-- My window manager is [`Amethyst`](https://github.com/ianyh/Amethyst)
-- I also use [`Thor`](https://apps.apple.com/us/app/thor/id1120999687?mt=12) and [`Alfred`](https://www.alfredapp.com)
-- I added a few [`neovim`](https://github.com/neovim/neovim) configurations to take better notes and also use Latex integrated with markdown! 
-- Absolutely disable wallpaper tinting in windows inside system preferences > general on macOS Big Sur 
-- I have added my new [`tmux`](https://github.com/tmux/tmux) configuration if anybody is interested 
-- I also have aliased top to [`bpytop`](https://github.com/aristocratos/bpytop) to have a nicer looking top
-- I have also configure end installed [`fzf`](https://github.com/junegunn/fzf) with the nord color theme
-- I have Firefox Nightly as a web browser 
-
-### My nvim configuration if you want to load them
-
-	vim ~/.config/nvim/init.vim
-
-##### And then run the command ``:PlugInstall``
-
-### Customizations 🔧
-
-- I use [`neofetch`](https://github.com/dylanaraps/neofetch), when I start a new shell because I just think it looks great. 
-- If you want you can go to [`~/.config/zsh`](/config/zsh) to edit your [`.zshrc`](config/zsh/.zshrc) and you can uncomment lines.
-- I also have aliased `ls` to `lsd` just because I think it looks better. 
-- To install Inconsolata nerd font go to [`Font`](https://github.com/epk/SF-Mono-Nerd-Font) and follow the install
-- Beautiful dynamic wallpapers [`First`](https://dynamicwallpaper.club/wallpaper/6df38eo4nym), [`Second`](https://dynamicwallpaper.club/wallpaper/jculsb683ok)
-- Wallpaper I used was this [`Third`](https://www.reddit.com/r/unixporn/comments/i901nk/bspwm_life_in_the_forest/)
-- I also suggest to Automatically Hide & Show the Menu Bar and also set show scroll bar in all the application only when scrolling (system Preferences -> General)
+## Instructions for Installation 📝
 
 ### `Option 1: Installation on M1 macbook`
 
