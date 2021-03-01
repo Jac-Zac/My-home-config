@@ -1,5 +1,9 @@
 # My-home-config ⚙️
 
+<p align="center">
+  <img width="50%" src="https://github.com/Jac-Zac/My-home-config/blob/master/.assets/Configuration.gif"/>
+</p>
+
 ## Synopsis 📄
 This configuration repo contains everything to set up my terminal from scratch in two scripts. It also has a very easy way to update your old configuration to keep it up to date.
 > It is made for mac, and perhaps GNU\Linux in the future
