@@ -16,7 +16,7 @@ if [ "$(uname)" = "Darwin" ] ; then
 			brew update && brew upgrade
 # If Arch linux
 elif [ "$(uname)" = "Linux" ]; then
-			echo 
+			echo >> $HOME/.zprofile
 			echo "[ "$(tty)" = "/dev/tty1" ] && ! pidof -s Xorg >/dev/null 2>&1 && exec startx" >> $HOME/.zprofile
 			sudo pacman -Syu
 fi
