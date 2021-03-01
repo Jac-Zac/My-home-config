@@ -1,4 +1,6 @@
-# My-home-config ⚙️
+<h1 align="center">
+   My-home-config ⚙️
+</h1>
 
 <p align="center">
   <img width="50%" src="https://github.com/Jac-Zac/My-home-config/blob/master/.assets/logo.png"/>
@@ -111,6 +113,7 @@ chmod +x installer.sh
 ```
 bash installer.sh 
 ```
+
 > You might need to insert your sudo password to install brew in `/opt` 
 
 > You should close your terminal windows and open a new one, to reload the configurations
