@@ -9,8 +9,8 @@ I mainly created this to always have my config with me, but I would really be ha
 
 ## Example of what my terminal look like 🌇
 
-![showcase](https://github.com/Jac-Zac/My-home-config/blob/master/first_desktop.jpg)
-![showcase](https://github.com/Jac-Zac/My-home-config/blob/master/second_desktop.jpg)
+![showcase](https://github.com/Jac-Zac/My-home-config/blob/master/.assets/first_desktop.jpg)
+![showcase](https://github.com/Jac-Zac/My-home-config/blob/master/.assets/second_desktop.jpg)
 
 ## Installation ⌘
 
@@ -143,7 +143,7 @@ bash installer.sh
 
 ##### This is what it looks like 
 
-![showcase](https://github.com/Jac-Zac/My-home-config/blob/master/Arch_rice.jpg)
+![showcase](https://github.com/Jac-Zac/My-home-config/blob/master/.assets/Arch_rice.jpg)
 
 Now I also have a configuration for my Raspberry pi 4 running Arch with dwm as a WM and I'm loving it so far, thus I'm thinking of posting that too in the future.
 I think I will do it but I don't have a date.

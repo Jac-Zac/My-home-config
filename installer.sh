@@ -10,8 +10,8 @@ mkdir .cache/wget
 mv .oh-my-zsh $HOME/.config/oh-my-zsh
 
 cp -r config $HOME/.config
-cp profile $HOME/.profile
-cp zprofile $HOME/.zprofile
+cp .profile $HOME/.profile
+cp .zprofile $HOME/.zprofile
 
 # plugins and themes 
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.config/oh-my-zsh/}/themes/powerlevel10k
