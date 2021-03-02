@@ -181,22 +181,23 @@ I think I will do it but I don't have a date.
 
 ## Keybinds
 
-I use <kbd>super</kbd> AKA Command key (on macOS) as my main modifier.
+I use <kbd>command</kbd> AKA super key (on GNU/Linux) as my main modifier
 
 #### Keyboard
 
 | Keybind | Action |
 | --- | --- |
-| <kbd>super + shift + enter</kbd> | Spawn terminal |
-| <kbd>super + b</kbd> | Open firefox nightly |
-| <kbd>super + p</kbd> | Launch Alfred |
-| <kbd>super + w</kbd> | Close Window |
-| <kbd>super + q</kbd> | Close Application |
+| <kbd>command + shift + enter</kbd> | Spawn terminal |
+| <kbd>command + enter</kbd> | Swap windows |
+| <kbd>command + b</kbd> | Open firefox nightly |
+| <kbd>command + p</kbd> | Launch Alfred |
+| <kbd>command + w</kbd> | Close Window |
+| <kbd>command + q</kbd> | Close Application |
+| <kbd>cotrol + [1-0]</kbd> | Change workspace |
+| <kbd>command + shift + [1-0]</kbd> | Move focused client to workspace |
+| <kbd>command + shift + [hjkl]</kbd> | Resize client |
 | <kbd>super + [hjkl]</kbd> | Change focus by direction |
 | <kbd>alt + f</kbd> | Set window to floating mode |
-| <kbd>cotrol + [1-0]</kbd> | Change workspace |
-| <kbd>super + shift + [1-0]</kbd> | Move focused client to workspace |
-| <kbd>super + shift + [hjkl]</kbd> | Resize client |
 
 ## Other things 📚
 
