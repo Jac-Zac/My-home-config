@@ -49,26 +49,30 @@ The possible installation options are made for different types of operating syst
 + **OS**: `MacOS/Arch Linux` 
 + **WM**: [`Amethyst`](https://github.com/ianyh/Amethyst)
 + **Shell**: [`ohmyzsh`](https://ohmyz.sh/) with theme -> [`powerlevel10k`](https://github.com/romkatv/powerlevel10k)
-+ **Terminal**: [`iTerm`](https://iterm2.com/) which I use in minimal mode with tab bar on the bottom, and add borderless and with 20 padding
-+ **Editor**: [`Neovim`](https://github.com/neovim/neovim/) configurations to take better notes and also use Latex integrated with markdown! 
++ **Terminal**: [`iTerm`](https://iterm2.com/) 
++ **Editor**: [`Neovim`](https://github.com/neovim/neovim/) 
 + **Theme**: [`Nord`](https://github.com/arcticicestudio/nord-iterm2)
 + **Font**: [`Inconsolata Nerd`](https://github.com/ryanoasis/nerd-fonts)
 + **System information**: [`neofetch`](https://github.com/dylanaraps/neofetch)
-+ **Fuzzy finder**: [`fzf`](https://github.com/junegunn/fzf) and I also watch YouTube from the terminal thanks to [`ytfzf`](https://github.com/pystardust/ytfzf)
++ **Fuzzy finder**: [`fzf`](https://github.com/junegunn/fzf) 
 + **Launcher**: [`Thor`](https://apps.apple.com/us/app/thor/id1120999687?mt=12) and [`Alfred`](https://www.alfredapp.com)
 + **Terminal multiplexer**: [`tmux`](https://github.com/tmux/tmux)
-+ **Resource monitor**: [`bpytop`](https://github.com/aristocratos/bpytop) which I have aliased to top
++ **Resource monitor**: [`bpytop`](https://github.com/aristocratos/bpytop) *(aliased to top)*
 + **Browser**: [`Firefox Nightly`](https://github.com/pystardust/ytfzf)
 + **Wallpapers**: [`First`](https://dynamicwallpaper.club/wallpaper/6df38eo4nym), [`Second`](https://dynamicwallpaper.club/wallpaper/jculsb683ok), [`Third`](https://www.reddit.com/r/unixporn/comments/i901nk/bspwm_life_in_the_forest/)
 
 ### Customizations 🔧
 
+- I use Iterm in minimal mode with tab bar on the bottom, and add borderless and with 20 padding
+- YouTube from the terminal can be watched thanks to [`ytfzf`](https://github.com/pystardust/ytfzf)
 - If you want you can go to [`~/.config/zsh`](/config/zsh) to edit your [`.zshrc`](config/zsh/.zshrc) and you can uncomment lines.
 - I have aliased `ls` to `lsd` just because I think it looks better. 
 - I also suggest to Automatically Hide & Show the Menu Bar and also set show scroll bar in all the application only when scrolling (system Preferences -> General)
 - Absolutely disable wallpaper tinting in windows inside system preferences > general on macOS Big Sur 
 
 ### My nvim configuration if you want to load them
+
+> This configurations hash a sort of Latex integrated with [`markdown-preview`](https://github.com/instant-markdown/vim-instant-markdown)! 
 
 	vim ~/.config/nvim/init.vim
 
@@ -174,6 +178,25 @@ bash installer.sh
 
 Now I also have a configuration for my Raspberry pi 4 running Arch with dwm as a WM and I'm loving it so far, thus I'm thinking of posting that too in the future.
 I think I will do it but I don't have a date.
+
+## Keybinds
+
+I use <kbd>super</kbd> AKA Command key (on macOS) as my main modifier.
+
+#### Keyboard
+
+| Keybind | Action |
+| --- | --- |
+| <kbd>super + shift + enter</kbd> | Spawn terminal |
+| <kbd>super + b</kbd> | Open firefox nightly |
+| <kbd>super + p</kbd> | Launch Alfred |
+| <kbd>super + w</kbd> | Close Window |
+| <kbd>super + q</kbd> | Close Application |
+| <kbd>super + [hjkl]</kbd> | Change focus by direction |
+| <kbd>alt + f</kbd> | Set window to floating mode |
+| <kbd>cotrol + [1-0]</kbd> | Change workspace |
+| <kbd>super + shift + [1-0]</kbd> | Move focused client to workspace |
+| <kbd>super + shift + [hjkl]</kbd> | Resize client |
 
 ## Other things 📚
 
