@@ -23,6 +23,11 @@ I mainly created this to always have my config with me, but I would really be ha
 <hr>
 </p>
 
+<p align="center">
+<img width="100%" hight="25%" src="https://raw.githubusercontent.com/Jac-Zac/My-home-config/master/.assets/first_desktop.png"/>
+<img width="100%" hight="25%" src="https://raw.githubusercontent.com/Jac-Zac/My-home-config/master/.assets/second_desktop.png"/>
+</p>
+
 ## Installation Options ⌘
 
 The possible installation options are made for different types of operating system, not all of them are completely working correctly, but none of them will create any damage to your system
@@ -36,10 +41,6 @@ The possible installation options are made for different types of operating syst
 * [**3 - Arch Linux**](#option-3-Installation-on-Arch-Linux)
 
 ### Here are some details about my setup 💻
-
-<p align="center">
-  <img alt="img" align="right" width="450px" src="https://raw.githubusercontent.com/Jac-Zac/My-home-config/master/.assets/showcase.jpg"/>
-</p>
 
 + **OS**: `MacOS/Arch Linux` 
 + **WM**: [`Amethyst`](https://github.com/ianyh/Amethyst)
@@ -55,6 +56,7 @@ The possible installation options are made for different types of operating syst
 + **Resource monitor**: [`bpytop`](https://github.com/aristocratos/bpytop) *(aliased to top)*
 + **Browser**: [`Firefox Nightly`](https://github.com/pystardust/ytfzf)
 + **Wallpapers**: [`First`](https://dynamicwallpaper.club/wallpaper/6df38eo4nym), [`Second`](https://dynamicwallpaper.club/wallpaper/jculsb683ok), [`Third`](https://www.reddit.com/r/unixporn/comments/i901nk/bspwm_life_in_the_forest/)
+
 
 ### Customizations 🔧
 
