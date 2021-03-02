@@ -3,7 +3,7 @@
 </h1>
 
 <p align="center">
-  <img width="100%" hight="25%" src="https://github.com/Jac-Zac/My-home-config/blob/master/.assets/logo.png"/>
+  <img width="50%" hight="25%" src="https://github.com/Jac-Zac/My-home-config/blob/master/.assets/logo_dark.png"/>
 </p>
 
 <h3 align="center">
@@ -44,7 +44,7 @@ The possible installation options are made for different types of operating syst
 * [**2 - x86_64 Mac**](#option-2-Installation-on-x86_64-Mac)
 * [**3 - Arch Linux**](#option-3-Installation-on-Arch-Linux)
 
-### Here are some details about my setup: 💻
+### Here are some details about my setup 💻
 
 + **OS**: `MacOS/Arch Linux` 
 + **WM**: [`Amethyst`](https://github.com/ianyh/Amethyst)
