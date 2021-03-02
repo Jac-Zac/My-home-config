@@ -24,8 +24,8 @@ I mainly created this to always have my config with me, but I would really be ha
 </p>
 
 <p align="center">
-<img width="100%" hight="25%" src="https://raw.githubusercontent.com/Jac-Zac/My-home-config/master/.assets/first_desktop.png"/>
-<img width="100%" hight="25%" src="https://raw.githubusercontent.com/Jac-Zac/My-home-config/master/.assets/second_desktop.png"/>
+<img width="100%" hight="25%" src="https://raw.githubusercontent.com/Jac-Zac/My-home-config/master/.assets/first.png"/>
+<img width="100%" hight="25%" src="https://raw.githubusercontent.com/Jac-Zac/My-home-config/master/.assets/second.png"/>
 </p>
 
 ## Installation Options ⌘
