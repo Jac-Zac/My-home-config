@@ -87,27 +87,19 @@ _You should always keep your configuration up to date, luckily there is a straig
 
 	- You have to go to the "My-home-config" directory
 		 
-		```sh
-		 cd My-home-config
-		```
+		  cd My-home-config
 
 	- Pull the updates from Github latest version  
 
-		```sh
-		 git pull
-		```
+		  git pull
 
 	- This command give execute permission to the script
 
-		```sh
-		 chmod +x update.sh
-		```
+		  chmod +x update.sh
 
 	- This command run the update script
 
-		```sh
-		 bash update.sh 
-		```
+		  ./update.sh 
 
 ## Instructions for Installation 📝
 
@@ -115,26 +107,26 @@ _You should always keep your configuration up to date, luckily there is a straig
 
 1. This is to clone the repository ⏳ 
 
-```sh
+```
 git clone https://github.com/Jac-Zac/My-home-config.git
 ```
 
 2. This allows you to go to the correct directory
 
-```sh
+```
 cd My-home-config
 ```
 
 3. This command give execute permission to the script
 
-```sh
+```
 chmod +x installer.sh 
 ```
 
 4. Run the first script
 
-```sh
-bash installer.sh 
+```
+./installer.sh 
 ```
 
 > You might need to insert your sudo password to install brew in `/opt` 
@@ -149,26 +141,26 @@ bash installer.sh
 
 1. Clone the repository ⏳ 
 
-```sh
+```
 git clone https://github.com/Jac-Zac/My-home-config.git
 ```
 
 2. This allows you to go to the correct directory
 
-```sh
+```
 cd My-home-config
 ```
 
 3. This command give execute permission to the script 
 
-```sh
+```
 chmod +x installer.sh 
 ```
 
 4. Run the first script
 
-```sh
-bash installer.sh 
+```
+./installer.sh 
 ```
 
 > You should close your terminal windows and open a new one, to reload the configurations
