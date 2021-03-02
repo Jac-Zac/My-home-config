@@ -3,7 +3,7 @@
 </h1>
 
 <p align="center">
-  <img width="100%" src="https://github.com/Jac-Zac/My-home-config/blob/master/.assets/logo.png"/>
+  <img width="100%" hight="50%" src="https://github.com/Jac-Zac/My-home-config/blob/master/.assets/logo.png"/>
 </p>
 
 <h3 align="center">
