@@ -14,19 +14,18 @@
 	This configuration repo contains everything to set up my terminal from scratch in two scripts. It also has a very easy way to update your old configuration to keep it up to date.
 </p>
 
-
 <h3 align="center">
 	Motivation 💭
 </h3>
 
 <p align="center">
 I mainly created this to always have my config with me, but I would really be happy if anybody wanted to try it. Furthermore I think that if I can help someone with this it is worth shearing it. 
+<hr>
 </p>
 
-
-<h3 align="center">
+<h2 align="center">
 	Example of what my terminal look like 🌇
-</h3>
+</h2>
 
 <p align="center">
   <img width="100%" src="https://github.com/Jac-Zac/My-home-config/blob/master/.assets/first_desktop.jpg"/>
