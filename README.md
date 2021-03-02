@@ -3,7 +3,7 @@
 </h1>
 
 <p align="center">
-  <img width="50%" hight="25%" src="https://github.com/Jac-Zac/My-home-config/blob/master/.assets/logo_dark.png"/>
+  <img width="50%" hight="25%" src="https://raw.githubusercontent.com/Jac-Zac/My-home-config/master/.assets/logo_dark.png"/>
 </p>
 
 <h3 align="center">
@@ -23,15 +23,6 @@ I mainly created this to always have my config with me, but I would really be ha
 <hr>
 </p>
 
-<h2 align="center">
-	Example of what my terminal look like 🌇
-</h2>
-
-<p align="center">
-  <img width="100%" src="https://github.com/Jac-Zac/My-home-config/blob/master/.assets/first_desktop.jpg"/>
-  <img width="100%" src="https://github.com/Jac-Zac/My-home-config/blob/master/.assets/second_desktop.jpg"/>
-</p>
-
 ## Installation Options ⌘
 
 The possible installation options are made for different types of operating system, not all of them are completely working correctly, but none of them will create any damage to your system
@@ -46,9 +37,13 @@ The possible installation options are made for different types of operating syst
 
 ### Here are some details about my setup 💻
 
+<p align="center">
+  <img alt="img" align="right" width="450px" src="https://raw.githubusercontent.com/Jac-Zac/My-home-config/master/.assets/showcase.jpg"/>
+</p>
+
 + **OS**: `MacOS/Arch Linux` 
 + **WM**: [`Amethyst`](https://github.com/ianyh/Amethyst)
-+ **Shell**: [`ohmyzsh`](https://ohmyz.sh/) with theme -> [`powerlevel10k`](https://github.com/romkatv/powerlevel10k)
++ **Shell**: [`ohmyzsh`](https://ohmyz.sh/) -> [`powerlevel10k`](https://github.com/romkatv/powerlevel10k)
 + **Terminal**: [`iTerm`](https://iterm2.com/) 
 + **Editor**: [`Neovim`](https://github.com/neovim/neovim/) 
 + **Theme**: [`Nord`](https://github.com/arcticicestudio/nord-iterm2)
@@ -174,7 +169,7 @@ bash installer.sh
 
 ##### This is what it looks like 
 
-![showcase](https://github.com/Jac-Zac/My-home-config/blob/master/.assets/Arch_rice.jpg)
+<img src="https://raw.githubusercontent.com/Jac-Zac/My-home-config/master/.assets/Arch_rice.jpg"/>
 
 Now I also have a configuration for my Raspberry pi 4 running Arch with dwm as a WM and I'm loving it so far, thus I'm thinking of posting that too in the future.
 I think I will do it but I don't have a date.
