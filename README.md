@@ -6,25 +6,40 @@
   <img width="50%" src="https://github.com/Jac-Zac/My-home-config/blob/master/.assets/logo.png"/>
 </p>
 
-## Synopsis 📄
+<h3 align="center">
+	Synopsis 📄
+</h3>
 
-This configuration repo contains everything to set up my terminal from scratch in two scripts. It also has a very easy way to update your old configuration to keep it up to date.
-> It is made for mac, and perhaps GNU\Linux in the future
+<p align="center">
+	This configuration repo contains everything to set up my terminal from scratch in two scripts. It also has a very easy way to update your old configuration to keep it up to date.
+</p>
 
-## Motivation 💭
 
+<h3 align="center">
+	Motivation 💭
+</h3>
+
+<p align="center">
 I mainly created this to always have my config with me, but I would really be happy if anybody wanted to try it. Furthermore I think that if I can help someone with this it is worth shearing it. 
+</p>
 
-## Example of what my terminal look like 🌇
 
-![showcase](https://github.com/Jac-Zac/My-home-config/blob/master/.assets/first_desktop.jpg)
-![showcase](https://github.com/Jac-Zac/My-home-config/blob/master/.assets/second_desktop.jpg)
+<h3 align="center">
+	Example of what my terminal look like 🌇
+</h3>
+
+<p align="center">
+  <img width="100%" src="https://github.com/Jac-Zac/My-home-config/blob/master/.assets/first_desktop.jpg"/>
+  <img width="100%" src="https://github.com/Jac-Zac/My-home-config/blob/master/.assets/second_desktop.jpg"/>
+</p>
 
 ## Installation Options ⌘
 
 The possible installation options are made for different types of operating system, not all of them are completely working correctly, but none of them will create any damage to your system
 
-#### The are 3 operating system configurations
+> It is made for mac, and perhaps GNU\Linux in the future
+
+#### There are 3 operating system configurations
 
 * [**1 - M1 Mac**](#option-1-Installation-on-M1-macbook)
 * [**2 - x86_64 Mac**](#option-2-Installation-on-x86_64-Mac)
@@ -42,7 +57,7 @@ The possible installation options are made for different types of operating syst
 + **System information**: [`neofetch`](https://github.com/dylanaraps/neofetch)
 + **Fuzzy finder**: [`fzf`](https://github.com/junegunn/fzf) and I also watch YouTube from the terminal thanks to [`ytfzf`](https://github.com/pystardust/ytfzf)
 + **Launcher**: [`Thor`](https://apps.apple.com/us/app/thor/id1120999687?mt=12) and [`Alfred`](https://www.alfredapp.com)
-+ **Rerminal multiplexer**: [`tmux`](https://github.com/tmux/tmux)
++ **Terminal multiplexer**: [`tmux`](https://github.com/tmux/tmux)
 + **Resource monitor**: [`bpytop`](https://github.com/aristocratos/bpytop) which I have aliased to top
 + **Browser**: [`Firefox Nightly`](https://github.com/pystardust/ytfzf)
 + **Wallpapers**: [`First`](https://dynamicwallpaper.club/wallpaper/6df38eo4nym), [`Second`](https://dynamicwallpaper.club/wallpaper/jculsb683ok), [`Third`](https://www.reddit.com/r/unixporn/comments/i901nk/bspwm_life_in_the_forest/)
