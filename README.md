@@ -6,7 +6,6 @@
   <img width="50%" hight="25%" src="https://raw.githubusercontent.com/Jac-Zac/My-home-config/master/.assets/logo_dark.png"/>
 </p>
 
-
 <p align="center">
 <a href="#arm64-Mac-Installation"><img width="150px" style="padding: 0 10px;" src=".assets/arm64.png"></a>
 <a href="#x86_64-Mac-Installation"><img width="150px" style="padding: 0 10px;" src=".assets/x86_64.png"></a>
@@ -37,18 +36,10 @@ I mainly created this to always have my config with me, but I would really be ha
 <img width="100%" hight="25%" src="https://raw.githubusercontent.com/Jac-Zac/My-home-config/master/.assets/second.png"/>
 </p>
 
-## Installation Options 🪛
 
 The possible installation options are made for different types of operating system, not all of them are completely working correctly, but none of them will create any damage to your system
 
 > It is made for mac, and perhaps GNU\Linux in the future
-
-#### There are 3 operating system configurations
-
-* [**1 - M1 Mac**](#option-1-Installation-on-M1-macbook)
-* [**2 - x86_64 Mac**](#option-2-Installation-on-x86_64-Mac)
-* [**3 - Arch Linux**](#option-3-Installation-on-Arch-Linux)
-* [**4 - keybinds**](#Keybinds)
 
 ### Here are some details about my setup 💻
 
