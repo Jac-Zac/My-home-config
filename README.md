@@ -6,10 +6,11 @@
   <img width="50%" hight="25%" src="https://raw.githubusercontent.com/Jac-Zac/My-home-config/master/.assets/logo_dark.png"/>
 </p>
 
+
 <p align="center">
-<a href="##arm64 Installation"><img width="200px" style="padding: 0 10px;" src=".assets/arm64.png"></a>
-<a href="##x86_64 Mac Installation"><img width="200px" style="padding: 0 10px;" src=".assets/x86_64.png"></a>
-<a href="##Arch Linux Installation"><img width="200px" style="padding: 0 10px;" src=".assets/arch.png"></a>
+<a href="##arm64-Installation"><img width="200px" style="padding: 0 10px;" src=".assets/arm64.png"></a>
+<a href="##x86_64-Mac-Installation"><img width="200px" style="padding: 0 10px;" src=".assets/x86_64.png"></a>
+<a href="##Arch-Linux-Installation"><img width="200px" style="padding: 0 10px;" src=".assets/arch.png"></a>
 <a href="##Keybyinds"><img width="200px" style="padding: 0 10px;" src=".assets/keybinds.png"></a>
 </p>
 
@@ -113,7 +114,7 @@ _You should always keep your configuration up to date, luckily there is a straig
 
 ## Instructions for Installation 📝
 
-## arm64 Mac Installation 
+## arm64-Mac-Installation 
 
 1. This is to clone the repository ⏳ 
 
@@ -145,7 +146,7 @@ chmod +x installer.sh
 
 ##### Installation Completed
 
-## x86_64 Mac Installation
+## x86_64-Mac-Installation
 
 > You have to be in zsh shell for this installation, if you are running an old version of macOS you might need to switch away from bash
 
@@ -186,11 +187,11 @@ chmod +x installer.sh
 Now I also have a configuration for my Raspberry pi 4 running Arch with dwm as a WM and I'm loving it so far, thus I'm thinking of posting that too in the future.
 I think I will do it but I don't have a date.
 
-## Keybinds ⌨️
+## Keybinds
 
 I use <kbd>command</kbd> AKA super key (on GNU/Linux) as my main modifier
 
-#### Keyboard
+#### Keyboard ⌨️
 
 | Keybind | Action |
 | --- | --- |
