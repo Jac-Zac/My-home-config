@@ -1,5 +1,5 @@
 <h1 align="center">
-   My-home-config ⚙️
+   My-home-config ⌘
 </h1>
 
 <p align="center">
@@ -28,7 +28,7 @@ I mainly created this to always have my config with me, but I would really be ha
 <img width="100%" hight="25%" src="https://raw.githubusercontent.com/Jac-Zac/My-home-config/master/.assets/second.png"/>
 </p>
 
-## Installation Options ⌘
+## Installation Options 🪛
 
 The possible installation options are made for different types of operating system, not all of them are completely working correctly, but none of them will create any damage to your system
 
@@ -55,12 +55,13 @@ The possible installation options are made for different types of operating syst
 + **Terminal multiplexer**: [`tmux`](https://github.com/tmux/tmux)
 + **Resource monitor**: [`bpytop`](https://github.com/aristocratos/bpytop) *(aliased to top)*
 + **Browser**: [`Firefox Nightly`](https://github.com/pystardust/ytfzf)
-+ **Wallpapers**: [`First`](https://dynamicwallpaper.club/wallpaper/6df38eo4nym), [`Second`](https://dynamicwallpaper.club/wallpaper/jculsb683ok), [`Third`](https://www.reddit.com/r/unixporn/comments/i901nk/bspwm_life_in_the_forest/)
++ **Wallpapers**: [`First`](https://dynamicwallpaper.club/wallpaper/6df38eo4nym), [`Second`](https://dynamicwallpaper.club/wallpaper/jculsb683ok), [`Third`](https://www.reddit.com/r/unixporn/comments/i901nk/bspwm_life_in_the_forest/),[`Forth`](https://assets.rebelmouse.io/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpbWFnZSI6Imh0dHBzOi8vYXNzZXRzLnJibC5tcy8xMTA1Njc2OC9vcmlnaW4uanBnIiwiZXhwaXJlc19hdCI6MTY2ODI2MjYzMn0.7jRvgBvrI5I0tqbkjw5bqZqUSKh0G5r4zK5kmkLG-0k/img.jpg\?width\=1200\&height\=628)
 
 
 ### Customizations 🔧
 
 - I use Iterm in minimal mode with tab bar on the bottom, and add borderless and with 20 padding
+- To show images on iTerm I use [`imgcat`](https://pypi.org/project/imgcat/)
 - YouTube from the terminal can be watched thanks to [`ytfzf`](https://github.com/pystardust/ytfzf)
 - If you want you can go to [`~/.config/zsh`](/config/zsh) to edit your [`.zshrc`](config/zsh/.zshrc) and you can uncomment lines.
 - I have aliased `ls` to `lsd` just because I think it looks better. 
@@ -176,7 +177,7 @@ chmod +x installer.sh
 Now I also have a configuration for my Raspberry pi 4 running Arch with dwm as a WM and I'm loving it so far, thus I'm thinking of posting that too in the future.
 I think I will do it but I don't have a date.
 
-## Keybinds
+## Keybinds ⌨️
 
 I use <kbd>command</kbd> AKA super key (on GNU/Linux) as my main modifier
 
@@ -193,7 +194,7 @@ I use <kbd>command</kbd> AKA super key (on GNU/Linux) as my main modifier
 | <kbd>cotrol + [1-0]</kbd> | Change workspace |
 | <kbd>command + shift + [1-0]</kbd> | Move focused client to workspace |
 | <kbd>command + shift + [hjkl]</kbd> | Resize client |
-| <kbd>super + [hjkl]</kbd> | Change focus by direction |
+| <kbd>command + [hjkl]</kbd> | Change focus by direction |
 | <kbd>alt + f</kbd> | Set window to floating mode |
 
 ## Other things 📚
