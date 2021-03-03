@@ -6,6 +6,14 @@
   <img width="50%" hight="25%" src="https://raw.githubusercontent.com/Jac-Zac/My-home-config/master/.assets/logo_dark.png"/>
 </p>
 
+<p align="center">
+<a href="#arm64  Installation"><img width="200px" style="padding: 0 10px;" src=".assets/arm64.png"></a>
+<a href="#x86_64 Mac Installation"><img width="200px" style="padding: 0 10px;" src=".assets/x86_64.png"></a>
+<a href="#Arch Linux Installation"><img width="200px" style="padding: 0 10px;" src=".assets/arch.png"></a>
+<a href="#Keybyinds"><img width="200px" style="padding: 0 10px;" src=".assets/keybinds.png"></a>
+</p>
+
+<hr>
 <h3 align="center">
 	Synopsis 📄
 </h3>
@@ -39,6 +47,7 @@ The possible installation options are made for different types of operating syst
 * [**1 - M1 Mac**](#option-1-Installation-on-M1-macbook)
 * [**2 - x86_64 Mac**](#option-2-Installation-on-x86_64-Mac)
 * [**3 - Arch Linux**](#option-3-Installation-on-Arch-Linux)
+* [**4 - keybinds**](#Keybinds)
 
 ### Here are some details about my setup 💻
 
@@ -104,7 +113,7 @@ _You should always keep your configuration up to date, luckily there is a straig
 
 ## Instructions for Installation 📝
 
-### `Option 1: Installation on M1 macbook`
+## arm64 Mac Installation 
 
 1. This is to clone the repository ⏳ 
 
@@ -136,7 +145,7 @@ chmod +x installer.sh
 
 ##### Installation Completed
 
-### `Option 2: Installation on x86_64 Mac`
+## x86_64 Mac Installation
 
 > You have to be in zsh shell for this installation, if you are running an old version of macOS you might need to switch away from bash
 
@@ -168,7 +177,7 @@ chmod +x installer.sh
 
 ##### Installation Completed
 
-### `Option 3: Installation on Arch Linux`
+## Arch Linux Installation
 
 ##### This is what it looks like 
 
