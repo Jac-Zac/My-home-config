@@ -35,10 +35,11 @@ set guicursor=
 " set number how I like them
 set number relativenumber
 set hlsearch
-
 set ruler
 
 " set languages with fn
+" default is English
+set spell
 map <F1> :setlocal spell! spelllang=en<CR>
 map <F2> :setlocal spell! spelllang=it<CR>
 
