@@ -7,10 +7,10 @@
 </p>
 
 <p align="center">
-<a href="#arm64-Mac-Installation"><img width="150px" style="padding: 0 10px;" src=".assets/arm64.png"></a>
-<a href="#x86_64-Mac-Installation"><img width="150px" style="padding: 0 10px;" src=".assets/x86_64.png"></a>
-<a href="#Arch-Linux-Installation"><img width="150px" style="padding: 0 10px;" src=".assets/arch.png"></a>
-<a href="#Keybinds"><img width="150px" style="padding: 0 10px;" src=".assets/keybinds.png"></a>
+<a href="#arm64-Mac-Installation"><img width="150px" style="padding: 10px 10px;" src=".assets/arm64.png"></a>
+<a href="#x86_64-Mac-Installation"><img width="150px" style="padding: 10px 10px;" src=".assets/x86_64.png"></a>
+<a href="#Arch-Linux-Installation"><img width="150px" style="padding: 10px 10px;" src=".assets/arch.png"></a>
+<a href="#Keybinds"><img width="150px" style="padding: 10px 10px;" src=".assets/keybinds.png"></a>
 </p>
 
 <hr>
