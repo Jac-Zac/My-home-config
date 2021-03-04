@@ -55,7 +55,7 @@ The possible installation options are made for different types of operating syst
 + **Launcher**: [`Thor`](https://apps.apple.com/us/app/thor/id1120999687?mt=12) and [`Alfred`](https://www.alfredapp.com)
 + **Terminal multiplexer**: [`tmux`](https://github.com/tmux/tmux)
 + **Resource monitor**: [`bpytop`](https://github.com/aristocratos/bpytop) *(aliased to top)*
-+ **Browser**: [`Firefox Nightly`](https://github.com/pystardust/ytfzf)
++ **Browser**: [`Firefox Nightly`](https://www.mozilla.org/en-US/firefox/61.0a1/releasenotes/)
 + **Wallpapers**: [`First`](https://dynamicwallpaper.club/wallpaper/6df38eo4nym), [`Second`](https://dynamicwallpaper.club/wallpaper/jculsb683ok), [`Third`](https://www.reddit.com/r/unixporn/comments/i901nk/bspwm_life_in_the_forest/),[`Forth`](https://assets.rebelmouse.io/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpbWFnZSI6Imh0dHBzOi8vYXNzZXRzLnJibC5tcy8xMTA1Njc2OC9vcmlnaW4uanBnIiwiZXhwaXJlc19hdCI6MTY2ODI2MjYzMn0.7jRvgBvrI5I0tqbkjw5bqZqUSKh0G5r4zK5kmkLG-0k/img.jpg\?width\=1200\&height\=628)
 
 
