@@ -1,0 +1,4 @@
+.DS_Store
+config/oh-my-zsh
+config/ytfzf
+config/nvim/plugged
