@@ -3,28 +3,28 @@
 </h1>
 
 <p align="center">
-  <img width="50%" hight="25%" src="https://raw.githubusercontent.com/Jac-Zac/My-home-config/master/.assets/logo.png"/>
+  <img width="100%" hight="100%" src="https://raw.githubusercontent.com/Jac-Zac/My-home-config/master/.assets/logo.png"/>
 </p>
 
 <p align="center">
-<a href="#arm64-Mac-Installation"><img width="150px" style="padding: 10px 10px;" src=".assets/arm64.png"></a>
-<a href="#x86_64-Mac-Installation"><img width="150px" style="padding: 10px 10px;" src=".assets/x86_64.png"></a>
-<a href="#Arch-Linux-Installation"><img width="150px" style="padding: 10px 10px;" src=".assets/arch.png"></a>
-<a href="#Keybinds"><img width="150px" style="padding: 10px 10px;" src=".assets/keybinds.png"></a>
+<a href="#arm64-Mac-Installation"><img width="200" style="padding: 10px 10px;" src=".assets/config.png"></a>
+<a href="#x86_64-Mac-Installation"><img width="200" style="padding: 10px 10px;" src=".assets/install.png"></a>
+<a href="#Arch-Linux-Installation"><img width="200" style="padding: 10px 10px;" src=".assets/arch.png"></a>
+<a href="#Keybinds"><img width="200" style="padding: 10px 10px;" src=".assets/keys.png"></a>
 </p>
 
 <hr>
-<h3 align="center">
+<h2 align="center">
 	Synopsis 📄
-</h3>
+</h2>
 
 <p align="center">
 	This configuration repo contains everything to set up my terminal from scratch in two scripts. It also has a very easy way to update your old configuration to keep it up to date.
 </p>
 
-<h3 align="center">
+<h2 align="center">
 	Motivation 💭
-</h3>
+</h2>
 
 <p align="center">
 I mainly created this to always have my config with me, but I would really be happy if anybody wanted to try it. Furthermore I think that if I can help someone with this it is worth shearing it. 
