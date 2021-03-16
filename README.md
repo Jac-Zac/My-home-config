@@ -8,7 +8,7 @@
 
 <p align="center">
 <a href="#Configuration-computer"><img width="200" style="padding: 5px 5px;" src=".assets/config.png"></a>
-<a href="#x86_64-Mac-Installation"><img width="200" style="padding: 5px 5px;" src=".assets/install.png"></a>
+<a href="#Installation-memo"><img width="200" style="padding: 5px 5px;" src=".assets/install.png"></a>
 <a href="#Arch-Linux-Installation"><img width="200" style="padding: 5px 5px;" src=".assets/arch.png"></a>
 <a href="#Keybinds"><img width="200" style="padding: 5px 5px;" src=".assets/keys.png"></a>
 </p>
@@ -37,7 +37,7 @@ The possible installation options are made for different types of operating syst
 
 > It is made for mac, and perhaps GNU\Linux in the future
 
-### Configuration :computer:<img alt="" align="right" src="https://img.shields.io/github/repo-size/Jac-Zac/My-home-config?color=g&logo=github&style=flat-square"/>
+## Configuration :computer:<img alt="" align="right" src="https://img.shields.io/github/repo-size/Jac-Zac/My-home-config?color=g&logo=github&style=flat-square"/>
 
 + **OS**							• `MacOS/Arch Linux` 
 + **WM**							• [`Amethyst`](https://github.com/ianyh/Amethyst)
@@ -54,7 +54,7 @@ The possible installation options are made for different types of operating syst
 + **Browser**						• [`Firefox Nightly`](https://www.mozilla.org/en-US/firefox/61.0a1/releasenotes/)
 + **Wallpapers**					• [`First`](https://dynamicwallpaper.club/wallpaper/6df38eo4nym), [`Second`](https://dynamicwallpaper.club/wallpaper/jculsb683ok), [`Third`](https://www.reddit.com/r/unixporn/comments/i901nk/bspwm_life_in_the_forest/),[`Forth`](https://assets.rebelmouse.io/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpbWFnZSI6Imh0dHBzOi8vYXNzZXRzLnJibC5tcy8xMTA1Njc2OC9vcmlnaW4uanBnIiwiZXhwaXJlc19hdCI6MTY2ODI2MjYzMn0.7jRvgBvrI5I0tqbkjw5bqZqUSKh0G5r4zK5kmkLG-0k/img.jpg\?width\=1200\&height\=628)
 
-### Customizations 🔧
+## Customizations 🔧
 
 - I use Iterm in minimal mode with tab bar on the bottom, and add borderless and with 20 padding
 - To show images on iTerm I use [`imgcat`](https://pypi.org/project/imgcat/)
@@ -75,7 +75,7 @@ The possible installation options are made for different types of operating syst
 
 </details>
 
-#### Updating 📅
+### Updating 📅
 
 **Have you already installed everything but your version lack behind ?**
 
@@ -122,7 +122,7 @@ I think I will do it if some asks for it
 
 ---
 
-## Installation :memo::pencil:
+## Installation :memo:
 
 > You have to be in zsh shell for this installation, if you are running an old version of macOS you might need to switch away from bash
 
@@ -156,7 +156,7 @@ chmod +x installer.sh
 
 **Installation Completed !**
 
-### Keybinds
+## Keybinds
 
 I use <kbd>command</kbd> AKA super key (on GNU/Linux) as my main modifier
 
