@@ -52,7 +52,7 @@ The possible installation options are made for different types of operating syst
 + **Terminal multiplexer**			• [`tmux`](https://github.com/tmux/tmux)
 + **Resource monitor**				• [`bpytop`](https://github.com/aristocratos/bpytop) *(aliased to top)*
 + **Browser**						• [`Firefox Nightly`](https://www.mozilla.org/en-US/firefox/61.0a1/releasenotes/)
-+ **Wallpapers**					• [`First`](https://dynamicwallpaper.club/wallpaper/6df38eo4nym), [`Second`](https://dynamicwallpaper.club/wallpaper/jculsb683ok), [`Third`](https://www.reddit.com/r/unixporn/comments/i901nk/bspwm_life_in_the_forest/),[`Forth`](https://assets.rebelmouse.io/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpbWFnZSI6Imh0dHBzOi8vYXNzZXRzLnJibC5tcy8xMTA1Njc2OC9vcmlnaW4uanBnIiwiZXhwaXJlc19hdCI6MTY2ODI2MjYzMn0.7jRvgBvrI5I0tqbkjw5bqZqUSKh0G5r4zK5kmkLG-0k/img.jpg\?width\=1200\&height\=628)
++ **Wallpapers**					• [`Fall_wallpaper`](.wallpaper/Fall.jpg)
 
 ## Customizations 🔧
 
@@ -77,7 +77,7 @@ The possible installation options are made for different types of operating syst
 
 ### Updating 📅
 
-**Have you already installed everything but your version lack behind ?**
+**Have you already installed everything but your version lack behind ?** :thinking:
 
 _You should always keep your configuration up to date, luckily there is a straightforward and Skid (Script Kiddie) proof solution._
 
