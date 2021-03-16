@@ -57,7 +57,9 @@ brew install tmux
 brew install htop
 brew install bpytop
 brew install fzf
-brew install neovim																				#	
+brew install neovim
+brew install alfred
+brew install firefox-nightly
 
 npm -g install instant-markdown-d
 
