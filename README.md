@@ -78,13 +78,50 @@ _You should always keep your configuration up to date, luckily there is a straig
 ### Customizations 🔧
 > This setup is made for macOS, and perhaps GNU\Linux in the future
 
-- I use Iterm in minimal mode with tab bar on the bottom, and add borderless and with 20 padding
-- To show images on iTerm I use [`imgcat`](https://pypi.org/project/imgcat/)
-- YouTube from the terminal can be watched thanks to [`ytfzf`](https://github.com/pystardust/ytfzf)
-- If you want you can go to [`~/.config/zsh`](/config/zsh) to edit your [`.zshrc`](config/zsh/.zshrc) and you can uncomment lines.
-- I have aliased `ls` to `lsd` just because I think it looks better. 
+<details>
+	<summary><strong>System Preferences</strong></summary>
+
 - I also suggest to Automatically Hide & Show the Menu Bar and also set show scroll bar in all the application only when scrolling (system Preferences -> General)
 - Absolutely disable wallpaper tinting in windows inside system preferences > general on macOS Big Sur 
+
+</details>
+
+<details>
+	<summary><strong>Edit you shell configurations</strong></summary>
+
+_If you want you can go to [`~/.config/zsh`](/config/zsh) to edit your [`.zshrc`](config/zsh/.zshrc) and you can uncomment lines._
+_You can also edit your prompt in the [`~/.config/.p10k.zsh`](config/zsh/.p10k.zsh)_
+
+</details>
+
+<details>
+	<summary><strong>iTerm configuration</strong></summary>
+
+_I use iTerm in minimal mode with tab bar on the bottom and borderless setting._
+
+> To have a bit of space I also sugguest to add 20px of padding 
+
+You can also go to your iTerm preferences and import the iTerm_profile.json that you can find in the cloned directory 
+
+</details>
+
+<details>
+	<summary><strong>Images on iTerm</strong></summary>
+
+_If you'd like to see images on iTerm you can use [`imgcat`](https://pypi.org/project/imgcat/)_
+
+</details>
+
+<details>
+	<summary><strong>Better file listing</strong></summary>
+
+_I have aliased ls to [`lsd`](https://github.com/Peltoche/lsd), to make it look better and have icons_
+
+> If you are not interested in using it just uncomment the following line in the .zshrc file
+
+	alias ls="lsd"
+
+</details>
 
 <details>
 	<summary><strong>My nvim confiuguration</strong></summary>
@@ -94,6 +131,8 @@ _You should always keep your configuration up to date, luckily there is a straig
 	vim ~/.config/nvim/init.vim
 
 ##### And then run the command ``:PlugInstall``
+
+> YouTube from the terminal can be watched thanks to [`ytfzf`](https://github.com/pystardust/ytfzf)
 
 </details>
 
