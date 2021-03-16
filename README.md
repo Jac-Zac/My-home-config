@@ -116,9 +116,9 @@ _You can also go to your iTerm preferences and import the iTerm_profile.json tha
 <details>
 	<summary><strong>Better file listing</strong></summary>
 
-_I have aliased ls to [`lsd`](https://github.com/Peltoche/lsd), to make it look better and have icons_
+> I have aliased ls to [`lsd`](https://github.com/Peltoche/lsd), to make it look better and have icons_
 
-> If you are not interested in using it just uncomment the following line in the .zshrc file
+_If you are not interested in using it just uncomment the following line in the .zshrc file_
 
 	alias ls="lsd"
 
