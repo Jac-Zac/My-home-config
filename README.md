@@ -9,7 +9,7 @@
 <p align="center">
 <a href="#Configuration-computer"><img width="200" style="padding: 5px 5px;" src=".assets/config.png"></a>
 <a href="#Installation-memo"><img width="200" style="padding: 5px 5px;" src=".assets/install.png"></a>
-<a href="#Arch-Linux-Installation"><img width="200" style="padding: 5px 5px;" src=".assets/arch.png"></a>
+<a href="#Arch-Linux"><img width="200" style="padding: 5px 5px;" src=".assets/arch.png"></a>
 <a href="#Keybinds"><img width="200" style="padding: 5px 5px;" src=".assets/keys.png"></a>
 </p>
 <hr>
@@ -18,22 +18,14 @@
 	This configuration repo contains everything to set up my terminal from scratch in two scripts. It also has a very easy way to update your old configuration to keep it up to date.
 </p>
 
-<h2 align="center">
-	Motivation 💭
-</h2>
-
-<p align="center">
-I mainly created this to always have my config with me, but I would really be happy if anybody wanted to try it. Furthermore I think that if I can help someone with this it is worth shearing it. 
-</p>
-
 ## Configuration :computer:<img alt="" align="right" src="https://img.shields.io/github/repo-size/Jac-Zac/My-home-config?color=g&logo=github&style=flat-square"/>
 
-  <img href=".assets/Showcase.jpg" src=".assets/Showcase.jpg" alt="minimal" align="right" width="400px"/>
+  <img href=".assets/Showcase.jpg" src="https://raw.githubusercontent.com/Jac-Zac/My-home-config/master/.assets/Showcase.jpg" alt="minimal" align="right" width="400px"/>
 </a>
 
-> It is made for macOS, and perhaps GNU\Linux in the future
+#### Welcome to my configuration showcase
 
-:octocat: Those are some details about my setup
+:octocat: _Those are some details about my setup_
 
 + **OS**							• `MacOS/Arch Linux` 
 + **WM**							• [`Amethyst`](https://github.com/ianyh/Amethyst)
@@ -50,33 +42,15 @@ I mainly created this to always have my config with me, but I would really be ha
 + **Browser**						• [`Firefox Nightly`](https://www.mozilla.org/en-US/firefox/61.0a1/releasenotes/)
 + **Wallpapers**					• [`Fall`](.wallpaper/Fall.jpg), [`Login Image`](.wallpaper/gruv-staircase.jpg)
 
-## Customizations 🔧
+## Motivation 💭
 
-- I use Iterm in minimal mode with tab bar on the bottom, and add borderless and with 20 padding
-- To show images on iTerm I use [`imgcat`](https://pypi.org/project/imgcat/)
-- YouTube from the terminal can be watched thanks to [`ytfzf`](https://github.com/pystardust/ytfzf)
-- If you want you can go to [`~/.config/zsh`](/config/zsh) to edit your [`.zshrc`](config/zsh/.zshrc) and you can uncomment lines.
-- I have aliased `ls` to `lsd` just because I think it looks better. 
-- I also suggest to Automatically Hide & Show the Menu Bar and also set show scroll bar in all the application only when scrolling (system Preferences -> General)
-- Absolutely disable wallpaper tinting in windows inside system preferences > general on macOS Big Sur 
-
-<details>
-	<summary><strong>My nvim confiuguration</strong></summary>
-
-> This configurations hash a sort of Latex integrated with [`markdown-preview`](https://github.com/instant-markdown/vim-instant-markdown)! 
-
-	vim ~/.config/nvim/init.vim
-
-##### And then run the command ``:PlugInstall``
-
-</details>
+_I mainly created this to always have my config with me, but I would really be happy if anybody wanted to try it. Furthermore I think that if I can help someone with this it is worth shearing it._
 
 ### Updating 📅
 
 **Have you already installed everything but your version lack behind ?** :thinking:
 
-_You should always keep your configuration up to date, luckily there is a straightforward and Skid (Script Kiddie) proof solution._
-
+_You should always keep your configuration up to date, luckily there is a straightforward and noob-proof solution._
 
 <details>
 <summary><strong>Instruction to update</strong></summary>
@@ -101,22 +75,27 @@ _You should always keep your configuration up to date, luckily there is a straig
 
 </details>
 
-<h2 align="center">
-<hr>
-	Arch Linux Installation
-</h2>
+### Customizations 🔧
+> This setup is made for macOS, and perhaps GNU\Linux in the future
 
-<em><p align="center">This is what a little showcase</p></em>
+- I use Iterm in minimal mode with tab bar on the bottom, and add borderless and with 20 padding
+- To show images on iTerm I use [`imgcat`](https://pypi.org/project/imgcat/)
+- YouTube from the terminal can be watched thanks to [`ytfzf`](https://github.com/pystardust/ytfzf)
+- If you want you can go to [`~/.config/zsh`](/config/zsh) to edit your [`.zshrc`](config/zsh/.zshrc) and you can uncomment lines.
+- I have aliased `ls` to `lsd` just because I think it looks better. 
+- I also suggest to Automatically Hide & Show the Menu Bar and also set show scroll bar in all the application only when scrolling (system Preferences -> General)
+- Absolutely disable wallpaper tinting in windows inside system preferences > general on macOS Big Sur 
 
+<details>
+	<summary><strong>My nvim confiuguration</strong></summary>
 
-<img src="https://raw.githubusercontent.com/Jac-Zac/My-home-config/master/.assets/Arch_rice.jpg"/>
+> This configurations hash a sort of Latex integrated with [`markdown-preview`](https://github.com/instant-markdown/vim-instant-markdown)! 
 
-<em><p align="center"> 
-Now I also have a configuration for my Raspberry pi 4 running Arch with dwm as a WM and I'm loving it so far, thus I'm thinking of posting that too in the future.
-I think I will do it if some asks for it
-</p></em>
+	vim ~/.config/nvim/init.vim
 
----
+##### And then run the command ``:PlugInstall``
+
+</details>
 
 ## Installation :memo:
 
@@ -172,10 +151,28 @@ I use <kbd>command</kbd> AKA super key (on GNU/Linux) as my main modifier
 | <kbd>command + [hjkl]</kbd> | Change focus by direction |
 | <kbd>alt + f</kbd> | Set window to floating mode |
 
+
 ## Other things 📚
 
 **I also use ohmyzsh** to learn more and support them go to -> [`ohmyzsh`](https://ohmyz.sh/)
 Now I will be focusing on other things but also better my configuration for M1 Mac. For the README.md I took inspiration from [this repo](https://github.com/owl4ce/dotfiles)
+
+<h2 align="center">
+<hr>
+	Arch Linux
+</h2>
+
+<em><p align="center">This is what a little showcase</p></em>
+
+
+<img src="https://raw.githubusercontent.com/Jac-Zac/My-home-config/master/.assets/Arch_rice.jpg"/>
+
+<em><p align="center"> 
+Now I also have a configuration for my Raspberry pi 4 running Arch with [dwm](https://dwm.suckless.org/) as a WM and I'm loving it so far, thus I'm thinking of posting that too in the future.
+I think I will do it if some asks for it
+</p></em>
+
+---
 
 ### Problems ❌
 If you happen to run into some problems you can just open an issue, I'll try to solve it as soon as possible. Otherwise you can contact me by sending me an email. 
