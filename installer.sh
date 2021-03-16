@@ -58,8 +58,10 @@ brew install htop
 brew install bpytop
 brew install fzf
 brew install neovim
+brew install neofetch
 brew install alfred
 brew install firefox-nightly
+brew install amethyst
 
 npm -g install instant-markdown-d
 
