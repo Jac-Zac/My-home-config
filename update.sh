@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Updating config
-cp -r config $HOME/.config
+cp -r .config $HOME/.config
 cp .profile $HOME/.profile
 cp .zprofile $HOME/.zprofile
 
