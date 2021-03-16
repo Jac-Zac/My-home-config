@@ -17,7 +17,7 @@ DISABLE_AUTO_UPDATE="true"
 DISABLE_UPDATE_PROMPT="true"
 
 # Uncomment the following line to change how often to auto-update (in days).
-export UPDATE_ZSH_DAYS=10
+Export UPDATE_ZSH_DAYS=10
 
 # Uncomment the following line to enable command auto-correction.
 # ENABLE_CORRECTION="true"
@@ -33,7 +33,6 @@ zsh-autosuggestions
 
 source $ZSH/oh-my-zsh.sh
 
-alias brave="open -a \"Brave Browser Nightly.app\" -n --args --process-per-site"
 alias safari="cd /Applications;open Safari.app;cd"
 alias showD="defaults write com.apple.finder CreateDesktop -bool true;killall Finder"
 alias hideD="defaults write com.apple.finder CreateDesktop -bool false;killall Finder"
