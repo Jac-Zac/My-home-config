@@ -3,17 +3,16 @@
 </h1>
 
 <p align="center">
-  <img width="100%" hight="100%" src="https://raw.githubusercontent.com/Jac-Zac/My-home-config/master/.assets/logo.png"/>
+  <img width="60%" hight="100%" src="https://raw.githubusercontent.com/Jac-Zac/My-home-config/master/.assets/logo.png"/>
 </p>
 
 <p align="center">
-<a href="#arm64-Mac-Installation"><img width="200" style="padding: 10px 10px;" src=".assets/config.png"></a>
-<a href="#x86_64-Mac-Installation"><img width="200" style="padding: 10px 10px;" src=".assets/install.png"></a>
-<a href="#Arch-Linux-Installation"><img width="200" style="padding: 10px 10px;" src=".assets/arch.png"></a>
-<a href="#Keybinds"><img width="200" style="padding: 10px 10px;" src=".assets/keys.png"></a>
+<a href="#arm64-Mac-Installation"><img width="170" style="padding: 20px 20px;" src=".assets/config.png"></a>
+<a href="#x86_64-Mac-Installation"><img width="170" style="padding: 20px 20px;" src=".assets/install.png"></a>
+<a href="#Arch-Linux-Installation"><img width="170" style="padding: 20px 20px;" src=".assets/arch.png"></a>
+<a href="#Keybinds"><img width="170" style="padding: 20px 20px;" src=".assets/keys.png"></a>
 </p>
 
-<hr>
 <h2 align="center">
 	Synopsis 📄
 </h2>
