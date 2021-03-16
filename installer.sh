@@ -9,7 +9,7 @@ mkdir .cache/zsh
 mkdir .cache/wget
 mv .oh-my-zsh $HOME/.config/oh-my-zsh
 
-cp -r config $HOME/.config
+cp -r .config $HOME/.config
 cp .profile $HOME/.profile
 cp .zprofile $HOME/.zprofile
 
