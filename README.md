@@ -76,7 +76,9 @@ _You should always keep your configuration up to date, luckily there is a straig
 </details>
 
 ### Customizations 🔧
-> This setup is made for macOS, and perhaps GNU\Linux in the future
+
+##### This setup is made for macOS, and perhaps GNU\Linux in the future
+> YouTube from the terminal can be watched thanks to [`ytfzf`](https://github.com/pystardust/ytfzf)
 
 <details>
 	<summary><strong>System Preferences</strong></summary>
@@ -89,26 +91,25 @@ _You should always keep your configuration up to date, luckily there is a straig
 <details>
 	<summary><strong>Edit you shell configurations</strong></summary>
 
-_If you want you can go to [`~/.config/zsh`](/config/zsh) to edit your [`.zshrc`](config/zsh/.zshrc) and you can uncomment lines._
-_You can also edit your prompt in the [`~/.config/.p10k.zsh`](config/zsh/.p10k.zsh)_
+> Shell configurations
+
+_If you want you can go to [`~/.config/zsh`](.config/zsh) to edit your [`.zshrc`](.config/zsh/.zshrc) and you can uncomment lines._
+_You can also edit your prompt in the [`~/.config/zsh/.p10k.zsh`](.config/zsh/.p10k.zsh)_
 
 </details>
 
 <details>
 	<summary><strong>iTerm configuration</strong></summary>
 
-_I use iTerm in minimal mode with tab bar on the bottom and borderless setting._
+> Everything related to my iTerm
+
+**I use iTerm in minimal mode with tab bar on the bottom and borderless setting.**
+
+If you'd like to see images on iTerm you can use [`imgcat`](https://pypi.org/project/imgcat/).
+
+_You can also go to your iTerm preferences and import the iTerm_profile.json that you can find in the cloned directory_
 
 > To have a bit of space I also sugguest to add 20px of padding 
-
-You can also go to your iTerm preferences and import the iTerm_profile.json that you can find in the cloned directory 
-
-</details>
-
-<details>
-	<summary><strong>Images on iTerm</strong></summary>
-
-_If you'd like to see images on iTerm you can use [`imgcat`](https://pypi.org/project/imgcat/)_
 
 </details>
 
@@ -131,8 +132,6 @@ _I have aliased ls to [`lsd`](https://github.com/Peltoche/lsd), to make it look 
 	vim ~/.config/nvim/init.vim
 
 ##### And then run the command ``:PlugInstall``
-
-> YouTube from the terminal can be watched thanks to [`ytfzf`](https://github.com/pystardust/ytfzf)
 
 </details>
 
