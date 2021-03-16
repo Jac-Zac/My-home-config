@@ -24,20 +24,16 @@
 
 <p align="center">
 I mainly created this to always have my config with me, but I would really be happy if anybody wanted to try it. Furthermore I think that if I can help someone with this it is worth shearing it. 
-<hr>
 </p>
-
-<p align="center">
-<img width="100%" hight="25%" src="https://raw.githubusercontent.com/Jac-Zac/My-home-config/master/.assets/first.png"/>
-<img width="100%" hight="25%" src="https://raw.githubusercontent.com/Jac-Zac/My-home-config/master/.assets/second.png"/>
-</p>
-
-
-The possible installation options are made for different types of operating system, not all of them are completely working correctly, but none of them will create any damage to your system
-
-> It is made for mac, and perhaps GNU\Linux in the future
 
 ## Configuration :computer:<img alt="" align="right" src="https://img.shields.io/github/repo-size/Jac-Zac/My-home-config?color=g&logo=github&style=flat-square"/>
+
+  <img href=".assets/Showcase.jpg" src=".assets/Showcase.jpg" alt="minimal" align="right" width="400px"/>
+</a>
+
+> It is made for macOS, and perhaps GNU\Linux in the future
+
+:octocat: Those are some details about my setup
 
 + **OS**							• `MacOS/Arch Linux` 
 + **WM**							• [`Amethyst`](https://github.com/ianyh/Amethyst)
@@ -52,7 +48,7 @@ The possible installation options are made for different types of operating syst
 + **Terminal multiplexer**			• [`tmux`](https://github.com/tmux/tmux)
 + **Resource monitor**				• [`bpytop`](https://github.com/aristocratos/bpytop) *(aliased to top)*
 + **Browser**						• [`Firefox Nightly`](https://www.mozilla.org/en-US/firefox/61.0a1/releasenotes/)
-+ **Wallpapers**					• [`Fall_wallpaper`](.wallpaper/Fall.jpg)
++ **Wallpapers**					• [`Fall`](.wallpaper/Fall.jpg), [`Login Image`](.wallpaper/gruv-staircase.jpg)
 
 ## Customizations 🔧
 
@@ -179,7 +175,7 @@ I use <kbd>command</kbd> AKA super key (on GNU/Linux) as my main modifier
 ## Other things 📚
 
 **I also use ohmyzsh** to learn more and support them go to -> [`ohmyzsh`](https://ohmyz.sh/)
-Now I will be focusing on other things but also better my configuration for M1 Mac
+Now I will be focusing on other things but also better my configuration for M1 Mac. For the README.md I took inspiration from [this repo](https://github.com/owl4ce/dotfiles)
 
 ### Problems ❌
 If you happen to run into some problems you can just open an issue, I'll try to solve it as soon as possible. Otherwise you can contact me by sending me an email. 
