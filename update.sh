@@ -1,9 +1,12 @@
 #!/bin/bash
 
+echo "Updating your system"
+echo
+
 # Updating config
-cp -r .config $HOME/.config
-cp .profile $HOME/.profile
-cp .zprofile $HOME/.zprofile
+rsync -r .config $HOME/.config
+rsync .profile $HOME/.profile
+rsync .zprofile $HOME/.zprofile
 
 # Updating oh-my-zsh related stuff
 cd $HOME/.config/oh-my-zsh && git pull
