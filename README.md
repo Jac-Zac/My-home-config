@@ -141,25 +141,29 @@ _If you are not interested in using it just uncomment the following line in the 
 
 #### Step by step instructions 
 
-1. This is to clone the repository ⏳ 
+1. If not done already, install Apple's Command Line Tools. 🙂
+```
+xcode-select --install
+```
+2. This is to clone the repository ⏳ 
 
 ```
 git clone https://github.com/Jac-Zac/My-home-config.git
 ```
 
-2. This allows you to go to the correct directory
+3. This allows you to go to the correct directory
 
 ```
 cd My-home-config
 ```
 
-3. This command give execute permission to the script
+4. This command give execute permission to the script
 
 ```
 chmod +x installer.sh 
 ```
 
-4. Run the first script
+5. Run the first script
 
 ```
 ./installer.sh 
