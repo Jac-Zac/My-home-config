@@ -17,7 +17,7 @@ DISABLE_AUTO_UPDATE="true"
 DISABLE_UPDATE_PROMPT="true"
 
 # Uncomment the following line to change how often to auto-update (in days).
-Export UPDATE_ZSH_DAYS=10
+export UPDATE_ZSH_DAYS=10
 
 # Uncomment the following line to enable command auto-correction.
 # ENABLE_CORRECTION="true"
@@ -33,7 +33,14 @@ zsh-autosuggestions
 
 source $ZSH/oh-my-zsh.sh
 
-alias safari="cd /Applications;open Safari.app;cd"
+# Functions 
+fcd() {
+  cd "$(find . -type d | fzf)"
+}
+
+# Aliases 
+alias firefox="open /Applications/Firefox\ Nightly.app"
+alias safari="open /Applications/Safari.app"
 alias showD="defaults write com.apple.finder CreateDesktop -bool true;killall Finder"
 alias hideD="defaults write com.apple.finder CreateDesktop -bool false;killall Finder"
 alias cp="cp -iv"
@@ -42,7 +49,6 @@ alias rm="rm -v"
 alias ls="lsd"
 alias wget="wget --hsts-file ~/.cache/wget/wget-hsts" 
 alias vim="nvim"
-alias python="python3"
 alias locate_update="sudo /usr/libexec/locate.updatedb"
 alias top='bpytop'
 
