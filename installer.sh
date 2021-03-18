@@ -27,6 +27,12 @@ git clone https://github.com/arcticicestudio/nord-tmux.git
 
 ######################################## INSTALLING BREW FOR DIFFERENT ARCHITECTURES ######################################## 
 
+if [ "$(uname)" = "Linux" ] ; then
+			echo "I have not supported more things on Linux therefore you will exit"	
+			exit
+fi
+# If Arch linux
+
 # Apple Silicon
 if [ "$(uname - m)" = "arm64" ] ; then
 			echo "Installing brew"
