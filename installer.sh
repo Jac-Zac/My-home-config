@@ -52,19 +52,7 @@ fi
 ##############################################################################################################################
 
  # install things to make your rice look like mine
-brew install wget
-brew install lsd
-brew install figlet
-brew install node
-brew install tmux
-brew install htop
-brew install bpytop
-brew install fzf
-brew install neovim
-brew install neofetch
-brew install alfred
-brew install firefox-nightly
-brew install amethyst
+brew bundle -v
 
 npm -g install instant-markdown-d
 
