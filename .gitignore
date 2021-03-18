@@ -1,3 +1,10 @@
+.config/tmux/themes/nord-tmux
 .config/oh-my-zsh
 .config/ytfzf
+.config/git
+
+
 .config/nvim/plugged
+.config/nvim/plugged/nerdtree
+.config/nvim/plugged/vim-airline
+.config/nvim/plugged/vim-airline-themes
