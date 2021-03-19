@@ -77,9 +77,10 @@ _mainScript_() {
     mkdir .cache/wget
     mv .oh-my-zsh/ $HOME/.config/oh-my-zsh
     
-    # rsync -r .config/ $HOME/.config
-    # rsync .profile $HOME/.profile
-    # rsync .zprofile $HOME/.zprofile
+	
+    rsync .profile $HOME/.profile
+    rsync .zprofile $HOME/.zprofile
+    rsync -r .config $HOME
     
     # plugins and themes
 	git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.config/oh-my-zsh/custom}/themes/powerlevel10k 
@@ -169,6 +170,10 @@ _mainScript_() {
 			    npm -g install instant-markdown-d
     fi
   ##############################################################################################################################
+
+  	# Load .zprofile and .zshrc
+  	source $HOME/.zprofile
+  	source $HOME/.config/zsh/.zshrc
   
     # Install brew packages and applications
     brew bundle -v
@@ -190,9 +195,10 @@ _update_() {
   echo
   
   # Updating config
-	rsync -r .config $HOME/.config
-	rsync .profile $HOME/.profile
-	rsync .zprofile $HOME/.zprofile
+  
+  rsync .profile $HOME/.profile
+  rsync .zprofile $HOME/.zprofile
+  rsync -r .config $HOME
   
   # Updating oh-my-zsh related stuff
   cd $HOME/.config/oh-my-zsh && git pull
