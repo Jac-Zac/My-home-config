@@ -116,8 +116,8 @@ _mainScript_() {
     defaults write NSGlobalDomain NSAutomaticWindowAnimationsEnabled -bool false
 
 	# Top right screen corner → Desktop
-    defaults write com.apple.dock wvous-tr-corner -int 0
-    defaults write com.apple.dock wvous-tr-modifier -int 0
+    defaults write com.apple.dock wvous-tr-corner -int 2
+    defaults write com.apple.dock wvous-tr-modifier -int 2
 
 
 	# Dock Settings 
