@@ -65,13 +65,9 @@ _You should always keep your configuration up to date, luckily there is a straig
 
 	  git pull
 
-- This command give execute permission to the script
+- This command run the install script in update mode
 
-	  chmod +x update.sh
-
-- This command run the update script
-
-	  ./update.sh 
+	  ./installer.sh -u
 
 </details>
 
@@ -141,32 +137,22 @@ _If you are not interested in using it just uncomment the following line in the 
 
 #### Step by step instructions 
 
-1. If not done already, install Apple's Command Line Tools. 🙂
-```
-xcode-select --install
-```
-2. This is to clone the repository ⏳ 
+1. This is to clone the repository, and enter inside it ⏳ 
 
 ```
-git clone https://github.com/Jac-Zac/My-home-config.git
+git clone https://github.com/Jac-Zac/My-home-config.git && cd My-home-config
 ```
 
-3. This allows you to go to the correct directory
-
-```
-cd My-home-config
-```
-
-4. This command give execute permission to the script
+2. This command give execute permission to the script
 
 ```
 chmod +x installer.sh 
 ```
 
-5. Run the first script
+3. Get information about the script, and then you can follow the instructions
 
 ```
-./installer.sh 
+./installer.sh -help
 ```
 
 > You should close your terminal windows and open a new one, to reload the configurations
@@ -197,7 +183,7 @@ I use <kbd>command</kbd> AKA super key (on GNU/Linux) as my main modifier
 ## Other things 📚
 
 **I also use ohmyzsh** to learn more and support them go to -> [`ohmyzsh`](https://ohmyz.sh/)
-Now I will be focusing on other things but also better my configuration for M1 Mac. For the README.md I took inspiration from [this repo](https://github.com/owl4ce/dotfiles)
+Now I will be focusing on other things but also better my configuration for M1 Mac. For the README.md I took inspiration from [this repo](https://github.com/owl4ce/dotfiles), and for the bootstrap script I took inspiration from [this repo instead](https://github.com/natelandau/dotfiles)
 
 <h2 align="center">
 <hr>

@@ -16,24 +16,16 @@ brew "clang-format"
 brew "cmake"
 # Create Docker hosts locally and on cloud providers
 brew "docker-machine"
-# Perl lib for reading and writing EXIF metadata
-brew "exiftool"
-# Database of public exploits and corresponding vulnerable software
-brew "exploitdb"
 # Image manipulation library
 brew "jpeg"
 # Play, record, convert, and stream audio and video
 brew "ffmpeg"
-# Banner-like program prints strings as ASCII art
-brew "figlet"
 # Command-line fuzzy finder written in Go
 brew "fzf"
 # GNU compiler collection
 brew "gcc"
 # Open source programming language to build simple/reliable/efficient software
 brew "go"
-# World's fastest and most advanced password recovery utility
-brew "hashcat"
 # Improved top (interactive process viewer)
 brew "htop"
 # Lightweight and flexible command-line JSON processor
@@ -64,6 +56,8 @@ brew "node"
 brew "openblas"
 # SSL/TLS VPN implementing OSI layer 2 or 3 secure network extension
 brew "openvpn"
+# Framework for layout and rendering of i18n text
+brew "pango"
 # Paste PNG into files
 brew "pngpaste"
 # Show ps output as a tree
@@ -76,8 +70,6 @@ brew "qrencode"
 brew "radare2"
 # File browser
 brew "ranger"
-# SMART hard drive monitoring
-brew "smartmontools"
 # SSH login cracker
 brew "sshtrix"
 # Terminal multiplexer
@@ -103,3 +95,7 @@ cask "iterm2"
 cask "mactex"
 # Reverse proxy, secure introspectable tunnels to localhost
 cask "ngrok"
+mas "Keynote", id: 409183694
+mas "Numbers", id: 409203825
+mas "Pages", id: 409201541
+mas "Thor", id: 1120999687
