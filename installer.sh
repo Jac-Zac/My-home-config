@@ -27,7 +27,6 @@ _seekConfirmation_() {
   done
 }
 
-
 _mainScript_() {
 
  
@@ -191,15 +190,19 @@ _update_() {
   echo
   
   # Updating config
-#	rsync -r .config $HOME/.config
-#	rsync .profile $HOME/.profile
-#	rsync .zprofile $HOME/.zprofile
+	rsync -r .config $HOME/.config
+	rsync .profile $HOME/.profile
+	rsync .zprofile $HOME/.zprofile
   
   # Updating oh-my-zsh related stuff
   cd $HOME/.config/oh-my-zsh && git pull
   cd $HOME/.config/oh-my-zsh/custom/themes/powerlevel10k && git pull
   cd $HOME/.config/oh-my-zsh/custom/plugins/zsh-autosuggestions && git pull
   cd $HOME/.config/oh-my-zsh/custom/plugins/zsh-syntax-highlighting && git pull
+
+  # Load .zprofile and .zshrc
+  source $HOME/.zprofile
+  source $HOME/.config/zsh/.zshrc
   
   # If MacOS
   if [ "$(uname)" = "Darwin" ] ; then
