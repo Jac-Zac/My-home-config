@@ -219,7 +219,6 @@ _update_() {
   echo "${green}You system is now up to date with my current configuration${reset}"
 }
 
-
 ## FOR NOW 
 _parseOptions_() {
   # Iterate over options

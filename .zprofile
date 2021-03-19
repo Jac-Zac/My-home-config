@@ -33,6 +33,7 @@ export CPPFLAGS="-I//Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/incl
 export HOMEBREW_GITHUB_API_TOKEN=REDACTED
 
 # Homebrew PATH
+export HOMEBREW_BUNDLE_FILE=$HOME/.config/brewfile/Brewfile
 PATH="/opt/homebrew/bin:$PATH"
 PATH="/opt/rust/bin:$PATH"
 
