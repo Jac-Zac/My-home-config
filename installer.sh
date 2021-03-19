@@ -166,8 +166,6 @@ _mainScript_() {
 			    			echo "${green}brew installed${reset}"
     			fi
 
-    			# Instant markdown for nvim
-			    npm -g install instant-markdown-d
     fi
   ##############################################################################################################################
 
@@ -183,8 +181,19 @@ _mainScript_() {
   ##############################################################################################################################
   }
 
+ _Nvim_() {
+
+	 echo "Installing nvim essentials"
+	# Nvim Instant markdown for nvim
+	  sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+	   npm -g install instant-markdown-d
+
+ }
+
   _commandLineTools_
-#  _shell_config_
+  _shell_config_
+  _Nvim_
   _macSystemPrefs_
   _brew_installation_
 
