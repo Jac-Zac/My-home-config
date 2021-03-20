@@ -79,6 +79,8 @@ _You should always keep your configuration up to date, luckily there is a straig
 <details>
 	<summary><strong>System Preferences</strong></summary>
 
+> I'd like to load all of those preferences automatically with the default command in the future
+
 - I also suggest to Automatically Hide & Show the Menu Bar and also set show scroll bar in all the application only when scrolling (system Preferences -> General)
 - Absolutely disable wallpaper tinting in windows inside system preferences > general on macOS Big Sur 
 
@@ -103,18 +105,33 @@ _You can also edit your prompt in the [`~/.config/zsh/.p10k.zsh`](.config/zsh/.p
 
 If you'd like to see images on iTerm you can use [`imgcat`](https://pypi.org/project/imgcat/).
 
-_You can also go to your iTerm preferences and import the iTerm_profile.json that you can find in the cloned directory_
+![showcase](.assets/iterm.png)
 
-> To have a bit of space I also sugguest to add 20px of padding 
+*You can also go to your iTerm preferences and import the iTerm_profile.json that you can find in the cloned directory*
+
+> To have a bit of space I also sugguest to add 20px of padding, set it under advenced >  margin
+
+</details>
+
+<details>
+	<summary><strong>Firefox Configuration</strong></summary>
+
+> My firefox configuration allows me to browse the web with more freedome then ever before
+
+*I use nord theme and I changed my new tabs to black pages. And I use also use* [`zuBlock Origin`](https://ublockorigin.com) *and* [`Decentraleyes`](https://git.synz.io/Synzvato/decentraleyes)
+
+![showcase](.assets/firefox.png)
 
 </details>
 
 <details>
 	<summary><strong>Better file listing</strong></summary>
 
-> I have aliased ls to [`lsd`](https://github.com/Peltoche/lsd), to make it look better and have icons_
+> I have aliased ls to [`lsd`](https://github.com/Peltoche/lsd), to make it look better and have icons
 
-_If you are not interested in using it just uncomment the following line in the .zshrc file_
+![showcase](.assets/lsd.png)
+
+*If you are not interested in using it just uncomment the following line in the .zshrc file*
 
 	alias ls="lsd"
 
@@ -122,6 +139,8 @@ _If you are not interested in using it just uncomment the following line in the 
 
 <details>
 	<summary><strong>My nvim confiuguration</strong></summary>
+
+![showcase](.assets/nvim.png)
 
 > This configurations hash a sort of Latex integrated with [`markdown-preview`](https://github.com/instant-markdown/vim-instant-markdown)! 
 
