@@ -50,7 +50,7 @@ _I mainly created this to always have my config with me, but I would really be h
 
 _To install brew on your system wheter it is x86_64 or arm just run this oneliner_
 
-```sh
+```bash
 curl -SL https://raw.githubusercontent.com/Jac-Zac/My-home-config/master/installer.sh >> installer.sh ; chmod +x installer.sh; ./installer.sh -b; rm installer.sh
 ```
 
