@@ -1,4 +1,7 @@
-# Set Bold colors and reset
+############################
+#      Set echo Colors     #
+############################
+
 red=`tput setaf 1`
 green=`tput setaf 2`
 yellow=`tput setaf 3`
@@ -8,7 +11,9 @@ bold=$(tput bold);
 underline=`tput smul`
 rm_underline=`tput rmul`
 
-# Set functions 
+############################
+#     General functions    #
+############################ 
 _safeExit_() {
   trap - INT TERM EXIT
   exit ${1:-0}
@@ -16,7 +21,7 @@ _safeExit_() {
 
 _seekConfirmation_() {
   # v1.0.0
-  echo "$@"
+  echo "${bold}$@${reset}"
   while true; do
     read -r -p " (y/n) " yn
     case $yn in
@@ -27,184 +32,204 @@ _seekConfirmation_() {
   done
 }
 
-_mainScript_() {
+############################
+#       Help Texts         #
+############################
 
- 
-  echo "${bold}${underline}Welcome to JacZac's Dotfiles automatic installation${reset}${no_underline}"
+_usage_() {
+  cat <<EOF
+  ${underline}Run The script with no options to install everything${rm_underline}
 
+  ${bold}$(basename "$0") [OPTION]...${reset}
+  Configures a new computer running MacOSX, performs the following optional actions:
+    * Install Mac Command Line Tools
+    * Install Homebrew
+    * Install packages and applications via the above
+    * Change zsh config files 
+    * Set some defaults mac settings 
+    * Configure iTerm2
+  ${bold}Options:${reset}
+   ${yellow} -h, --help				Display this help and exit ${reset}
+   ${blue} -u, --update			Update your old configuration ${reset}
+   ${green} -b, --brew				Install brew on x86_64 or arm mac automatically${reset}
+    -s, --shell				Shell and propt configuration
+    -n, --nvim				Nvim configuration installation
+    -p, --preferences			Load my custom mac preferences
+EOF
+}
+
+############################
+#       Installation       #
+############################
+
+_commandLineTools_() {
+  # DESC:   Install XCode command line tools if needed
+  
+  echo "${bold}Checking for Command Line Tools...${bold}"
+
+  if ! xcode-select --print-path &>/dev/null; then
+
+    # Prompt install of XCode Command Line Tools
+    xcode-select --install >/dev/null 2>&1
+
+    # Wait till XCode Command Line Tools are installed
+    until xcode-select --print-path &>/dev/null 2>&1; do
+      sleep 5
+    done
+
+    local x=$(find '/Applications' -maxdepth 1 -regex '.*/Xcode[^ ]*.app' -print -quit)
+    if [ -e "$x" ]; then
+      sudo xcode-select -s "$x"
+      sudo xcodebuild -license accept
+    fi
+ echo "${green}Install XCode Command Line Tools${reset}"
+  else
+
+    echo "${green}Command Line Tools installed${reset}"
+  fi
+}
+
+_shell_config_() {
+
+  echo "${bold}Checking for brew${reset}"
+  	_brew_installation_
+	brew tap homebrew/cask-fonts
+	brew install --cask font-hack-nerd-font
+  
   echo
 
-  [[ "$OSTYPE" != "darwin"* ]] \
-    && fatal "We are not on macOS" "$LINENO"
+  echo "${bold}Installing ohmyzsh${reset}"
+  # Install ohmyzsh
+  sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-  _commandLineTools_() {
-    # DESC:   Install XCode command line tools if needed
-    # ARGS:   None
-    # OUTS:   None
-
-    echo "Checking for Command Line Tools..."
-
-    if ! xcode-select --print-path &>/dev/null; then
-
-      # Prompt install of XCode Command Line Tools
-      xcode-select --install >/dev/null 2>&1
-
-      # Wait till XCode Command Line Tools are installed
-      until xcode-select --print-path &>/dev/null 2>&1; do
-        sleep 5
-      done
-
-      local x=$(find '/Applications' -maxdepth 1 -regex '.*/Xcode[^ ]*.app' -print -quit)
-      if [ -e "$x" ]; then
-        sudo xcode-select -s "$x"
-        sudo xcodebuild -license accept
-      fi
-	  echo "${green}Install XCode Command Line Tools${reset}"
-    else
-
-      echo "${green}Command Line Tools installed${reset}"
-    fi
-
-  }
-
-  _shell_config_() {
-    # Install ohmyzsh
-    sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-    
-    # Make cache directories
-    mkdir .cache
-    mkdir .cache/zsh
-    mkdir .cache/wget
-    mv .oh-my-zsh/ $HOME/.config/oh-my-zsh
-    
-	
-    rsync .profile $HOME/.profile
-    rsync .zprofile $HOME/.zprofile
-    rsync -r .config $HOME
-    
-    # plugins and themes
-	git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.config/oh-my-zsh/custom}/themes/powerlevel10k 
-    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.config/oh-my-zsh/custom}/plugins/zsh-autosuggestions
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.config/oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-    
-    # tmux configuration with nord theme
-    cd $HOME/.config/tmux/themes
-    git clone https://github.com/arcticicestudio/nord-tmux.git
-  }
-
-  _macSystemPrefs_() {
-	  echo
-    _seekConfirmation_ "Set mac system preference defaults?" || return 0
-    sudo -v # Ask for sudo privs up-front
-
-    if _seekConfirmation_ "Would you like to set your computer name (as done via System Preferences >> Sharing)?"; then
-      echo "What would you like the name to be? "
-      read -r COMPUTER_NAME
-      sudo scutil --set ComputerName "${COMPUTER_NAME}"
-      sudo scutil --set HostName "${COMPUTER_NAME}"
-      sudo scutil --set LocalHostName "${COMPUTER_NAME}"
-      sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "${COMPUTER_NAME}"
-    fi
-
-    # General UI Tweaks
-    # ---------------------------
-
-	# Automatically hide menu bar 
-	defaults write NSGlobalDomain _HIHideMenuBar -bool true
-
-	# info "Disable opening and closing window animations"
-    defaults write NSGlobalDomain NSAutomaticWindowAnimationsEnabled -bool false
-
-	# Top right screen corner → Desktop
-    defaults write com.apple.dock wvous-tr-corner -int 2
-    defaults write com.apple.dock wvous-tr-modifier -int 2
-
-
-	# Dock Settings 
-    # ---------------------------
-	# info "Remove the auto-hiding Dock delay"
-    defaults write com.apple.dock autohide-delay -float 0
-
-    # info "Remove the animation when hiding/showing the Dock"
-    defaults write com.apple.dock autohide-time-modifier -float 0
-
-    # info "Automatically hide and show the Dock"
-    defaults write com.apple.dock autohide -bool true
-	# info "Show only open applications in the Dock"
-    defaults write com.apple.dock static-only -bool true
-
-
-  }
-
-
-  _brew_installation_() {
-  ######################################## INSTALLING BREW FOR DIFFERENT ARCHITECTURES ########################################
-   echo
-  # If brew is installed exit else brew install
-    if [ "$(which brew)" = "brew not found" ] ; then
-    			# Apple Silicon
-    			if [ "$(uname - m)" = "arm64" ] ; then
-			    			echo "Installing brew"
-			    			# First you should follow the steps to install Homebrew
-			    			cd /opt
-			    			# Create a directory for Homebrew. This requires root permissions
-			    			sudo mkdir homebrew
-			    			# Make us the owner of the directory so that we no longer require root permissions.
-			    			sudo chown -R $(whoami) /opt/homebrew
-			    			# Download and unzip Homebrew. This command can be found at https://docs.brew.sh/Installation
-			    			curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C homebrew
-			    			# Back home
-			    			cd ~
-							echo
-			    			echo "${green}brew installed${reset}"
-    			# Intel x86_64
-    			else
-			    			echo "Installing brew"
-			    			/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-			    			echo "export PATH=/opt/homebrew/bin:$PATH" >> ~/.config/zsh/.zshrc
-							echo
-			    			echo "${green}brew installed${reset}"
-    			fi
-
-    fi
-  ##############################################################################################################################
-
-  	# Load .zprofile and .zshrc
-  	source $HOME/.zprofile
-  	source $HOME/.config/zsh/.zshrc
+  echo
   
-    # Install brew packages and applications
-    brew bundle -v
-	brew cleanup
-    
-    
-  ##############################################################################################################################
-  }
+  echo "${bold}Loading my configurations ohmyzsh${reset}"
+  # Make cache directories
+  mkdir .cache
+  mkdir .cache/zsh
+  mkdir .cache/wget
+  mv .oh-my-zsh/ $HOME/.config/oh-my-zsh
+  
+  rsync .profile $HOME/.profile
+  rsync .zprofile $HOME/.zprofile
+  rsync -r .config $HOME
+  
+  # plugins and themes
+  git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.config/oh-my-zsh/custom}/themes/powerlevel10k 
+  git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.config/oh-my-zsh/custom}/plugins/zsh-autosuggestions
+  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.config/oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+  
+  # tmux configuration with nord theme
+  git clone https://github.com/arcticicestudio/nord-tmux.git ${HOME}/.config/tmux/themes/nord-tmux
+}
 
- _Nvim_() {
+_macSystemPrefs_() {
+ 
+  echo
+  _seekConfirmation_ "Set mac system preference defaults?" || return 0
+  sudo -v # Ask for sudo privs up-front
 
-	 echo "Installing nvim essentials"
-	# Nvim Instant markdown for nvim
-	  sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
-       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-	   npm -g install instant-markdown-d
+  if _seekConfirmation_ "Would you like to set your computer name (as done via System Preferences >> Sharing)?"; then
+    echo "What would you like the name to be? "
+    read -r COMPUTER_NAME
+    sudo scutil --set ComputerName "${COMPUTER_NAME}"
+    sudo scutil --set HostName "${COMPUTER_NAME}"
+    sudo scutil --set LocalHostName "${COMPUTER_NAME}"
+    sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "${COMPUTER_NAME}"
+  fi
 
- }
+  # General UI Tweaks
+  # ---------------------------
 
-  _commandLineTools_
-  _shell_config_
-  _Nvim_
-  _macSystemPrefs_
-  _brew_installation_
+ # Automatically hide menu bar 
+  defaults write NSGlobalDomain _HIHideMenuBar -bool true
 
-} # End main function 
+  info "Disable opening and closing window animations"
+  defaults write NSGlobalDomain NSAutomaticWindowAnimationsEnabled -bool false
+
+  # Top right screen corner → Desktop
+  defaults write com.apple.dock wvous-tr-corner -int 2
+  defaults write com.apple.dock wvous-tr-modifier -int 2
+
+
+  # Dock Settings 
+  # ---------------------------
+  info "Remove the auto-hiding Dock delay"
+  defaults write com.apple.dock autohide-delay -float 0
+
+  # info "Remove the animation when hiding/showing the Dock"
+  defaults write com.apple.dock autohide-time-modifier -float 0
+
+  # info "Automatically hide and show the Dock"
+  defaults write com.apple.dock autohide -bool true
+ 
+  info "Show only open applications in the Dock"
+  defaults write com.apple.dock static-only -bool true
+
+}
+
+_brew_installation_() {
+
+# If brew is installed exit else brew install
+  if [ "$(which brew)" = "brew not found" ] ; then
+  			# Apple Silicon
+  			if [ "$(uname - m)" = "arm64" ] ; then
+	    			echo "Installing brew"
+	    			# First you should follow the steps to install Homebrew
+	    			cd /opt
+	    			# Create a directory for Homebrew. This requires root permissions
+	    			sudo mkdir homebrew
+	    			# Make us the owner of the directory so that we no longer require root permissions.
+	    			sudo chown -R $(whoami) /opt/homebrew
+	    			# Download and unzip Homebrew. This command can be found at https://docs.brew.sh/Installation
+	    			curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C homebrew
+	    			# Back home
+	    			cd ~
+					echo
+	    			echo "${green}brew installed${reset}"
+  			# Intel x86_64
+  			else
+	    			echo "Installing brew"
+	    			/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+	    			echo "export PATH=/opt/homebrew/bin:$PATH" >> ~/.config/zsh/.zshrc
+					echo
+	    			echo "${green}brew installed${reset}"
+  			fi
+  else
+	    echo
+		echo "${green}You have brew, it will be updated${reset}"
+		brew update && brew upgrade
+  fi	
+}
+
+_packages_installation_ () {
+
+  # Install brew packages and applications
+  brew bundle -v
+  brew cleanup
+
+}
+
+_Nvim_() {
+
+ echo "${bold}Installing nvim essentials${reset}"
+ # Nvim Instant markdown for nvim
+
+ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  
+ npm -g install instant-markdown-d
+
+}
+
 
 _update_() {
+
   echo "${bold}Updating your system${reset}"
   echo
   
   # Updating config
-  
   rsync .profile $HOME/.profile
   rsync .zprofile $HOME/.zprofile
   rsync -r .config $HOME
@@ -215,13 +240,9 @@ _update_() {
   cd $HOME/.config/oh-my-zsh/custom/plugins/zsh-autosuggestions && git pull
   cd $HOME/.config/oh-my-zsh/custom/plugins/zsh-syntax-highlighting && git pull
 
-  # Load .zprofile and .zshrc
-  source $HOME/.zprofile
-  source $HOME/.config/zsh/.zshrc
-  
   # If MacOS
   if [ "$(uname)" = "Darwin" ] ; then
-			  brew bundle -v 
+			  brew update && brew upgrade 
   # If Arch linux
   elif [ "$(uname)" = "Linux" ]; then
 			  echo >> $HOME/.zprofile
@@ -234,7 +255,31 @@ _update_() {
   echo "${green}You system is now up to date with my current configuration${reset}"
 }
 
-## FOR NOW 
+####################################
+#          Main function           #
+# Allows you to install everything #
+####################################
+
+_mainScript_() {
+  
+	echo "${bold}${underline}Welcome to JacZac's Dotfiles automatic installation${reset}${no_underline}"
+  	echo
+
+  [[ "$OSTYPE" != "darwin"* ]] \
+    && fatal "We are not on macOS" "$LINENO"
+
+  _commandLineTools_
+  _shell_config_
+  _Nvim_
+  _packages_installation_
+
+} # End main function 
+
+
+############################
+#         Get flags        #
+############################
+
 _parseOptions_() {
   # Iterate over options
   # breaking -ab into -a -b when needed and --foo=bar into --foo bar
@@ -276,7 +321,24 @@ _parseOptions_() {
       -u | --update) 
 		_update_
 		_safeExit_
-		  ;;
+		;;
+	  -b | --brew)
+		_commandLineTools_
+  		_brew_installation_
+		_safeExit_
+		;;
+	  -s | --shell)
+		_shell_config_
+		_safeExit_
+		;;
+	  -n | --nvim)
+		_Nvim_
+		_safeExit_
+		;;
+	  -p | --preferences)
+  		_macSystemPrefs_
+		_safeExit_
+		;;
       --endopts)
         shift
         break
@@ -286,24 +348,6 @@ _parseOptions_() {
     shift
   done
   args+=("$@")
-}
-
-_usage_() {
-  cat <<EOF
-  ${underline}Run The script with no options to install everything${rm_underline}
-
-  ${bold}$(basename "$0") [OPTION]...${reset}
-  Configures a new computer running MacOSX, performs the following optional actions:
-    * Install Mac Command Line Tools
-    * Install Homebrew
-    * Install packages and applications via the above
-    * Change zsh config files 
-    * Set some defaults mac settings 
-    * Configure iTerm2
-  ${bold}Options:${reset}
-   ${yellow} -h, --help        Display this help and exit ${reset}
-   ${blue} -u, --update      Update your old configuration ${reset}
-EOF
 }
 
 ## Run functions
