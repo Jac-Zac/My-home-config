@@ -84,6 +84,8 @@ _You should always keep your configuration up to date, luckily there is a straig
 - I also suggest to Automatically Hide & Show the Menu Bar and also set show scroll bar in all the application only when scrolling (system Preferences -> General)
 - Absolutely disable wallpaper tinting in windows inside system preferences > general on macOS Big Sur 
 
+![showcase](.assets/preference.png)
+
 </details>
 
 <details>
@@ -93,6 +95,8 @@ _You should always keep your configuration up to date, luckily there is a straig
 
 _If you want you can go to [`~/.config/zsh`](.config/zsh) to edit your [`.zshrc`](.config/zsh/.zshrc) and you can uncomment lines._
 _You can also edit your prompt in the [`~/.config/zsh/.p10k.zsh`](.config/zsh/.p10k.zsh)_
+
+![showcase](.assets/prompt.png)
 
 </details>
 
