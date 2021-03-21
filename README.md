@@ -7,10 +7,10 @@
 </p>
 
 <p align="center">
-<a href="#Configuration-computer"><img width="200" style="padding: 5px 5px;" src=".assets/config.png"></a>
-<a href="#Installation-memo"><img width="200" style="padding: 5px 5px;" src=".assets/install.png"></a>
-<a href="#Arch-Linux"><img width="200" style="padding: 5px 5px;" src=".assets/arch.png"></a>
-<a href="#Keybinds"><img width="200" style="padding: 5px 5px;" src=".assets/keys.png"></a>
+<a href="#Configuration-computer"><img width="180" style="padding: 5px 5px;" src=".assets/config.png"></a>
+<a href="#Installation-memo"><img width="180" style="padding: 5px 5px;" src=".assets/install.png"></a>
+<a href="#Arch-Linux"><img width="180" style="padding: 5px 5px;" src=".assets/arch.png"></a>
+<a href="#Keybinds"><img width="180" style="padding: 5px 5px;" src=".assets/keys.png"></a>
 </p>
 <hr>
 
