@@ -46,6 +46,14 @@
 
 _I mainly created this to always have my config with me, but I would really be happy if anybody wanted to try it. Furthermore I think that if I can help someone with this it is worth shearing it._
 
+### Install brew for your system 🍺
+
+_To install brew on your system wheter it is x86_64 or arm just run this oneliner_
+
+```sh
+curl -SL https://raw.githubusercontent.com/Jac-Zac/My-home-config/master/installer.sh >> installer.sh ; chmod +x installer.sh; ./installer.sh -b; rm installer.sh
+```
+
 ### Updating 📅
 
 **Have you already installed everything but your version lack behind ?** :thinking:
@@ -175,7 +183,7 @@ chmod +x installer.sh
 3. Get information about the script, and then you can follow the instructions
 
 ```
-./installer.sh -help
+./installer.sh --help
 ```
 
 > You should close your terminal windows and open a new one, to reload the configurations

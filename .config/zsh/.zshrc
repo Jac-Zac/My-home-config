@@ -1,9 +1,8 @@
 neofetch # |  lolcat -p -a -d 1 -s 70
 
 # History in cache directory:
-HISTFILE=~/.cache/zsh/history
-HISTSIZE=20000
-SAVEHIST=10000
+HISTSIZE=5000
+SAVEHIST=5000
 
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/zshnameddirrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/zshnameddirrc"
 
