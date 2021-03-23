@@ -95,7 +95,16 @@ _shell_config_() {
   	_brew_installation_
 	brew tap homebrew/cask-fonts
 	brew install --cask font-hack-nerd-font
-  
+	brew install powerlevel10k
+ 	brew install neovim
+ 	brew install fzf
+	brew install wget
+	brew install lsd
+	brew install neofetch
+	brew install htop
+	brew install bpytop
+	brew install tmux
+	brew install zsh-autosuggestions
   echo
 
   echo "${bold}Installing ohmyzsh${reset}"
@@ -117,9 +126,8 @@ _shell_config_() {
   
   # plugins and themes
   git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.config/oh-my-zsh/custom}/themes/powerlevel10k 
-  git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.config/oh-my-zsh/custom}/plugins/zsh-autosuggestions
-  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.config/oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-  
+  git clone https://github.com/zdharma/fast-syntax-highlighting $HOME/.config/fast-syntax-highlighting
+
   # tmux configuration with nord theme
   git clone https://github.com/arcticicestudio/nord-tmux.git ${HOME}/.config/tmux/themes/nord-tmux
 }
