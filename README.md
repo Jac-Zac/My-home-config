@@ -180,10 +180,10 @@ git clone https://github.com/Jac-Zac/My-home-config.git && cd My-home-config
 chmod +x installer.sh 
 ```
 
-3. Get information about the script, and then you can follow the instructions
+3. Run the script. If you want to get some more information you can start by running `./installer -h`
 
 ```
-./installer.sh --help
+./installer.sh
 ```
 
 > You should close your terminal windows and open a new one, to reload the configurations
