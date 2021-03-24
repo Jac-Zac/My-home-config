@@ -46,9 +46,9 @@
 
 _I mainly created this to always have my config with me, but I would really be happy if anybody wanted to try it. Furthermore I think that if I can help someone with this it is worth shearing it._
 
-### Install brew for your system 🍺
+### Install only brew 🍺
 
-_To install brew on your system wheter it is x86_64 or arm just run this oneliner_
+_If you only need brew you can install it on your system whether it is x86_64 or arm just run this oneliner_
 
 ```bash
 curl -SL https://raw.githubusercontent.com/Jac-Zac/My-home-config/master/installer.sh >> installer.sh ; chmod +x installer.sh; ./installer.sh -b; rm installer.sh
