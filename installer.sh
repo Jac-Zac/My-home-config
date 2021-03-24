@@ -105,6 +105,7 @@ _shell_config_() {
 	brew install bpytop
 	brew install tmux
 	brew install zsh-autosuggestions
+	brew install romkatv/powerlevel10k/powerlevel10k
   echo
 
   echo "${bold}Installing ohmyzsh${reset}"
@@ -179,36 +180,39 @@ _macSystemPrefs_() {
 
 _brew_installation_() {
 
+ArmPrefix="/opt"
+IntelPrefix="/usr/local"
+
 # If brew is installed exit else brew install
-  if [ "$(which brew)" = "brew not found" ] ; then
-  			# Apple Silicon
-  			if [ "$(uname - m)" = "arm64" ] ; then
-	    			echo "Installing brew"
-	    			# First you should follow the steps to install Homebrew
-	    			cd /opt
-	    			# Create a directory for Homebrew. This requires root permissions
-	    			sudo mkdir homebrew
-	    			# Make us the owner of the directory so that we no longer require root permissions.
-	    			sudo chown -R $(whoami) /opt/homebrew
-	    			# Download and unzip Homebrew. This command can be found at https://docs.brew.sh/Installation
-	    			curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C homebrew
-	    			# Back home
-	    			cd ~
-					echo
-	    			echo "${green}brew installed${reset}"
+if [ "$(ls ${ArmPrefix} | grep homebrew )" = "homebrew" ] || [ "$(ls ${IntelPrefix} | grep homebrew)" = "homebrew" ] ; then
+	echo
+	echo "${green}You have brew, it will be updated${reset}"
+	brew update && brew upgrade
+else
+  	# Apple Silicon
+  	if [ "$(uname - m)" = "arm64" ] ; then
+	    	echo "Installing brew"
+	    	# First you should follow the steps to install Homebrew
+	    	cd ${ArmPrefix}
+	    	# Create a directory for Homebrew. This requires root permissions
+	    	sudo mkdir homebrew
+	    	# Make us the owner of the directory so that we no longer require root permissions.
+	    	sudo chown -R $(whoami) /opt/homebrew
+	    	# Download and unzip Homebrew. This command can be found at https://docs.brew.sh/Installation
+	    	curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C homebrew
+	    	# Back home
+	    	cd ~
+			echo
+	    	echo "${green}brew installed${reset}"
   			# Intel x86_64
-  			else
-	    			echo "Installing brew"
-	    			/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-	    			echo "export PATH=/opt/homebrew/bin:$PATH" >> ~/.config/zsh/.zshrc
-					echo
-	    			echo "${green}brew installed${reset}"
-  			fi
-  else
-	    echo
-		echo "${green}You have brew, it will be updated${reset}"
-		brew update && brew upgrade
-  fi	
+  	else
+	    	echo "Installing brew"
+	    	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+	    	echo "export PATH=/opt/homebrew/bin:$PATH" >> ~/.config/zsh/.zshrc
+			echo
+	    	echo "${green}brew installed${reset}"
+  	fi
+ fi	
 }
 
 _packages_installation_ () {
