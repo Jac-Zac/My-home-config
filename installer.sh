@@ -1,3 +1,4 @@
+#!/bin/sh
 ############################
 #      Set echo Colors     #
 ############################
@@ -128,6 +129,7 @@ _shell_config_() {
   # plugins and themes
   git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.config/oh-my-zsh/custom}/themes/powerlevel10k 
   git clone https://github.com/zdharma/fast-syntax-highlighting $HOME/.config/fast-syntax-highlighting
+  git clone https://github.com/nyquase/vi-mode $HOME/.config/vi-mode
 
   # tmux configuration with nord theme
   git clone https://github.com/arcticicestudio/nord-tmux.git ${HOME}/.config/tmux/themes/nord-tmux
@@ -248,9 +250,8 @@ _update_() {
   
   # Updating oh-my-zsh related stuff
   cd $HOME/.config/oh-my-zsh && git pull
+  cd $HOME/.config/fast-syntax-highlighting && git pull
   cd $HOME/.config/oh-my-zsh/custom/themes/powerlevel10k && git pull
-  cd $HOME/.config/oh-my-zsh/custom/plugins/zsh-autosuggestions && git pull
-  cd $HOME/.config/oh-my-zsh/custom/plugins/zsh-syntax-highlighting && git pull
 
   # If MacOS
   if [ "$(uname)" = "Darwin" ] ; then
