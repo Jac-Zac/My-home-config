@@ -29,9 +29,6 @@ export CPATH=`xcrun --show-sdk-path`/usr/include
 export LDFLAGS="-L//Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include"
 export CPPFLAGS="-I//Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include"
 
-# Homebrew token
-export HOMEBREW_GITHUB_API_TOKEN=REDACTED
-
 # Homebrew PATH
 export HOMEBREW_BUNDLE_FILE=$HOME/.config/brewfile/Brewfile
 PATH="/opt/homebrew/bin:$PATH"
