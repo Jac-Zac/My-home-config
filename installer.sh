@@ -251,7 +251,7 @@ _update_() {
   # Updating oh-my-zsh related stuff
   cd $HOME/.config/oh-my-zsh && git pull
   cd $HOME/.config/fast-syntax-highlighting && git pull
-  cd $HOME/.config/oh-my-zsh/custom/themes/powerlevel10k && git pull
+  cd $HOME/.config/vi-mode && git pull
 
   # If MacOS
   if [ "$(uname)" = "Darwin" ] ; then
