@@ -48,7 +48,7 @@ _I mainly created this to always have my config with me, but I would really be h
 
 ### Install only brew 🍺
 
-_If you only need brew you can install it on your system whether it is x86_64 or arm just run this oneliner_
+*If you only need brew you can install it on your system whether it is x86_64 or arm just run this one-liner*
 
 ```bash
 curl -SL https://raw.githubusercontent.com/Jac-Zac/My-home-config/master/installer.sh >> installer.sh ; chmod +x installer.sh; ./installer.sh -b; rm installer.sh
@@ -93,6 +93,10 @@ _You should always keep your configuration up to date, luckily there is a straig
 - Absolutely disable wallpaper tinting in windows inside system preferences > general on macOS Big Sur 
 
 ![showcase](.assets/preference.png)
+
+- And if you are can't stand the annoying sound when you use tab completion change Sound configurations as showed below
+
+![showcase](.assets/sound.png)
 
 </details>
 
