@@ -1,0 +1,97 @@
+# Run neofetch when you start the shell to get a nice visual and some system informations 
+neofetch # |  lolcat -p -a -d 1 -s 70
+
+autoload -U colors && colors	# Load colors
+
+# My simple prompt inspired by Luke Smith's config for the Zoomer Shell
+PS1="%B%{$fg[cyan]%}[%{$fg[magenta]%}%n%{$fg[blue]%}@%{$fg[green]%}%m %{$fg[yellow]%}%~%{$fg[cyan]%}]%{$reset_color%} $%b "
+
+# Git information on the right 
+autoload -Uz vcs_info
+git_branch_test_color() {
+  local ref=$(git symbolic-ref --short HEAD 2> /dev/null)
+  if [ -n "${ref}" ]; then
+    if [ -n "$(git status --porcelain)" ]; then
+      local gitstatuscolor='%F{red}'
+    else
+      local gitstatuscolor='%F{green}'
+    fi
+    echo "${gitstatuscolor} ${ref}"
+  else
+    echo ""
+  fi
+}
+setopt PROMPT_SUBST
+RPROMPT='$(git_branch_test_color)%F{none} '
+
+
+# History in cache directory:
+HISTSIZE=500
+SAVEHIST=500
+HISTFILE=~/.cache/zsh/history
+
+# zsh syntax highlighting
+source $HOME/.config/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+
+# zsh auto-suggestion
+source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# Basic auto/tab complete:
+autoload -U compinit
+zstyle ':completion:*' menu select
+zmodload zsh/complist
+compinit
+_comp_options+=(globdots)		# Include hidden files.
+
+# vi mode
+bindkey -v
+export KEYTIMEOUT=1
+
+# Use vim keys in tab complete menu:
+bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect 'l' vi-forward-char
+bindkey -M menuselect 'j' vi-down-line-or-history
+bindkey -v '^?' backward-delete-char
+
+# Change cursor shape for different vi modes.
+function zle-keymap-select () {
+    case $KEYMAP in
+        vicmd) echo -ne '\e[1 q';;      # block
+        viins|main) echo -ne '\e[5 q';; # beam
+    esac
+}
+zle -N zle-keymap-select
+zle-line-init() {
+    zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
+    echo -ne "\e[5 q"
+}
+zle -N zle-line-init
+echo -ne '\e[5 q' # Use beam shape cursor on startup.
+preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
+
+
+
+# Functions 
+fcd() {
+  cd ; cd "$(find . -type d | fzf)"
+}
+
+# Aliases 
+alias firefox="open /Applications/Firefox\ Nightly.app"
+alias safari="open /Applications/Safari.app"
+alias showD="defaults write com.apple.finder CreateDesktop -bool true;killall Finder"
+alias hideD="defaults write com.apple.finder CreateDesktop -bool false;killall Finder"
+alias cp="cp -iv"
+alias mv="mv -iv"
+alias rm="rm -v"
+alias ls="lsd"
+alias l="lsd -la"
+alias wget="wget --hsts-file ~/.cache/wget/wget-hsts" 
+alias vim="nvim"
+alias locate_update="sudo /usr/libexec/locate.updatedb"
+alias top='bpytop'
+
+# Load fzf configurations
+[ -f ~/.config/fzf/fzf.zsh ] && source ~/.config/fzf/fzf.zsh
+
