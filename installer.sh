@@ -95,8 +95,9 @@ _shell_config_() {
   echo "${bold}Checking for brew${reset}"
   	_brew_installation_
 	brew tap homebrew/cask-fonts
+	brew install zsh-autosuggestions
+	brew install romkatv/powerlevel10k/powerlevel10k
 	brew install --cask font-hack-nerd-font
-	brew install powerlevel10k
  	brew install neovim
  	brew install fzf
 	brew install wget
@@ -105,8 +106,6 @@ _shell_config_() {
 	brew install htop
 	brew install bpytop
 	brew install tmux
-	brew install zsh-autosuggestions
-	brew install romkatv/powerlevel10k/powerlevel10k
   echo
 
   echo "${bold}Installing ohmyzsh${reset}"
