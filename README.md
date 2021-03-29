@@ -29,7 +29,7 @@
 
 + **OS**							• `MacOS/Arch Linux` 
 + **WM**							• [`Amethyst`](https://github.com/ianyh/Amethyst)
-+ **Shell**							• [`ohmyzsh`](https://ohmyz.sh/) -> [`powerlevel10k`](https://github.com/romkatv/powerlevel10k)
++ **Shell**							• [`zsh`](https://www.zsh.org/) -> [`powerlevel10k`](https://github.com/romkatv/powerlevel10k)
 + **Terminal**						• [`iTerm`](https://iterm2.com/) 
 + **Editor**						• [`Neovim`](https://github.com/neovim/neovim/) 
 + **Theme**							• [`Nord`](https://github.com/arcticicestudio/nord-iterm2)
@@ -217,8 +217,7 @@ I use <kbd>command</kbd> AKA super key (on GNU/Linux) as my main modifier
 
 ## Other things 📚
 
-**I also use ohmyzsh** to learn more and support them go to -> [`ohmyzsh`](https://ohmyz.sh/)
-Now I will be focusing on other things but also better my configuration for M1 Mac. For the README.md I took inspiration from [this repo](https://github.com/owl4ce/dotfiles), and for the bootstrap script I took inspiration from [this repo instead](https://github.com/natelandau/dotfiles)
+I'd like to slowly switch aways from powerlevel10k to get a faster feeling shell, but now I will be focusing on other things but also better my configuration for M1 Mac. For the README.md I took inspiration from [this repo](https://github.com/owl4ce/dotfiles), and for the bootstrap script I took inspiration from [this repo instead](https://github.com/natelandau/dotfiles)
 
 <h2 align="center">
 <hr>
