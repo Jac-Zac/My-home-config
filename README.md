@@ -94,10 +94,6 @@ _You should always keep your configuration up to date, luckily there is a straig
 
 ![showcase](.assets/preference.png)
 
-- And if you are can't stand the annoying sound when you use tab completion change Sound configurations as showed below
-
-![showcase](.assets/sound.png)
-
 </details>
 
 <details>

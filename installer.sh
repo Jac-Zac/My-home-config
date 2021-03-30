@@ -128,7 +128,7 @@ _shell_config_() {
   # plugins and themes
   git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.config/oh-my-zsh/custom}/themes/powerlevel10k 
   git clone https://github.com/zdharma/fast-syntax-highlighting $HOME/.config/fast-syntax-highlighting
-  git clone https://github.com/nyquase/vi-mode $HOME/.config/vi-mode
+  git clone https://github.com/jeffreytse/zsh-vi-mode.git $HOME/.config/zsh-vi-mode
 
   # tmux configuration with nord theme
   git clone https://github.com/arcticicestudio/nord-tmux.git ${HOME}/.config/tmux/themes/nord-tmux
