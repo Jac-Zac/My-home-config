@@ -1,0 +1,33 @@
+#!/bin/sh
+
+# Aliases 
+alias firefox="open /Applications/Firefox\ Nightly.app"
+alias safari="open /Applications/Safari.app"
+alias showD="defaults write com.apple.finder CreateDesktop -bool true;killall Finder"
+alias hideD="defaults write com.apple.finder CreateDesktop -bool false;killall Finder"
+alias locate_update="sudo /usr/libexec/locate.updatedb"
+
+# Better commands 
+alias cp="cp -iv"
+alias mv="mv -iv"
+alias rm="rm -v"
+alias ls="lsd"
+alias l="lsd -la"
+alias top='bpytop'
+
+# Use neovim for vim if present.
+[ -x "$(command -v nvim)" ] && alias vim="nvim" vimdiff="nvim -d"
+alias wget="wget --hsts-file ~/.cache/wget/wget-hsts"
+
+# git aliases
+alias g='git'
+alias gaa='git add --all'
+alias gb='git branch'
+alias gst='git status'
+alias gcam='git commit -a -m'
+alias gco='git checkout'
+alias gd='git diff'
+alias gp='git push'
+alias gr='git remote'
+
+

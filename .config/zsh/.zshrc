@@ -1,8 +1,8 @@
 neofetch # |  lolcat -p -a -d 1 -s 70
 
 # History in cache directory:
-HISTSIZE=500
-SAVEHIST=500
+HISTSIZE=2500
+SAVEHIST=2500
 HISTFILE=~/.cache/zsh/history
 
 # Load aliases and shortcuts if existent.
@@ -11,7 +11,6 @@ HISTFILE=~/.cache/zsh/history
 
 # Basic auto/tab complete:
 autoload -U compinit
-# zstyle ':completion:*' menu select
 zstyle ':completion:*' menu select matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 zmodload zsh/complist
 compinit
