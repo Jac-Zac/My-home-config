@@ -130,7 +130,7 @@ If you'd like to see images on iTerm you can use [`imgcat`](https://pypi.org/pro
 
 > My firefox configuration allows me to browse the web with more freedome then ever before
 
-*I use nord theme and I changed my new tabs to black pages. And I use also use* [`zuBlock Origin`](https://ublockorigin.com) *and* [`Decentraleyes`](https://git.synz.io/Synzvato/decentraleyes)
+*I use nord theme and I changed my new tabs to black pages. And I use also use* [`zuBlock Origin`](https://ublockorigin.com) *and* [`LocalCDN`](https://www.localcdn.org/)
 
 ![showcase](.assets/firefox.png)
 
