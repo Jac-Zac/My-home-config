@@ -30,4 +30,10 @@ alias gd='git diff'
 alias gp='git push'
 alias gr='git remote'
 
+# web searches
+alias rogan="open https://open.spotify.com/show/4rOoJ6Egrf8K2IrywzwOMk"
+alias mtype="open https://monkeytype.com/"
+alias chat="open https://web.whatsapp.com/"
+alias youtube="open https://www.youtube.com/"
+alias github="open https://github.com/"
 
