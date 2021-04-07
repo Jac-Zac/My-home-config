@@ -130,7 +130,16 @@ If you'd like to see images on iTerm you can use [`imgcat`](https://pypi.org/pro
 
 > My firefox configuration allows me to browse the web with more freedome then ever before
 
-*I use nord theme and I changed my new tabs to black pages. And I use also use* [`zuBlock Origin`](https://ublockorigin.com) *and* [`LocalCDN`](https://www.localcdn.org/)
+*I use [nord theme](https://addons.mozilla.org/en-US/firefox/addon/nord-theme-cool/?utm_source=addons.mozilla.org&utm_medium=referral&utm_content=search) and I changed my new tabs to black pages.*
+
+
+- [`zuBlock Origin`](https://ublockorigin.com) 
+- [`LocalCDN`](https://www.localcdn.org/)
+- [`HTTPS Everywhere`](https://www.eff.org/https-everywhere)
+- [`Privacy Badger`](https://privacybadger.org/)
+- [`SponsorBlock`](https://sponsor.ajay.app/)
+- [`Temp Mail`](https://addons.mozilla.org/en-US/firefox/addon/temp-mail/)
+
 
 ![showcase](.assets/firefox.png)
 
