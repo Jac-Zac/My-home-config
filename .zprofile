@@ -11,9 +11,10 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
 export LESSHISTFILE="-"
-
-# Path to your oh-my-zsh installation.
-export ZSH="$HOME/.config/oh-my-zsh"
+export PASSWORD_STORE_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/password-store"
+export GOPATH="${XDG_DATA_HOME:-$HOME/.local/share}/go"
+export HISTFILE="${XDG_DATA_HOME:-$HOME/.local/share}/history"
+export GNUPGHOME="${XDG_DATA_HOME:-$HOME/.local/share}/gnupg"
 
 # FZF default color theme (Nord)
 export FZF_DEFAULT_OPTS='
