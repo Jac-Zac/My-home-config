@@ -24,7 +24,6 @@ git_branch_test_color() {
 setopt PROMPT_SUBST
 RPROMPT='$(git_branch_test_color)%F{none} '
 
-
 # History in cache directory:
 HISTSIZE=500
 SAVEHIST=500
@@ -70,27 +69,13 @@ zle -N zle-line-init
 echo -ne '\e[5 q' # Use beam shape cursor on startup.
 preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 
-
+# Disable annoying sounds 
+unsetopt BEEP
 
 # Functions 
 fcd() {
   cd ; cd "$(find . -type d | fzf)"
 }
-
-# Aliases 
-alias firefox="open /Applications/Firefox\ Nightly.app"
-alias safari="open /Applications/Safari.app"
-alias showD="defaults write com.apple.finder CreateDesktop -bool true;killall Finder"
-alias hideD="defaults write com.apple.finder CreateDesktop -bool false;killall Finder"
-alias cp="cp -iv"
-alias mv="mv -iv"
-alias rm="rm -v"
-alias ls="lsd"
-alias l="lsd -la"
-alias wget="wget --hsts-file ~/.cache/wget/wget-hsts" 
-alias vim="nvim"
-alias locate_update="sudo /usr/libexec/locate.updatedb"
-alias top='bpytop'
 
 # Load fzf configurations
 [ -f ~/.config/fzf/fzf.zsh ] && source ~/.config/fzf/fzf.zsh
