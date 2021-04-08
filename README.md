@@ -140,6 +140,11 @@ If you'd like to see images on iTerm you can use [`imgcat`](https://pypi.org/pro
 - [`SponsorBlock`](https://sponsor.ajay.app/)
 - [`Temp Mail`](https://addons.mozilla.org/en-US/firefox/addon/temp-mail/)
 
+##### Set this value in your [about:config](about:config) to true
+```
+toolkit.legacyUserProfileCustomizations.stylesheets = true
+```
+> Then follow [this](https://www.youtube.com/watch?v=1UhsLlJs9Jg) tutorial, and use copy the chrome directory from my file 
 
 ![showcase](.assets/firefox.png)
 
