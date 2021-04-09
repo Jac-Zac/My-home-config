@@ -139,6 +139,9 @@ If you'd like to see images on iTerm you can use [`imgcat`](https://pypi.org/pro
 - [`Privacy Badger`](https://privacybadger.org/)
 - [`SponsorBlock`](https://sponsor.ajay.app/)
 - [`Temp Mail`](https://addons.mozilla.org/en-US/firefox/addon/temp-mail/)
+- [`Stylus`](https://addons.mozilla.org/en-US/firefox/addon/styl-us/)
+
+>And use [nord theme for youtube](https://github.com/MajesticWaffle/Youtube-Nord-Theme) and this for [whatsapp](https://github.com/vednoc/dark-whatsapp)
 
 ##### Set this value in your [about:config](about:config) to true
 ```
