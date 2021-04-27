@@ -1,0 +1,58 @@
+# Lighthaus Colors:
+
+set notification-error-bg       "#2e3340" 
+set notification-error-fg       "#D8DEE8" 
+set notification-warning-bg     "#2e3340" 
+set notification-warning-fg     "#D8DEE8" 
+set notification-bg             "#2e3340" 
+set notification-fg             "#D8DEE8" 
+
+set completion-bg               "#2e3340" 
+set completion-fg               "#D8DEE8" 
+set completion-group-bg         "#2e3340" 
+set completion-group-fg         "#D8DEE8" 
+set completion-highlight-bg     "#2e3340" 
+set completion-highlight-fg     "#a3be8b" 
+
+set index-bg                    "#2e3340" 
+set index-fg                    "#D8DEE8" 
+set index-active-bg             "#2e3340" 
+set index-active-fg             "#D8DEE8" 
+
+set inputbar-bg                 "#2e3340" 
+set inputbar-fg                 "#D8DEE8" 
+set statusbar-bg                "#2e3340" 
+set statusbar-fg                "#D8DEE8" 
+
+set highlight-color             "#a3be8b" 
+set highlight-active-color      "#ff79c6" 
+
+set default-bg                  "#2e3340" 
+set default-fg                  "#D8DEE8" 
+
+set render-loading              true
+set render-loading-fg           "#D8DEE8" 
+set render-loading-bg           "#2e3340" 
+
+# Recolor mode settings
+
+set recolor-lightcolor          "#21252D" 
+set recolor-darkcolor           "#2e3340" E
+
+# set recolor                     "true"
+
+set sandbox none
+set statusbar-h-padding 0
+set statusbar-v-padding 0
+set page-padding 1
+set selection-clipboard clipboard
+map u scroll half-up
+map d scroll half-down
+map D toggle_page_mode
+map r reload
+map R rotate
+map K zoom in
+map J zoom out
+map i recolor
+map p print
+map g goto top

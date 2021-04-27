@@ -171,7 +171,9 @@ toolkit.legacyUserProfileCustomizations.stylesheets = true
 
 ![showcase](.assets/nvim.png)
 
-> This configurations hash a sort of Latex integrated with [`markdown-preview`](https://github.com/instant-markdown/vim-instant-markdown)! 
+> This configurations has a sort of Latex integrated with [`markdown-preview`](https://github.com/instant-markdown/vim-instant-markdown)! 
+
+_I have also added latex compiling on the fly with_ [`neotex`](https://github.com/donRaphaco/neotex), and [`zathura`](https://github.com/zegervdv/homebrew-zathura)
 
 	vim ~/.config/nvim/init.vim
 

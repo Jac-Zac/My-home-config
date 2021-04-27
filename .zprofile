@@ -13,7 +13,6 @@ export XDG_CACHE_HOME="$HOME/.cache"
 export LESSHISTFILE="-"
 export PASSWORD_STORE_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/password-store"
 export GOPATH="${XDG_DATA_HOME:-$HOME/.local/share}/go"
-export HISTFILE="${XDG_DATA_HOME:-$HOME/.local/share}/history"
 export GNUPGHOME="${XDG_DATA_HOME:-$HOME/.local/share}/gnupg"
 
 # FZF default color theme (Nord)

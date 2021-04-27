@@ -1,9 +1,9 @@
 neofetch # |  lolcat -p -a -d 1 -s 70
 
 # History in cache directory:
-HISTSIZE=2500
-SAVEHIST=2500
-HISTFILE=~/.cache/zsh/history
+HISTSIZE=5000
+SAVEHIST=5000
+HISTFILE=~/.config/zsh/.zsh_history
 
 # Load aliases and shortcuts if existent.
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliasrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliasrc"
