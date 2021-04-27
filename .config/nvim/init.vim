@@ -4,6 +4,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'suan/vim-instant-markdown'
 Plug 'preservim/nerdtree'
+Plug 'donRaphaco/neotex', { 'for': 'tex' }
 call plug#end()
 
 " Nord customizations
@@ -18,8 +19,12 @@ colorscheme nord " set color schema to nord
 let g:airline_powerline_fonts = 1
 
 " vim instant markdown configuration 
-" let g:instant_markdown_open_to_the_world = 1 " open the markdown to people on my same network
+let g:instant_markdown_open_to_the_world = 1 " open the markdown to people on my same network
 let g:instant_markdown_mathjax = 1 " allows you to render Latex (this is essential)
+
+" Latex for nvim 
+let g:neotex_enabled = 2
+let g:neotex_delay = 500
 
 set tabstop=4 
 set shiftwidth=4
@@ -28,9 +33,6 @@ set autoindent
 set nowrap
 set incsearch
 set syntax=markdown
-
-" set cursor after exiting nvim 
-set guicursor=
 
 " set number how I like them
 set number relativenumber
@@ -45,3 +47,6 @@ map <F2> :setlocal spell! spelllang=it<CR>
 
 " Nerd tree
 map <F3> :NERDTree<CR>
+
+" Compiling latex
+map <F4> :NeoTex<CR>
