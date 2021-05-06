@@ -1,6 +1,10 @@
 # Run neofetch when you start the shell to get a nice visual and some system informations 
 neofetch # |  lolcat -p -a -d 1 -s 70
 
+# Load aliases and shortcuts if existent.
+[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliasrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliasrc"
+[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/shell/zshnameddirrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/zshnameddirrc"
+
 autoload -U colors && colors	# Load colors
 
 # My simple prompt inspired by Luke Smith's config for the Zoomer Shell
@@ -24,20 +28,9 @@ git_branch_test_color() {
 setopt PROMPT_SUBST
 RPROMPT='$(git_branch_test_color)%F{none} '
 
-# History in cache directory:
-HISTSIZE=500
-SAVEHIST=500
-HISTFILE=~/.cache/zsh/history
-
-# zsh syntax highlighting
-source $HOME/.config/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
-
-# zsh auto-suggestion
-source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-
 # Basic auto/tab complete:
 autoload -U compinit
-zstyle ':completion:*' menu select
+zstyle ':completion:*' menu select matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 zmodload zsh/complist
 compinit
 _comp_options+=(globdots)		# Include hidden files.
@@ -80,3 +73,8 @@ fcd() {
 # Load fzf configurations
 [ -f ~/.config/fzf/fzf.zsh ] && source ~/.config/fzf/fzf.zsh
 
+# zsh auto-suggestion
+source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# zsh syntax highlighting
+source $HOME/.config/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh

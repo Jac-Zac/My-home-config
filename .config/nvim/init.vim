@@ -48,5 +48,5 @@ map <F2> :setlocal spell! spelllang=it<CR>
 " Nerd tree
 map <F3> :NERDTree<CR>
 
-" Compiling latex
-map <F4> :NeoTex<CR>
+" Opening pdf file with zathura
+map <F4> :! cat $(echo *.tex <bar> sed 's/.tex/.pdf/') <bar> zathura - & <CR>
