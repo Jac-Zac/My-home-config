@@ -3,6 +3,7 @@ Plug 'arcticicestudio/nord-vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'suan/vim-instant-markdown'
+Plug 'vim-python/python-syntax'
 Plug 'preservim/nerdtree'
 Plug 'donRaphaco/neotex', { 'for': 'tex' }
 call plug#end()
@@ -24,7 +25,9 @@ let g:instant_markdown_mathjax = 1 " allows you to render Latex (this is essenti
 
 " Latex for nvim 
 let g:neotex_enabled = 2
-let g:neotex_delay = 500
+
+" Python syntax
+let g:python_highlight_all = 1
 
 set tabstop=4 
 set shiftwidth=4
