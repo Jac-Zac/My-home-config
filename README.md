@@ -147,7 +147,7 @@ If you'd like to see images on iTerm you can use [`imgcat`](https://pypi.org/pro
 ```
 toolkit.legacyUserProfileCustomizations.stylesheets = true
 ```
-> Then follow [this](https://www.youtube.com/watch?v=1UhsLlJs9Jg) tutorial, and use copy the chrome directory from my file or go to [this Github page][https://github.com/marmmaz/FirefoxCSS]
+> Then follow [this](https://www.youtube.com/watch?v=1UhsLlJs9Jg) tutorial, and use copy the chrome directory from my file or go to [this Github page](https://github.com/andreasgrafen/ag.proton)
 
 ![showcase](.assets/firefox.png)
 
