@@ -121,14 +121,14 @@ If you'd like to see images on iTerm you can use [`imgcat`](https://pypi.org/pro
 
 *You can also go to your iTerm preferences and import the iTerm_profile.json that you can find in the cloned directory*
 
-> To have a bit of space I also sugguest to add 20px of padding, set it under advenced >  margin
+> To have a bit of space I also suggest to add 20px of padding, set it under advanced >  margin
 
 </details>
 
 <details>
 	<summary><strong>Firefox Configuration</strong></summary>
 
-> My firefox configuration allows me to browse the web with more freedome then ever before
+> My firefox configuration allows me to browse the web with more freedom then ever before
 
 *I use [nord theme](https://addons.mozilla.org/en-US/firefox/addon/nord-theme-cool/?utm_source=addons.mozilla.org&utm_medium=referral&utm_content=search) and I changed my new tabs to black pages.*
 
@@ -147,7 +147,7 @@ If you'd like to see images on iTerm you can use [`imgcat`](https://pypi.org/pro
 ```
 toolkit.legacyUserProfileCustomizations.stylesheets = true
 ```
-> Then follow [this](https://www.youtube.com/watch?v=1UhsLlJs9Jg) tutorial, and use copy the chrome directory from my file 
+> Then follow [this](https://www.youtube.com/watch?v=1UhsLlJs9Jg) tutorial, and use copy the chrome directory from my file or go to [this Github page][https://github.com/marmmaz/FirefoxCSS]
 
 ![showcase](.assets/firefox.png)
 
