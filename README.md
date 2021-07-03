@@ -128,7 +128,7 @@ If you'd like to see images on iTerm you can use [`imgcat`](https://pypi.org/pro
 <details>
 	<summary><strong>Firefox Configuration</strong></summary>
 
-> My firefox configuration allows me to browse the web with more freedom then ever before
+> My firefox configuration allows me to browse the web with more freedom then ever before. Furthermore use 1.1.1.1 as your DNS Server
 
 *I use [nord theme](https://addons.mozilla.org/en-US/firefox/addon/nord-theme-cool/?utm_source=addons.mozilla.org&utm_medium=referral&utm_content=search) and I changed my new tabs to black pages.*
 
@@ -141,7 +141,7 @@ If you'd like to see images on iTerm you can use [`imgcat`](https://pypi.org/pro
 - [`Temp Mail`](https://addons.mozilla.org/en-US/firefox/addon/temp-mail/)
 - [`Stylus`](https://addons.mozilla.org/en-US/firefox/addon/styl-us/)
 
->And use [nord theme for youtube](https://github.com/MajesticWaffle/Youtube-Nord-Theme) and this for [whatsapp](https://github.com/vednoc/dark-whatsapp)
+> And use [nord theme for youtube](https://github.com/MajesticWaffle/Youtube-Nord-Theme) and this for [whatsapp](https://github.com/vednoc/dark-whatsapp)
 
 ##### Set this value in your [about:config](about:config) to true
 ```
