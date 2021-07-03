@@ -1,0 +1,22 @@
+@import url("userChrome.css");
+
+/* Removes white loading page */
+@-moz-document url("about:newtab") {
+       body {
+           background-color: #2e3440 !important;
+       }
+   }
+
+  /* Hide scrollbar */
+
+  :root{
+    scrollbar-width: none !important;
+  }
+
+
+  @-moz-document url(about:privatebrowsing) {
+
+  :root{
+    scrollbar-width: none !important;
+  }
+  }
