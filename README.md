@@ -54,7 +54,7 @@ _I mainly created this to always have my config with me, but I would really be h
 curl -SL https://raw.githubusercontent.com/Jac-Zac/My-home-config/master/installer.sh >> installer.sh ; chmod +x installer.sh; ./installer.sh -b; rm installer.sh
 ```
 
-### Updating 📅
+### Updating :calendar:
 
 **Have you already installed everything but your version lack behind ?** :thinking:
 
@@ -213,7 +213,7 @@ chmod +x installer.sh
 
 #### Routines you should implement into your mac usage
 
-*You should try to keep your system up to date, also follow the [`instruction under the updating section`](#Updating)*
+*You should try to keep your system up to date, also follow the [`instruction under the updating section`](#Updating-calendar)*
 
 ###### And I also use: 
 
