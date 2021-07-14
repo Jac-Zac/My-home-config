@@ -209,6 +209,34 @@ chmod +x installer.sh
 
 **Installation Completed !**
 
+## Maintenance :gear:
+
+#### Routines you should implement into your mac usage
+
+*You should try to keep your system up to date, also follow the [`instruction under the updating section`](#Updating)*
+
+###### And I also use: 
+
+- [`this`](https://github.com/mengfeng/clean-my-mac) script to clean up any junk that has build up.
+- [`ncdu`](https://github.com/rofl0r/ncdu) to check for big files and directory that I can delete
+
+#### Checking for malware 
+
+Moreover it is always a good measure to check if you have any malware installed by using [`clamav`](https://github.com/Cisco-Talos/clamav).
+
+###### To use it just run:
+
+```
+sudo freshclam
+```
+> If you get an error try copy the sample configuration file to a new file and comment out `Example` side the file.
+
+###### Wait for it to finish and then:
+
+```
+sudo clamscan -r --bell -i /
+```
+
 ## Keybinds
 
 I use <kbd>command</kbd> AKA super key (on GNU/Linux) as my main modifier

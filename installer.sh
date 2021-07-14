@@ -106,6 +106,8 @@ _shell_config_() {
 	brew install htop
 	brew install bpytop
 	brew install tmux
+	brew install clamav
+	brew install ncdu
   echo
 
   echo "${bold}Installing ohmyzsh${reset}"
