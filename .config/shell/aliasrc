@@ -6,6 +6,8 @@ alias safari="open /Applications/Safari.app"
 alias showD="defaults write com.apple.finder CreateDesktop -bool true;killall Finder"
 alias hideD="defaults write com.apple.finder CreateDesktop -bool false;killall Finder"
 alias locate_update="sudo /usr/libexec/locate.updatedb"
+alias pip3-update="pip3 list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U"
+alias weather="curl http://wttr.in/trieste"
 
 # Better commands 
 alias cp="cp -iv"
@@ -14,6 +16,8 @@ alias rm="rm -v"
 alias ls="lsd"
 alias l="lsd -la"
 alias top='bpytop'
+alias mpv='mpv --geometry=50%'
+alias history='history 1'
 
 # Use neovim for vim if present.
 [ -x "$(command -v nvim)" ] && alias vim="nvim" vimdiff="nvim -d"
@@ -36,4 +40,3 @@ alias mtype="open https://monkeytype.com/"
 alias chat="open https://web.whatsapp.com/"
 alias youtube="open https://www.youtube.com/"
 alias github="open https://github.com/"
-
