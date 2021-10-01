@@ -40,7 +40,7 @@ _seekConfirmation_() {
 _usage_() {
   cat <<EOF
   ${underline}Run The script with no options to install everything${rm_underline}
-
+darwin
   ${bold}$(basename "$0") [OPTION]...${reset}
   Configures a new computer running MacOSX, performs the following optional actions:
     * Install Mac Command Line Tools
@@ -90,6 +90,53 @@ _commandLineTools_() {
   fi
 }
 
+_NotArchLinuxInstall_() {
+  ## Install some configuration to have a decent looking shell 
+  
+  echo "${bold}You are running Linux as of now the script install some simple configurations${bold}"
+  ### Script to make your shell look better
+
+  ### Install zsh, neofetch, curl, wget, git, make, cargo on almost any distribution
+  packagesNeeded='zsh curl wget git make cargo'
+  if [ -x "$(command -v apk)" ];       then sudo apk add --no-cache $packagesNeeded
+  elif [ -x "$(command -v apt-get)" ]; then sudo apt-get install $packagesNeeded
+  elif [ -x "$(command -v dnf)" ];     then sudo dnf install $packagesNeeded
+  elif [ -x "$(command -v zypper)" ];  then sudo zypper install $packagesNeeded
+  else echo "FAILED TO INSTALL PACKAGE: Package manager not found. You must manually install: $packagesNeeded">&2; fi
+
+  # Install nerd font
+  mkdir -p ~/.local/share/fonts
+  cd ~/.local/share/fonts && curl -fLo "Droid Sans Mono for Powerline Nerd Font Complete.otf" https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/DroidSansMono/complete/Droid%20Sans%20Mono%20Nerd%20Font%20Complete.otf
+
+  # Back to home directory
+  cd
+
+  # Install powerlevl10k 
+  git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.config/powerlevel10k
+
+  # Fast synatx hilighting 
+  git clone https://github.com/zdharma/fast-syntax-highlighting ~/.config/fast-syntax-highlighting
+
+  # Install lsd
+  cargo install lsd
+
+  # Move lsd to the PATH
+  sudo mv .cargo/bin/lsd /usr/local/bin/
+
+  # Remove .cargo
+  sudo rm -r .cargo
+
+  echo 'source ~/.config/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
+  echo 'source $HOME/.config/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh' >>~/.zshrc
+  echo 'alias ls= "lsd"' >>~/.zshrc
+  echo 'neofetch' >>~/.zshrc
+
+  # Change default shell to zsh
+  chsh -s $(which zsh)
+
+  echo "${green}The installation completed successfully ${reset}"
+  echo "${bold}Change your terminal emulator fonts and use Droid Sans Mono Nerd and then restart your terminal${bold}"
+
 _shell_config_() {
 
   echo "${bold}Checking for brew${reset}"
@@ -106,7 +153,6 @@ _shell_config_() {
 	brew install htop
 	brew install bpytop
 	brew install tmux
-	brew install clamav
 	brew install ncdu
   echo
 
@@ -276,16 +322,21 @@ _update_() {
 
 _mainScript_() {
   
-	echo "${bold}${underline}Welcome to JacZac's Dotfiles automatic installation${reset}${no_underline}"
-  	echo
+    echo "${bold}${underline}Welcome to JacZac's Dotfiles automatic installation${reset}${no_underline}"
+    echo
+    
+    # Check operating system 
+  if [ $OSTYPE = "darwin"* ]; then
+      _commandLineTools_
+      _shell_config_
+      _Nvim_
+      _packages_installation_
+  elif [ $OSTYPE = "linux-gnu"]; then
+      _NotArchLinuxInstall_
+  else
+    && fatal "You are running a operating system which is not supported"
+  fi
 
-  [[ "$OSTYPE" != "darwin"* ]] \
-    && fatal "We are not on macOS" "$LINENO"
-
-  _commandLineTools_
-  _shell_config_
-  _Nvim_
-  _packages_installation_
 
 } # End main function 
 
