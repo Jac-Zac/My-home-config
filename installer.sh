@@ -326,16 +326,16 @@ _mainScript_() {
     echo
     
     # Check operating system 
-  if [ $OSTYPE = "darwin"* ]; then
+  #if [ $OSTYPE = "darwin"* ]; then
       _commandLineTools_
       _shell_config_
       _Nvim_
       _packages_installation_
-  elif [ $OSTYPE = "linux-gnu"]; then
-      _NotArchLinuxInstall_
-  else
-       fatal "You are running a operating system which is not supported"
-  fi
+  #elif [ $OSTYPE = "linux-gnu"]; then
+   #   _NotArchLinuxInstall_
+  #else
+   #    fatal "You are running a operating system which is not supported"
+  #fi
 
 
 } # End main function 
