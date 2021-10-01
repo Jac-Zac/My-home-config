@@ -330,7 +330,7 @@ _mainScript_() {
     echo
     
     # Check operating system 
-  if [ $OSTYPE = "darwin"* ]; then
+  if [ $OSTYPE = "darwin20.0" ]; then
       _commandLineTools_
       _shell_config_
       _Nvim_
