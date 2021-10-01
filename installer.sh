@@ -334,7 +334,7 @@ _mainScript_() {
   elif [ $OSTYPE = "linux-gnu"]; then
       _NotArchLinuxInstall_
   else
-    && fatal "You are running a operating system which is not supported"
+       fatal "You are running a operating system which is not supported"
   fi
 
 
