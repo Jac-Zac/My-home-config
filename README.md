@@ -262,7 +262,8 @@ I use <kbd>command</kbd> AKA super key (on GNU/Linux) as my main modifier
 
 I'd like to slowly switch aways from powerlevel10k to get a faster feeling shell, but now I will be focusing on other things but also better my configuration for M1 Mac. For the README.md I took inspiration from [this repo](https://github.com/owl4ce/dotfiles), and for the bootstrap script I took inspiration from [this repo instead](https://github.com/natelandau/dotfiles).
 I have also started using [`Zsh Vi Mode`](https://github.com/jeffreytse/zsh-vi-mode), in my shell prompt.
-In conclusion I have started using [expose](https://github.com/beyondcode/expose) instead of ngrok to create secure tunnels, by using the command `expose --auth=my_token`
+In conclusion I have started using [expose](https://github.com/beyondcode/expose) instead of ngrok to create secure tunnels, by using the command `expose --auth=my_token`.
+I have just added support for other Linux distros at least to have a decent configuration
 
 <h2 align="center">
 <hr>
