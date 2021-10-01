@@ -328,21 +328,16 @@ _mainScript_() {
   
     echo "${bold}${underline}Welcome to JacZac's Dotfiles automatic installation${reset}${no_underline}"
     echo
-    
-    # Check operating system 
-  if [ $OSTYPE = "darwin20.0" ]; then
+   
+  # Check if Linux
+  if [ $OSTYPE = "linux-gnu" ]; then
+      _NotArchLinuxInstall_
+  fi
+
       _commandLineTools_
       _shell_config_
       _Nvim_
       _packages_installation_
-
-  elif [ $OSTYPE = "linux-gnu" ]; then
-      _NotArchLinuxInstall_
-  else
-      echo "You are running a operating system which is not supported"
-      _safeExit_
-  fi
-
 } # End main function 
 
 
