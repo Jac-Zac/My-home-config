@@ -90,6 +90,7 @@ _commandLineTools_() {
   fi
 }
 
+# Configuration for other linux distro
 _NotArchLinuxInstall_() {
   ## Install some configuration to have a decent looking shell 
   
@@ -137,6 +138,9 @@ _NotArchLinuxInstall_() {
   echo "${green}The installation completed successfully ${reset}"
   echo "${bold}Change your terminal emulator fonts and use Droid Sans Mono Nerd and then restart your terminal${bold}"
 
+}
+
+# Configure the shell prompt
 _shell_config_() {
 
   echo "${bold}Checking for brew${reset}"
@@ -326,17 +330,17 @@ _mainScript_() {
     echo
     
     # Check operating system 
-  #if [ $OSTYPE = "darwin"* ]; then
+  if [ $OSTYPE = "darwin"* ]; then
       _commandLineTools_
       _shell_config_
       _Nvim_
       _packages_installation_
-  #elif [ $OSTYPE = "linux-gnu"]; then
-   #   _NotArchLinuxInstall_
-  #else
-   #    fatal "You are running a operating system which is not supported"
-  #fi
 
+  elif [ $OSTYPE = "linux-gnu" ]; then
+      _NotArchLinuxInstall_
+  else;
+      fatal "You are running a operating system which is not supported"
+  fi
 
 } # End main function 
 
