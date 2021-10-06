@@ -237,7 +237,7 @@ ArmPrefix="/opt"
 IntelPrefix="/usr/local"
 
 # If brew is installed exit else brew install
-if [ "$(ls ${ArmPrefix} | grep homebrew )" = "homebrew" ] || [ "$(ls ${IntelPrefix} | grep homebrew)" = "homebrew" ] ; then
+if [ "$(ls ${ArmPrefix} | grep homebrew )" = "homebrew" ] || [ "$(ls ${IntelPrefix} | grep brew)" = "brew" ] ; then
 	echo
 	echo "${green}You have brew, it will be updated${reset}"
 	brew update && brew upgrade
