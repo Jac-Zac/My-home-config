@@ -260,7 +260,7 @@ else
   			# Intel x86_64
   	else
 	    	echo "Installing brew"
-	    	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+	        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"	
 	    	echo "export PATH=/opt/homebrew/bin:$PATH" >> ~/.config/zsh/.zshrc
 			echo
 	    	echo "${green}brew installed${reset}"

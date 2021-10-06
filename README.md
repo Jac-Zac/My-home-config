@@ -204,8 +204,9 @@ chmod +x installer.sh
 ```
 ./installer.sh
 ```
-
 > You should close your terminal windows and open a new one, to reload the configurations
+
+*You can run ```.\install -s``` to only install the command prompt configurations*
 
 **Installation Completed !**
 
