@@ -237,11 +237,7 @@ ArmPrefix="/opt"
 IntelPrefix="/usr/local"
 
 # If brew is installed exit else brew install
-if [ "$(ls ${ArmPrefix} | grep homebrew )" = "homebrew" ] || [ "$(ls ${IntelPrefix} | grep brew)" = "brew" ] ; then
-	echo
-	echo "${green}You have brew, it will be updated${reset}"
-	brew update && brew upgrade
-else
+if [[ $(command -v brew) == "" ]]; then
   	# Apple Silicon
   	if [ "$(uname - m)" = "arm64" ] ; then
 	    	echo "Installing brew"
@@ -265,6 +261,10 @@ else
 			echo
 	    	echo "${green}brew installed${reset}"
   	fi
+else
+	echo
+	echo "${green}You have brew, it will be updated${reset}"
+	brew update && brew upgrade
  fi	
 }
 
