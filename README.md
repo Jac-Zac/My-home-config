@@ -265,7 +265,7 @@ I'd like to slowly switch aways from powerlevel10k to get a faster feeling shell
 I have also started using [`Zsh Vi Mode`](https://github.com/jeffreytse/zsh-vi-mode), in my shell prompt.
 In conclusion I have started using [expose](https://github.com/beyondcode/expose) instead of ngrok to create secure tunnels, by using the command `expose --auth=my_token`.
 I have just added support for other Linux distros at least to have a decent configuration.
-Another good things it to have a todo list thanks to [this project](https://github.com/sioodmy/todo)
+Another good things it to have a todo list thanks to [this project](https://github.com/sioodmy/todo). I also have many aliases for example if you write `intel` in front of any command it will run the under Rosetta.
 
 <h2 align="center">
 <hr>

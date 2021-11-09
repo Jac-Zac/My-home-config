@@ -18,6 +18,7 @@ alias l="lsd -la"
 alias top='bpytop'
 alias mpv='mpv --geometry=50%'
 alias history='history 1'
+alias intel='arch -arch x86_64'
 
 # Use neovim for vim if present.
 [ -x "$(command -v nvim)" ] && alias vim="nvim" vimdiff="nvim -d"
