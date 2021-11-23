@@ -127,8 +127,8 @@ _NotArchLinuxInstall_() {
   # Remove .cargo
   sudo rm -r .cargo
 
-  echo 'source ~/.config/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
-  echo 'source $HOME/.config/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh' >>~/.zshrc
+  echo 'source $HOME/.config/shell/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
+  echo 'source $HOME/.config/shell/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh' >>~/.zshrc
   echo 'alias ls= "lsd"' >>~/.zshrc
   echo 'neofetch' >>~/.zshrc
 
@@ -146,8 +146,6 @@ _shell_config_() {
   echo "${bold}Checking for brew${reset}"
   	_brew_installation_
 	brew tap homebrew/cask-fonts
-	brew install zsh-autosuggestions
-	brew install romkatv/powerlevel10k/powerlevel10k
 	brew install --cask font-hack-nerd-font
  	brew install neovim
  	brew install fzf
@@ -176,17 +174,28 @@ _shell_config_() {
   rsync .profile $HOME/.profile
   rsync .zprofile $HOME/.zprofile
   rsync -r .config $HOME
+
+  cd ~/Library/Font
+  git clone https://github.com/shaunsingh/SFMono-Nerd-Font-Ligaturized.git
   
   # plugins and themes
-  git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.config/oh-my-zsh/custom}/themes/powerlevel10k 
-  git clone https://github.com/zdharma/fast-syntax-highlighting $HOME/.config/fast-syntax-highlighting
-  git clone https://github.com/jeffreytse/zsh-vi-mode.git $HOME/.config/zsh-vi-mode
+  git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $HOME/.config/shell/powerlevel10k
+  git clone https://github.com/zsh-users/zsh-autosuggestions.git $HOME/.config/shell/zsh-autosuggestions
+  git clone https://github.com/zdharma/fast-syntax-highlighting $HOME/.config/shell/fast-syntax-highlighting
+  git clone https://github.com/jeffreytse/zsh-vi-mode.git $HOME/.config/shell/zsh-vi-mode
 
   # tmux configuration with nord theme
   git clone https://github.com/arcticicestudio/nord-tmux.git ${HOME}/.config/tmux/themes/nord-tmux
 }
 
 _macSystemPrefs_() {
+
+  echo "${bold}Install yabai${reset}"
+  brew install koekeishiya/formulae/yabai
+  brew install yabai
+  brew install skhd
+
+  echo "${bold}You should enable yabai after you finish everything up${reset}"
  
   echo
   _seekConfirmation_ "Set mac system preference defaults?" || return 0
@@ -300,9 +309,10 @@ _update_() {
   rsync -r .config $HOME
   
   # Updating oh-my-zsh related stuff
-  cd $HOME/.config/oh-my-zsh && git pull
-  cd $HOME/.config/fast-syntax-highlighting && git pull
-  cd $HOME/.config/vi-mode && git pull
+  cd $HOME/.config/shell/fast-syntax-highlighting && git pull
+  cd $HOME/.config/shell/powerlevel10k && git pull
+  cd $HOME/.config/shell/zsh-autosuggestions && git pull
+  cd $HOME/.config/shell/zsh-vi-mode && git pull
 
   # If MacOS
   if [ "$(uname)" = "Darwin" ] ; then
