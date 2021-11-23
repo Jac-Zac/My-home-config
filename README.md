@@ -267,6 +267,11 @@ In conclusion I have started using [expose](https://github.com/beyondcode/expose
 I have just added support for other Linux distros at least to have a decent configuration.
 Another good things it to have a todo list thanks to [this project](https://github.com/sioodmy/todo). I also have many aliases for example if you write `intel` in front of any command it will run the under Rosetta.
 
+    sudo nvram boot-args=-arm64e_preview_abi
+
+Create a certificate and compile yabai to then switch it s
+https://www.simple-bar.com/
+
 <h2 align="center">
 <hr>
 	Arch Linux
