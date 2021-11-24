@@ -28,7 +28,7 @@
 :octocat: _Those are some details about my setup_
 
 + **OS**							• `MacOS/Arch Linux` 
-+ **WM**							• [`Amethyst`](https://github.com/ianyh/Amethyst)
++ **WM**							• [`yabai`](https://github.com/koekeishiya/yabai)
 + **Shell**							• [`zsh`](https://www.zsh.org/) -> [`powerlevel10k`](https://github.com/romkatv/powerlevel10k)
 + **Terminal**						• [`iTerm`](https://iterm2.com/) 
 + **Editor**						• [`Neovim`](https://github.com/neovim/neovim/) 
@@ -36,7 +36,7 @@
 + **Font**							• [`Inconsolata Nerd`](https://github.com/ryanoasis/nerd-fonts)
 + **System information**			• [`neofetch`](https://github.com/dylanaraps/neofetch)
 + **Fuzzy finder**					• [`fzf`](https://github.com/junegunn/fzf) 
-+ **Launcher**						• [`Thor`](https://apps.apple.com/us/app/thor/id1120999687?mt=12) and [`Alfred`](https://www.alfredapp.com)
++ **Launcher**						• [`skhd`](https://github.com/koekeishiya/skhd) and [`Alfred`](https://www.alfredapp.com)
 + **Terminal multiplexer**			• [`tmux`](https://github.com/tmux/tmux)
 + **Resource monitor**				• [`bpytop`](https://github.com/aristocratos/bpytop) *(aliased to top)*
 + **Browser**						• [`Firefox Nightly`](https://www.mozilla.org/en-US/firefox/61.0a1/releasenotes/)
@@ -187,10 +187,10 @@ _I have also added latex compiling on the fly with_ [`neotex`](https://github.co
 
 #### Step by step instructions 
 
-1. This is to clone the repository, and enter inside it ⏳ 
+1. This is to clone the repository without old commits, and enter inside it ⏳ 
 
 ```
-git clone https://github.com/Jac-Zac/My-home-config.git && cd My-home-config
+git clone https://github.com/Jac-Zac/My-home-config.git --depth=1 && cd My-home-config
 ```
 
 2. This command give execute permission to the script
@@ -265,7 +265,7 @@ I'd like to slowly switch aways from powerlevel10k to get a faster feeling shell
 I have also started using [`Zsh Vi Mode`](https://github.com/jeffreytse/zsh-vi-mode), in my shell prompt.
 In conclusion I have started using [expose](https://github.com/beyondcode/expose) instead of ngrok to create secure tunnels, by using the command `expose --auth=my_token`.
 I have just added support for other Linux distros at least to have a decent configuration.
-Another good things it to have a todo list thanks to [this project](https://github.com/sioodmy/todo). I also have many aliases for example if you write `intel` in front of any command it will run the under Rosetta.
+I also have many aliases for example if you write `intel` in front of any command it will run the under Rosetta.
 
     sudo nvram boot-args=-arm64e_preview_abi
 
