@@ -1,0 +1,71 @@
+#!/usr/bin/env sh
+
+sudo yabai --load-sa
+yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+
+# global settings
+yabai -m config mouse_follows_focus          off
+yabai -m config focus_follows_mouse          off
+yabai -m config window_placement             first_child
+yabai -m config window_placement             second_child
+yabai -m config window_placement             third_child
+yabai -m config window_topmost               off
+yabai -m config window_shadow                off
+yabai -m config window_opacity               off
+yabai -m config window_opacity_duration      0.0
+yabai -m config active_window_opacity        1.0
+yabai -m config normal_window_opacity        1.0
+yabai -m config window_border                off
+yabai -m config window_border_width          6
+# yabai -m config active_window_border_color   0xff7aa2f7
+# yabai -m config normal_window_border_color   0xff444b6a
+# yabai -m config active_window_border_color   0xff81A1C1
+# yabai -m config normal_window_border_color   0xff7A808C
+yabai -m config insert_feedback_color        0xff61afef
+yabai -m config split_ratio                  0.50
+yabai -m config auto_balance                 off
+yabai -m config mouse_modifier               fn
+yabai -m config mouse_action1                move
+yabai -m config mouse_action2                resize
+yabai -m config mouse_drop_action            swap
+
+yabai -m config layout                       bsp
+yabai -m config top_padding                  12
+yabai -m config bottom_padding               12
+yabai -m config left_padding                 12
+yabai -m config right_padding                12
+yabai -m config window_gap                   12
+
+yabai -m space 1 --label I
+yabai -m space 2 --label II
+yabai -m space 3 --label III
+yabai -m space 4 --label IV
+yabai -m space 5 --label V
+yabai -m space 6 --label VI
+yabai -m space 7 --label VII
+yabai -m space 8 --label VIII
+yabai -m space 9 --label IX
+yabai -m space 10 --label X
+
+# yabai -m rule --add app="Google Chrome" space=1
+# yabai -m rule --add app="Alacritty"     space=2
+# ^^ these are annoying
+# ^^ these are annoying
+yabai -m rule --add app="Safari"        space=1
+yabai -m rule --add app="Spotify"       space=2
+yabai -m rule --add app="Discord"       space=3
+
+yabai -m rule --add app="^System Preferences$" manage=off
+yabai -m rule --add app='^System Information$' manage=off
+yabai -m rule --add title='Preferences$' manage=off
+yabai -m rule --add app="^Finder$" manage=off
+yabai -m rule --add app="^Calculator$" manage=off
+yabai -m rule --add app="^App Store$" manage=off
+yabai -m rule --add app="^FaceTime$" manage=off
+yabai -m rule --add app="^Mail$" manage=off
+yabai -m rule --add title='Settings$' manage=off
+
+yabai -m config external_bar all:27:0
+# yabai -m config external_bar all:0:0
+
+echo "yabai configuration loaded.."
