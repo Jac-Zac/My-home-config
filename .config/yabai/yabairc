@@ -11,14 +11,13 @@ yabai -m config window_placement             second_child
 yabai -m config window_placement             third_child
 yabai -m config window_topmost               off
 yabai -m config window_shadow                off
-yabai -m config window_opacity               off
-yabai -m config window_opacity_duration      0.0
+yabai -m config window_opacity               on
 yabai -m config active_window_opacity        1.0
-yabai -m config normal_window_opacity        1.0
-yabai -m config window_border                off
-yabai -m config window_border_width          6
-# yabai -m config active_window_border_color   0xff7aa2f7
-# yabai -m config normal_window_border_color   0xff444b6a
+yabai -m config normal_window_opacity        0.9
+yabai -m config window_border                on
+yabai -m config window_border_width          2
+yabai -m config active_window_border_color   0xFFA3BE8C
+yabai -m config normal_window_border_color   0xFF2E3440
 # yabai -m config active_window_border_color   0xff81A1C1
 # yabai -m config normal_window_border_color   0xff7A808C
 yabai -m config insert_feedback_color        0xff61afef
@@ -30,11 +29,11 @@ yabai -m config mouse_action2                resize
 yabai -m config mouse_drop_action            swap
 
 yabai -m config layout                       bsp
-yabai -m config top_padding                  12
-yabai -m config bottom_padding               12
-yabai -m config left_padding                 12
-yabai -m config right_padding                12
-yabai -m config window_gap                   12
+yabai -m config top_padding                  13
+yabai -m config bottom_padding               13
+yabai -m config left_padding                 13
+yabai -m config right_padding                13
+yabai -m config window_gap                   13
 
 yabai -m space 1 --label I
 yabai -m space 2 --label II
@@ -47,21 +46,26 @@ yabai -m space 8 --label VIII
 yabai -m space 9 --label IX
 yabai -m space 10 --label X
 
-# yabai -m rule --add app="Google Chrome" space=1
 # yabai -m rule --add app="Alacritty"     space=2
 # ^^ these are annoying
 # ^^ these are annoying
 yabai -m rule --add app="Safari"        space=1
-yabai -m rule --add app="Spotify"       space=2
-yabai -m rule --add app="Discord"       space=3
+yabai -m rule --add app="Discord"       space=5
 
-yabai -m rule --add app="^System Preferences$" manage=off
-yabai -m rule --add app='^System Information$' manage=off
-yabai -m rule --add title='Preferences$' manage=off
-yabai -m rule --add app="^Finder$" manage=off
-yabai -m rule --add app="^Calculator$" manage=off
-yabai -m rule --add app="^App Store$" manage=off
+# ===== Rules ==================================
+
+yabai -m rule --add label="^Finder$" manage=off
+yabai -m rule --add label="System Preferences" app="^System Preferences$" title=".*" manage=off
+yabai -m rule --add label="App Store" app="^App Store$" manage=off
+yabai -m rule --add label="Activity Monitor" app="^Activity Monitor$" manage=off
+yabai -m rule --add label="KeePassXC" app="^KeePassXC$" manage=off
+yabai -m rule --add label="Calculator" app="^Calculator$" manage=off
+yabai -m rule --add label="Dictionary" app="^Dictionary$" manage=off
+yabai -m rule --add label="mpv" app="^mpv$" manage=off
+yabai -m rule --add label="Software Update" title="Software Update" manage=off
+yabai -m rule --add label="About This Mac" app="System Information" title="About This Mac" manage=off
 yabai -m rule --add app="^FaceTime$" manage=off
+yabai -m rule --add app="^Calculator$" manage=off
 yabai -m rule --add app="^Mail$" manage=off
 yabai -m rule --add title='Settings$' manage=off
 

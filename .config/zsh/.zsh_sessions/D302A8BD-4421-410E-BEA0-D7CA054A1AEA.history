@@ -1,0 +1,3665 @@
+history 
+history | grep xcode
+which history 
+cd .config
+l
+cler
+l
+cd z
+cd zsh
+l
+clear
+l
+vim .zsh_history
+history 
+vim .zsh_history
+history | grep polariz
+vim .zsh_history
+history | grep polar
+history
+vim .zsh_history
+history | grep test
+celar
+l
+cd
+clear
+l
+cd .cache
+l
+clear
+l
+rm p10k-* 
+sudo rm p10k-* 
+clear
+l
+cd p10k-jaczac
+l
+cat prompt-
+l
+cat prompt-13
+cd ..
+sudo rm -r p10k-& 
+clear
+l
+rm p10k-
+sudo rm p10k-* 
+clear
+l
+sudo rm -r p10k-jaczac
+clear
+l
+sudo rm -r matplotlib
+clear
+l
+cd f
+l
+cd fsh
+l
+cd ..
+l
+clear
+l
+cd
+clear
+l
+cd .config/z
+cd .config/zsh
+l
+clear
+l
+vim .zshrc
+rm .zsh_history
+clear
+l
+exit
+clear
+l
+whoami 
+k
+history ]
+history 
+clear
+l
+history 
+history --help
+history --h
+history -h
+history -H
+man history 
+clea
+clear
+exit
+brew up
+brew update && brew upgrade
+lc0
+clear
+l
+htop
+clear
+l
+exit
+cd Downloads
+l
+mv 256x20-t40-1541.pb ../packages/lc0
+clear
+l
+cd
+exit
+ls -la
+rm -r .npm .DS_Store
+sudo rm -r .npm .DS_Store
+clear
+l
+mkdir /Nibbler.app/
+mkdir Nibbler.app/
+cd Nibbler.app
+l
+mkdir Contents
+cd Contents
+l
+mkdir Resources
+cd Resources
+l
+clear
+l
+ls
+clea
+rl
+cd packages
+l
+clear
+l
+cd ni
+l
+cd
+cd Downloads
+l
+open chromedriver-v13.1.5-darwin-arm64.zip
+rm chromedriver-v13.1.5-darwin-arm64.zip
+cd chromedriver-v13.1.5-darwin-arm64
+l
+vim chromedriver
+./chromedriver
+./chromedriver
+cd ..
+rm -r chromedriver-v13.1.5-darwin-arm64
+clear
+l
+cd nibbler-2.1.7
+l
+cd c
+cd src
+l
+cd .
+cd .
+cd ..
+mv src app
+clear
+l
+cd app
+l
+cd packages
+l
+git clone 
+git clone https://github.com/LeelaChessZero/lc0.git
+cd lc0
+./build.sh -Dgtest=false
+ls
+./install_openSUSE_lc0.sh
+clear
+l
+cd
+l
+l
+l
+cd packages
+l
+clear
+l
+git clone https://github.com/nguyenpham/Banksia.git
+g++ -std=c++11 -c ../src/3rdparty/process/process.cpp ../src/3rdparty/process/process_unix.cpp -O2 -DNDEBUG\
+g++ -std=c++11 -c ../src/3rdparty/json/*.cpp -O2 -DNDEBUG\
+g++ -std=c++11 -c ../src/3rdparty/fathom/*.cpp -O2 -DNDEBUG\
+g++ -std=c++11 -c ../src/base/*.cpp -O2 -DNDEBUG\
+g++ -std=c++11 -c ../src/chess/*.cpp -O2 -DNDEBUG\
+g++ -std=c++11 -c ../src/game/*.cpp -O2 -DNDEBUG\
+g++ -std=c++11 -c ../src/*.cpp -O2 -DNDEBUG\
+g++ -o banksia *.o
+cd ls
+ls
+cd Banksia
+g++ -std=c++11 -c ../src/3rdparty/process/process.cpp ../src/3rdparty/process/process_unix.cpp -O2 -DNDEBUG\
+g++ -std=c++11 -c ../src/3rdparty/json/*.cpp -O2 -DNDEBUG\
+g++ -std=c++11 -c ../src/3rdparty/fathom/*.cpp -O2 -DNDEBUG\
+g++ -std=c++11 -c ../src/base/*.cpp -O2 -DNDEBUG\
+g++ -std=c++11 -c ../src/chess/*.cpp -O2 -DNDEBUG\
+g++ -std=c++11 -c ../src/game/*.cpp -O2 -DNDEBUG\
+g++ -std=c++11 -c ../src/*.cpp -O2 -DNDEBUG\
+g++ -o banksia *.o
+ls
+mkdir build
+cd build
+l
+clear
+l
+cmake ..
+make -j8
+banksia -u -c 4 -d c:\allenginefolder
+ls
+./banksia
+ines located in c:\myengines in this case.\
+  -v on|off    turn on/off verbose (default on)
+banksia -u -c 4 -d c:\allenginefolder
+banksia -t c:\banksia\tour.json
+./banksia -t c:\banksia\tour.json
+./banksia -u -d c:\chess\engines
+ls
+clear
+l
+./banksia -t /Users/jaczac/packages/Banksia/build/tour.json
+ls
+vim engines.json
+clea
+rl
+ls
+cd ..
+l
+cd ..
+sudo rm -r Banksia/
+clear
+l
+clear
+l
+git clone https://github.com/rooklift/nibbler.git
+ls
+clar
+l
+clear
+l
+ls
+cd nibbler
+l
+clear
+l
+cd .
+cd ..
+rm -r nibbler
+sudo rm -r nibbler
+which nibbler 
+which electron 
+electron --version 
+brew search electron 
+pip3 list 
+pip3 list | grep ele
+npm update
+npm install electron 
+sudo npm install electron 
+sudo npm install electron -h
+sudo npm install electron -g
+ls
+sudo rm -r package-lock.json node_modules 
+l
+cd
+clear
+l
+cd Downloads
+l
+lcear
+l
+open nibbler-2.1.7.zip
+rm nibbler-2.1.7.zip
+clear
+l
+cd nibbler-2.1.7
+l
+cd scr
+l
+cd scr
+cd src
+l
+cd ..
+cd scr
+l
+cd src
+l
+claer
+l
+ls
+cd ..
+l
+cd
+cd Downloads
+l
+cd nibbler
+l
+mv src app
+mv app ../electron-v13.1.5-darwin-arm64/Electron.app/Contents/Resources
+clear
+l
+ls
+cd 
+cd Downloads
+l
+cd E
+l
+cd Ele
+l
+cd electron-v13.1.5-darwin-arm64
+l
+clear
+l
+cd Electron.app/l
+l
+cd Electron.app
+l
+cd Contents
+l
+cd MacOS
+l
+file Electron
+cd ..
+l
+cd Resources
+l
+cd app
+l
+vim builder.py
+cd Do
+l
+cd DOw
+l
+cd DOw
+l
+cd Downloads
+l
+sudo rm nibbler-2.1.7 .DS_Store
+sudo rm -r nibbler-2.1.7 .DS_Store
+clear
+l
+open electron-v13.1.5-darwin-arm64.zip
+rm electron-v13.1.5-darwin-arm64.zip
+clear
+l
+cd electron-v13.1.5-darwin-arm64
+l
+cd Electron.app
+l
+cd Contents
+l
+cd Resources
+l
+cd ..
+l
+clear
+l
+cd ..
+l
+cd ..
+l
+clear
+l
+ls
+cd Electron.app
+l
+cd Contents
+l
+clear
+l
+cd MacOS
+l
+file Electron
+cd ..
+ls
+cd MacOS
+cd ..
+cd Resources
+l
+clea
+rl
+cd app
+l
+cd ..
+l
+cd ..
+l
+cd ..
+cd ..
+open Electron.app
+ls
+cd Electron.app
+l
+cd Contents
+l
+cd MacOS
+l
+./Electron
+cd ..
+l
+cd Resources
+l
+cd app
+l
+python3 builder.py
+ls
+vim builder.py
+l
+cd ..
+l
+mkdir electron_zipped
+rmdir e
+rmdir electron_zipped
+cp -r app test
+ls
+rm -r app
+mkdir app
+cd app
+mkdir electron_zipped
+cd ..
+l
+mv test app/
+cd app
+l
+mv test electron_zipped
+ls
+cd electron_zipped
+l
+cd test
+mv * ..
+cd ..
+l
+rm -r test
+./builder.py
+python3 builder.py
+ls
+cd m
+cd
+cd Downloads
+l
+open E
+cd electron-v13.1.5-darwin-arm64
+l
+open Electron.app
+rm -r Electron.app
+clear
+l
+cd ..
+l
+sudo rm -r electron-v13.1.5-darwin-arm64 
+clear
+l
+cd Nibbler-1.13_macOS
+l
+clear
+l
+cd Nibbler.app
+l
+cd Contents
+l
+cd Resources
+l
+cd app
+l
+vim builder.py
+clear
+l
+cd ..
+l
+celar
+l
+cd app
+l
+cd 
+cd Downloads
+l
+cd Nibbler-1.13_macOS
+l
+cd Nibbler.app
+l
+cd ..
+open Nibbler.app
+cd .
+cd ..
+open Nibbler-1.13_macOS
+cd ..
+l
+rm -r Nibbler.app
+l
+clear
+l
+cd Downloads
+l
+cd NI
+l
+cd NI
+l
+cd Nibbler-1.13_macOS
+l
+cd Nibbler.app
+l
+cd ..
+=ls
+clear
+l
+cd ..
+celar
+l
+git clone https://github.com/rooklift/nibbler.git
+cd nibbler
+l
+clear
+l
+cd src
+l
+vim builder.py
+ls
+which lco
+which lc0
+lc0
+clear
+l
+cd packages
+l
+clear
+l
+cd clean-my-mac
+l
+cd ..
+cd lc0
+l
+clear
+l
+cd build
+l
+cd release
+l
+mv lc0 ../../
+clear
+l
+cd
+cd packages/lc0
+l
+ls
+clear
+l
+file lc0
+ls
+vim build
+ls
+clear
+l
+ls
+clear
+l
+cd Downloads
+l
+open electron-v13.1.5-darwin-arm64.zip 
+cd E
+l
+cd electron-v13.1.5-darwin-arm64
+l
+celar
+l
+clear
+l
+cd ...
+l
+clear
+l
+cd ..
+l
+clear
+l
+exit
+cd lc
+l
+clear
+l
+cd DOw
+l
+cd Downloads
+l
+open Nibbler-1.13_macOS.zip
+ls
+cd Nibbler-1.13_macOS
+l
+cd Nibbler.app
+l
+cd Contents
+l
+cd MacOS
+l
+file Electron
+cd ..
+l
+ls
+clear
+l
+cd Resources
+l
+cd app
+l
+clear
+l
+cd
+clear
+l
+cd Downloads
+l
+clear
+l
+rm -r Ba
+rm -r BanksiaGui-0.45-mac.zip 
+clear
+l
+cd Nibbler-1.13_macOS
+l
+cd ..
+cd nibbler-2.1.7
+l
+clear
+l
+cd scr
+l
+cd scr
+cd src
+l
+vim builder.py
+clear
+l
+ls
+cd ..
+l
+mv app ../../Nibbler.app/Contents/Resources/
+clear
+l
+c
+cd
+cd Nibbler.app
+l
+cd Contents
+l
+cd Resources
+l
+mv app ../../../Downloads/electron-v13.1.5-darwin-arm64/Electron.app/Contents/Resources
+clear
+l
+cd Downloads
+cd electron-v13.1.5-darwin-arm64/Electron.app
+l
+cd Contents
+l
+clear
+l
+cd Resources/app
+l
+vim builder.py
+./builder.py
+sudo ./builder.py
+vim builder.py
+python3 builder.py
+chmod +x builder.py
+./builder.py
+ks
+ls
+vim builder.py
+electron .
+electron .
+cd De
+	l
+cd DE
+l
+clear
+l
+cd packages
+l
+cd
+cd Downloads
+l
+cd nibbler
+l
+cd ..
+rm -r nibbler
+sudo rm -r nibbler
+clear
+l
+cd electron-v13.1.5-darwin-arm64
+l
+clear
+l
+cd Ee
+l
+open Electron.app
+cd Electron.app
+l
+cd Contents
+l
+cd MacOS
+l
+./Electron
+cd ..
+l
+cd Resources
+l
+cd app
+l
+./builder.py
+ls
+l
+electron .
+electron .
+clear
+l
+exit
+htop
+brew install brew install stockfish
+clear
+brew install stockfish
+which stockfish
+stockfish --verson 
+stockfish --version
+cd /opt/homebrew
+l
+cd bin
+l
+cd ..
+l
+open bin/i
+open bin/
+cd ..
+open homebrew
+open homebrew
+clear
+cd
+cd /opt/
+l
+rm .DS_Store
+l
+clear
+l
+cd homebrew
+cd bin
+l
+rm .diclear
+l
+clear
+l
+lc0
+clear
+l
+which lc0
+cd /home
+l
+cd /opt
+l
+sudo rm -r lc0 
+celakr
+l
+clear
+ls
+exit
+cd
+cd Github
+l
+clear
+l
+rm .DS_Store
+l
+clear
+l
+cd 
+cd Desktop
+l
+clear
+l
+cd M
+l
+celar
+l
+cd
+cd Desktop
+l
+cd
+cd Downloads
+l
+lcear
+l
+cd electron-v13.1.5-darwin-arm64
+l
+clear
+l
+cd Electron.app
+l
+cd Contents
+l
+lcear
+l
+cd Resources
+l
+clear
+l
+cd app
+l
+electron .
+l
+cd ..
+l
+cd
+clear
+l
+cd Downloads
+l
+cd electron-v13.1.5-darwin-arm64
+l
+clear
+l
+cd Electron.app
+l
+clear
+l
+cd Contents
+l
+cd Resources
+l
+cd app
+electron .
+ls
+cd
+cd ap
+l
+cd Downloads/electron-v13.1.5-darwin-arm64/Electron.app/Contents/Resources/app
+l
+vim main.js
+vim main.js
+vim nibbler.
+vim nibbler.css
+electron .
+vim nibbler.css
+clear
+l
+electron .
+vim nibbler.css
+electron .
+cd Downloads/electron-v13.1.5-darwin-arm64/Electron.app/Contents/Resources/app
+l
+electron .
+vim main.js
+grep titleBarStyle * 
+grep "titleBarStyle" * 
+grep "titleBar" * 
+grep "title" * 
+vim nibbler.css
+electron .
+vim nibbler.css
+vim main.js
+electron .
+vim main.js
+electron .
+vim main.js
+electron .
+vim main.js
+electron .
+vim main.js
+electron .
+vim main.js
+electron .
+vim main.js
+l
+rm main.js
+wget https://raw.githubusercontent.com/rooklift/nibbler/master/src/main.js
+vim main.js
+clear
+l
+cd
+exit
+cd Downloads/electron-v13.1.5-darwin-arm64/Electron.app/Contents/Resources/app
+cl
+l
+electron .
+clear
+l
+electron .
+clear
+l
+vim builder.py
+clear
+l
+cd .
+l
+cd .
+.l
+clear
+lc
+ls
+cd .
+l
+cd ..
+l
+cd ..
+l
+cd MacOS
+l
+clear
+l
+cd ..
+l
+cd .
+l
+cd ..
+l
+cd ..
+l
+cd .
+l
+cd ..l
+cd ..
+l
+cd Nibbler-1.13_macOS
+l
+cd Nibbler.app
+l
+cd Contents
+l
+cd MacOS
+l
+file Ee
+l
+file Electron 
+rm Electron
+ls
+cd .,
+cd ..
+l
+cd ..
+l
+cd ..
+l
+open Nibbler.app
+cd Downloads
+l
+cd Nibbler-1.13_macOS
+l
+open Nibbler.app
+cd ..
+rm -r Nibbler-1.13_macOS
+l
+clear
+l
+ls
+ear
+l
+clear
+l
+open Nibbler-1.13_macOS.zip
+rm Nibbler-1.13_macOS.zip
+clear
+l
+exit
+cd Downloads
+l
+cd Nibbler-1.13_macOS
+l
+clear
+l
+open Nibbler.app
+cd ..
+l
+open Nibbler-1.13_macOS
+htop
+cd Downloads
+l
+clear
+l
+cd rm .D
+l
+rm .DS_Store
+l
+open electron-v13.1.5-darwin-arm64
+open electron-v13.1.5-darwin-arm64.zip
+ls
+mv electron-v13.1.5-darwin-arm64.zip electron-v13.1.5-darwin-arm64/Electron.app/Contents/Resources/app/electron_zipped
+clear
+l
+exit
+cd Downloads
+l
+ls
+clear
+l
+cd electron-v13.1.5-darwin-arm64
+l
+clear
+l
+cd Electron.app
+ls
+clea
+rl
+cd Contents
+l
+clear
+l
+cd MacOS
+l
+cd ...
+cd ..
+l
+cd Resources
+l
+clear
+l
+cd app
+l
+clear
+l
+cd dow
+l
+cd Downloads
+l
+mkdir boards
+cd boards
+wget https://images.chesscomfiles.com/chess-themes/boards/green/150.png
+wget https://images.chesscomfiles.com/chess-themes/boards/brown/150.png
+wget https://images.chesscomfiles.com/chess-themes/boards/tournament/150.png
+clear
+l
+cd Downloads
+l
+clear
+l
+mkdir pieces
+clear
+l
+cd p
+cd pieces
+l
+clear
+l
+wget https://images.chesscomfiles.com/chess-themes/pieces/bases/150/br.png
+ls
+wget https://images.chesscomfiles.com/chess-themes/pieces/bases/150/bn.png
+wget https://images.chesscomfiles.com/chess-themes/pieces/bases/150/bb.png
+wget https://images.chesscomfiles.com/chess-themes/pieces/bases/150/bk.png
+wget https://images.chesscomfiles.com/chess-themes/pieces/bases/150/bq.png
+wget https://images.chesscomfiles.com/chess-themes/pieces/bases/150/bp.png
+wget https://images.chesscomfiles.com/chess-themes/pieces/bases/150/wp.png
+wget https://images.chesscomfiles.com/chess-themes/pieces/bases/150/wr.png
+wget https://images.chesscomfiles.com/chess-themes/pieces/bases/150/wn.png
+wget https://images.chesscomfiles.com/chess-themes/pieces/bases/150/wb.png
+l
+wget https://images.chesscomfiles.com/chess-themes/pieces/bases/150/wk.png
+wget https://images.chesscomfiles.com/chess-themes/pieces/bases/150/wq.png
+ls
+ls
+clear
+l
+l
+sclear
+l
+l
+cd Downloads
+l
+ls
+clear
+l
+cd pieces
+l
+clear
+l
+mv bb.png _B.png
+l
+open _B.png
+mv bk.png _K.png
+l
+mv bn.png _N.png
+ls
+open bp.png
+mv bp.png _P.png
+mv bq.png _Q.png
+mv br.png _R.png
+ls
+open _K.png
+ls
+open wb.png
+mv wb.png B.png
+mv wk.png K.png
+l
+mv wn.png
+open wn.png
+mv wn.png N.png
+mv wp.png P.png
+mv wq.png Q.png
+mv wr.png R.png
+ls
+cd
+clear
+l
+exi9t
+exit
+cd Desktop
+cd
+cd Downloads
+l
+clear
+lcd
+k
+clear
+l
+l
+cd electron-v13.1.5-darwin-arm64
+l
+clea
+rl
+cd Electron.app
+ll
+clear
+l
+cd Contents
+l
+clear
+l
+cd MacOS
+l
+clear
+l
+ls
+file Electron
+l
+cp Electron ../../../../Nibbler-1.13_macOS/Nibbler.app/Contents/MacOS
+clear
+l
+ls
+cd ..
+l
+cd ..
+l
+cd ..
+l
+clear
+l
+cd ..
+l
+mv electron-v13.1.5-darwin-arm64 Nibbler-m1_macOS
+cd Nibbler-
+l
+cd Nibbler-
+cd Nibbler-1.13_macOS
+l
+cd ..
+l
+cd Nibbler-m1_macOS
+l
+vim version
+vim LICENSE
+vim LICENSES.chromium.html
+ls
+cd ..
+l
+mv Nibbler-m1_macOS electron-v13.1.5-darwin-arm64
+l
+cd electron-v13.1.5-darwin-arm64
+l
+clear
+l
+cd Electron.app
+l
+cd Contents
+l
+cd MacOS
+l
+clear
+l
+file Electron
+l
+cd ..
+l
+cd Resources
+l
+cd app
+l
+clear
+l
+vim builder.py
+celar
+l
+clear
+l
+clear
+l
+vim builder.py
+l
+electron .
+clear
+l
+./builder.py
+ls
+mkdir ./electron_zipped
+ls
+cd electron_zipped
+l
+ls
+clear
+l
+cd ..
+l
+./builder.py
+vim builder.py
+,
+scediclear
+l
+./builder.py
+ls
+clear
+l
+cd pieces
+l
+open _N.png
+open B.png
+ls
+cd ..
+l
+cd modules
+l
+cd ..
+l
+cd misc
+l
+cd ..
+l
+electron .
+clear
+ls
+clear
+l
+cd electron_zipped
+l
+clear
+l
+cd ..
+le
+ls
+ls
+ls
+clear
+electron .
+electron .
+ls
+clear
+l
+cd pieces
+l
+clear
+l
+cd ..
+l
+clear
+l
+clear
+l
+clear
+l
+clear
+l
+clear
+l
+electron .
+clear
+l
+clear
+l
+electron .
+clear
+l
+cd pieces
+l
+clear
+l
+open B.png
+open _B.png
+ls
+l
+brew update && brew upgrade
+cd Downloads
+l
+clear
+l
+cd electron-v13.1.5-darwin-arm64
+l
+clear
+l
+cd Electron.app
+l
+cd Contents
+cd Resources
+l
+cd app
+l
+clear
+l
+electron .
+electron .
+which electron 
+electron --version 
+npm install electron-packager -g
+sudo npm install electron-packager -g
+sudo npm install electron-packager -g
+sudo npm uninstall electron
+sudo npm install electron
+sudo rm -r .npm 
+rm .DS_Store
+l
+rm package* 
+sudo rm package* 
+l
+cd packages
+l
+cd .
+l
+cd ..
+l
+sudo rm -r node_modules
+clear
+l
+which electron 
+file /opt/homebrew/bin/electron
+electron --version 
+clear
+l
+exit
+ls
+ls -la
+cd Downloads
+l
+wget https://github.com/rooklift/nibbler
+rm chess-svgrepo-com.svg 
+l
+mv nibbler nibbler.png
+clear
+l
+open nibbler.png
+vim nibbler.png
+rm nibbler.png
+wget https://user-images.githubusercontent.com/16866223/87366667-86b5d680-c579-11ea-94de-cb6fabf2f3c3.png
+ls
+mv 87366667-86b5d680-c579-11ea-94de-cb6fabf2f3c3.png nibbler.png
+open nibbler.png
+clear
+l
+mv nibbler.png ../Desktop/Cool_Stuff/png2icns
+cd 
+cd Desktop
+l
+cd Cool_Stuff
+l
+cd png2icns
+l
+rm electron.png
+rm whatsapp.png
+./png2icns.sh nibbler.png
+./png2icns.sh nibbler.png --version 
+cd Downloads
+l
+cd Downloads
+cd E
+l
+ls
+cd electron-v13.1.5-darwin-arm64
+l
+/opt/homebrew/lib/node_modules/electron/dist/Electron.app/Contents/MacOS/Electron Electron.app
+ls
+cd Electron.app
+l
+cd Contents
+l
+cd ..
+l
+cd ..
+l
+cd ..
+l
+/opt/homebrew/lib/node_modules/electron/dist/Electron.app/Contents/MacOS/Electron app
+ls
+ls -la
+npx create-electron-app app
+ls
+cd app
+l
+npm start
+npm run make
+npm run
+npm run make
+ls
+cd ..
+l
+/opt/homebrew/lib/node_modules/electron/dist/Electron.app/Contents/MacOS/Electron electron-v13.1.5-darwin-arm64/Electron.app
+/opt/homebrew/lib/node_modules/electron/dist/Electron.app/Contents/MacOS/Electron electron-v13.1.5-darwin-arm64/
+/opt/homebrew/lib/node_modules/electron/dist/Electron.app/Contents/MacOS/Electron electron-v13.1.5-darwin-arm64/Electron.app/Contents/Resources/app
+ls
+clea
+rl
+ls
+cd electron-v13.1.5-darwin-arm64
+l
+mv Electron.app Nibbler.app
+cd Nibbler.app
+l
+clear
+l
+cd Contents
+l
+cd Resources
+lk
+l
+cd ..
+l
+cd Frameworks
+l
+cd ..
+l
+vim Info.plist
+l
+cd Frameworks
+l
+cd Electron\ Helper\ \(GPU\).app
+l
+cd Contents
+l
+vim Info.plist
+l
+cd ..
+l
+cd ..
+l
+cd Electron\ Helper\ \(Plugin\).app
+l
+cd Contents
+l
+vim Info.plist
+l
+cd ..
+l
+cd ..
+l
+cd Electron\ Helper\ \(Renderer\).app
+l
+cd Contents
+l
+vim Info.plist
+l
+cd .
+cd ..
+l
+clear
+l
+cd ..
+l
+clear
+l
+cd ..
+l
+clear
+l
+cd ..
+l
+l
+cd Co
+cd Contents
+l
+cd MacOS
+l
+cd ..
+l
+cd MacOS
+l
+mv Electron Nibbler
+cd ..
+l
+cd Frameworks
+l
+mv Electron\ Framework.framework Nibbler\ Framework.framework
+l
+mv Electron\ Helper.app Nibbler\ Helper.app
+mv Electron\ Helper\ \(GPU\).app Nibbler\ Helper\ \(GPU\).app 
+mv Electron\ Helper\ \(Plugin\).app Nibbler\ Helper\ \(Plugin\).app 
+mv Electron\ Helper\ \(Renderer\).app Nibbler\ Helper\ \(Renderer\).app
+l
+cd ..
+l
+clear
+l
+cd MacOS
+l
+cd .
+cd ..
+cd Frameworks
+l
+cd Nibbler\ 
+l
+cd Nibbler\ Framework.framework
+l
+cd ..
+l
+cd Nibbler\ Helper\ \(GPU\).app
+l
+cd Contents
+l
+cd MacOS
+l
+mv Electron\ Helper\ \(GPU\) Nibbler\ Helper\ \(GPU\)
+cd ..
+l
+cd .
+vim Info.plist
+l
+cd .
+cd ..
+l
+cd .
+l
+cd ..
+l
+cd Nibbler\ Helper\ \(Plugin\).app
+l
+cd Contents
+l
+cd MacOS
+l
+mv Electron\ Helper\ \(Plugin\) Nibbler\ Helper\ \(Plugin\)
+cd ..
+l
+cd ..
+l
+cd ..
+l
+cd Nibbler\ Helper\ \(Renderer\).app
+l
+cd Contents
+l
+cd MacOS
+l
+mv Electron\ Helper\ \(Renderer\) Nibbler\ Helper\ \(Renderer\)
+cd ..
+l
+cd ..
+l
+cd ..
+l
+cd Nibbler\ Helper.app
+l
+cd Contents
+l
+cd MacOS
+l
+mv Electron\ Helper Nibbler\ Helper
+clear
+l
+cd
+clear
+l
+ls
+ls
+sudo rm r .npm
+sudo rm -r .npm
+ls -la
+rm -r .npm
+clear
+l
+ls
+ls -la
+rm -r .npm
+sudo rm -r .npm
+clear
+l
+which electron 
+which elctron-forge
+cd Desktop
+l
+cd 
+cd Downloads
+l
+clear
+lc
+cd GI
+l
+cd electron-v13.1.5-darwin-arm64
+l
+clear
+l
+cd Electron.app
+l
+clear
+l
+cd Contents
+l
+clear
+l
+cd MacOS
+l
+clear
+l
+cd ..
+l
+cd Resources
+l
+clear
+l
+ cd app
+l
+clear
+l
+electron .
+clear
+l
+vim builder.py
+cd ..
+l
+cp -r app ~/Downloads
+l
+cd app
+l
+clear
+l
+electron-packager . 
+electron-packager . 
+electron-packager
+electron-packager ./
+electron-packager -all 
+ls
+cat m
+cat main.js
+cat index.html 
+cat package.json
+ls
+clear
+l
+ls
+clear
+l
+mv nibbler.html index.html
+electron-packager -all 
+electron .
+ls
+mv index.html nibbler.html
+electron .
+electron --version
+electron --help
+npx create-electron-app my-new-app
+ls
+pwd
+npx create-electron-app my-new-app
+ls
+l
+npx create-electron-app my-new-app
+cd ..
+npx create-electron-app app
+cd ..
+l
+cd ..
+l
+cd ..
+l
+npx Nibbler.app/Contents/Resources/app
+npx Nibbler.app/Contents/MacOS/Nibbler
+ls
+npm install -g @electron-forge/cli
+ls
+l
+ls
+clear
+l
+cd NI
+l
+cd Nibbler.app
+l
+cd .
+cd ..
+l
+open Nibbler.app
+cd ..
+open electron-v13.1.5-darwin-arm64
+electron --help
+/opt/homebrew/lib/node_modules/electron/dist/Electron.app/Contents/MacOS/Electron electron-v13.1.5-darwin-arm64/Nibbler.app/Contents/Resources/app
+/opt/homebrew/lib/node_modules/electron/dist/Electron.app/Contents/MacOS/Electron electron-v13.1.5-darwin-arm64/Nibbler.app/Contents/Resources/app
+clear
+l
+cd
+npx create-electron-app my-app
+npx create-electron-app Nibbler
+lz
+ls
+cd Nibbler
+l
+cd sc
+l
+cd src
+l
+cd ..
+l
+clear
+cd .
+cd ..
+l
+cd Downloads
+l
+cd electron-v13.1.5-darwin-arm64
+l
+cd ..
+l
+mv app src
+mv src ../Nibbler/
+mv src ../Nibbler/
+which lc0
+which stockfish
+cd /opt/homebrew/bin/stockfish
+l
+cp /opt/homebrew/bin/stockfish ~/test
+ls
+cd Downloads
+l
+rm .DS_Store
+clear
+l
+ls
+clear
+l
+cd 
+l
+mv test Nibbler
+l
+cd Nibbler
+l
+open nibbler.app
+ls
+cp -r nibbler.app /Applications/Nibbler.app
+clear
+l
+cd
+xeit
+exit
+cd packages
+l
+cd gi
+l
+cd lc0
+l
+cp -r lc0 256x20-t40-1541.pb ~/Nibbler
+clear
+l
+cd
+clear
+l
+cd Nibbler
+l
+sudo rm -r src
+npm run make
+ls
+cd out
+l
+cd make
+l
+cd zip
+l
+cd darwin
+l
+cd arm64
+l
+cp nibbler-darwin-arm64-1.0.0.zip ~/Downloads
+l
+cd
+cd Nibbler/out/make
+l
+cd .
+l
+cd ..
+l
+cd mi
+l
+cd nibbler-darwin-arm64
+l
+cd nibbler.app
+l
+cd Contents
+l
+cd MacOS
+l
+cd ...
+l
+cd ..
+l
+cd ..
+l
+cd ..
+open nibbler.app
+open nibbler.app
+ls
+open nibbler.app
+ls
+cd ....
+l
+cd ..
+l
+ccd ..
+cd ..
+l
+cd sc
+l
+cd src
+l
+electron .
+electron .
+electron .
+ls
+cd ..
+l
+clear
+l
+l
+rm out
+rm -r out
+clear
+l
+npm run make
+ls
+cd out
+l
+cd make
+l
+cd ..
+l
+cd nibbler-darwin-arm64
+l
+open nibbler.app
+cd nibbler.app
+l
+cd Contents
+l
+cd Resources
+l
+cd app
+l
+cd src
+l
+cd
+cd Nibbler
+l
+rm out
+rm -r out
+l
+cd src
+l
+mv main.js index.js
+electron .
+cd ..
+l
+npm run make
+cd out
+l
+cd nibbler-darwin-arm64
+l
+cd nibbler.app
+l
+cd ..
+open nibbler.app
+open nibbler.app
+ls
+cd ..
+l
+mv nibbler-darwin-arm64 ~/DE
+cd 
+cd DE test
+l
+mv -r DE test
+l
+mv DE test
+l
+cd test
+l
+cd ..
+rm -r Nibbler
+l
+cd Dow
+	l
+cd DOw
+l
+cd DOw
+l
+cd DOw
+cd Downloads
+k
+l
+rm nibbler-darwin-arm64-1.0.0.zip
+l
+mv pieces boards ../test
+cd Nibbler-1.13_macOS
+l
+cd ..
+rm -r Nibbler-1.13_macOS
+ls
+ls -la
+cd electron-v13.1.5-darwin-arm64
+l
+cl;ear
+l
+clear
+l
+open Nibbler.app
+cd
+clear
+l
+rm -r .npm
+sudo rm -r .npm
+clear
+l
+rm .DS_Store
+l
+clear
+l
+cd NI
+l
+cd Nibbler
+l
+cd
+mv Nibbler Desktop
+mv Nibbler.zip Desktop
+l
+cd /Applications
+l
+cd Nibbler.app
+l
+clear
+lc
+d Contents
+l
+cd Contents
+l
+cd ..
+cd ..
+open /Applications
+cd 
+cd Downloads
+l
+l
+clear
+l
+cd pwn_restaurant
+cd
+cd DOw
+l
+cd
+cd /Applications
+l
+cd
+cd Downloads
+l
+mkdir pieces
+cd pieces
+wget https://images.chesscomfiles.com/chess-themes/pieces/neo/150/br.png
+wget https://images.chesscomfiles.com/chess-themes/pieces/neo/150/wn.png
+wget https://images.chesscomfiles.com/chess-themes/pieces/neo/150/bb.png
+https://images.chesscomfiles.com/chess-themes/pieces/neo/150/bk.png
+wget https://images.chesscomfiles.com/chess-themes/pieces/neo/150/bk.png
+wget https://images.chesscomfiles.com/chess-themes/pieces/neo/150/bq.png
+wget https://images.chesscomfiles.com/chess-themes/pieces/neo/150/bp.png
+l
+wget https://images.chesscomfiles.com/chess-themes/pieces/neo/150/wp.png
+wget https://images.chesscomfiles.com/chess-themes/pieces/neo/150/wb.png
+wget https://images.chesscomfiles.com/chess-themes/pieces/neo/150/wr.png
+wget https://images.chesscomfiles.com/chess-themes/pieces/neo/150/wrk.png
+wget https://images.chesscomfiles.com/chess-themes/pieces/neo/150/wk.png
+ls
+mv bb.png _B.png
+mv bk.png _K.png
+wget https://images.chesscomfiles.com/chess-themes/pieces/neo/150/bn.png
+mv bn.png _N.png
+ls
+mv bp.png _P.png
+mv bq.png _Q.png
+mv br.png _R.png
+l
+mv wb.png B.png
+mv wk.png K.png
+mv wn.png N.png
+mv wn.png N.png
+ls
+mv wp.png P.png
+mv wq.png Q.png
+wget https://images.chesscomfiles.com/chess-themes/pieces/neo/150/wq.png
+mv wq.png Q.png
+mv wr.png R.png
+clear
+l
+cd
+cd Downloads
+l
+mv pieces ~/Desktop/Nibbler
+l
+clear
+l
+cd Downloads
+l
+cd
+cd Downloads
+l
+cd electron-v13.1.5-darwin-arm64
+l
+clear
+lc
+cd Nibbler.app
+clear
+l
+cd Contents
+l
+cd MacOS
+l
+cd ..
+l
+cd Resources
+l
+cd app
+l
+cd pieces
+l
+c
+dclear
+l
+cd 
+cd Downloads
+l
+cd
+cd Desktop
+l
+cd Nibbler
+l
+rm -r pieces
+clear
+l
+cd boards
+wget https://images.chesscomfiles.com/chess-themes/boards/blue/150.png
+clear
+l
+ssh jaczac@192.168.1.200
+electron --version
+ls
+clear
+l
+cd DOw
+l
+cd Downloads
+l
+whoami
+ifconfig
+ifconfig | grep inet
+ssh jaczac@192.168.1.200
+exit
+clear
+l
+ssh jaczac@192.168.1.200
+clear
+l
+l
+cd Downloads
+l
+cd ..
+open Downloads
+ls
+cd DOw
+l
+cd Downloads
+l
+open chess-svgrepo-com.png
+rm chess-svgrepo-com.png
+convert chess-svgrepo-com.svg chess.png
+ls
+rm chess.png
+l
+pwd
+clear
+l
+rm chess-svgrepo-com.svg
+clear
+l
+l
+ls
+clear
+l
+cd Dow
+l
+cd 
+clear
+l
+cd Downloads
+l
+wget https://user-images.githubusercontent.com/16866223/87366667-86b5d680-c579-11ea-94de-cb6fabf2f3c3.png
+ls
+clea
+rl
+rm 87366667-86b5d680-c579-11ea-94de-cb6fabf2f3c3.png 
+mv 87366667-86b5d680-c579-11ea-94de-cb6fabf2f3c3-1.png nibbler.png
+mv nibbler.png ../Desktop/Cool_Stuff/png2icns
+cd
+cd Desktop/Cool_Stuff
+l
+cd png2icns
+l
+./png2icns.sh nibbler.png --version 
+l
+open nibbler.
+mv nibbler.icns ~
+cd 
+ls
+python3 -m http.server
+clear
+l
+exit
+cd Desktop
+l
+cd Nibbler
+l
+cd nibbler.app
+l
+cd Contents
+l
+cd MacOS
+l
+cd
+celar
+l
+cd
+cd Desktop
+l
+ssh jaczac@192.168.1.200
+ssh jaczac@192.168.1.200
+mv nibbler.icns Downloads/nibbler.app/Contents/Resources/electron.icns
+cd
+cd Downloads
+l
+open nibbler.app
+cd Downloads/l
+cd Downloads
+l
+python3 -m http.server
+ls
+rm electron-v13.1.5-darwin-
+l
+rm electron-v13.1.5-darwin-x64.zip
+clea
+rl
+cd 
+cdl
+history 
+cd .config/zsh
+l
+cat history
+vim .zsh_history
+clear
+l
+cd
+clear
+l
+ls
+cd
+cd Downloads
+l
+wget 192.168.1.200:8000/nibbler-darwin-x64-1.0.0.zip
+ls
+open nibbler-darwin-x64-1.0.0.zip
+cd nibbler.app/
+l
+cd Contents
+l
+cd MacOS
+l
+cd ..
+cd Resources
+l
+cd Downloads
+l
+npx create-electron-app Nibbler
+sudo npm install -g npm@7.19.1
+npx create-electron-app Nibbler
+l
+cd Nibbler
+l
+rm -r src
+git clone https://github.com/mcostalba/Stockfish.git
+ls
+cd Stockfish
+l
+cd ..
+rm -r Stockfish
+sudo rm -r Stockfish
+clear
+l
+ls
+git clone https://github.com/rooklift/nibbler.git
+cd nibbler
+l
+mv src ..
+cd ..
+l
+rm -r nibbler
+sudo rm -r nibbler
+clear
+l
+npm run make
+,s]
+clea
+rl
+clear
+l
+ls
+clear
+l
+cd out
+lclear
+l
+clear
+l
+cd make
+l
+clear
+l
+cd zip
+l
+cd ..
+l
+cd .
+l
+cd ..
+l
+cd nibbler-darwin-arm64
+l
+open nibbler.app
+cd ..
+l
+cd ..
+l
+rm -r out
+clear
+l
+cd src
+l
+mv main.js index.js
+clear
+l
+cd ..
+l
+npm run make
+ls
+cd out
+l
+clear
+l
+cd nibbler-darwin-arm64
+l
+clear
+l
+cd nibbler.app
+l
+cd Contents
+l
+cd r
+l
+cd Resources
+l
+cd ..
+clear
+lc
+cd .
+cd ..
+l
+clear
+l
+cd ..
+l
+open nibbler.app
+ls
+open nibbler.app
+l
+mv nibbler.app ~/Github/Nibbler_2.1.7_MacOS
+cd .
+cd
+cd Downloads/l
+cd Downloads
+l
+rm -r Nibbler
+l
+cd
+clear
+l
+rm -r .npm
+sudo rm -r .npm
+celar
+l
+cd Desktop
+l
+cd Nibbler
+l
+mv -r lc0 stockfish 256x20-t40-1541.pb boards pieces ~/Github/Nibbler_2.1.7_MacOS/Apple_Silicon
+mv lc0 stockfish 256x20-t40-1541.pb boards pieces ~/Github/Nibbler_2.1.7_MacOS/Apple_Silicon
+l
+cd
+cd
+cd
+celar
+l
+cd Github
+cd Nibbler_2.1.7_MacOS
+l
+cd Apple_Silicon
+l
+cp -r lc0 stockfish boards pieces 256x20-t40-1541.pb ~/Desktop/Nibbler
+cd
+clear
+l
+clear
+l
+cd
+clear
+l
+cd
+cd Github
+l
+cd 
+cd DE
+	l
+cd Desktop
+l
+rm -r Nibbler.zip
+gzip Nibbler
+gzip -r Nibbler
+ls
+ls
+cd Nibbler
+l
+cd ..
+gunzip -r Nibbler
+l
+cd M
+cd Nibbler
+l
+cd ..
+cd ..
+open D
+clear
+l
+cd Mi
+cd Ni
+cd Desktop/Nibbler
+l
+mv lc0 stockfish 256x20-t40-1541.pb boards pieces /Applications/Nibbler.app/
+cd
+clear
+l
+cd Desktop
+l
+sudo rm -r Nibbler
+clear
+l
+exit
+ls
+cd Downloads
+l
+cd nibbler.app
+l
+cd ..
+mv nibbler.app ..
+l
+cd 
+l
+cd Github
+l
+mkdir Nibbler_2.1.7_MacOS
+s
+ls
+cd ..
+l
+rm .DS_Store
+l
+mv nibbler.app Github/Nibbler_2.1.7_MacOS
+ls
+clear
+l
+cd 
+clear
+l
+cd Downloads
+l
+cd 
+clear
+l
+cd Downloads
+l
+cd electron-v13.1.5-darwin-arm64
+l
+cd Nibbler.app
+l
+cd Contents
+l
+cd ..
+l
+cd ..
+cd ..
+sudo rm -r electron-v13.1.5-darwin-arm64
+clear
+l
+cd
+celar
+l
+cd
+clear
+l
+cd Downloads/l
+cd
+cd Desktop
+l
+cd Nibbler
+l
+cp -r lc0 stockfish boards pieces 256x20-t40-1541.pb ../../Github/Nibbler_2.1.7_MacOS
+cd
+celar
+lc
+d
+cd Github
+l
+clear
+lc
+cd Nibbler_2.1.7_MacOS
+l
+mkdir x86_64
+mv * x86_64
+l
+cd x86_64
+l
+cd .
+cd ..
+l
+celar
+l
+cd
+cd Downloads
+l
+cd
+cd Dee
+l
+cd Desktop
+l
+cd Nibbler
+l
+cd nibbler.app
+l
+cd Contents
+l
+cd Resources
+l
+cd app
+l
+cd src
+l
+vim index.js
+clear
+l
+cd
+clear
+l
+exit
+clear
+l
+cd Desktop
+l
+ls
+cd
+cd Github
+l
+clear
+l
+cd Nibbler_2.1.7_MacOS
+l
+cd x86_64
+l
+rm lc0 stockfish
+sudo rm lc0 stockfish
+clear
+l
+rm 256x20-t40-1541.pb 
+clear
+l
+cd
+clear
+l
+ls
+clear
+l
+cd Github
+l
+cd Nibbler_2.1.7_MacOS
+l
+mkdir Apple_Silicon
+mv nibbler.app Apple_Silicon
+l
+git init
+l
+clear
+l
+gaa
+gcam "First commit"
+clear
+l
+cd
+cd /Applications
+l
+cd NI
+cd N
+cd Nibbler.app
+l
+mv lc0 stockfish 256x20-t40-1541.pb boards pieces ~/packages/nibbler
+clear
+exit
+cd Github/Highschool_Exam
+l
+cd ..
+l
+cd Nibbler_2.1.7_MacOS
+l
+cd x86_64
+l
+clear
+l
+cd nibbler.app
+l
+cd Contents
+l
+cd Resources
+l
+cp electron.icns ~/Downloads/Nibbler/out/nibbler-darwin-arm64/nibbler.app/Contents/Resources/electron.icns
+cd
+celar
+l
+cl
+sclear
+l
+cd Github
+l
+cd Nibbler_2.1.7_MacOS
+l
+ls
+cd /Applications
+l
+open Nibbler.app
+ls
+clear
+l
+cd 
+cl
+ls
+cd pac
+	l
+cd packages
+l
+rm -r lc0
+sudo rm -r lc0
+clear
+l
+mkdir nibbler
+cd
+clear
+cleanup
+clea
+rl
+clear
+l
+cd
+cd /Applications/q
+cd /Applications
+l
+rm -r T
+l
+sudo rm -r Microsoft\ Teams.app 
+mv Mincrosoft\ Teams.app Microsoft\ Teams.app
+clear
+l
+rm .DS_Store
+ls
+cd ni
+l
+cd Nibbler.app
+l
+cd Contents
+l
+cd MacOS
+l
+cd ..
+l
+cd Resources
+l
+cd app
+l
+cd src
+l
+vim index.js
+cd
+vim index.js
+cd /Applications/Nibbler.app/Contents/Resources
+l
+cd app
+l
+cd src
+l
+vim index.js
+cd /Applications/Nibbler.app/Contents/Resources
+cd app
+l
+cd src
+l
+vim index.js
+vim index.js
+cd /Applications/Nibbler.app/Contents/Resources
+cd app
+cd src
+l
+vim index.js
+vim index.js
+vim index.js
+vim index.js
+clear
+l
+clear
+l
+cd
+clear
+l
+clear
+l
+clear
+l
+top
+top
+top
+ytop
+gtop
+htop
+cd
+ls
+cd packages
+l
+clear
+l
+cd nibbler
+ls
+brew update && brew upgrade
+clear
+l
+clear
+l
+cd /Applications
+l
+sudo rm -r Stockfish.app 
+celar
+l
+cd
+clear
+l
+cd Downloads
+rm .DS_Store
+clear
+l
+exit
+clear
+l
+cd DOw
+l
+cd DOw
+l
+cd Downloads
+l
+rm Discord.dmg
+clear
+l
+showD
+hideD
+clear
+l
+cd
+which stockfish
+stockfish --version
+stockfish --help
+stockfish 
+man stockfish
+clear
+l
+which stockfish
+cd /opt/homebrew/bin
+l
+vim stockfish
+clear
+l
+cd
+celar
+l
+cd /Applications
+l
+cd S
+l
+cd S
+l
+cd Stockfish.app
+l
+cd Contents
+l
+clear
+l
+cd MacOS
+l
+clear
+l
+file Stockfish
+./Stockfish --version 
+ls
+cd ..
+l
+cd _MASReceipt
+l
+cd .
+cd ..
+l
+cd Resources
+l
+cd Base.lproj
+l
+cd ..
+l
+cd en.lproj
+l
+cd ..
+l
+diff stockfish-arm64 /opt/homebrew/bin/stockfish
+vimdiff stockfish-arm64 /opt/homebrew/bin/stockfish
+clear
+l
+cd /Applications
+l
+sudo rm -r Stockfish.app
+clear
+l
+rm .DS_Store
+clear
+l
+cd /opt/homebrew/bin
+l
+file stockfish
+ls -la | grep sto
+ls -la | grep stok
+ls -la | grep stock
+cd Downloads
+l
+clear
+l
+mv nn-956480d8378f.nnue ../packages/nibbler
+vim gotham_rap
+cat gotham_rap
+clear
+l
+rm gotham_rap
+l
+clear
+l
+exit
+cd /Applications
+l
+clear
+l
+cd Nibbler.app
+l
+clear
+lc
+cd Contents
+l
+clear
+l
+ls
+cd MacOS
+cd
+cd Github
+l
+clear
+l
+cd Nibbler_2.1.7_MacOS
+l
+clear
+l
+cd Apple_Silicon
+l
+clear
+l
+cd nibbler.app
+l
+clear
+l
+cd Contents
+l
+cd Resources
+l
+cd a
+l
+cd app
+l
+cd src
+l
+clear
+l
+vim index.js
+vim index.js
+cd /Applications/Nibbler.app/Contents/Resources
+l
+cd app
+l
+cd src
+l
+vim index.js
+vim index.js
+vim index.js
+clear
+l
+vim index.js
+clear
+l
+cd
+clear
+l
+cd /Applications/Nibbler.app/Contents/Resources
+l
+cd app
+l
+clear
+l
+cd src
+l
+vim index.js
+cd Github/Nibbler_2.1.7_MacOS/Apple_Silicon
+l
+cd nibbler.app/Contents/Resources/app
+l
+clesr
+l
+cd src
+l
+clear
+l
+vim index.js
+cd 
+cd Library
+l
+cd jac
+l
+cd Mobile\ Documents
+l
+cd com\~apple\~CloudDocs/
+l
+cd Desktop
+l
+cd
+clear
+l
+exit
+brew update && brew upgrade
+brew search stockfish 
+clear
+ecd
+cd
+exit
+cd Github
+l
+clear
+l
+cd My-home-config
+l
+cd ..
+l
+open Nibbler_2.1.7_MacOS
+cd
+cd /Applications
+l
+rm -r Discord\ 2.app 
+clear
+cd
+clear
+l
+exut
+exit
+cd Github
+l
+clear
+l
+cd
+clear
+l
+cd .config
+lc
+elar
+lc
+clear
+l
+cd z
+l
+clear
+l
+cd zshl
+cd zsh
+l
+cat .zshrc
+cat .zsh_history
+clear
+l
+l
+clear
+l
+ls
+cd Github
+l
+cd Nibbler_2.1.7_MacOS
+l
+gaa
+sudo rm x86_64.zip 
+clear
+l
+gaa
+gcam "second commit "
+ls
+wget https://raw.githubusercontent.com/rooklift/nibbler/master/README.md
+clear
+l
+git remote add origin https://github.com/Jac-Zac/Nibbler_MacOS.git
+ls
+gp -u origin main
+gp -u origin master
+clear
+l
+cd x86_64
+l
+claer
+l
+cd ..
+l
+gp -u origin master
+clear
+l
+clear
+l
+cd ..
+l
+rm -r Nibbler_2.1.7_MacOS
+sudo rm -r Nibbler_2.1.7_MacOS
+clear
+l
+exit
+brew update && brew upgrade
+brew outdated.
+ls
+clear
+l
+exit
+cd DE
+cd Desktop/l
+cd Desktop
+l
+git clone https://github.com/rooklift/nibbler.git
+sudo rm -r nibbler
+clear
+l
+exit
+cd Github
+l
+mkdir Nibbler_MacOS
+clear
+l
+cd cd Ni
+cd Nibbler_
+l
+cd Nibbler_2.1.7_MacOS
+l
+cp -r Apple_Silicon x86_64 README.md ../Nibbler_MacOS
+clear
+l
+cd ..
+l
+clear
+l
+cd Nibbler_
+l
+cd Nibbler_MacOS
+git init
+gaa
+gcam "First commit"
+clear
+l
+git remote add origin https://github.com/Jac-Zac/Nibbler_MacOS.git
+clear
+l
+gp -u origin master
+cd ni
+l
+cd packages
+l
+cd nibbler
+l
+clear
+l
+cp stockfish nn-956480d8378f.nnue 256x20-t40-1541.pb ../../Github/Nibbler_MacOS/Apple_Silicon
+ls
+clear
+l
+exit
+cd DE
+l
+rm .DS_Store
+l
+clear
+l
+cd Desktop
+l
+mv Screenshot\ 2021-07-06\ at\ 13.22.37.png showcase.png
+mv showcase.png ../Github/Nibbler_MacOS/assets
+clear
+l
+exit
+cd as
+l
+cd Desktop
+l
+mv Screenshot\ 2021-07-06\ at\ 13.22.37.png my_setup.png
+ls
+mv Screenshot\ 2021-07-06\ at\ 13.28.09.png my_setup.png
+mv my_setup.png ../Github/Nibbler_MacOS/assets
+clear
+l
+l
+cd Github
+l
+cd 
+cd Downloads
+l
+mv output-onlinejpgtools.jpg ../Github/Nibbler_MacOS/assets/showcase.png
+clear
+l
+mv output-onlinejpgtools.jpg ../Github/Nibbler_MacOS/assets/showcase.png
+l
+sclear
+l
+cd 
+cd Dw
+l
+cd Desktop
+l
+rm Sc
+rm Screenshot\ 2021-07-06\ at\ 13.35.03.png
+clear
+l
+cd Github/Nibbler_MacOS
+l
+cd assets
+l
+open my_setup.png
+file my_setup.png
+file showcase.png
+open showcase.png
+cd
+cd Downloads
+l
+open output-onlinejpgtools.jpg
+ls
+cd
+cd Github/Nibbler_MacOS
+l
+cd assets
+l
+open my_setup.png
+open showcase.png
+mv showcase.png my_setup.png
+clear
+l
+cd DOw
+l
+cd Downloads
+l
+open my_setup.jpg
+file my_setup.jpg
+mv my_setup.jpg ../Github/Nibbler_MacOS/assets
+l
+ls
+file showcase.jpg
+mv showcase.jpg ../Github/Nibbler_MacOS/assets/showcase.png
+clear
+l
+cd
+clear
+l
+cd Do
+l
+clear
+l
+git clone https://github.com/Jac-Zac/Nibbler_MacOS.git
+lsk
+ls
+cd Nibbler_MacOS
+l
+cp -r .git ../Github/Nibbler_MacOS
+ls
+clear
+l
+cd ..
+l
+clear
+l
+rm -r Nibbler_MacOS
+sudo rm -r Nibbler_MacOS
+clear
+l
+cd Desktop
+l
+cd
+l
+cd Downloads
+l
+mv my_setup.jpg.png ../Github/Nibbler_MacOS/assets/my_setup.png
+clear
+l
+mv Screenshot\ 2021-07-06\ at\ 14.00.05.png. ../Github/Nibbler_MacOS/assets/showcase.png
+clear
+l
+mv Screenshot\ 2021-07-06\ at\ 14.00.05.png. ../Github/Nibbler_MacOS/assets/showcase.png
+mv Screenshot\ 2021-07-06\ at\ 14.00.05.png ../Github/Nibbler_MacOS/assets
+cd
+clear
+l
+cd Github/Nibbler_MacOS
+l
+clear
+l
+cd Apple_Silicon
+l
+rm 256x20-t40-1541.pb stockfish 
+sudo rm 256x20-t40-1541.pb stockfish 
+l
+rm -r boards pieces
+clear
+l
+cd ..
+l
+cd x86_64
+l
+clear
+l
+cd ..
+l
+gaa
+gcam "less stuff"
+gp -u origin master
+cd ..
+l
+cd Nibbler_MacOS
+l
+rm -r .git 
+sudo rm -r .git 
+clear
+l
+cd Apple_Silicon
+l
+cd ..
+l
+cd x86_64
+l
+cd boards
+l
+cd ..
+l
+cd ..
+l
+cd Apple_Silicon
+l
+cd .
+l
+cd ..
+l
+git init
+gaa
+gcam "First commit"
+git remote add origin https://github.com/Jac-Zac/Nibbler_MacOS.git
+clear
+l
+gp -u origin master
+xls
+clear
+l
+cd Apple_Silicon/l
+cd Apple_Silicon
+l
+cd ..
+l
+cd x86_64
+l
+cp -r boards pieces ../Apple_Silicon
+clear
+l
+cd ..
+l
+cd c
+l
+cd x86_64
+l
+cd ..
+l
+cd Apple_Silicon
+l
+cd ..
+l
+cls
+clear
+lc
+cd Apple_Silicon
+l
+cd ..
+l
+ls
+rm -r .git
+sudo rm -r .git
+l
+clear
+l
+cd Apple_Silicon .. 
+mv Apple_Silicon ..
+mv x86_64 ..
+clear
+l
+gaa
+git init
+gaa
+gcam "First commit"
+clear
+l
+gclear
+l
+clear
+l
+ls
+clear
+l
+git remote add origin https://github.com/Jac-Zac/Nibbler_MacOS.git
+gp -u origin master
+ls
+cd ..
+rm -r Nibbler_MacOS
+sudo rm -r Nibbler_MacOS
+git clone https://github.com/Jac-Zac/Nibbler_MacOS.git
+cd Nibbler_MacOS
+l
+wget https://raw.githubusercontent.com/rooklift/nibbler/master/README.md
+gaa
+gcam "First commit"
+gp -u origin master
+gp -u origin main
+cd ..
+l
+cd .
+cd ..
+cd
+open Github
+ls
+cd Github
+ls
+cd x86_64
+l
+cd
+celar
+l
+cd Github
+l
+cd ..
+open Github
+cd Github
+l
+rm Apple_Silicon x86_64
+l
+clear
+l
+rm Apple_Silicon.zip x86_64.zip
+clear
+l
+sudo rm -r Apple_Silicon x86_64 .DS_Store
+clear
+l
+cd Nibbler_MacOS
+l
+clear
+l
+vim README.md
+l
+mkdir assets
+ls
+clear
+l
+gaa
+lk
+gaa
+gcam "adding images"
+gp -u origin main
+ls
+ls
+clear
+l
+cd assets/l
+cd assets
+l
+rm showcase.png
+ls
+gaa
+gcam "adding images"
+cd ..
+gaa
+gcam "adding images"
+gp -u origin main
+cd .git
+l
+cd logs
+l
+cd refs
+l
+cd heads
+l
+vim main
+ls
+cd ..
+l
+cd ..
+l
+cd ..
+l
+cd .
+ls
+clear
+l
+cd ..
+l
+rm -r .git
+sudo rm -r .git
+clear
+l
+cd ..
+l
+ls
+cd G
+cd Gi
+l
+cd Nibbler_MacOS
+l
+cd assets
+l
+file my_setup.png
+rm my_setup.png
+kls
+ls
+l
+ls
+ls
+l
+sclear
+l
+cd ..
+l
+ls
+ls
+gst
+gaa
+gcam "adding images"
+clear
+l
+gp -u origin main
+cd N
+l
+clea
+rl
+vim Re
+vim README.md
+clear
+l
+cd assets
+l
+convert my_setup.jpg my_setup.png
+open my_setup.png
+rm my_setup.png
+open my_setup.jpg 
+ls
+ls
+rm my_setup.jpg
+clear
+l
+open showcase.png
+open showcase.png
+ls
+rm showcase.png
+clear
+l
+ls
+mv Screenshot\ 2021-07-06\ at\ 14.00.05.png showcase.png
+clear
+l
+cd ..
+l
+clear
+l
+gaa
+gcam "adding images"
+gp -u origin main
+vim README.md
+gaa
+gcam "adding images"
+gp -u origin main
+vim README.md
+gaa
+gcam "changing Readme"
+clear
+l
+gp -u origin main
+cd
+cd A
+cd /Applications
+l
+cd N
+l
+cd Nibbler.app
+l
+clear
+l
+cd Contents
+l
+clear
+l
+cd MacOS
+l
+clear
+l
+cd ..
+l
+cd Resources
+l
+cp -r app ~/Github/Nibbler_MacOS/src
+git clone https://github.com/Jac-Zac/nibbler.git
+clear
+l
+cd nibbler
+l
+clear
+l
+vim README.md
+clear
+l
+cd
+cd Github
+l
+cd
+sudo rm -r nibbler
+clear
+clear
+l
+git clone https://github.com/rooklift/nibbler
+cd nibbler
+l
+clear
+l
+mv src ../Github/Nibbler_MacOS
+cd ..
+rm -r nibbler
+sudo rm -r nibbler
+clear
+l
+cd N
+cd Github
+l
+cd Nibbler_MacOS
+l
+celar
+l
+cd src
+l
+cd ..
+ls
+mv src original_src
+mkdir src
+mv original_src src
+cd se
+cd src
+l
+ls
+cd ..
+l
+vim README.md
+l
+cd src
+l
+cd original_src
+l
+mv main.js index.js
+clear
+l
+cd ..
+l
+cd ..
+ls
+gaa
+gcam "Adding src"
+clear
+l
+gp -u origin master
+gp -u origin main
+cd Github/Nibbler_MacOS
+l
+vim README.md
+clear
+l
+gaa
+gcam "making the readme look better"
+gp -u origin main
+ls
+clear
+l
+exit
+cleanup
+ls
+ls -la
+clear
+l
+cd Desktop
+l
+rm Sc
+rm Screenshot\ 2021-07-06\ at\ 14.00.05.png
+clear
+l
+cd ..
+l
+cd DOw
+l
+cd Downloads
+l
+cd ..
+l
+ncdu
+celar
+l
+clear
+l
+clear
+l
+cd /Applications
+k
+ls
+open /Applications
+c
+clear
+ext
+exit
+cd ni
+l
+cd packages/nibbler
+cledarl
+clear
+l
+cd boards
+wget https://images.chesscomfiles.com/chess-themes/boards/marble/150.png
+clear
+l
+exit
+cd Downloads
+l
+ls
+ls
+open Apple_Silicon.zip
+ssh jaczac@192.168.1.200
+clear
+exit
+cd ni
+l
+cd packages
+l
+cd nibbler
+l
+cp -r 256x20-t40-1541.pb nn-956480d8378f.nnue boards pieces ../../x86_64
+cd
+clear
+l
+cd c
+cd x86_64
+l
+ls
+file 256x20-t40-1541.pb
+clear
+l
+cd ..
+l
+clear
+l
+wget 192.168.1.200:8000/nibbler-darwin-x64-1.0.0.zip
+ls
+clear
+l
+open nibbler-darwin-x64-1.0.0.zip
+ls
+clear
+l
+rm -r nibbler-darwin-x64-1.0.0.zip
+clear
+l
+open nibbler.app
+ls
+clear
+l
+rm .DS_Store
+l
+clear
+l
+mkdir x86_64
+mv nibbler.app x86_64
+clear
+l
+cd /Applications
+l
+cd N
+l
+cd Nibbler.app
+l
+clear
+lc
+d Contents
+l
+cd Contents
+l
+clear
+lc
+cd re
+l
+cd Resources/a
+l
+cd Resources/a
+cd Resources/app
+l
+cd src
+l
+vim nibbler.
+vim nibbler.css
+cd /Applications/Nibbler.app/Contents/Resources
+l
+cd a
+l
+cd app
+l
+clear
+l
+cd src
+l
+vim nibbler.
+vim nibbler.css
+clear
+l
+clear
+l
+ssh jaczac@192.168.1.200
+clear
+l
+ssh jaczac@192.168.1.200
+/Users/jaczac/x86_64/lc0 ; exit;
