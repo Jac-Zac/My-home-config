@@ -44,7 +44,7 @@
 
 ## Motivation 💭
 
-_I mainly created this to always have my config with me, but I would really be happy if anybody wanted to try it. Furthermore I think that if I can help someone with this it is worth shearing it._
+_I mainly created this to always have my config with me, but I would really be happy if anybody wanted to try it. Furthermore I think that if I can help someone with this it is worth sharing it._
 
 ### Install only brew 🍺
 
