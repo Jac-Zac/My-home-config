@@ -347,7 +347,13 @@ _mainScript_() {
       _commandLineTools_
       _shell_config_
       _Nvim_
+
+  read -p "{$bold}{$yellow}Do you want to install everything I have on my mac ? (Enter Yes or No): ${reset}" answer
+  if [[ $answer == "Yes" || $answer == "yes" || $answer == "Y" || $answer == "y" ]]; then
       _packages_installation_
+      echo "${green}Everything has been installed{$reset}"
+  fi
+
 } # End main function 
 
 
