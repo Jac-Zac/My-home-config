@@ -20,7 +20,7 @@
 
 ## Configuration :computer:<img alt="" align="right" src="https://img.shields.io/github/repo-size/Jac-Zac/My-home-config?color=g&logo=github&style=flat-square"/>
 
-  <img href=".assets/Showcase.jpg" src="https://raw.githubusercontent.com/Jac-Zac/My-home-config/master/.assets/Showcase.png" alt="minimal" align="right" width="400px"/>
+  <img href=".assets/Showcase_2.jpg" src="https://raw.githubusercontent.com/Jac-Zac/My-home-config/master/.assets/Showcase_2.png" alt="minimal" align="right" width="400px"/>
 </a>
 
 #### Welcome to my configuration showcase
