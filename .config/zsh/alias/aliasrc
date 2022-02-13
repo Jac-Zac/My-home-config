@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Aliases 
-alias todo="vim .cache/todo/todo.md;cd"
+alias todo="vim ~/.cache/todo/todo.md"
 alias firefox="open /Applications/Firefox\ Nightly.app"
 alias safari="open /Applications/Safari.app"
 alias showD="defaults write com.apple.finder CreateDesktop -bool true;killall Finder"
