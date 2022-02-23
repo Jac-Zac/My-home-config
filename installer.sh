@@ -312,7 +312,6 @@ _update_() {
   cd $HOME/.config/shell/fast-syntax-highlighting && git pull
   cd $HOME/.config/shell/powerlevel10k && git pull
   cd $HOME/.config/shell/zsh-autosuggestions && git pull
-  cd $HOME/.config/shell/zsh-vi-mode && git pull
 
   # If MacOS
   if [ "$(uname)" = "Darwin" ] ; then
