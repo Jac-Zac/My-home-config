@@ -280,7 +280,7 @@ https://www.simple-bar.com/
 <em><p align="center">This is what a little showcase</p></em>
 
 
-<img src="./assets/Arch_rice.jpg"/>
+<img src="https://raw.githubusercontent.com/Jac-Zac/My-home-config/master/.assets/Arch_rice.jpg"/>
 
 <em><p align="center"> 
 Now I also have a configuration for my Raspberry pi 4 running Arch with [dwm](https://dwm.suckless.org/) as a WM and I'm loving it so far, thus I'm thinking of posting that too in the future.
