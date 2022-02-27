@@ -40,7 +40,7 @@
 + **Terminal multiplexer**			• [`tmux`](https://github.com/tmux/tmux)
 + **Resource monitor**				• [`bpytop`](https://github.com/aristocratos/bpytop) *(aliased to top)*
 + **Browser**						• [`Firefox Nightly`](https://www.mozilla.org/en-US/firefox/61.0a1/releasenotes/)
-+ **Wallpapers**					• [`Fall`](.wallpaper/Fall.jpg), [`Login Image`](.wallpaper/gruv-staircase.jpg)
++ **Wallpapers**					• [`Fall`](https://wallpaper.dog/large/10812699.jpg)
 
 ## Motivation 💭
 
@@ -280,7 +280,7 @@ https://www.simple-bar.com/
 <em><p align="center">This is what a little showcase</p></em>
 
 
-<img src="https://raw.githubusercontent.com/Jac-Zac/My-home-config/master/.assets/Arch_rice.jpg"/>
+<img src="https://sta.sh/01ey0lbe949p"/>
 
 <em><p align="center"> 
 Now I also have a configuration for my Raspberry pi 4 running Arch with [dwm](https://dwm.suckless.org/) as a WM and I'm loving it so far, thus I'm thinking of posting that too in the future.
