@@ -147,6 +147,7 @@ _shell_config_() {
   	_brew_installation_
 	brew tap homebrew/cask-fonts
 	brew install --cask font-hack-nerd-font
+        brew install --cask font-inconsolata-lgc-nerd-font
  	brew install neovim
  	brew install fzf
 	brew install wget
