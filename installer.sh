@@ -127,10 +127,10 @@ _NotArchLinuxInstall_() {
   # Remove .cargo
   sudo rm -r .cargo
 
-  echo 'source $HOME/.config/shell/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
-  echo 'source $HOME/.config/shell/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh' >>~/.zshrc
-  echo 'alias ls= "lsd"' >>~/.zshrc
-  echo 'neofetch' >>~/.zshrc
+  echo 'source $HOME/.config/shell/powerlevel10k/powerlevel10k.zsh-theme' >>~/.config/shell/profile
+  echo 'source $HOME/.config/shell/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh' >>~/.config/shell/profile
+  echo 'alias ls= "lsd"' >>~/.config/shell/profile
+  echo 'neofetch' >>~/.config/shell/profile
 
   # Change default shell to zsh
   chsh -s $(which zsh)
@@ -143,39 +143,26 @@ _NotArchLinuxInstall_() {
 # Configure the shell prompt
 _shell_config_() {
 
-  echo "${bold}Checking for brew${reset}"
-  	_brew_installation_
-	brew tap homebrew/cask-fonts
-	brew install --cask font-hack-nerd-font
-        brew install --cask font-inconsolata-lgc-nerd-font
- 	brew install neovim
- 	brew install fzf
-	brew install wget
-	brew install lsd
-	brew install neofetch
-	brew install htop
-	brew install bpytop
-	brew install tmux
-	brew install ncdu
-  echo
+  if $ARCH; then
+	  echo Arch !!
+	  exit
+  fi
 
-  echo "${bold}Installing ohmyzsh${reset}"
-  # Install ohmyzsh
-  sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
-  echo
-  
-  echo "${bold}Loading my configurations ohmyzsh${reset}"
+  echo "${bold}Loading my configurations${reset}"
   # Make cache directories
   mkdir .cache
   mkdir .cache/zsh
   mkdir .cache/wget
-  mv .oh-my-zsh/ $HOME/.config/oh-my-zsh
   
-  rsync .profile $HOME/.profile
-  rsync .zprofile $HOME/.zprofile
+  # Copy my configuration
   rsync -r .config $HOME
+  rsync .config/shell/profile $HOME/.config/shell/profile
+	
+  # Create the link
+  cd 
+  ln -s ~/.config/shell/profile ~/.zprofile
 
+  # Copy the fonts
   cd ~/Library/Font
   git clone https://github.com/shaunsingh/SFMono-Nerd-Font-Ligaturized.git
   
@@ -183,7 +170,6 @@ _shell_config_() {
   git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $HOME/.config/shell/powerlevel10k
   git clone https://github.com/zsh-users/zsh-autosuggestions.git $HOME/.config/shell/zsh-autosuggestions
   git clone https://github.com/z-shell/fast-syntax-highlighting.git $HOME/.config/shell/fast-syntax-highlighting
-  git clone https://github.com/jeffreytse/zsh-vi-mode.git $HOME/.config/shell/zsh-vi-mode
 
   # tmux configuration with nord theme
   git clone https://github.com/arcticicestudio/nord-tmux.git ${HOME}/.config/tmux/themes/nord-tmux
@@ -193,7 +179,7 @@ _macSystemPrefs_() {
 
   echo "${bold}Install yabai${reset}"
   brew install koekeishiya/formulae/yabai
-  brew install yabai
+  brew install yabai --head
   brew install skhd
 
   echo "${bold}You should enable yabai after you finish everything up${reset}"
@@ -317,7 +303,7 @@ _update_() {
   # If MacOS
   if [ "$(uname)" = "Darwin" ] ; then
 			  brew update && brew upgrade 
-  # If Arch linux
+  # If linux
   elif [ "$(uname)" = "Linux" ]; then
 			  echo >> $HOME/.zprofile
 			  echo "[ "$(tty)" = "/dev/tty1" ] && ! pidof -s Xorg >/dev/null 2>&1 && exec startx" >> $HOME/.zprofile
@@ -338,15 +324,41 @@ _mainScript_() {
   
     echo "${bold}${underline}Welcome to JacZac's Dotfiles automatic installation${reset}${no_underline}"
     echo
-   
-  # Check if Linux
-  if [ $OSTYPE = "linux-gnu" ]; then
-      _NotArchLinuxInstall_
-  fi
-
+  
+  # If MacOS
+  if [ "$(uname)" = "Darwin" ] ; then
       _commandLineTools_
-      _shell_config_
-      _Nvim_
+	  # If the system is macos run the following
+	  echo "${bold}Checking for brew${reset}" 
+	  _brew_installation_
+	  # Installing necessary packages
+	  brew tap homebrew/cask-fonts
+	  brew install --cask font-hack-nerd-font
+	  brew install --cask font-inconsolata-lgc-nerd-font
+	  brew install neovim
+	  brew install fzf
+	  brew install wget
+	  brew install lsd
+	  brew install neofetch
+	  brew install htop
+	  brew install bpytop
+	  brew install tmux
+	  brew install ncdu
+	  echo
+
+  # If it is not arch linux
+  elif ! [ -x "$(command -v pacman)" ]; then
+	  _NotArchLinuxInstall_
+	  exit
+  else
+	  # Set arch linux flag
+	  ARCH = "true"
+	  echo "Arch"
+  fi
+  
+  # Do this anyway 
+  _shell_config_
+  _Nvim_
 
   read -p "{$bold}{$yellow}Do you want to install everything I have on my mac ? (Enter Yes or No): ${reset}" answer
   if [[ $answer == "Yes" || $answer == "yes" || $answer == "Y" || $answer == "y" ]]; then
@@ -354,7 +366,8 @@ _mainScript_() {
       echo "${green}Everything has been installed{$reset}"
   fi
 
-} # End main function 
+}
+# End main function 
 
 
 ############################
