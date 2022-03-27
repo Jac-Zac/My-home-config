@@ -143,11 +143,6 @@ _NotArchLinuxInstall_() {
 # Configure the shell prompt
 _shell_config_() {
 
-  if $ARCH; then
-	  echo Arch !!
-	  exit
-  fi
-
   echo "${bold}Loading my configurations${reset}"
   # Make cache directories
   mkdir .cache
@@ -157,15 +152,7 @@ _shell_config_() {
   # Copy my configuration
   rsync -r .config $HOME
   rsync .config/shell/profile $HOME/.config/shell/profile
-	
-  # Create the link
-  cd 
-  ln -s ~/.config/shell/profile ~/.zprofile
 
-  # Copy the fonts
-  cd ~/Library/Font
-  git clone https://github.com/shaunsingh/SFMono-Nerd-Font-Ligaturized.git
-  
   # plugins and themes
   git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $HOME/.config/shell/powerlevel10k
   git clone https://github.com/zsh-users/zsh-autosuggestions.git $HOME/.config/shell/zsh-autosuggestions
@@ -173,6 +160,32 @@ _shell_config_() {
 
   # tmux configuration with nord theme
   git clone https://github.com/arcticicestudio/nord-tmux.git ${HOME}/.config/tmux/themes/nord-tmux
+
+  # Create the link
+  cd 
+
+  ln -s ~/.config/shell/profile ~/.zprofile
+
+  # Check if you are running arch linux
+  if $ARCH; then
+	  echo "${green}${bold}You are runing Arch linux (Nice !)${reset} \n"
+	  sudo pacman -S base-devel
+	  ln -s ~/.config/x11/xprofile ~/.xprofile
+	  mkdir packages
+	  git clone https://aur.archlinux.org/yay.git $HOME/packages
+	  git clone https://github.com/LukeSmithxyz/st.git $HOME/packages
+	  git clone https://github.com/LukeSmithxyz/dwm.git $HOME/packages
+	  cd $HOME/packages/yay
+	  makepkg -si
+	  yay nerd-fonts-complete
+	  echo
+	  exit
+  fi
+
+  # Copy the fonts
+  cd ~/Library/Font
+  git clone https://github.com/shaunsingh/SFMono-Nerd-Font-Ligaturized.git
+  
 }
 
 _macSystemPrefs_() {
@@ -353,7 +366,6 @@ _mainScript_() {
   else
 	  # Set arch linux flag
 	  ARCH = "true"
-	  echo "Arch"
   fi
   
   # Do this anyway 
