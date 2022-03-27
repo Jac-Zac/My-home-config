@@ -149,6 +149,29 @@ _shell_config_() {
   mkdir .cache/zsh
   mkdir .cache/wget
   
+  # Check if you are running arch linux
+  if $ARCH; then
+	echo "${green}${bold}You are runing Arch linux (Nice !)${reset}"
+	echo
+	sudo pacman -Sy base-devel rsync neovim zsh xorg xorg-xinit xorrg-server neofetch tmux htop bpytop lsd
+	chsh -s $(which zsh)
+	ln -s ~/.config/x11/xprofile ~/.xprofile
+	mkdir packages
+	git clone https://github.com/LukeSmithxyz/st.git ~/packages/st
+	git clone https://github.com/LukeSmithxyz/dwm.git ~/packages/dwn
+	git clone https://aur.archlinux.org/yay.git $HOME/packages/yay
+	cp dwm_config.h ~/packages/dwm/config.h
+	cd $HOME/package/dwm
+	sudo make && make install
+	cd $HOME/packages/yay
+	makepkg -si
+	yay nerd-fonts-complete
+	echo
+  else
+  # Copy the fonts
+  	git clone https://github.com/shaunsingh/SFMono-Nerd-Font-Ligaturized.git ~/Library/Font
+  fi
+
   # Copy my configuration
   rsync -r .config $HOME
   rsync .config/shell/profile $HOME/.config/shell/profile
@@ -165,26 +188,6 @@ _shell_config_() {
   cd 
 
   ln -s ~/.config/shell/profile ~/.zprofile
-
-  # Check if you are running arch linux
-  if $ARCH; then
-	  echo "${green}${bold}You are runing Arch linux (Nice !)${reset} \n"
-	  sudo pacman -S base-devel
-	  ln -s ~/.config/x11/xprofile ~/.xprofile
-	  mkdir packages
-	  git clone https://aur.archlinux.org/yay.git $HOME/packages
-	  git clone https://github.com/LukeSmithxyz/st.git $HOME/packages
-	  git clone https://github.com/LukeSmithxyz/dwm.git $HOME/packages
-	  cd $HOME/packages/yay
-	  makepkg -si
-	  yay nerd-fonts-complete
-	  echo
-	  exit
-  fi
-
-  # Copy the fonts
-  cd ~/Library/Font
-  git clone https://github.com/shaunsingh/SFMono-Nerd-Font-Ligaturized.git
   
 }
 
