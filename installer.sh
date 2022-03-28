@@ -153,7 +153,7 @@ _shell_config_() {
   if $ARCH; then
 	echo "${green}${bold}You are runing Arch linux (Nice !)${reset}"
 	echo
-	sudo pacman -Sy base-devel rsync neovim zsh xorg xorg-xinit xorrg-server neofetch tmux htop bpytop lsd
+	sudo pacman -Sy base-devel rsync neovim zsh xorg xorg-xinit xorg-server neofetch tmux htop bpytop lsd firefox alacritty
 	chsh -s $(which zsh)
 	ln -s ~/.config/x11/xprofile ~/.xprofile
 	mkdir packages
@@ -166,6 +166,7 @@ _shell_config_() {
 	cd $HOME/packages/yay
 	makepkg -si
 	yay nerd-fonts-complete
+        sh -c "$(curl -fsSL https://raw.githubusercontent.com/mut-ex/minimal-functional-fox/master/install.sh)"
 	echo
   else
   # Copy the fonts
