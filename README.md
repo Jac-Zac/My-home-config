@@ -267,7 +267,7 @@ In conclusion I have started using [expose](https://github.com/beyondcode/expose
 I have just added support for other Linux distros at least to have a decent configuration.
 Maybe I'll take a look at [this border project](https://github.com/koekeishiya/limelight.git)
 https://github.com/Patato777/dotfiles
-https://github.com/glouw/paperview
+https://github.com/terroo/wallset.git
 
     sudo nvram boot-args=-arm64e_preview_abi
 
