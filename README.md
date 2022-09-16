@@ -147,7 +147,7 @@ If you'd like to see images on iTerm you can use [`imgcat`](https://pypi.org/pro
 ```
 toolkit.legacyUserProfileCustomizations.stylesheets = true
 ```
-> Then follow [this](https://www.youtube.com/watch?v=1UhsLlJs9Jg) tutorial, and use copy the chrome directory from my file or go to [this Github page](https://github.com/andreasgrafen/ag.proton)
+> Then follow the instruction given in [this Github page](https://github.com/crambaud/waterfall.git)
 
 ![showcase](.assets/firefox.png)
 
@@ -171,13 +171,9 @@ toolkit.legacyUserProfileCustomizations.stylesheets = true
 
 ![showcase](.assets/nvim.png)
 
-> This configurations has a sort of Latex integrated with [`markdown-preview`](https://github.com/instant-markdown/vim-instant-markdown)! 
+I use my custom fork of [luavim](https://github.com/elairavi/luavim)
 
 _I have also added latex compiling on the fly with_ [`neotex`](https://github.com/donRaphaco/neotex), and [`zathura`](https://github.com/zegervdv/homebrew-zathura)
-
-	vim ~/.config/nvim/init.vim
-
-##### And then run the command ``:PlugInstall``
 
 </details>
 
