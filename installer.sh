@@ -359,6 +359,10 @@ _mainScript_() {
 	  brew install bpytop
 	  brew install tmux
 	  brew install ncdu
+	  brew install ripgrep
+	  brew install duf
+	  brew install gping
+	  brew install procs
 	  echo
 
   # If it is not arch linux
