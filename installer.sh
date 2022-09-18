@@ -363,6 +363,7 @@ _mainScript_() {
 	  brew install duf
 	  brew install gping
 	  brew install procs
+	  brew install autojump
 	  echo
 
   # If it is not arch linux

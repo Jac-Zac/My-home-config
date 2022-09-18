@@ -17,7 +17,7 @@ _comp_options+=(globdots)		# Include hidden files.
 
 # Functions 
 fcd() {
-  cd ; cd "$(find . -type d | fzf)"
+  cd ; cd "$(find . -type d | fzf --preview '([[ -f {} ]] && (bat --style=numbers --color=always {} || cat {})) || ([[ -d {} ]] && (lsd --tree {})) || echo {} 2> /dev/null | head -200')"
 }
 
 
@@ -52,16 +52,16 @@ bindkey "^?" backward-delete-char
 
 # Change cursor shape for different vi modes.
 function zle-keymap-select {
-  if [[ ${KEYMAP} == vicmd ]] ||
-     [[ $1 = 'block' ]]; then
-    echo -ne '\e[1 q'
-  elif [[ ${KEYMAP} == main ]] ||
-       [[ ${KEYMAP} == viins ]] ||
-       [[ ${KEYMAP} = '' ]] ||
-       [[ $1 = 'beam' ]]; then
-    echo -ne '\e[5 q'
-  fi
-}
+   if [[ ${KEYMAP} == vicmd ]] ||
+      [[ $1 = 'block' ]]; then
+     echo -ne '\e[1 q'
+   elif [[ ${KEYMAP} == main ]] ||
+        [[ ${KEYMAP} == viins ]] ||
+        [[ ${KEYMAP} = '' ]] ||
+        [[ $1 = 'beam' ]]; then
+     echo -ne '\e[5 q'
+   fi
+ }
 zle -N zle-keymap-select
 
 # ci", ci', ci`, di", etc
@@ -111,3 +111,8 @@ source $HOME/.config/shell/fast-syntax-highlighting/fast-syntax-highlighting.plu
 
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
 [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
+
+# To add autojump
+[ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
