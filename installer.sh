@@ -272,6 +272,7 @@ _Nvim_() {
  echo "${bold}Installing nvim essentials${reset}"
  # Nvim Instant markdown for nvim
  git clone https://github.com/Jac-Zac/luavim-jaczac-config.git ~/.config/nvim
+ # I'm not sure this is needded to make instant-markdown-pewview work thous I should test it
  npm -g install instant-markdown-d
 
  echo "${green}My nvim configuration has been successfully installed${reset}"
