@@ -14,7 +14,7 @@ rm_underline=`tput rmul`
 
 ############################
 #     General functions    #
-############################ 
+############################
 _safeExit_() {
   trap - INT TERM EXIT
   exit ${1:-0}
@@ -46,13 +46,12 @@ darwin
     * Install Mac Command Line Tools
     * Install Homebrew
     * Install packages and applications via the above
-    * Change zsh config files 
-    * Set some defaults mac settings 
+    * Change zsh config files
+    * Set some defaults mac settings
     * Configure iTerm2
   ${bold}Options:${reset}
    ${yellow} -h, --help				Display this help and exit ${reset}
-   ${blue} -u, --update			Update your old configuration ${reset}
-   ${green} -b, --brew				Install brew on x86_64 or arm mac automatically${reset}
+   ${green} -u, --update			Update your old configuration ${reset}
     -s, --shell				Shell and propt configuration
     -n, --nvim				Nvim configuration installation
     -p, --preferences			Load my custom mac preferences
@@ -65,7 +64,7 @@ EOF
 
 _commandLineTools_() {
   # DESC:   Install XCode command line tools if needed
-  
+
   echo "${bold}Checking for Command Line Tools...${bold}"
 
   if ! xcode-select --print-path &>/dev/null; then
@@ -92,8 +91,8 @@ _commandLineTools_() {
 
 # Configuration for other linux distro
 _NotArchLinuxInstall_() {
-  ## Install some configuration to have a decent looking shell 
-  
+  ## Install some configuration to have a decent looking shell
+
   echo "${bold}You are running Linux as of now the script install some simple configurations${bold}"
   ### Script to make your shell look better
 
@@ -112,10 +111,10 @@ _NotArchLinuxInstall_() {
   # Back to home directory
   cd
 
-  # Install powerlevl10k 
+  # Install powerlevl10k
   git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.config/powerlevel10k
 
-  # Fast synatx hilighting 
+  # Fast synatx hilighting
   git clone https://github.com/zdharma/fast-syntax-highlighting ~/.config/fast-syntax-highlighting
 
   # Install lsd
@@ -148,7 +147,7 @@ _shell_config_() {
   mkdir .cache
   mkdir .cache/zsh
   mkdir .cache/wget
-  
+
   # Check if you are running arch linux
   if $ARCH; then
 	echo "${green}${bold}You are runing Arch linux (Nice !)${reset}"
@@ -186,10 +185,10 @@ _shell_config_() {
   git clone https://github.com/arcticicestudio/nord-tmux.git ${HOME}/.config/tmux/themes/nord-tmux
 
   # Create the link
-  cd 
+  cd
 
   ln -s ~/.config/shell/profile ~/.zprofile
-  
+
 }
 
 _macSystemPrefs_() {
@@ -200,7 +199,7 @@ _macSystemPrefs_() {
   brew install skhd
 
   echo "${bold}You should enable yabai after you finish everything up${reset}"
- 
+
   echo
   _seekConfirmation_ "Set mac system preference defaults?" || return 0
   sudo -v # Ask for sudo privs up-front
@@ -217,7 +216,7 @@ _macSystemPrefs_() {
   # General UI Tweaks
   # ---------------------------
 
- # Automatically hide menu bar 
+ # Automatically hide menu bar
   defaults write NSGlobalDomain _HIHideMenuBar -bool true
 
   info "Disable opening and closing window animations"
@@ -228,7 +227,7 @@ _macSystemPrefs_() {
   defaults write com.apple.dock wvous-tr-modifier -int 2
 
 
-  # Dock Settings 
+  # Dock Settings
   # ---------------------------
   info "Remove the auto-hiding Dock delay"
   defaults write com.apple.dock autohide-delay -float 0
@@ -238,7 +237,7 @@ _macSystemPrefs_() {
 
   # info "Automatically hide and show the Dock"
   defaults write com.apple.dock autohide -bool true
- 
+
   info "Show only open applications in the Dock"
   defaults write com.apple.dock static-only -bool true
 
@@ -246,39 +245,18 @@ _macSystemPrefs_() {
 
 _brew_installation_() {
 
-ArmPrefix="/opt"
-IntelPrefix="/usr/local"
-
 # If brew is installed exit else brew install
 if [[ $(command -v brew) == "" ]]; then
-  	# Apple Silicon
-  	if [ "$(uname - m)" = "arm64" ] ; then
-	    	echo "Installing brew"
-	    	# First you should follow the steps to install Homebrew
-	    	cd ${ArmPrefix}
-	    	# Create a directory for Homebrew. This requires root permissions
-	    	sudo mkdir homebrew
-	    	# Make us the owner of the directory so that we no longer require root permissions.
-	    	sudo chown -R $(whoami) /opt/homebrew
-	    	# Download and unzip Homebrew. This command can be found at https://docs.brew.sh/Installation
-	    	curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C homebrew
-	    	# Back home
-	    	cd ~
-			echo
-	    	echo "${green}brew installed${reset}"
-  			# Intel x86_64
-  	else
-	    	echo "Installing brew"
-	        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"	
-	    	echo "export PATH=/opt/homebrew/bin:$PATH" >> ~/.config/zsh/.zshrc
-			echo
-	    	echo "${green}brew installed${reset}"
-  	fi
+    echo "Installing brew"
+	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+	# echo "export PATH=/opt/homebrew/bin:$PATH" >> ~/.config/zsh/.zshrc
+	echo
+	echo "${green}brew installed${reset}"
 else
 	echo
-	echo "${green}You have brew, it will be updated${reset}"
+	echo "${green}You already have brew installed; it will be updated${reset}"
 	brew update && brew upgrade
- fi	
+fi
 }
 
 _packages_installation_ () {
@@ -294,9 +272,9 @@ _Nvim_() {
  echo "${bold}Installing nvim essentials${reset}"
  # Nvim Instant markdown for nvim
  git clone https://github.com/Jac-Zac/luavim-jaczac-config.git ~/.config/nvim
-  
  npm -g install instant-markdown-d
 
+ echo "${green}My nvim configuration has been successfully installed${reset}"
 }
 
 
@@ -304,12 +282,12 @@ _update_() {
 
   echo "${bold}Updating your system${reset}"
   echo
-  
+
   # Updating config
   rsync .profile $HOME/.profile
   rsync .zprofile $HOME/.zprofile
   rsync -r .config $HOME
-  
+
   # Updating oh-my-zsh related stuff
   cd $HOME/.config/shell/fast-syntax-highlighting && git pull
   cd $HOME/.config/shell/powerlevel10k && git pull
@@ -317,16 +295,16 @@ _update_() {
 
   # If MacOS
   if [ "$(uname)" = "Darwin" ] ; then
-			  brew update && brew upgrade 
+			  brew update && brew upgrade
   # If linux
   elif [ "$(uname)" = "Linux" ]; then
 			  echo >> $HOME/.zprofile
 			  echo "[ "$(tty)" = "/dev/tty1" ] && ! pidof -s Xorg >/dev/null 2>&1 && exec startx" >> $HOME/.zprofile
 			  sudo pacman -Syu
   fi
-  
+
   cd
-  
+
   echo "${green}You system is now up to date with my current configuration${reset}"
 }
 
@@ -336,15 +314,15 @@ _update_() {
 ####################################
 
 _mainScript_() {
-  
+
     echo "${bold}${underline}Welcome to JacZac's Dotfiles automatic installation${reset}${no_underline}"
     echo
-  
+
   # If MacOS
   if [ "$(uname)" = "Darwin" ] ; then
       _commandLineTools_
 	  # If the system is macos run the following
-	  echo "${bold}Checking for brew${reset}" 
+	  echo "${bold}Checking for brew${reset}"
 	  _brew_installation_
 	  # Installing necessary packages
 	  brew tap homebrew/cask-fonts
@@ -374,8 +352,8 @@ _mainScript_() {
 	  # Set arch linux flag
 	  ARCH = "true"
   fi
-  
-  # Do this anyway 
+
+  # Do this anyway
   _shell_config_
   _Nvim_
 
@@ -386,7 +364,7 @@ _mainScript_() {
   fi
 
 }
-# End main function 
+# End main function
 
 
 ############################
@@ -431,13 +409,8 @@ _parseOptions_() {
         _usage_ >&2
         _safeExit_
         ;;
-      -u | --update) 
+      -u | --update)
 		_update_
-		_safeExit_
-		;;
-	  -b | --brew)
-		_commandLineTools_
-  		_brew_installation_
 		_safeExit_
 		;;
 	  -s | --shell)
