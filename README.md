@@ -105,7 +105,7 @@ _You can also edit your prompt in the [`~/.config/zsh/.p10k.zsh`](.config/zsh/.p
 
 > Everything related to my iTerm
 
-**I use iTerm in minimal mode with tab bar on the bottom and borderless setting.**
+**I use iTerm in minimal mode with tab bar on the bottom and border-less setting.**
 
 If you'd like to see images on iTerm you can use [`imgcat`](https://pypi.org/project/imgcat/).
 
@@ -120,7 +120,7 @@ If you'd like to see images on iTerm you can use [`imgcat`](https://pypi.org/pro
 <details>
 	<summary><strong>Firefox Configuration</strong></summary>
 
-> My firefox configuration allows me to browse the web with more freedom then ever before. Furthermore use 1.1.1.1 as your DNS Server
+> My Firefox configuration allows me to browse the web with more freedom then ever before. Furthermore use 1.1.1.1 as your DNS Server
 
 ### A possible good idea is to use:
 
