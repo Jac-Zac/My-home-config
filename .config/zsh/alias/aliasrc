@@ -1,20 +1,25 @@
 #!/bin/sh
 
-# Aliases 
+# Aliases
+alias gopen="open \$(git config --get remote.origin.url)" # Open the github directory on the browser
 alias todo="vim ~/.cache/todo/todo.md"
 alias firefox="open /Applications/Firefox\ Nightly.app"
 alias safari="open /Applications/Safari.app"
-alias showD="defaults write com.apple.finder CreateDesktop -bool true;killall Finder"
-alias hideD="defaults write com.apple.finder CreateDesktop -bool false;killall Finder"
+alias showD="defaults write com.apple.finder CreateDesktop -bool true;killall Finder" # show the Dock
+alias hideD="defaults write com.apple.finder CreateDesktop -bool false;killall Finder" # hide the Dock
 alias noDSS="defaults write com.apple.desktopservices DSDontWriteNetworkStores true"
-alias locate_update="sudo /usr/libexec/locate.updatedb"
+alias locate_update="sudo /usr/libexec/locate.updatedb" # Update locate database
 alias pip3-update="pip3 list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U"
 alias weather="curl http://wttr.in/trieste"
 alias DSSdelete="find . -name '.DS_Store' -type f -delete"
 alias icat="kitty +kitten icat"
 
-# Better commands 
+# Better commands
+alias v="vim"
+alias df="duf"
+alias ps="procs"
 alias cp="cp -iv"
+alias ping="gping"
 alias mv="mv -iv"
 alias rm="rm -v"
 alias grep="grep --color"
@@ -23,7 +28,7 @@ alias l="lsd -la"
 alias top='bpytop'
 alias mpv='mpv --geometry=50%'
 alias history='history 1'
-alias wpm='wpm --monochrome --stats-file=~/.config/wpm/wpm.csv'
+alias mtype='tt --notheme -showwpm'
 alias intel='arch -arch x86_64'
 
 # Use neovim for vim if present.
@@ -32,6 +37,7 @@ alias wget="wget --hsts-file ~/.cache/wget/wget-hsts"
 
 # git aliases
 alias g='git'
+alias gs='git status'
 alias gaa='git add --all'
 alias gb='git branch'
 alias gst='git status'
@@ -44,7 +50,6 @@ alias gr='git remote'
 # web searches
 alias rogan="open https://open.spotify.com/show/4rOoJ6Egrf8K2IrywzwOMk"
 alias lex="open https://open.spotify.com/show/2MAi0BvDc6GTFvKFPXnkCL"
-alias mtype="open https://monkeytype.com/"
-alias chat="open https://web.whatsapp.com/"
+alias chat="open https://web.whatsapp.com/" # Open whatsapp
 alias youtube="open https://www.youtube.com/"
 alias github="open https://github.com/"

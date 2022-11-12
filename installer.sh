@@ -271,9 +271,11 @@ _Nvim_() {
 
  echo "${bold}Installing nvim essentials${reset}"
  # Nvim Instant markdown for nvim
- git clone https://github.com/Jac-Zac/luavim-jaczac-config.git ~/.config/nvim
+ git clone https://github.com/Jac-Zac/Nvim-jaczac-config.git ~/.config/nvim
  # I'm not sure this is needded to make instant-markdown-pewview work thous I should test it
  npm -g install instant-markdown-d
+
+ pip3 install pynvim
 
  echo "${green}My nvim configuration has been successfully installed${reset}"
 }
@@ -329,6 +331,7 @@ _mainScript_() {
 	  brew tap homebrew/cask-fonts
 	  brew install --cask font-hack-nerd-font
 	  brew install --cask font-inconsolata-lgc-nerd-font
+	  brew install python3
 	  brew install neovim
 	  brew install fzf
 	  brew install wget
