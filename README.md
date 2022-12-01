@@ -198,7 +198,7 @@ chmod +x installer.sh
 ```
 > You should close your terminal windows and open a new one, to reload the configurations
 
-*You can run ```.\install -s``` to only install the command prompt configurations*
+*You can run ```./install -s``` to only install the command prompt configurations*
 
 **Installation Completed !**
 
@@ -254,9 +254,8 @@ I use <kbd>command</kbd> AKA super key (on GNU/Linux) as my main modifier
 
 ## Other things 📚
 
-I'd like to slowly switch aways from powerlevel10k to get a faster feeling shell, but now I will be focusing on other things but also better my configuration for M1 Mac. For the README.md I took inspiration from [this repo](https://github.com/owl4ce/dotfiles), and for the bootstrap script I took inspiration from [this repo instead](https://github.com/natelandau/dotfiles).
+I'd like to slowly switch away from powerlevel10k to get a faster feeling shell, but now I will be focusing on other things but also better my configuration for M1 Mac. For the README.md I took inspiration from [this repo](https://github.com/owl4ce/dotfiles), and for the bootstrap script I took inspiration from [this repo instead](https://github.com/natelandau/dotfiles).
 I also have many aliases for example if you write `intel` in front of any command it will run the under Rosetta. I have also started using updog to run simple https python servers.
-<!-- In conclusion I have started using [expose](https://github.com/beyondcode/expose) instead of ngrok to create secure tunnels, by using the command `expose --auth=my_token`. -->
 I have just added support for other Linux distros at least to have a decent configuration.
 > Other possible inst resting things
 ```
@@ -288,4 +287,4 @@ I think I will do it if some asks for it
 
 ### Problems ❌
 If you happen to run into some problems you can just open an issue, I'll try to solve it as soon as possible. Otherwise you can contact me by sending me an email.
-> It is not been tested for a bit. Therefore feedbacks are appreciated
+> It is not been tested for a bit. Therefore feedback are appreciated
