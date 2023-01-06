@@ -1,6 +1,7 @@
 #!/bin/sh
 
 # Aliases
+alias formatting="isort . && autopep8 -r --in-place . && black ."
 alias gopen="open \$(git config --get remote.origin.url)" # Open the github directory on the browser
 alias todo="vim ~/.cache/todo/todo.md"
 alias firefox="open /Applications/Firefox\ Nightly.app"
@@ -9,7 +10,7 @@ alias showD="defaults write com.apple.finder CreateDesktop -bool true;killall Fi
 alias hideD="defaults write com.apple.finder CreateDesktop -bool false;killall Finder" # hide the Dock
 alias noDSS="defaults write com.apple.desktopservices DSDontWriteNetworkStores true"
 alias locate_update="sudo /usr/libexec/locate.updatedb" # Update locate database
-alias pip3-update="pip3 list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U"
+alias pip3-update="pip3 list --outdated | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U"
 alias weather="curl http://wttr.in/trieste"
 alias DSSdelete="find . -name '.DS_Store' -type f -delete"
 alias icat="kitty +kitten icat"
