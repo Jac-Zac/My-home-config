@@ -34,7 +34,7 @@
 + **Editor**						• [`Neovim`](https://github.com/neovim/neovim/)
 + **Theme**							• [`Nord`](https://github.com/arcticicestudio/nord-iterm2)
 + **Font**							• [`Inconsolata Nerd`](https://github.com/ryanoasis/nerd-fonts)
-+ **System information**			• [`neofetch`](https://github.com/dylanaraps/neofetch)
++ **System information**			• [`paleofetch`](https://github.com/Jac-Zac/paleofetch-mac-prettier)
 + **Fuzzy finder**					• [`fzf`](https://github.com/junegunn/fzf)
 + **Launcher**						• [`skhd`](https://github.com/koekeishiya/skhd) and [`Alfred`](https://www.alfredapp.com)
 + **Terminal multiplexer**			• [`tmux`](https://github.com/tmux/tmux)
@@ -96,7 +96,7 @@ _You should always keep your configuration up to date, luckily there is a straig
 _If you want you can go to [`~/.config/zsh`](.config/zsh) to edit your [`.zshrc`](.config/zsh/.zshrc) and you can uncomment lines._
 _You can also edit your prompt in the [`~/.config/zsh/.p10k.zsh`](.config/zsh/.p10k.zsh)_
 
-![showcase](.assets/prompt.png)
+![showcase](https://github.com/Jac-Zac/paleofetch-mac-prettier/raw/master/.gitlab/example.png)
 
 </details>
 
@@ -126,8 +126,7 @@ If you'd like to see images on iTerm you can use [`imgcat`](https://pypi.org/pro
 
 https://github.com/arkenfox/user.js/
 
-*I use [nord theme](https://addons.mozilla.org/en-US/firefox/addon/nord-theme-cool/?utm_source=addons.mozilla.org&utm_medium=referral&utm_content=search) and I changed my new tabs to black pages.*
-
+*I use [nord theme](https://addons.mozilla.org/en-US/firefox/addon/nord-theme-cool/?utm_source=addons.mozilla.org&utm_medium=referral&utm_content=search) and I changed my new tabs to black pages. And I use brave search*
 
 - [`zuBlock Origin`](https://ublockorigin.com)
 - [`LocalCDN`](https://www.localcdn.org/)
