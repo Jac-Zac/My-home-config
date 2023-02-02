@@ -336,7 +336,6 @@ _mainScript_() {
 	  brew install fzf
 	  brew install wget
 	  brew install lsd
-	  brew install neofetch
 	  brew install htop
 	  brew install bpytop
 	  brew install tmux
