@@ -345,6 +345,7 @@ _mainScript_() {
 	  brew install gping
 	  brew install procs
 	  brew install autojump
+      git clone https://github.com/Jac-Zac/paleofetch-mac-prettier.git $HOME/.config/paleofetch-mac-prettier && cd $HOME/.config/paleofetch-mac-prettier && make install && cd
 	  echo
 
   # If it is not arch linux
