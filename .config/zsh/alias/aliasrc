@@ -1,7 +1,8 @@
 #!/bin/sh
 
 # Aliases
-alias formatting="isort . && black . && find . -regex '.*\.\(cpp\|hpp\|cc\|cxx\)' -exec clang-format -style=file -i {} \;"
+# alias formatting="isort . && black . && find . -regex '.*\.\(cpp\|hpp\|cc\|cxx\)' -exec clang-format -style=Google -i {} \;"
+alias formatting_c++='find . -name "*.cpp" -or -name "*.hpp" -or -name "*.cc" | xargs clang-format -i'
 alias gopen="open \$(git config --get remote.origin.url)" # Open the github directory on the browser
 alias todo="vim ~/Github/University/TODO.md"
 alias firefox="open /Applications/Firefox\ Nightly.app"
@@ -26,7 +27,7 @@ alias rm="rm -v"
 alias grep="grep --color"
 alias ls="lsd"
 alias l="lsd -la"
-alias top='bpytop'
+alias top='btop'
 alias mpv='mpv --geometry=50%'
 alias history='history 1'
 alias mtype='tt --notheme -showwpm'
