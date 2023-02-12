@@ -38,7 +38,7 @@
 + **Fuzzy finder**					• [`fzf`](https://github.com/junegunn/fzf)
 + **Launcher**						• [`skhd`](https://github.com/koekeishiya/skhd) and [`Alfred`](https://www.alfredapp.com)
 + **Terminal multiplexer**			• [`tmux`](https://github.com/tmux/tmux)
-+ **Resource monitor**				• [`bpytop`](https://github.com/aristocratos/bpytop) *(aliased to top)*
++ **Resource monitor**				• [`btop`](https://github.com/aristocratos/btop) *(aliased to top)*
 + **Browser**						• [`Firefox Nightly`](https://www.mozilla.org/en-US/firefox/61.0a1/releasenotes/)
 + **Wallpapers**					• [`Fall`](https://wallpaper.dog/large/10812699.jpg)
 
@@ -155,7 +155,7 @@ toolkit.legacyUserProfileCustomizations.stylesheets = true
 
 ![showcase](.assets/lsd.png)
 
-*If you are not interested in using it just uncomment the following line in the .zshrc file*
+*If you are not interested in using it just uncommon the following line in the .zshrc file*
 
 	alias ls="lsd"
 
@@ -164,6 +164,7 @@ toolkit.legacyUserProfileCustomizations.stylesheets = true
 <details>
 	<summary><strong>My nvim confiuguration</strong></summary>
 
+[![My Skills](https://skillicons.dev/icons?i=js,html,css,wasm)](https://skillicons.dev)
 ![showcase](.assets/nvim.png)
 
 I use my custom fork of [luavim](https://github.com/elairavi/luavim)
@@ -256,7 +257,7 @@ I use <kbd>command</kbd> AKA super key (on GNU/Linux) as my main modifier
 I'd like to slowly switch away from powerlevel10k to get a faster feeling shell, but now I will be focusing on other things but also better my configuration for M1 Mac. For the README.md I took inspiration from [this repo](https://github.com/owl4ce/dotfiles), and for the bootstrap script I took inspiration from [this repo instead](https://github.com/natelandau/dotfiles).
 I also have many aliases for example if you write `intel` in front of any command it will run the under Rosetta. I have also started using updog to run simple https python servers.
 I have just added support for other Linux distros at least to have a decent configuration.
-> Other possible inst resting things
+> Other possible interesting things:
 ```
 https://github.com/Patato777/dotfiles
 https://github.com/terroo/wallset.git

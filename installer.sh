@@ -337,7 +337,7 @@ _mainScript_() {
 	  brew install wget
 	  brew install lsd
 	  brew install htop
-	  brew install bpytop
+	  brew install btop
 	  brew install tmux
 	  brew install ncdu
 	  brew install ripgrep
