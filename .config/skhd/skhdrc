@@ -1,5 +1,5 @@
 # open iTerm
-cmd + shift - return : open -a iTerm
+cmd + shift - return : open -a kitty
 
 # focus window
 cmd - h : yabai -m window --focus north
@@ -64,5 +64,5 @@ cmd + shift - t : yabai -m window --toggle float;\
            yabai -m window --grid 4:4:1:1:2:2
 
 # Restart Yabai
-lctrl + alt + cmd - q : brew services restart yabai
+lctrl + alt + cmd - q : yabai --restart-service
 lctrl + alt + cmd + shift - q : osascript -e 'tell app "System Events" to log out'
