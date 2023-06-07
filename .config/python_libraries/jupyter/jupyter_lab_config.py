@@ -552,9 +552,9 @@ c = get_config()  #noqa
 
 ## Whether to open in a browser after starting.
 #  See also: ExtensionApp.open_browser
-c.LabApp.open_browser = True
+c.ServerApp.open_browser = True
 
-c.LabApp.browser = u'open -a /Applications/Firefox\ Nightly.app/ %s'
+c.ServerApp.browser = u'open -a /Applications/Firefox\ Nightly.app/ %s'
 
 ## The override url for static lab assets, typically a CDN.
 #  Default: ''
