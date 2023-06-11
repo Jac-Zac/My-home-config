@@ -1,5 +1,4 @@
 .config/tmux/themes/nord-tmux
 .config/nvim/plugged
-.config/ytfzf
 .config/git
 .DS_Store
