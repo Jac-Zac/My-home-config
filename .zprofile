@@ -16,16 +16,12 @@ export GOPATH="${XDG_DATA_HOME:-$HOME/.local/share}/go"
 export GNUPGHOME="${XDG_DATA_HOME:-$HOME/.local/share}/gnupg"
 export IPYTHONDIR="${XDG_CONFIG_HOME:-$HOME/.config}/python_libraries/jupyter"
 export JUPYTER_CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/python_libraries/jupyter"
-export GIT_CONFIG="{XDG_CONFIG_HOME:-$HOME/.config}/git"
+export GIT_CONFIG_GLOBAL="${XDG_CONFIG_HOME:-$HOME/.config}/git/gitconfig"
 
 # FZF default color theme (Nord)
 export FZF_DEFAULT_OPTS='
 --color fg:#D8DEE9,bg:#2E3440,hl:#A3BE8C,fg+:#D8DEE9,bg+:#434C5E,hl+:#A3BE8C
 --color pointer:#BF616A,info:#4C566A,spinner:#4C566A,header:#4C566A,prompt:#81A1C1,marker:#EBCB8B'
-
-# Rustup direcotry
-export RUSTUP_HOME="/opt/rust"
-export CARGO_HOME="/opt/rust"
 
 # Xcode
 export CPATH=`xcrun --show-sdk-path`/usr/include
@@ -33,9 +29,7 @@ export LDFLAGS="-L//Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/inclu
 export CPPFLAGS="-I//Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include"
 
 # Homebrew PATH
-export HOMEBREW_BUNDLE_FILE=$HOME/.config/brewfile/Brewfile
 PATH="/opt/homebrew/bin:$PATH"
-PATH="/opt/rust/bin:$PATH"
 
 # other Apple silicon executable path
 PATH="/opt/homebrew/Cellar/openvpn/2.5.0/sbin:$PATH"
