@@ -1,9 +1,9 @@
-neofetch # |  lolcat -p -a -d 1 -s 70
+paleofetch
 
 # History in cache directory:
-HISTSIZE=5000
-HISTFILESIZE=5000
-HISTFILE=~/.cache/zsh/zsh_history
+# HISTSIZE=5000
+# HISTFILESIZE=5000
+# HISTFILE=~/.cache/zsh/zsh_history
 
 # Load aliases and shortcuts if existent.
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/alias/aliasrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/alias/aliasrc"
@@ -107,7 +107,7 @@ source $HOME/.config/shell/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $HOME/.config/shell/powerlevel10k/powerlevel10k.zsh-theme
 
 # zsh syntax highlighting
-source $HOME/.config/shell/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+source $HOME/.config/shell/fast-syntax-highlighting/F-Sy-H.plugin.zsh
 
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
 [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
