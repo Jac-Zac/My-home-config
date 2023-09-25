@@ -112,10 +112,13 @@ _NotArchLinuxInstall_() {
   cd
 
   # Install powerlevl10k
-  git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.config/powerlevel10k
+  git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.config/shell/powerlevel10k
 
   # Fast synatx hilighting
-  git clone https://github.com/zdharma/fast-syntax-highlighting ~/.config/fast-syntax-highlighting
+  git clone https://github.com/zdharma/fast-syntax-highlighting ~/.config/shell/fast-syntax-highlighting
+
+  # zsh-autosuggestions
+  git clone https://github.com/zsh-users/zsh-autosuggestions.git ~/.config/shell/zsh-autosuggestions/
 
   # Install lsd
   cargo install lsd
