@@ -167,6 +167,8 @@ toolkit.legacyUserProfileCustomizations.stylesheets = true
 [![My Skills](https://skillicons.dev/icons?i=js,html,css,wasm)](https://skillicons.dev)
 ![showcase](.assets/nvim.png)
 
+Look into https://github.com/AstroNvim/AstroNvim
+
 I use my custom fork of [luavim](https://github.com/elairavi/luavim)
 
 _I have also added latex compiling on the fly with_ [`neotex`](https://github.com/donRaphaco/neotex), and [`zathura`](https://github.com/zegervdv/homebrew-zathura)
