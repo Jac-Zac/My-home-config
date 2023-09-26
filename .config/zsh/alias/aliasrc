@@ -1,10 +1,8 @@
 #!/bin/sh
 
 # Aliases
-# alias formatting="isort . && black . && find . -regex '.*\.\(cpp\|hpp\|cc\|cxx\)' -exec clang-format -style=Google -i {} \;"
-alias formatting_c++='find . -name "*.cpp" -or -name "*.hpp" -or -name "*.cc" | xargs clang-format -i'
 alias gopen="open \$(git config --get remote.origin.url)" # Open the github directory on the browser
-alias todo="vim ~/Github/University/TODO.md"
+alias todo="vim ~/University/TODO.md"
 alias firefox="open /Applications/Firefox\ Nightly.app"
 alias safari="open /Applications/Safari.app"
 alias showD="defaults write com.apple.finder CreateDesktop -bool true;killall Finder" # show the Dock
