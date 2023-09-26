@@ -123,6 +123,9 @@ _NotArchLinuxInstall_() {
   # Install lsd
   cargo install lsd
 
+  # Change owner
+  sudo chown -R $(whoami) .config
+
   # Move lsd to the PATH
   sudo mv .cargo/bin/lsd /usr/local/bin/
 
@@ -273,12 +276,12 @@ _packages_installation_ () {
 _Nvim_() {
 
  echo "${bold}Installing nvim essentials${reset}"
- # Nvim Instant markdown for nvim
- git clone https://github.com/Jac-Zac/Nvim-jaczac-config.git ~/.config/nvim
- # I'm not sure this is needded to make instant-markdown-pewview work thous I should test it
- npm -g install instant-markdown-d
 
- pip3 install pynvim
+ git clone --depth 1 https://github.com/AstroNvim/AstroNvim ~/.config/nvim
+
+ git clone https://github.com/Jac-Zac/astronvim_jaczac ~/.config/nvim/lua/user
+
+ nvim --headless -c 'quitall'
 
  echo "${green}My nvim configuration has been successfully installed${reset}"
 }
