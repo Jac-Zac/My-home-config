@@ -1,11 +1,11 @@
 #!/usr/bin/env sh
 
-sudo yabai --load-sa
 yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+sudo yabai --load-sa
 
 # global settings
-yabai -m config mouse_follows_focus          off
-yabai -m config focus_follows_mouse          off
+yabai -m config mouse_follows_focus          on
+yabai -m config focus_follows_mouse          on
 yabai -m config window_placement             first_child
 yabai -m config window_placement             second_child
 yabai -m config window_topmost               off
@@ -16,7 +16,7 @@ yabai -m config normal_window_opacity        0.9
 yabai -m config window_border                on
 yabai -m config window_border_width          4
 yabai -m config window_border_radius         12
-yabai -m config window_border_blur           off
+yabai -m config window_border_blur           on
 yabai -m config window_border_hidpi          on
 # yabai -m config active_window_border_color   0xFFD08770 # orange
 yabai -m config active_window_border_color   0xFFEBCB8B # yellow
@@ -26,7 +26,7 @@ yabai -m config normal_window_border_color   0xFF4C566A
 # yabai -m config normal_window_border_color   0xFF2E3440
 yabai -m config insert_feedback_color        0xff61afef
 yabai -m config split_ratio                  0.50
-yabai -m config auto_balance                 off
+yabai -m config auto_balance                 on
 yabai -m config mouse_modifier               fn
 yabai -m config mouse_action1                move
 yabai -m config mouse_action2                resize
@@ -35,6 +35,7 @@ yabai -m config mouse_drop_action            swap
 # yabai -m config split_ratio                  0.55
 
 yabai -m config layout                       bsp
+# yabai -m config auto_balance                 on # Auto focus on mouse that is what I want
 yabai -m config top_padding                  18
 yabai -m config bottom_padding               13
 yabai -m config left_padding                 13
