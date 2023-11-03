@@ -69,3 +69,10 @@ cmd + shift - t : yabai -m window --toggle float;\
 # Restart Yabai
 lctrl + alt + cmd - q : yabai --restart-service && skhd --restart-service
 lctrl + alt + cmd + shift - q : osascript -e 'tell app "System Events" to log out'
+
+
+# Example for sckatchy bar config
+# lalt - space : yabai -m window --toggle float; sketchybar --trigger window_focus
+# shift + lalt - f : yabai -m window --toggle zoom-fullscreen; sketchybar --trigger window_focus
+# lalt - f : yabai -m window --toggle zoom-parent; sketchybar --trigger window_focus
+# shift + lalt - 1 : yabai -m window --space 1 && sketchybar --trigger windows_on_spaces
