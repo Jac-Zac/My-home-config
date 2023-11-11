@@ -203,6 +203,8 @@ _macSystemPrefs_() {
   brew install koekeishiya/formulae/yabai
   brew install yabai --head
   brew install skhd
+  brew tap FelixKratz/formulae
+  brew install borders
 
   echo "${bold}You should enable yabai after you finish everything up${reset}"
 
