@@ -13,17 +13,8 @@ yabai -m config window_shadow                float
 yabai -m config window_opacity               on
 yabai -m config active_window_opacity        1.0
 yabai -m config normal_window_opacity        0.9
-yabai -m config window_border                on
-yabai -m config window_border_width          4
-yabai -m config window_border_radius         12
 yabai -m config window_border_blur           on
 yabai -m config window_border_hidpi          on
-# yabai -m config active_window_border_color   0xFFD08770 # orange
-yabai -m config active_window_border_color   0xFFEBCB8B # yellow
-# yabai -m config active_window_border_color   0xFF81A1C1 # blue
-# yabai -m config active_window_border_color   0xFFA3BE8C # Green
-yabai -m config normal_window_border_color   0xFF4C566A
-# yabai -m config normal_window_border_color   0xFF2E3440
 yabai -m config insert_feedback_color        0xff61afef
 yabai -m config split_ratio                  0.50
 yabai -m config auto_balance                 on
@@ -75,3 +66,15 @@ yabai -m config external_bar all:27:0
 # yabai -m config external_bar all:0:0
 
 echo "yabai configuration loaded.."
+
+# yabai -m config active_window_border_color   0xFFD08770 # orange
+# yabai -m config active_window_border_color   0xFFEBCB8B # yellow
+# yabai -m config active_window_border_color   0xFF81A1C1 # blue
+# yabai -m config active_window_border_color   0xFFA3BE8C # Green
+# yabai -m config normal_window_border_color   0xFF4C566A
+# yabai -m config normal_window_border_color   0xFF2E3440
+#
+# yabai -m config window_border_width          4
+# yabai -m config window_border_radius         12
+
+borders active_color=00xFFEBCB8B inactive_color=0xFF4C566A width=12.0 2>/dev/null 1>&2 &
