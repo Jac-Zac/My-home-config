@@ -201,9 +201,10 @@ _macSystemPrefs_() {
 
   echo "${bold}Install yabai${reset}"
   brew install koekeishiya/formulae/yabai
-  brew install yabai --head
+  brew install yabai
   brew install skhd
   brew tap FelixKratz/formulae
+  brew install svim
   brew install borders
 
   echo "${bold}You should enable yabai after you finish everything up${reset}"
@@ -345,7 +346,7 @@ _mainScript_() {
 	  brew install lsd
 	  brew install htop
 	  brew install btop
-	  brew install tmux
+	  # brew install tmux
 	  brew install ncdu
 	  brew install ripgrep
 	  brew install duf
