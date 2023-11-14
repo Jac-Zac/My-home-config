@@ -7,6 +7,7 @@ brew=(
   icon=􀐛
   label=?
   padding_left=0
+  padding_right=5
   icon.font.size="13"
   icon.y_offset=1
   label.y_offset=1
