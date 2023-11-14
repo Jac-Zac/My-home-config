@@ -3,12 +3,12 @@
 source "$CONFIG_DIR/icons.sh"
 
 wifi=(
-  padding_right=2
+  padding_right=0
   label.width=0
   icon.y_offset=1
-  icon.font.size="13"
+  icon.font.size="14"
   icon="$WIFI_DISCONNECTED"
-  icon.color="$GREEN"
+  icon.color="$MAGENTA"
   script="$PLUGIN_DIR/wifi.sh"
 )
 

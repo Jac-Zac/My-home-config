@@ -4,7 +4,16 @@ zen_on() {
   sketchybar --set wifi drawing=off \
              --set apple.logo drawing=off \
              --set '/cpu.*/' drawing=off \
-             --set calendar icon.drawing=on \
+             --set status_braket drawing=off \
+             --set calendar label.drawing=off \
+             --set calendar icon.drawing=off \
+             --set time label.drawing=on \
+             --set time icon.drawing=on \
+             --set time background.drawing=on \
+             --set input icon.drawing=off \
+             --set input label.drawing=off \
+             --set battery icon.drawing=on \
+             --set time icon.drawing=on \
              --set separator drawing=off \
              --set front_app drawing=off \
              --set volume_icon drawing=off \
@@ -20,6 +29,9 @@ zen_off() {
              --set apple.logo drawing=on \
              --set '/cpu.*/' drawing=on \
              --set calendar icon.drawing=on \
+             --set calendar label.drawing=on \
+             --set input icon.drawing=on \
+             --set input label.drawing=on \
              --set separator drawing=on \
              --set front_app drawing=on \
              --set volume_icon drawing=on \

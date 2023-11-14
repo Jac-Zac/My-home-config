@@ -1,39 +1,15 @@
 #!/bin/bash
 
-# Color Palette
-# export BLACK=0xff2e3440 # nord0
-# export WHITE=0xffd8dee9 # nord6
-# export RED=0xffbf616a # nord11
-# export GREEN=0xffa3be8c # nord14
-# export BLUE=0xff5e81ac # nord9
-# export YELLOW=0xffebcb8b # nord13
-# export ORANGE=0xffd08770 # nord12
-# export MAGENTA=0xffb48ead # nord15
-# export GREY=0xff4c566a # nord3
-# export TRANSPARENT=0x00000000
-#
-# # General bar colors
-# export BAR_COLOR=0xff2e3440 # nord0
-# export BAR_BORDER_COLOR=0xff3b4252 # nord1
-# export ICON_COLOR=$WHITE # nord6
-# export LABEL_COLOR=$WHITE # nord6
-# export BACKGROUND_1=0x603c3e4f
-# export BACKGROUND_2=0x60494d64
-#
-# export POPUP_BACKGROUND_COLOR=0xff2e3440 # nord0
-# export POPUP_BORDER_COLOR=$WHITE # nord6
-#
-# export SHADOW_COLOR=$BLACK # nord0
-
 export BLACK=0xff2e3440
 export WHITE=0xffd8dee9
 export RED=0xffbf616a
 export GREEN=0xffa3be8c
-export BLUE=0xff8aadf4
+export BLUE=0xff81a1c1
 export YELLOW=0xffebcb8b
-export ORANGE=0xfff5a97f
-export MAGENTA=0xffc6a0f6
+export ORANGE=0xffd08770
+export MAGENTA=0xffb48ead
 export GREY=0xff939ab7
+export CYAN=0xff88c0d0
 export TRANSPARENT=0x00000000
 export LIGHT_BACKGROUND=0xff4c566a
 
