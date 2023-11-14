@@ -3,10 +3,13 @@ cmd + shift - return : open -a kitty
 cmd - 0 : open -a /Applications/Firefox\ Nightly.app/
 
 # focus window
-alt - h : yabai -m window --focus south
-alt - j : yabai -m window --focus west
-alt - k : yabai -m window --focus east
-alt - l : yabai -m window --focus north
+alt - j : cycle_clockwise.sh
+alt - k : cycle_counterclockwise.sh 
+
+# alt - h : yabai -m window --focus south
+# alt - j : yabai -m window --focus west
+# alt - k : yabai -m window --focus east
+# alt - l : yabai -m window --focus north
 
 # swap managed window
 alt + shift - h : yabai -m window --swap south
