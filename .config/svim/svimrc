@@ -1,0 +1,7 @@
+" Enable ci command for specific characters
+nnoremap ci" ci"
+nnoremap ci} ci}
+nnoremap ci) ci)
+nnoremap ci] ci]
+nnoremap ci' ci'
+nnoremap ci? ci?
