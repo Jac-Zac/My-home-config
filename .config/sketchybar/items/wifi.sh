@@ -3,7 +3,7 @@
 source "$CONFIG_DIR/icons.sh"
 
 wifi=(
-  padding_right=0
+  padding_right=10
   label.width=0
   icon.y_offset=1
   icon.font.size="14"
