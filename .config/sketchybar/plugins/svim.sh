@@ -10,13 +10,13 @@ if [ "$SENDER" = "svim_update" ]; then
   case "$MODE" in
     "I") ICON="$MODE_INSERT" DRAWING=off
     ;;
-    "N") ICON="$MODE_NORMAL"
+    "N") ICON="$MODE_NORMAL" COLOR=$WHITE
     ;;
     "V") ICON="$MODE_VISUAL" COLOR=$YELLOW
     ;;
     "C") ICON="$MODE_CMD" DRAW_CMD=on COLOR=$RED
     ;;
-    "_") ICON="$MODE_PENDING"
+    "_") ICON="$MODE_PENDING" COLOR=$GREEN
     ;;
     *) DRAWING=off
     ;;
@@ -26,5 +26,7 @@ if [ "$SENDER" = "svim_update" ]; then
                          label.drawing="$DRAW_CMD" \
                          icon="$ICON" \
                          icon.color="$COLOR" \
+                         background.border_color="$COLOR" \
+                         background.border_width=1\
                          label="$CMDLINE"
 fi
