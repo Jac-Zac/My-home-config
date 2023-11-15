@@ -2,20 +2,23 @@
 
 time=(
   icon.font="$FONT:Bold:12.0"
-  icon.color=$YELLOW
-  label.font="$FONT:Bold:12.0"
-  label.color=$WHITE
-  label.padding_right=5
-  label.padding_left=3
-  label.y_offset=1
+  icon.color=$BLACK
+  label.font="$FONT:Bold:11.0"
+  label.color=$BLACK
+  icon.y_offset=0.5
+  label.padding_right=10
+  label.padding_left=2
+  icon.padding_left=5
+  label.y_offset=0.5
   label.align=right
   update_freq=30
   padding_left=0
   script="$PLUGIN_DIR/time.sh"
   click_script="$PLUGIN_DIR/zen.sh"
   # background.color="0xb8ebcb8b"
-  background.color=$BACKGROUND_2
-  background.height=30
+  background.color=$YELLOW
+  background.corner_radius=6
+  background.height=20
   blur_radius=30
 )
 

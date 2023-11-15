@@ -41,12 +41,12 @@ cpu_user=(
 )
 
 status_bracket=(
+  shadow=on
   background.height=30
   background.color=$BACKGROUND_2
   background.border_color=$BACKGROUND_2
   blur_radius=30
 )
-
 
 sketchybar --add item cpu.top right              \
            --set cpu.top "${cpu_top[@]}"         \
@@ -59,7 +59,6 @@ sketchybar --add item cpu.top right              \
                                                  \
            --add graph cpu.user right 75         \
            --set cpu.user "${cpu_user[@]}"
-
 
 # bracket for everything
 sketchybar --add bracket status                        \

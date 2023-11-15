@@ -34,7 +34,6 @@ apple_lock=(
   click_script="pmset displaysleepnow; $POPUP_OFF"
 )
 
-
 sketchybar --add item apple.logo left                  \
            --set apple.logo "${apple_logo[@]}"         \
                                                        \
