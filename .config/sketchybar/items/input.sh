@@ -8,7 +8,7 @@ sketchybar --add event input_change 'AppleSelectedInputSourcesChangedNotificatio
     --set input script="$PLUGIN_DIR/input.sh" \
           icon=􀇳 \
           icon.font="$FONT:Black:13.0"      \
-          label.font="$FONT:Italic:13.0"      \
+          label.font="$FONT:13.0"      \
           padding_left=8 \
           padding_right=8 \
           y_offset=1 \

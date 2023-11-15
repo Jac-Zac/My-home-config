@@ -3,8 +3,6 @@ source "$HOME/.config/sketchybar/icons.sh"
 
 # Register custom event - this will be use by sketchy bar's space items as well as app_space.sh
 
-sketchybar --add event window_change
-
 # Space items
 # COLORS_SPACE=($YELLOW $CYAN $MAGENTA $WHITE $BLUE $RED $GREEN $WHITE $WHITE $WHITE )
 COLORS_SPACE=($WHITE $LIGHT_BLUE $CYAN $BLUE $DARK_BLUE $MAGENTA $RED $ORANGE $YELLOW $GREEN )
@@ -29,11 +27,13 @@ do
                                     background.corner_radius=5                 \
                                     background.height=20                       \
                                     icon=${ICONS_SPACE[i]}                     \
+                                    label.font="Hack Nerd Font:Bold:14.0"      \
                                     icon.color=${COLORS_SPACE[i]}              \
                                     label="_"                                  \
                                     label.color=${COLORS_SPACE[i]}             \
-                                    icon.y_offset=1                           \
-                                    label.y_offset=-0.5             \
+                                    icon.y_offset=1.5                           \
+                                    label.y_offset=0             \
+                                    label.font.size=13             \
              --subscribe space.$sid front_app_switched window_change
 done
 
