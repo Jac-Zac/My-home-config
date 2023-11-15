@@ -6,7 +6,9 @@ zen_on() {
              --set '/cpu.*/' drawing=off \
              --set status_braket drawing=off \
              --set calendar label.drawing=off \
-             --set calendar icon.drawing=off \
+             --set calendar background.drawing=off \
+             --set input background.drawing=off \
+             --set wifi background.drawing=off \
              --set time label.drawing=on \
              --set time icon.drawing=on \
              --set time background.drawing=on \
