@@ -5,11 +5,9 @@ source "$HOME/.config/sketchybar/icons.sh"
 # The $SELECTED variable is available for space components and indicates if
 # the space invoking this script (with name: $NAME) is currently selected:
 # https://felixkratz.github.io/SketchyBar/config/components#space----associate-mission-control-spaces-with-an-item
-#
-ROMAN_NUMERALS=("I" "II" "III" "IV" "V" "VI" "VII" "VIII" "IX" "X")
 
 sketchybar --set $NAME background.drawing=$SELECTED \
-	icon.font.size="18" \
+	icon.font.size="12" \
 	icon.highlight=$SELECTED \
 	label.highlight=$SELECTED
 
@@ -17,8 +15,7 @@ if [[ $SENDER == "front_app_switched" || $SENDER == "window_change" ]];
 then
  for i in "${!ICONS_SPACE[@]}"
  do
-   sid=$(ROMAN_NUMERALS[$i])
-   # sid=$(($i+1))
+   sid=$(($i+1))
    LABEL=""
  
    QUERY=$(yabai -m query --windows --space $sid)

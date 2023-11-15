@@ -6,14 +6,8 @@ source "$HOME/.config/sketchybar/icons.sh"
 sketchybar --add event window_change
 
 # Space items
-# COLORS_SPACE=($YELLOW $CYAN $MAGENTA $WHITE $BLUE $RED $GREEN)
-COLORS_SPACE=($WHITE)
-
-for i in {1..10}
-do
-  COLORS_SPACE+=($WHITE)
-done
-
+# COLORS_SPACE=($YELLOW $CYAN $MAGENTA $WHITE $BLUE $RED $GREEN $WHITE $WHITE $WHITE )
+COLORS_SPACE=($WHITE $LIGHT_BLUE $CYAN $BLUE $DARK_BLUE $MAGENTA $RED $ORANGE $YELLOW $GREEN )
 LENGTH=${#ICONS_SPACE[@]}
 
 for i in "${!ICONS_SPACE[@]}"
@@ -38,16 +32,18 @@ do
                                     icon.color=${COLORS_SPACE[i]}              \
                                     label="_"                                  \
                                     label.color=${COLORS_SPACE[i]}             \
-                                    label.font.size="12"                       \
-             --subscribe space.$sid front_app window_change
+                                    icon.y_offset=1                           \
+                                    label.y_offset=-0.5             \
+             --subscribe space.$sid front_app_switched window_change
 done
 
 # Space bracket
 sketchybar --add bracket spaces '/space\..*/'                        \
            --set         spaces background.color=$BACKGROUND_2      \
                                   blur_radius=30                    \
-                                  background.border_color=$WHITE   \
-                                  background.border_width=2        \
+                                  shadow=on                         \
+                                  background.border_color=$YELLOW   \
+                                  background.border_width=1        \
                                   icon.highlight_color=$BACKGROUND_1\
                                   icon.padding_left=6               \
                                   icon.padding_right=2              \
