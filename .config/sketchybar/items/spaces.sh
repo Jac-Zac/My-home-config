@@ -18,6 +18,12 @@ do
   elif [[ $i == $(($LENGTH-1)) ]]; then
     PAD_RIGHT=8
   fi
+
+
+# Old config
+# icon.color=${COLORS_SPACE[i]}              \
+# label.color=${COLORS_SPACE[i]}             \
+
   sketchybar --add space space.$sid left                                       \
              --set       space.$sid script="$PLUGIN_DIR/app_space.sh"          \
                                     associated_space=$sid                      \
@@ -31,7 +37,7 @@ do
                                     icon.color=${COLORS_SPACE[i]}              \
                                     label="_"                                  \
                                     label.color=${COLORS_SPACE[i]}             \
-                                    icon.y_offset=1.5                           \
+                                    icon.y_offset=1.5                          \
                                     label.y_offset=0             \
                                     label.font.size=13             \
              --subscribe space.$sid front_app_switched window_change

@@ -22,8 +22,8 @@ cpu_percent=(
 
 cpu_sys=(
   width=0
-  graph.color=$RED
-  graph.fill_color=$RED
+  graph.color=$GREEN
+  graph.fill_color=$GREEN
   label.drawing=off
   icon.drawing=off
   background.height=20
@@ -32,7 +32,7 @@ cpu_sys=(
 )
 
 cpu_user=(
-  graph.color=$BLUE
+  graph.color=$LIGHT_BLUE
   label.drawing=off
   icon.drawing=off
   background.height=20

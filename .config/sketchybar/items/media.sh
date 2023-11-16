@@ -8,7 +8,7 @@ media=(
   background.color=$BACKGROUND_2
   script="$PLUGIN_DIR/media.sh"
   label.max_chars=30
-  scroll_texts=on
+  scroll_texts=off
   updates=on
 )
 
