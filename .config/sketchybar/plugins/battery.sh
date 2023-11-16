@@ -14,11 +14,11 @@ fi
 DRAWING=on
 COLOR=$WHITE
 case ${PERCENTAGE} in
-  9[0-9]|100) ICON=$BATTERY_100; DRAWING=on; COLOR=$GREEN
+  9[0-9]|100) ICON=$BATTERY_100; COLOR=$GREEN
   ;;
-  [6-8][0-9]) ICON=$BATTERY_75; DRAWING=on; COLOR=$GREEN
+  [5-8][0-9]) ICON=$BATTERY_75; COLOR=$GREEN
   ;;
-  [3-5][0-9]) ICON=$BATTERY_50; COLOR=$GREEN
+  [3-4][0-9]) ICON=$BATTERY_50; COLOR=$YELLOW
   ;;
   [1-2][0-9]) ICON=$BATTERY_25; COLOR=$ORANGE
   ;;
@@ -30,4 +30,4 @@ if [[ $CHARGING != "" ]]; then
   DRAWING=on
 fi
 
-sketchybar --set $NAME drawing=$DRAWING icon="$ICON" label="$PERCENTAGE %" icon.color=$COLOR
+sketchybar --set $NAME drawing=$DRAWING icon="$ICON" label=" $PERCENTAGE %" icon.color=$COLOR
