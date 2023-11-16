@@ -21,6 +21,7 @@ calendar=(
 
 date_bracket=(
   shadow=on
+  background.padding_left=10
   background.height=30
   background.color=$BLACK
   background.border_color=$BLACK

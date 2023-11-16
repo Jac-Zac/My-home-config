@@ -339,6 +339,7 @@ _mainScript_() {
 	  brew tap homebrew/cask-fonts
 	  brew install --cask font-hack-nerd-font
 	  brew install --cask font-inconsolata-lgc-nerd-font
+	  brew install raycast
 	  brew install python3
 	  brew install neovim
 	  brew install fzf
