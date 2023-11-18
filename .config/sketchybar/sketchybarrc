@@ -77,7 +77,6 @@ source "$ITEM_DIR/spaces.sh"
 # source "$ITEM_DIR/spotify.sh"
 # source "$ITEM_DIR/media.sh"
 source "$ITEM_DIR/front_app.sh"
-# source "$ITEM_DIR/media_ctrl.sh"
 
 # Right
 source "$ITEM_DIR/time.sh"

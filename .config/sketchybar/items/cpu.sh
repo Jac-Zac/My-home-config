@@ -64,4 +64,5 @@ sketchybar --add item cpu.top right              \
 sketchybar --add bracket status                        \
                 cpu.top cpu.percent cpu.sys cpu.user    \
                 brew github.bell wifi input volume_icon \
+                calendar time \
            --set status "${status_bracket[@]}"
