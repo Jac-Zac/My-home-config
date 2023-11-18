@@ -50,7 +50,7 @@ sketchybar --add bracket spaces '/space\..*/'                        \
                                   shadow=on                         \
                                   background.border_color=$YELLOW   \
                                   background.border_width=1        \
-                                  icon.highlight_color=$BACKGROUND_2v\
+                                  icon.highlight_color=$BACKGROUND_2\
                                   icon.padding_left=6               \
                                   icon.padding_right=2              \
                                   label.color=$YELLOW               \
