@@ -1,12 +1,10 @@
 #!/bin/bash
 
 yabai=(
-  icon.width=10
-  label.width=10
-  background.color=$BLACK
-  background.color=$BLACK
+  icon.width=0
+  label.width=0
   script="$PLUGIN_DIR/yabai.sh"
-  icon.font="$FONT:Bold:16.0"
+  icon.font="$FONT:16.0"
   display=active
 )
 

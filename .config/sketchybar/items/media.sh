@@ -1,14 +1,14 @@
 media=(
+  label.max_chars=30
+  scroll_texts=on
   background.height=30
   background.color=$BACKGROUND_2
   background.border_color=$BACKGROUND_2
-  blur_radius=30
   icon.background.drawing=on
-  icon.background.drawing=on
-  background.color=$BACKGROUND_2
+  icon.background.image=media.artwork
+  icon.background.image.corner_radius=9
   script="$PLUGIN_DIR/media.sh"
-  label.max_chars=30
-  scroll_texts=off
+  blur_radius=30
   updates=on
 )
 
