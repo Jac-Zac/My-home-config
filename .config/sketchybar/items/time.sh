@@ -1,16 +1,16 @@
 #!/bin/bash
 
 time=(
-  icon.font="$FONT:Bold:12.0"
+  icon.font="$FONT:Bold:14.0"
   icon.color=$BLACK
   label.font="$FONT:Bold:11.0"
   label.color=$BLACK
   icon.y_offset=1
   label.padding_right=10
-  label.padding_left=3
+  label.padding_left=2
   icon.padding_left=5
   background.y_offset=1
-  label.y_offset=1
+  label.y_offset=2
   label.align=right
   update_freq=30
   padding_left=0
