@@ -1,7 +1,7 @@
 #!/bin/bash
 
 front_app=(
-  label.font="$FONT:Italic:15.0"
+  label.font="$FONT:Italic:14.0"
   label.y_offset=2
   label.padding_right=10
   icon.background.drawing=on
@@ -17,7 +17,8 @@ front_app=(
   icon.background.image.scale=0.9
   icon.background.image.padding_left=2
   script="$PLUGIN_DIR/front_app.sh"
-  click_script="open -a 'Mission Control'"
+  # click_script="open -a 'Mission Control'"
+  click_script="borders width=10.0 active_color=0xffbf616a && sleep 2 && borders active_color=0xFFA3BE8C width=6.0 "
 )
 
 sketchybar --add item front_app center      \
