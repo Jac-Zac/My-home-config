@@ -5,6 +5,7 @@ zen_on() {
              --set apple.logo drawing=off \
              --set '/cpu.*/' drawing=off \
              --set status_braket drawing=off \
+             --set calendar icon.drawing=off \
              --set calendar label.drawing=off \
              --set calendar background.drawing=off \
              --set input background.drawing=off \
