@@ -5,7 +5,9 @@ source "$HOME/.config/sketchybar/icons.sh"
 
 # Space items
 # COLORS_SPACE=($YELLOW $CYAN $MAGENTA $WHITE $BLUE $RED $GREEN $WHITE $WHITE $WHITE )
-COLORS_SPACE=($WHITE $LIGHT_BLUE $CYAN $BLUE $DARK_BLUE $MAGENTA $RED $ORANGE $YELLOW $GREEN )
+# COLORS_SPACE=($WHITE $LIGHT_BLUE $CYAN $BLUE $DARK_BLUE $MAGENTA $RED $ORANGE $YELLOW $GREEN )
+COLORS_SPACE=($WHITE $LIGHT_BLUE $CYAN $BLUE $MAGENTA $ORANGE $YELLOW $GREEN )
+# COLORS_SPACE=($WHITE $WHITE $WHITE $WHITE $WHITE $WHITE $WHITE $WHITE $WHITE $WHITE )
 LENGTH=${#ICONS_SPACE[@]}
 
 for i in "${!ICONS_SPACE[@]}"
@@ -48,8 +50,8 @@ sketchybar --add bracket spaces '/space\..*/'                        \
            --set         spaces background.color=$BACKGROUND_2      \
                                   blur_radius=30                    \
                                   shadow=on                         \
-                                  background.border_color=$YELLOW   \
-                                  background.border_width=1        \
+                                  background.border_color=$WHITE   \
+                                  background.border_width=0        \
                                   icon.highlight_color=$BACKGROUND_2\
                                   icon.padding_left=6               \
                                   icon.padding_right=2              \

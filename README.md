@@ -27,20 +27,20 @@
 
 :octocat: _Those are some details about my setup_
 
-+ **OS**							• `MacOS/Arch Linux`
-+ **WM**							• [`yabai`](https://github.com/koekeishiya/yabai)
-+ **Shell**							• [`zsh`](https://www.zsh.org/) -> [`powerlevel10k`](https://github.com/romkatv/powerlevel10k)
-+ **Terminal**						• [`iTerm`](https://iterm2.com/)
-+ **Editor**						• [`Neovim`](https://github.com/neovim/neovim/)
-+ **Theme**							• [`Nord`](https://github.com/arcticicestudio/nord-iterm2)
-+ **Font**							• [`Inconsolata Nerd`](https://github.com/ryanoasis/nerd-fonts)
-+ **System information**			• [`paleofetch`](https://github.com/Jac-Zac/paleofetch-mac-prettier)
-+ **Fuzzy finder**					• [`fzf`](https://github.com/junegunn/fzf)
-+ **Launcher**						• [`skhd`](https://github.com/koekeishiya/skhd) and [`Alfred`](https://www.alfredapp.com)
-+ **Terminal multiplexer**			• [`tmux`](https://github.com/tmux/tmux)
-+ **Resource monitor**				• [`btop`](https://github.com/aristocratos/btop) *(aliased to top)*
-+ **Browser**						• [`Firefox Nightly`](https://www.mozilla.org/en-US/firefox/61.0a1/releasenotes/)
-+ **Wallpapers**					• [`Fall`](https://wallpaper.dog/large/10812699.jpg)
+- **OS** • `MacOS/Arch Linux`
+- **WM** • [`yabai`](https://github.com/koekeishiya/yabai)
+- **Shell** • [`zsh`](https://www.zsh.org/) -> [`powerlevel10k`](https://github.com/romkatv/powerlevel10k)
+- **Terminal** • [`iTerm`](https://iterm2.com/)
+- **Editor** • [`Neovim`](https://github.com/neovim/neovim/)
+- **Theme** • [`Nord`](https://github.com/arcticicestudio/nord-iterm2)
+- **Font** • [`Inconsolata Nerd`](https://github.com/ryanoasis/nerd-fonts)
+- **System information** • [`paleofetch`](https://github.com/Jac-Zac/paleofetch-mac-prettier)
+- **Fuzzy finder** • [`fzf`](https://github.com/junegunn/fzf)
+- **Launcher** • [`skhd`](https://github.com/koekeishiya/skhd) and [`Alfred`](https://www.alfredapp.com)
+- **Terminal multiplexer** • [`tmux`](https://github.com/tmux/tmux)
+- **Resource monitor** • [`btop`](https://github.com/aristocratos/btop) _(aliased to top)_
+- **Browser** • [`Firefox Nightly`](https://www.mozilla.org/en-US/firefox/61.0a1/releasenotes/)
+- **Wallpapers** • [`Fall`](https://wallpaper.dog/large/10812699.jpg)
 
 ## Motivation 💭
 
@@ -59,21 +59,22 @@ _You should always keep your configuration up to date, luckily there is a straig
 
 - You have to go to the "My-home-config" directory
 
-	  cd My-home-config
+  cd My-home-config
 
 - Pull the updates from Github latest version
 
-	  git pull
+  git pull
 
 - This command run the install script in update mode
 
-	  ./installer.sh -u
+  ./installer.sh -u
 
 </details>
 
 ### Customizations 🔧
 
 ##### This setup is made for macOS, and perhaps GNU\Linux in the future
+
 > YouTube from the terminal can be watched thanks to [`ytfzf`](https://github.com/pystardust/ytfzf)
 
 <details>
@@ -111,9 +112,9 @@ If you'd like to see images on iTerm you can use [`imgcat`](https://pypi.org/pro
 
 ![showcase](.assets/iterm.png)
 
-*You can also go to your iTerm preferences and import the iTerm_profile.json that you can find in the cloned directory*
+_You can also go to your iTerm preferences and import the iTerm_profile.json that you can find in the cloned directory_
 
-> To have a bit of space I also suggest to add 20px of padding, set it under advanced >  margin
+> To have a bit of space I also suggest to add 20px of padding, set it under advanced > margin
 
 </details>
 
@@ -126,7 +127,7 @@ If you'd like to see images on iTerm you can use [`imgcat`](https://pypi.org/pro
 
 https://github.com/arkenfox/user.js/
 
-*I use [nord theme](https://addons.mozilla.org/en-US/firefox/addon/nord-theme-cool/?utm_source=addons.mozilla.org&utm_medium=referral&utm_content=search) and I changed my new tabs to black pages. And I use brave search*
+_I use [nord theme](https://addons.mozilla.org/en-US/firefox/addon/nord-theme-cool/?utm_source=addons.mozilla.org&utm_medium=referral&utm_content=search) and I changed my new tabs to black pages. And I use brave search_
 
 - [`zuBlock Origin`](https://ublockorigin.com)
 - [`LocalCDN`](https://www.localcdn.org/)
@@ -139,9 +140,11 @@ https://github.com/arkenfox/user.js/
 > And use [nord theme for youtube](https://github.com/MajesticWaffle/Youtube-Nord-Theme) and this for [whatsapp](https://github.com/vednoc/dark-whatsapp)
 
 ##### Set this value in your [about:config](about:config) to true
+
 ```
 toolkit.legacyUserProfileCustomizations.stylesheets = true
 ```
+
 > Then follow the instruction given in [this Github page](https://github.com/crambaud/waterfall.git)
 
 ![showcase](.assets/firefox.png)
@@ -155,9 +158,9 @@ toolkit.legacyUserProfileCustomizations.stylesheets = true
 
 ![showcase](.assets/lsd.png)
 
-*If you are not interested in using it just uncommon the following line in the .zshrc file*
+_If you are not interested in using it just uncommon the following line in the .zshrc file_
 
-	alias ls="lsd"
+    alias ls="lsd"
 
 </details>
 
@@ -198,9 +201,10 @@ chmod +x installer.sh
 ```
 ./installer.sh
 ```
+
 > You should close your terminal windows and open a new one, to reload the configurations
 
-*You can run ```./install -s``` to only install the command prompt configurations*
+_You can run `./install -s` to only install the command prompt configurations_
 
 **Installation Completed !**
 
@@ -208,7 +212,7 @@ chmod +x installer.sh
 
 #### Routines you should implement into your mac usage
 
-*You should try to keep your system up to date, also follow the [`instruction under the updating section`](#Updating-calendar)*
+_You should try to keep your system up to date, also follow the [`instruction under the updating section`](#Updating-calendar)_
 
 ###### And I also use:
 
@@ -224,6 +228,7 @@ Moreover it is always a good measure to check if you have any malware installed 
 ```
 sudo freshclam
 ```
+
 > If you get an error try copy the sample configuration file to a new file and comment out `Example` side the file.
 
 ###### Wait for it to finish and then:
@@ -238,28 +243,32 @@ I use <kbd>command</kbd> AKA super key (on GNU/Linux) as my main modifier
 
 #### Keyboard ⌨️
 
-| Keybind | Action |
-| --- | --- |
-| <kbd>command + shift + enter</kbd> | Spawn terminal |
-| <kbd>command + n</kbd> | Swap new windows |
-| <kbd>command + b</kbd> | Open firefox nightly |
-| <kbd>command + p</kbd> | Launch Alfred |
-| <kbd>command + w</kbd> | Close Window |
-| <kbd>command + q</kbd> | Close Application |
-| <kbd>cotrol + [1-0]</kbd> | Change workspace |
-| <kbd>command + shift + [1-0]</kbd> | Move focused window to workspace |
-| <kbd>command + shift + [hjkl]</kbd> | Resize client |
-| <kbd>command + [hjkl]</kbd> | Change focus by direction |
-| <kbd>command + shift + space</kbd> | Set window to floating mode |
-| <kbd>command + shift + t</kbd> | Set window in the center |
-| <kbd>lctrl + alt + cmd + q</kbd> | Restart yabai |
+| Keybind                             | Action                           |
+| ----------------------------------- | -------------------------------- |
+| <kbd>command + shift + enter</kbd>  | Spawn terminal                   |
+| <kbd>command + n</kbd>              | Swap new windows                 |
+| <kbd>command + b</kbd>              | Open firefox nightly             |
+| <kbd>command + p</kbd>              | Launch Alfred                    |
+| <kbd>command + w</kbd>              | Close Window                     |
+| <kbd>command + q</kbd>              | Close Application                |
+| <kbd>cotrol + [1-0]</kbd>           | Change workspace                 |
+| <kbd>command + shift + [1-0]</kbd>  | Move focused window to workspace |
+| <kbd>command + shift + [hjkl]</kbd> | Resize client                    |
+| <kbd>command + [hjkl]</kbd>         | Change focus by direction        |
+| <kbd>command + shift + space</kbd>  | Set window to floating mode      |
+| <kbd>command + shift + t</kbd>      | Set window in the center         |
+| <kbd>lctrl + alt + cmd + q</kbd>    | Restart yabai                    |
 
 ## Other things 📚
 
 I'd like to slowly switch away from powerlevel10k to get a faster feeling shell, but now I will be focusing on other things but also better my configuration for M1 Mac. For the README.md I took inspiration from [this repo](https://github.com/owl4ce/dotfiles), and for the bootstrap script I took inspiration from [this repo instead](https://github.com/natelandau/dotfiles).
 I also have many aliases for example if you write `intel` in front of any command it will run the under Rosetta. I have also started using updog to run simple https python servers.
+I have added fj to move very fast.
+
 I have just added support for other Linux distros at least to have a decent configuration.
+
 > Other possible interesting things:
+
 ```
 https://github.com/Patato777/dotfiles
 https://github.com/terroo/wallset.git
@@ -277,16 +286,18 @@ https://www.simple-bar.com/
 
 <em><p align="center">This is what a little showcase</p></em>
 
-
 <img src="https://raw.githubusercontent.com/Jac-Zac/My-home-config/master/.assets/Arch_rice.jpg"/>
 
 <em><p align="center">
 Now I also have a configuration for my Raspberry pi 4 running Arch with [dwm](https://dwm.suckless.org/) as a WM and I'm loving it so far, thus I'm thinking of posting that too in the future.
 I think I will do it if some asks for it
+
 </p></em>
 
 ---
 
 ### Problems ❌
+
 If you happen to run into some problems you can just open an issue, I'll try to solve it as soon as possible. Otherwise you can contact me by sending me an email.
+
 > It is not been tested for a bit. Therefore feedback are appreciated
