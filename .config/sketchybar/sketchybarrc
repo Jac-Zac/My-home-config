@@ -69,7 +69,7 @@ sketchybar --default "${defaults[@]}"
 
 # Left
 source "$ITEM_DIR/apple.sh"
-source "$ITEM_DIR/svim.sh"
+# source "$ITEM_DIR/svim.sh"
 source "$ITEM_DIR/spaces.sh"
 # source "$ITEM_DIR/yabai.sh"
 

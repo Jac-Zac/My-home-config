@@ -16,10 +16,9 @@ compinit
 _comp_options+=(globdots)		# Include hidden files.
 
 # Functions 
-fcd() {
-  cd ; cd "$(find . -type d | fzf --preview '([[ -f {} ]] && (bat --style=numbers --color=always {} || cat {})) || ([[ -d {} ]] && (lsd --tree {})) || echo {} 2> /dev/null | head -200')"
+fj() {
+    cd "$(autojump -s | awk -F'\t' '{print $2}' | fzf --height 40% --reverse --border --ansi --no-clear +m --preview 'ls {}' --preview-window=up:3:wrap)"
 }
-
 
 #################
 #      VIM      #
