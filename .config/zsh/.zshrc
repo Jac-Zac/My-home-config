@@ -16,8 +16,8 @@ compinit
 _comp_options+=(globdots)		# Include hidden files.
 
 # Functions 
-fj() {
-    cd "$(autojump -s | awk -F'\t' '{print $2}' | fzf --height 40% --reverse --border --ansi --no-clear +m --preview 'ls {}' --preview-window=up:3:wrap)"
+fcd() {
+    cd "$(autojump -s | awk -F'\t' '{if (system("[ -d \"" $2 "\" ]") == 0) print $2}' | fzf --height 40% --reverse --border --ansi --no-clear +m --preview 'ls {}' --preview-window=up:3:wrap)"
 }
 
 #################
