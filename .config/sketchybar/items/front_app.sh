@@ -1,8 +1,8 @@
 #!/bin/bash
 
 front_app=(
-  label.font="$FONT:Italic:14.0"
-  label.y_offset=2
+  label.font="$FONT:Regular:14.0"
+  label.y_offset=1
   label.padding_right=10
   icon.background.drawing=on
   display=active

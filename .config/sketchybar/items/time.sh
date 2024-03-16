@@ -3,7 +3,7 @@
 time=(
   icon.font="$FONT:Bold:14.0"
   icon.color=$BLACK
-  label.font="$FONT:Bold:11.0"
+  label.font="$FONT:Regular:12.0"
   label.color=$BLACK
   icon.y_offset=1
   label.padding_right=10
