@@ -3,11 +3,12 @@
 battery=(
   script="$PLUGIN_DIR/battery.sh"
   icon.font="$FONT:Regular:18.0"
-  label.font="$FONT:Regular:12.0"
+  label.font="$FONT:Regular:13.0"
   padding_right=3
   padding_left=1
-  label.padding_left=0
-  label.y_offset=-1.5
+  label.padding_left=-4
+  label.padding_right=10
+  # label.y_offset=-1.5
   y_offset=1
   label.drawing=on
   update_freq=120
