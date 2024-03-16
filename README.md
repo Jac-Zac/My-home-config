@@ -300,4 +300,6 @@ I think I will do it if some asks for it
 
 If you happen to run into some problems you can just open an issue, I'll try to solve it as soon as possible. Otherwise you can contact me by sending me an email.
 
+Need to fix some things looking at this: https://github.com/FelixKratz/dotfiles/blob/master/.install.sh
+
 > It is not been tested for a bit. Therefore feedback are appreciated
