@@ -97,12 +97,12 @@
     wifi                    # wifi speed
 	load                    # CPU load
     # disk_usage            # disk usage
-    # ram				    # free RAM
     # swap                  # used swap
     todo                    # todo items (https://github.com/todotxt/todo.txt-cli)
     timewarrior             # timewarrior tracking status (https://timewarrior.net/)
     taskwarrior             # taskwarrior task count (https://taskwarrior.org/)
-	battery	                # internal battery
+	  # battery	                # internal battery
+    ram				              # free RAM
 	
     # =========================[ Line #2 ]=========================
     newline
@@ -1551,7 +1551,13 @@
   # Show battery in yellow when it's discharging.
   typeset -g POWERLEVEL9K_BATTERY_DISCONNECTED_FOREGROUND=3
   # Battery pictograms going from low to high level of charge.
-  typeset -g POWERLEVEL9K_BATTERY_STAGES='\uf58d\uf579\uf57a\uf57b\uf57c\uf57d\uf57e\uf57f\uf580\uf581\uf578'
+  # \udb80\udc7a
+  # typeset -g POWERLEVEL9K_BATTERY_STAGES='\uf58d\uf579\uf57a\uf57b\uf57c\uf57d\uf57e\uf57f\uf580\uf581\uf578'
+
+  typeset -g POWERLEVEL9K_BATTERY_STAGES='󰁺\󰁻\󰁼\󰁽\󰁾\󰁿\󰂀\󰂁\󰂂\󰁹\󰂄'
+  
+  # typeset -g POWERLEVEL9K_BATTERY_STAGES='  \udb80\udc7a\udb80\ucd7b\udb80\ucd7c\udb80\ucd7d\udb80\ucd7e\udb80\ucd7f\udb80\ucd81\udb80\ucd82\ucd83\udb80\ucd79\udb80\udc84'
+  
   # Don't show the remaining time to charge/discharge.
   typeset -g POWERLEVEL9K_BATTERY_VERBOSE=false
   # typeset -g POWERLEVEL9K_BATTERY_BACKGROUND=0
