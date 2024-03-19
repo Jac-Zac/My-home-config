@@ -12,6 +12,7 @@ export GOPATH="${XDG_DATA_HOME:-$HOME/.local/share}/go"
 export GNUPGHOME="${XDG_DATA_HOME:-$HOME/.local/share}/gnupg"
 export IPYTHONDIR="${XDG_CONFIG_HOME:-$HOME/.config}/python_libraries/jupyter"
 export JUPYTER_CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/python_libraries/jupyter"
+export GIT_CONFIG_GLOBAL="${XDG_CONFIG_HOME:-$HOME/.config}/git/gitconfig"
 export HOMEBREW_BREWFILE="${XDG_CONFIG_HOME:-$HOME/.config}/brewfile/Brewfile"
 
 # Adding scripts to path
