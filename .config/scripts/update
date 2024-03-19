@@ -1,3 +1,5 @@
 brew update && brew upgrade
+brew doctor 
 mac-cleanup
+rm -r .npm/
 sudo purge
