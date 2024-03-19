@@ -7,7 +7,10 @@ ITEM_DIR="$CONFIG_DIR/items" # Directory where the items are configured
 PLUGIN_DIR="$CONFIG_DIR/plugins" # Directory where all the plugin scripts are stored
 
 # FONT="InconsolataLGC Nerd Font" # Needs to have Regular, Bold, Semibold, Heavy and Black variants
-FONT="Inconsolata Nerd Font" # Needs to have Regular, Bold, Semibold, Heavy and Black variants
+# FONT="Inconsolata Nerd Font" # Needs to have Regular, Bold, Semibold, Heavy and Black variants
+FONT="JetBrainsMono Nerd Font"
+ICON_FONT="sf-symols"
+
 PADDINGS=3 # All paddings use this value (icon, label, background)
 
 # Setting up and starting the helper process
@@ -44,7 +47,8 @@ sketchybar --bar "${bar[@]}"
 # Setting up default values
 defaults=(
   updates=when_shown
-  icon.font="$FONT:Bold:12.0"
+  # icon.font="$FONT:Bold:12.0"
+  icon.font="$FONT:Regular:12.0"
   icon.color=$ICON_COLOR
   icon.padding_left=$PADDINGS
   icon.padding_right=$PADDINGS
