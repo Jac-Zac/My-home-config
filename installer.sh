@@ -156,23 +156,23 @@ _shell_config_() {
 
   # Check if you are running arch linux
   if $ARCH; then
-	echo "${green}${bold}You are runing Arch linux (Nice !)${reset}"
-	echo
-	sudo pacman -Sy base-devel rsync neovim zsh xorg xorg-xinit xorg-server neofetch tmux htop bpytop lsd firefox alacritty
-	chsh -s $(which zsh)
-	ln -s ~/.config/x11/xprofile ~/.xprofile
-	mkdir packages
-	git clone https://github.com/LukeSmithxyz/st.git ~/packages/st
-	git clone https://github.com/LukeSmithxyz/dwm.git ~/packages/dwn
-	git clone https://aur.archlinux.org/yay.git $HOME/packages/yay
-	cp dwm_config.h ~/packages/dwm/config.h
-	cd $HOME/package/dwm
-	sudo make && make install
-	cd $HOME/packages/yay
-	makepkg -si
-	yay nerd-fonts-complete
-        sh -c "$(curl -fsSL https://raw.githubusercontent.com/mut-ex/minimal-functional-fox/master/install.sh)"
-	echo
+	  echo "${green}${bold}You are runing Arch linux (Nice !)${reset}"
+	  echo
+	  sudo pacman -Sy base-devel rsync neovim zsh xorg xorg-xinit xorg-server neofetch tmux htop bpytop lsd firefox alacritty
+	  chsh -s $(which zsh)
+	  ln -s ~/.config/x11/xprofile ~/.xprofile
+	  mkdir packages
+	  git clone https://github.com/LukeSmithxyz/st.git ~/packages/st
+	  git clone https://github.com/LukeSmithxyz/dwm.git ~/packages/dwn
+	  git clone https://aur.archlinux.org/yay.git $HOME/packages/yay
+	  cp dwm_config.h ~/packages/dwm/config.h
+	  cd $HOME/package/dwm
+	  sudo make && make install
+	  cd $HOME/packages/yay
+	  makepkg -si
+	  yay nerd-fonts-complete
+          sh -c "$(curl -fsSL https://raw.githubusercontent.com/mut-ex/minimal-functional-fox/master/install.sh)"
+	  echo
   else
   # Copy the fonts
   	git clone https://github.com/shaunsingh/SFMono-Nerd-Font-Ligaturized.git ~/Library/Font
@@ -204,7 +204,7 @@ _macSystemPrefs_() {
   brew install yabai
   brew install skhd
   brew tap FelixKratz/formulae
-  brew install svim
+  # brew install svim
   brew install borders
 
   echo "${bold}You should enable yabai after you finish everything up${reset}"
@@ -335,26 +335,30 @@ _mainScript_() {
 	  # If the system is macos run the following
 	  echo "${bold}Checking for brew${reset}"
 	  _brew_installation_
+
+	  # Use the Brew file instead
+	  brew bundle install
+
 	  # Installing necessary packages
-	  brew tap homebrew/cask-fonts
-	  brew install --cask font-hack-nerd-font
-	  brew install --cask font-inconsolata-lgc-nerd-font
-	  brew install raycast
-	  brew install python3
-	  brew install neovim
-	  brew install fzf
-	  brew install wget
-	  brew install lsd
-	  brew install htop
-	  brew install btop
-	  # brew install tmux
-	  brew install ncdu
-	  brew install ripgrep
-	  brew install duf
-	  brew install gping
-	  brew install procs
-	  brew install autojump
-      git clone https://github.com/Jac-Zac/paleofetch-mac-prettier.git $HOME/.config/paleofetch-mac-prettier && cd $HOME/.config/paleofetch-mac-prettier && make install && cd
+	  # brew tap homebrew/cask-fonts
+	  # brew install --cask font-hack-nerd-font
+	  # brew install --cask font-inconsolata-lgc-nerd-font
+	  # brew install raycast
+	  # brew install python3
+	  # brew install neovim
+	  # brew install fzf
+	  # brew install wget
+	  # brew install lsd
+	  # brew install htop
+	  # brew install btop
+	  # # brew install tmux
+	  # brew install ncdu
+	  # brew install ripgrep
+	  # brew install duf
+	  # brew install gping
+	  # brew install procs
+	  # brew install autojump
+    git clone https://github.com/Jac-Zac/paleofetch-mac-prettier.git $HOME/.config/paleofetch-mac-prettier && cd $HOME/.config/paleofetch-mac-prettier && make install && cd
 	  echo
 
   # If it is not arch linux
