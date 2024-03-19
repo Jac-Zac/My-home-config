@@ -302,4 +302,6 @@ If you happen to run into some problems you can just open an issue, I'll try to 
 
 Need to fix some things looking at this: https://github.com/FelixKratz/dotfiles/blob/master/.install.sh
 
+Maybe switch to lua sketchybar
+
 > It is not been tested for a bit. Therefore feedback are appreciated
