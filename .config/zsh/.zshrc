@@ -106,7 +106,7 @@ source $HOME/.config/shell/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $HOME/.config/shell/powerlevel10k/powerlevel10k.zsh-theme
 
 # zsh syntax highlighting
-source $HOME/.config/shell/fast-syntax-highlighting/F-Sy-H.plugin.zsh
+source $HOME/.config/shell/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
 [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
