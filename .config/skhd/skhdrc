@@ -2,14 +2,15 @@
 cmd + shift - return : open -a kitty
 cmd - 0 : open -a /Applications/Firefox\ Nightly.app/
 
-# focus window
-alt - j : cycle_clockwise.sh
-alt - k : cycle_counterclockwise.sh 
+# swap window
+# alt + shift - j : cycle_clockwise.sh
+# alt + shift - k : cycle_counterclockwise.sh 
 
-# alt - h : yabai -m window --focus south
-# alt - j : yabai -m window --focus west
-# alt - k : yabai -m window --focus east
-# alt - l : yabai -m window --focus north
+# change focus
+alt - h : yabai -m window --focus south
+alt - j : yabai -m window --focus west
+alt - k : yabai -m window --focus east
+alt - l : yabai -m window --focus north
 
 # swap managed window
 alt + shift - h : yabai -m window --swap south
@@ -47,7 +48,6 @@ cmd - k : yabai -m space --focus next
 cmd + shift - j : yabai -m window --space  prev; yabai -m space --focus prev
 cmd + shift - k : yabai -m window --space  next; yabai -m space --focus next
 
-
 # send window to desktop and follow focus
 cmd + shift - 1 : yabai -m window --space  1
 cmd + shift - 2 : yabai -m window --space  2
@@ -60,10 +60,11 @@ cmd + shift - 8 : yabai -m window --space  8
 cmd + shift - 9 : yabai -m window --space  9
 cmd + shift - 0 : yabai -m window --space  10
 
-# float mode yabai
-cmd + shift - space : yabai -m config layout float
+# toggle float mode yabai
+cmd + shift - f : yabai -m config --toggle layout float
+
 # Bsp mode yabai
-cmd - space : yabai -m config layout bsp
+cmd + shift - b : yabai -m config --toggle layout bsp
 
 # float / unfloat window and center on screen
 cmd + shift - t : yabai -m window --toggle float;\
