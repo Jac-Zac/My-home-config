@@ -1,0 +1,58 @@
+#!/bin/sh
+
+# Aliases
+alias gopen="open \$(git config --get remote.origin.url)" # Open the github directory on the browser
+alias todo="vim ~/Github/University/TODO.md"
+alias firefox="open /Applications/Firefox\ Nightly.app"
+alias safari="open /Applications/Safari.app"
+alias showD="defaults write com.apple.finder CreateDesktop -bool true;killall Finder" # show the Dock
+alias hideD="defaults write com.apple.finder CreateDesktop -bool false;killall Finder" # hide the Dock
+alias noDSS="defaults write com.apple.desktopservices DSDontWriteNetworkStores true"
+alias locate_update="sudo /usr/libexec/locate.updatedb" # Update locate database
+alias pip3-update="pip3 list --outdated | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U"
+alias weather="curl http://wttr.in/trieste"
+alias DSSdelete="find . -name '.DS_Store' -type f -delete"
+alias icat="kitty +kitten icat"
+
+# Better commands
+alias v="nvim"
+alias vi="nvim"
+alias df="duf"
+alias ps="procs"
+alias cp="cp -iv"
+alias ping="gping"
+alias mv="mv -iv"
+alias rm="rm -v"
+alias grep="grep --color"
+alias ls="lsd"
+alias l="lsd -la"
+alias top='btop'
+alias mpv='mpv --geometry=50%'
+alias history='history 1'
+alias mtype='tt --notheme -showwpm'
+alias intel='arch -arch x86_64'
+alias jl='jupyter lab'
+alias cat='bat'
+
+# Use neovim for vim if present.
+[ -x "$(command -v nvim)" ] && alias vim="nvim" vimdiff="nvim -d"
+alias wget="wget --hsts-file ~/.cache/wget/wget-hsts"
+
+# git aliases
+alias g='git'
+alias gs='git status'
+alias gaa='git add --all'
+alias gb='git branch'
+alias gst='git status'
+alias gcam='git commit -a -m'
+alias gco='git checkout'
+alias gd='git diff'
+alias gp='git push'
+alias gr='git remote'
+
+# web searches
+alias rogan="open https://open.spotify.com/show/4rOoJ6Egrf8K2IrywzwOMk"
+alias lex="open https://open.spotify.com/show/2MAi0BvDc6GTFvKFPXnkCL"
+alias chat="open https://web.whatsapp.com/" # Open whatsapp
+alias youtube="open https://www.youtube.com/"
+alias github="open https://github.com/"

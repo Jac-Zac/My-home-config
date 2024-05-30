@@ -6,7 +6,7 @@ paleofetch
 # HISTFILE=~/.cache/zsh/zsh_history
 
 # Load aliases and shortcuts if existent.
-[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/alias/aliasrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/alias/aliasrc"
+[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/aliases/aliasrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/aliases/aliasrc"
 
 # Basic auto/tab complete:
 autoload -U compinit
@@ -16,7 +16,7 @@ compinit
 _comp_options+=(globdots)		# Include hidden files.
 
 # Functions 
-fcd() {
+f() {
     cd "$(autojump -s | awk -F'\t' '{if (system("[ -d \"" $2 "\" ]") == 0) print $2}' | fzf --height 40% --reverse --border --ansi --no-clear +m --preview 'ls {}' --preview-window=up:3:wrap)"
 }
 
