@@ -15,10 +15,13 @@ zmodload zsh/complist
 compinit
 _comp_options+=(globdots)		# Include hidden files.
 
+show_file_or_dir_preview="if [ -d {} ]; then lsd --tree {} --color=always | head -200; else bat -n --color=always --line-range :500 {}; fi"
+
 # Functions 
-f() {
-    cd "$(autojump -s | awk -F'\t' '{if (system("[ -d \"" $2 "\" ]") == 0) print $2}' | fzf --height 40% --reverse --border --ansi --no-clear +m --preview 'ls {}' --preview-window=up:3:wrap)"
+fcd() {
+    cd "$(autojump -s | awk -F'\t' '{if (system("[ -d \"" $2 "\" ]") == 0) print $2}' | fzf --height 40% --reverse --border --ansi --preview $show_file_or_dir_preview)"
 }
+
 
 #################
 #      VIM      #
