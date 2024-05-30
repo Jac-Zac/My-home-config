@@ -33,6 +33,7 @@ alias mtype='tt --notheme -showwpm'
 alias intel='arch -arch x86_64'
 alias jl='jupyter lab'
 alias cat='bat'
+alias f='fcd'
 
 # Use neovim for vim if present.
 [ -x "$(command -v nvim)" ] && alias vim="nvim" vimdiff="nvim -d"
