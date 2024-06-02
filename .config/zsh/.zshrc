@@ -15,7 +15,7 @@ zmodload zsh/complist
 compinit
 _comp_options+=(globdots)		# Include hidden files.
 
-show_file_or_dir_preview="if [ -d {} ]; then lsd --tree {} --color=always | head -200; else bat -n --color=always --line-range :500 {}; fi"
+show_file_or_dir_preview="if [ -d {} ]; then lsd --tree {} --color=always --icon=always | head -200; else bat -n --color=always --line-range :500 {}; fi"
 
 # Functions 
 fcd() {
