@@ -34,6 +34,8 @@ alias intel='arch -arch x86_64'
 alias jl='jupyter lab'
 alias cat='bat'
 alias f='fcd'
+alias oo='cd ~/Documents/second_brain'
+alias ltree='lsd --tree'
 
 # Use neovim for vim if present.
 [ -x "$(command -v nvim)" ] && alias vim="nvim" vimdiff="nvim -d"
