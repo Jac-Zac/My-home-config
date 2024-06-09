@@ -111,9 +111,6 @@ _NotArchLinuxInstall_() {
   # Back to home directory
   cd
 
-  # Install powerlevl10k
-  git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.config/shell/powerlevel10k
-
   # Fast synatx hilighting
   git clone https://github.com/zdharma/fast-syntax-highlighting ~/.config/shell/fast-syntax-highlighting
 
@@ -132,7 +129,6 @@ _NotArchLinuxInstall_() {
   # Remove .cargo
   sudo rm -r .cargo
 
-  echo 'source $HOME/.config/shell/powerlevel10k/powerlevel10k.zsh-theme' >>~/.config/shell/profile
   echo 'source $HOME/.config/shell/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh' >>~/.config/shell/profile
   echo 'alias ls= "lsd"' >>~/.config/shell/profile
   echo 'neofetch' >>~/.config/shell/profile
@@ -183,7 +179,6 @@ _shell_config_() {
   rsync .config/shell/profile $HOME/.config/shell/profile
 
   # plugins and themes
-  git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $HOME/.config/shell/powerlevel10k
   git clone https://github.com/zsh-users/zsh-autosuggestions.git $HOME/.config/shell/zsh-autosuggestions
   git clone https://github.com/z-shell/fast-syntax-highlighting.git $HOME/.config/shell/fast-syntax-highlighting
 
@@ -201,6 +196,7 @@ _macSystemPrefs_() {
 
   echo "${bold}Install yabai${reset}"
   brew install koekeishiya/formulae/yabai
+  # brew install jandedobbeleer/oh-my-posh/oh-my-posh
   brew install yabai
   brew install skhd
   brew tap FelixKratz/formulae
@@ -224,16 +220,21 @@ _macSystemPrefs_() {
 
   # General UI Tweaks
   # ---------------------------
+  #
+  # Make repeat command even faster
 
- # Automatically hide menu bar
+  defaults write -g KeyRepeat -int 1
+  defaults write -g InitialKeyRepeat -int 15
+
+  # Automatically hide menu bar
   defaults write NSGlobalDomain _HIHideMenuBar -bool true
 
-  info "Disable opening and closing window animations"
-  defaults write NSGlobalDomain NSAutomaticWindowAnimationsEnabled -bool false
+  # info "Disable opening and closing window animations"
+  # defaults write NSGlobalDomain NSAutomaticWindowAnimationsEnabled -bool false
 
   # Top right screen corner → Desktop
-  defaults write com.apple.dock wvous-tr-corner -int 2
-  defaults write com.apple.dock wvous-tr-modifier -int 2
+  # defaults write com.apple.dock wvous-tr-corner -int 2
+  # defaults write com.apple.dock wvous-tr-modifier -int 2
 
 
   # Dock Settings
@@ -301,7 +302,6 @@ _update_() {
 
   # Updating oh-my-zsh related stuff
   cd $HOME/.config/shell/fast-syntax-highlighting && git pull
-  cd $HOME/.config/shell/powerlevel10k && git pull
   cd $HOME/.config/shell/zsh-autosuggestions && git pull
 
   # If MacOS
@@ -338,26 +338,6 @@ _mainScript_() {
 
 	  # Use the Brew file instead
 	  brew bundle install
-
-	  # Installing necessary packages
-	  # brew tap homebrew/cask-fonts
-	  # brew install --cask font-hack-nerd-font
-	  # brew install --cask font-inconsolata-lgc-nerd-font
-	  # brew install raycast
-	  # brew install python3
-	  # brew install neovim
-	  # brew install fzf
-	  # brew install wget
-	  # brew install lsd
-	  # brew install htop
-	  # brew install btop
-	  # # brew install tmux
-	  # brew install ncdu
-	  # brew install ripgrep
-	  # brew install duf
-	  # brew install gping
-	  # brew install procs
-	  # brew install autojump
     git clone https://github.com/Jac-Zac/paleofetch-mac-prettier.git $HOME/.config/paleofetch-mac-prettier && cd $HOME/.config/paleofetch-mac-prettier && make install && cd
 	  echo
 

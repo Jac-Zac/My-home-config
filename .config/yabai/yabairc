@@ -4,27 +4,33 @@ yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
 sudo yabai --load-sa
 
 # global settings
-yabai -m config mouse_follows_focus          on
-# yabai -m config focus_follows_mouse          on
-yabai -m config window_placement             first_child
-yabai -m config window_placement             second_child
-yabai -m config window_shadow                float
-yabai -m config window_opacity               on
-yabai -m config active_window_opacity        1.0
-yabai -m config normal_window_opacity        0.9
-yabai -m config insert_feedback_color        0xff61afef
-yabai -m config split_ratio                  0.50
-yabai -m config auto_balance                 on
-yabai -m config mouse_modifier               fn
-yabai -m config mouse_action1                move
-yabai -m config mouse_action2                resize
-yabai -m config mouse_drop_action            swap
+#
+
+yabai -m config external_bar                 all:27:0\
+                mouse_follows_focus         off\
+                window_placement            first_child\
+                window_placement            second_child\
+                window_shadow               float\
+                window_opacity              on\
+                active_window_opacity       1.0\
+                normal_window_opacity       0.9\
+                insert_feedback_color       0xff61afef\
+                split_ratio                 0.50\
+                auto_balance                on\
+                mouse_modifier              fn\
+                mouse_action1               move\
+                mouse_action2               resize\
+                mouse_drop_action           swap\
+                window_animation_duration   0.0\
+                window_animation_easing     ease_in_expo\
+                layout                      bsp\
+
+# yabai -m config menubar_opacity              0.0 # Completely disable menu bar
 # New windows take a bit more space
 # yabai -m config split_ratio                  0.55
-
-yabai -m config layout                       bsp
-
+#
 # yabai -m config auto_balance                 on # Auto focus on mouse that is what I want
+
 yabai -m config top_padding                  18
 yabai -m config bottom_padding               13
 yabai -m config left_padding                 13
@@ -61,8 +67,6 @@ yabai -m rule --add label="Software Update" title="Software Update" manage=off
 yabai -m rule --add label="About This Mac" app="System Information" title="About This Mac" manage=off
 
 # yabai -m rule --add label="Little Arc" app="^Arc$" title="^Space.*" manage=off
-
-yabai -m config external_bar all:27:0
 # yabai -m config external_bar all:0:0#
 
 echo "yabai configuration loaded.."
