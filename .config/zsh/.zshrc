@@ -1,31 +1,33 @@
 paleofetch
 
 # History in cache directory:
-# HISTSIZE=5000
+HISTSIZE=2000
 # HISTFILESIZE=5000
 # HISTFILE=~/.cache/zsh/zsh_history
 
 # Load aliases and shortcuts if existent.
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/aliases/aliasrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/aliases/aliasrc"
 
-# Basic auto/tab complete:
+# # Basic auto/tab complete:
 autoload -U compinit
 zstyle ':completion:*' menu select matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 zmodload zsh/complist
 compinit
 _comp_options+=(globdots)		# Include hidden files.
 
+# Set up fast movement with fuzzy finding
 show_file_or_dir_preview="if [ -d {} ]; then lsd --tree {} --color=always --icon=always | head -200; else bat -n --color=always --line-range :500 {}; fi"
 
-# Functions 
-fcd() {
+# Set Up Autojump Functions 
+f() {
     cd "$(autojump -s | awk -F'\t' '{if (system("[ -d \"" $2 "\" ]") == 0) print $2}' | fzf --height 40% --reverse --border --ansi --preview $show_file_or_dir_preview)"
 }
 
+bindkey -s "^f" 'f\n'
+bindkey -s "^g" 'lazygit\n'
 
-#################
-#      VIM      #
-#################
+# VIM
+#########################
 
 # vi mode
 bindkey -v
@@ -90,8 +92,10 @@ zle-line-init() {
 zle -N zle-line-init
 echo -ne '\e[5 q' # Use beam shape cursor on startup.
 precmd() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
+
 # Control bindings for programs
-bindkey -s "^g" "lc\n"
+#
+# bindkey -s "^g" "lc\n"
 bindkey -s "^h" "history 1\n"
 bindkey -s "^l" "clear\n"
 bindkey -s "^d" "dlfile\n"
@@ -111,8 +115,12 @@ source $HOME/.config/shell/powerlevel10k/powerlevel10k.zsh-theme
 # zsh syntax highlighting
 source $HOME/.config/shell/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 
-# To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
+# # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
 [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
+
+# if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
+#   eval "$(oh-my-posh init zsh --config $HOME/.config/oh_my_posh/base.toml)"
+# fi
 
 # To add autojump
 [ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
