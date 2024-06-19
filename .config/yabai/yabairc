@@ -64,6 +64,8 @@ yabai -m rule --add label="Mail" app="^Mail$" manage=off
 yabai -m rule --add label="Calculator" app="^Calculator$" manage=off
 yabai -m rule --add label="Dictionary" app="^Dictionary$" manage=off
 yabai -m rule --add label="Software Update" title="Software Update" manage=off
+yabai -m rule --add label="Time Machine" app="^Time Machine$" title=".*" manage=off
+yabai -m rule --add label="Finder" app="^Finder$" title=".*" manage=off
 yabai -m rule --add label="About This Mac" app="System Information" title="About This Mac" manage=off
 
 # yabai -m rule --add label="Little Arc" app="^Arc$" title="^Space.*" manage=off
