@@ -39,7 +39,7 @@
 - **Launcher** • [`skhd`](https://github.com/koekeishiya/skhd) and [`Alfred`](https://www.alfredapp.com)
 - **Terminal multiplexer** • [`tmux`](https://github.com/tmux/tmux)
 - **Resource monitor** • [`btop`](https://github.com/aristocratos/btop) _(aliased to top)_
-- **Browser** • [`Firefox Nightly`](https://www.mozilla.org/en-US/firefox/61.0a1/releasenotes/)
+- **Browser** • [`Zen Browser`](https://www.zen-browser.app/)
 - **Wallpapers** • [`Fall`](https://wallpaper.dog/large/10812699.jpg)
 
 ## Motivation 💭
