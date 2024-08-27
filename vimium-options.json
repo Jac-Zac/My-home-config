@@ -1,6 +1,0 @@
-{
-  "keyMappings": "# Insert your preferred key mappings here.\nmap s LinkHints.activateMode\nmap S LinkHints.activateModeToOpenInNewTab",
-  "searchUrl": "search.brave.com/search?",
-  "settingsVersion": "2.1.2",
-  "userDefinedLinkHintCss": "div > .vimiumHintMarker {\n  /* linkhint boxes */\n  background: #4c566a; /* Nord background */\n  border: 2px solid #3b4252; /* Darker border */\n  border-radius: 4px; /* Rounded corners for a softer look */\n  padding: 4px 8px; /* Padding for better spacing */\n}\n\ndiv > .vimiumHintMarker span {\n  /* linkhint text */\n  color: #eceff4; /* White text */\n  font-weight: bold;\n  font-size: 12px;\n  font-family: Arial, sans-serif; /* Consistent font for readability */\n}"
-}
