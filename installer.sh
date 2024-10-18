@@ -204,6 +204,7 @@ _macSystemPrefs_() {
   brew install borders
   # Useful for pair programming or shearing terminal etc
   brew install tmate
+  brew install atuin
 
   echo "${bold}You should enable yabai after you finish everything up${reset}"
 

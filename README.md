@@ -226,6 +226,7 @@ _You should try to keep your system up to date, also follow the [`instruction un
 - [`this`](https://github.com/mengfeng/clean-my-mac) script to clean up any junk that has build up.
 - [`ncdu`](https://github.com/rofl0r/ncdu) to check for big files and directory that I can delete
 - [`tmate`](https://tmate.io/) for instant terminal sharing and pair programming
+- [`atuin`](https://github.com/atuinsh/atuin) better command for history with `ctr-r`
 
 #### Checking for malware
 
