@@ -148,7 +148,7 @@ _I use [nord theme](https://addons.mozilla.org/en-US/firefox/addon/nord-theme-co
 
 > And use [nord theme for youtube](https://github.com/MajesticWaffle/Youtube-Nord-Theme) and this for [whatsapp](https://github.com/vednoc/dark-whatsapp)
 
-![showcase](.assets/firefox.png)
+![showcase](.assets/zen.png)
 
 </details>
 
