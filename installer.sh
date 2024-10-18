@@ -202,6 +202,8 @@ _macSystemPrefs_() {
   brew tap FelixKratz/formulae
   # brew install svim
   brew install borders
+  # Useful for pair programming or shearing terminal etc
+  brew install tmate
 
   echo "${bold}You should enable yabai after you finish everything up${reset}"
 
