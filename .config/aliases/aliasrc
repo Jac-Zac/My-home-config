@@ -36,6 +36,8 @@ alias cat='bat'
 alias f='fcd'
 alias oo='cd ~/Documents/second_brain'
 alias ltree='lsd --tree'
+alias openvpn="/opt/homebrew/opt/openvpn/sbin/openvpn"
+alias tmate='tmate -f ~/.config/tmate/tmate.conf'
 
 # Use neovim for vim if present.
 [ -x "$(command -v nvim)" ] && alias vim="nvim" vimdiff="nvim -d"
