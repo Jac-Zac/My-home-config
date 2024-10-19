@@ -124,6 +124,3 @@ source $HOME/.config/shell/fast-syntax-highlighting/fast-syntax-highlighting.plu
 
 # To add autojump
 [ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
-
-# Set atuin
-eval "$(atuin init zsh)"
