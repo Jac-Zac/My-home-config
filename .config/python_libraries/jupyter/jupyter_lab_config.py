@@ -1,10 +1,10 @@
 # Configuration file for lab.
 
-c = get_config()  #noqa
+c = get_config()  # noqa
 
-#------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 # Application(SingletonConfigurable) configuration
-#------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ## This is an application.
 
 ## The date format used by logging formatters for %(asctime)s
@@ -48,21 +48,21 @@ c = get_config()  #noqa
 #  .. code-block:: python
 #
 #     c.Application.logging_config = {
-#         'handlers': {
-#             'file': {
-#                 'class': 'logging.FileHandler',
-#                 'level': 'DEBUG',
-#                 'filename': '<path/to/file>',
+#         "handlers": {
+#             "file": {
+#                 "class": "logging.FileHandler",
+#                 "level": "DEBUG",
+#                 "filename": "<path/to/file>",
 #             }
 #         },
-#         'loggers': {
-#             '<application-name>': {
-#                 'level': 'DEBUG',
+#         "loggers": {
+#             "<application-name>": {
+#                 "level": "DEBUG",
 #                 # NOTE: if you don't list the default "console"
 #                 # handler here then it will be disabled
-#                 'handlers': ['console', 'file'],
+#                 "handlers": ["console", "file"],
 #             },
-#         }
+#         },
 #     }
 #  Default: {}
 # c.Application.logging_config = {}
@@ -75,9 +75,9 @@ c = get_config()  #noqa
 #  Default: False
 # c.Application.show_config_json = False
 
-#------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 # JupyterApp(Application) configuration
-#------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ## Base class for Jupyter applications
 
 ## Answer yes to any prompts.
@@ -120,9 +120,9 @@ c = get_config()  #noqa
 #  See also: Application.show_config_json
 # c.JupyterApp.show_config_json = False
 
-#------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 # ExtensionApp(JupyterApp) configuration
-#------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ## Base class for configurable Jupyter Server Extension Applications.
 #
 #      ExtensionApp subclasses can be initialized two ways:
@@ -211,9 +211,9 @@ c = get_config()  #noqa
 #  Default: []
 # c.ExtensionApp.template_paths = []
 
-#------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 # LabServerApp(ExtensionApp) configuration
-#------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ## A Lab Server Application that runs out-of-the-box
 
 ## "A list of comma-separated URIs to get the allowed extensions list
@@ -258,6 +258,11 @@ c = get_config()  #noqa
 ## Specify a config file to load.
 #  See also: JupyterApp.config_file_name
 # c.LabServerApp.config_file_name = ''
+
+## Whether getting a relative (False) or absolute (True) path when copying a
+#  path.
+#  Default: False
+# c.LabServerApp.copy_absolute_path = False
 
 ## Extra paths to look for federated JupyterLab extensions
 #  Default: []
@@ -396,9 +401,9 @@ c = get_config()  #noqa
 #  Default: ''
 # c.LabServerApp.workspaces_dir = ''
 
-#------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 # LabApp(LabServerApp) configuration
-#------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ##
 #  See also: LabServerApp.allowed_extensions_uris
 # c.LabApp.allowed_extensions_uris = ''
@@ -439,7 +444,12 @@ c = get_config()  #noqa
 #  Default: 'jupyterlab.handlers.announcements.CheckForUpdate'
 # c.LabApp.check_for_updates_class = 'jupyterlab.handlers.announcements.CheckForUpdate'
 
-## Whether to enable collaborative mode.
+## To enable real-time collaboration, you must install the extension `jupyter_collaboration`.
+#          You can install it using pip for example:
+#
+#              python -m pip install jupyter_collaboration
+#
+#          This flag is now deprecated and will be removed in JupyterLab v5.
 #  Default: False
 # c.LabApp.collaborative = False
 
@@ -451,6 +461,11 @@ c = get_config()  #noqa
 #  See also: JupyterApp.config_file_name
 # c.LabApp.config_file_name = ''
 
+## Whether getting a relative (False) or absolute (True) path when copying a
+#  path.
+#  Default: False
+# c.LabApp.copy_absolute_path = False
+
 ## Whether to start the app in core mode. In this mode, JupyterLab
 #          will run using the JavaScript assets that are within the installed
 #          JupyterLab Python package. In core mode, third party extensions are disabled.
@@ -458,6 +473,11 @@ c = get_config()  #noqa
 #          itself is installed in development mode (`pip install -e .`).
 #  Default: False
 # c.LabApp.core_mode = False
+
+## Whether custom CSS is loaded on the page.
+#      Defaults to False.
+#  Default: False
+# c.LabApp.custom_css = False
 
 ## The default URL to redirect to from `/`
 #  Default: '/lab'
@@ -470,9 +490,15 @@ c = get_config()  #noqa
 #  Default: False
 # c.LabApp.dev_mode = False
 
-## Whether to expose the global app instance to browser via window.jupyterlab
+## Whether to expose the global app instance to browser via window.jupyterapp
 #  Default: False
 # c.LabApp.expose_app_in_browser = False
+
+## The extension manager factory to use. The default options are:
+#          "readonly" for a manager without installation capability or "pypi" for
+#          a manager using PyPi.org and pip to install extensions.
+#  Default: 'pypi'
+# c.LabApp.extension_manager = 'pypi'
 
 ## Whether to load prebuilt extensions in dev mode. This may be
 #          useful to run and test prebuilt extensions in development installs of
@@ -485,12 +511,6 @@ c = get_config()  #noqa
 ## Extra paths to look for federated JupyterLab extensions
 #  Default: []
 # c.LabApp.extra_labextensions_path = []
-
-## Whether to skip loading styles for disabled prebuilt extensions.
-#          This will be the default behavior starting with JupyterLab 4.0
-#          (and this flag will be removed).
-#  Default: False
-# c.LabApp.future_skip_styles_for_disabled = False
 
 ## Generate default config file.
 #  See also: JupyterApp.generate_config
@@ -525,6 +545,10 @@ c = get_config()  #noqa
 #  Default: ''
 # c.LabApp.listings_url = ''
 
+## Whether all plugins are locked (cannot be enabled/disabled from the UI)
+#  Default: False
+# c.LabApp.lock_all_plugins = False
+
 ## The date format used by logging formatters for %(asctime)s
 #  See also: Application.log_datefmt
 # c.LabApp.log_datefmt = '%Y-%m-%d %H:%M:%S'
@@ -552,10 +576,7 @@ c = get_config()  #noqa
 
 ## Whether to open in a browser after starting.
 #  See also: ExtensionApp.open_browser
-
-c.ServerApp.open_browser = True
-
-c.Server.App.browser = 'open -a /Applications/Firefox\ Nightly.app/ %s'
+# c.LabApp.open_browser = False
 
 ## The override url for static lab assets, typically a CDN.
 #  Default: ''
@@ -585,6 +606,10 @@ c.Server.App.browser = 'open -a /Applications/Firefox\ Nightly.app/ %s'
 ## Instead of starting the Application, dump configuration to stdout (as JSON)
 #  See also: Application.show_config_json
 # c.LabApp.show_config_json = False
+
+## Whether to skip the initial install and JS build of the app in dev mode
+#  Default: False
+# c.LabApp.skip_dev_build = False
 
 ## Splice source packages into app directory.
 #  Default: False
@@ -648,14 +673,19 @@ c.Server.App.browser = 'open -a /Applications/Firefox\ Nightly.app/ %s'
 #  Default: '/Users/jaczac/.config/python_libraries/jupyter/lab/workspaces'
 # c.LabApp.workspaces_dir = '/Users/jaczac/.config/python_libraries/jupyter/lab/workspaces'
 
-#------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 # ServerApp(JupyterApp) configuration
-#------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ## The Jupyter Server application class.
 
 ## Set the Access-Control-Allow-Credentials: true header
 #  Default: False
 # c.ServerApp.allow_credentials = False
+
+## Whether or not to allow external kernels, whose connection files are placed in
+#  external_connection_dir.
+#  Default: False
+# c.ServerApp.allow_external_kernels = False
 
 ## Set the Access-Control-Allow-Origin header
 #
@@ -700,6 +730,22 @@ c.Server.App.browser = 'open -a /Applications/Firefox\ Nightly.app/ %s'
 #  Default: False
 # c.ServerApp.allow_root = False
 
+## Allow unauthenticated access to endpoints without authentication rule.
+#
+#          When set to `True` (default in jupyter-server 2.0, subject to change
+#          in the future), any request to an endpoint without an authentication rule
+#          (either `@tornado.web.authenticated`, or `@allow_unauthenticated`)
+#          will be permitted, regardless of whether user has logged in or not.
+#
+#          When set to `False`, logging in will be required for access to each endpoint,
+#          excluding the endpoints marked with `@allow_unauthenticated` decorator.
+#
+#          This option can be configured using `JUPYTER_SERVER_ALLOW_UNAUTHENTICATED_ACCESS`
+#          environment variable: any non-empty value other than "true" and "yes" will
+#          prevent unauthenticated access to endpoints without `@allow_unauthenticated`.
+#  Default: True
+# c.ServerApp.allow_unauthenticated_access = True
+
 ## Answer yes to any prompts.
 #  See also: JupyterApp.answer_yes
 # c.ServerApp.answer_yes = False
@@ -730,7 +776,7 @@ c.Server.App.browser = 'open -a /Applications/Firefox\ Nightly.app/ %s'
 #                        standard library module, which allows setting of the
 #                        BROWSER environment variable to override it.
 #  Default: ''
-# c.ServerApp.browser = ''
+c.ServerApp.browser = 'open -na "Zen Browser" --args --new-window %s'
 
 ## The full path to an SSL/TLS certificate file.
 #  Default: ''
@@ -805,6 +851,14 @@ c.Server.App.browser = 'open -a /Applications/Firefox\ Nightly.app/ %s'
 #          with the full knowledge of what that implies.
 #  Default: False
 # c.ServerApp.disable_check_xsrf = False
+
+## The directory to look at for external kernel connection files, if
+#  allow_external_kernels is True. Defaults to Jupyter
+#  runtime_dir/external_kernels. Make sure that this directory is not filled with
+#  left-over connection files, that could result in unnecessary kernel manager
+#  creations.
+#  Default: None
+# c.ServerApp.external_connection_dir = None
 
 ## handlers that should be loaded at higher priority than the default services
 #  Default: []
@@ -882,8 +936,8 @@ c.Server.App.browser = 'open -a /Applications/Firefox\ Nightly.app/ %s'
 # c.ServerApp.kernel_spec_manager_class = 'builtins.object'
 
 ## The kernel websocket connection class to use.
-#  Default: 'jupyter_server.services.kernels.connection.channels.ZMQChannelsWebsocketConnection'
-# c.ServerApp.kernel_websocket_connection_class = 'jupyter_server.services.kernels.connection.channels.ZMQChannelsWebsocketConnection'
+#  Default: 'jupyter_server.services.kernels.connection.base.BaseKernelWebsocketConnection'
+# c.ServerApp.kernel_websocket_connection_class = 'jupyter_server.services.kernels.connection.base.BaseKernelWebsocketConnection'
 
 ## DEPRECATED. Use ZMQChannelsWebsocketConnection.kernel_ws_protocol
 #  Default: ''
@@ -977,6 +1031,8 @@ c.Server.App.browser = 'open -a /Applications/Firefox\ Nightly.app/ %s'
 # c.ServerApp.port_retries = 50
 
 ## Preferred starting directory to use for notebooks and kernels.
+#  ServerApp.preferred_dir is deprecated in jupyter-server 2.0. Use
+#  FileContentsManager.preferred_dir instead
 #  Default: ''
 # c.ServerApp.preferred_dir = ''
 
@@ -1034,6 +1090,13 @@ c.Server.App.browser = 'open -a /Applications/Firefox\ Nightly.app/ %s'
 #  Default: {}
 # c.ServerApp.ssl_options = {}
 
+## Paths to set up static files as immutable.
+#
+#  This allow setting up the cache control of static files as immutable. It
+#  should be used for static file named with a hash for instance.
+#  Default: []
+# c.ServerApp.static_immutable_cache = []
+
 ## Supply overrides for terminado. Currently only supports "shell_command".
 #  Default: {}
 # c.ServerApp.terminado_settings = {}
@@ -1088,7 +1151,7 @@ c.Server.App.browser = 'open -a /Applications/Firefox\ Nightly.app/ %s'
 #
 #          See the `webbrowser.open` documentation for details.
 #  Default: 2
-# c.ServerApp.webbrowser_open_new = 2
+c.ServerApp.webbrowser_open_new = 1
 
 ## Set the tornado compression options for websocket connections.
 #
@@ -1099,6 +1162,26 @@ c.Server.App.browser = 'open -a /Applications/Firefox\ Nightly.app/ %s'
 #  See the tornado docs for WebSocketHandler.get_compression_options for details.
 #  Default: None
 # c.ServerApp.websocket_compression_options = None
+
+## Configure the websocket ping interval in seconds.
+#
+#  Websockets are long-lived connections that are used by some Jupyter Server
+#  extensions.
+#
+#  Periodic pings help to detect disconnected clients and keep the connection
+#  active. If this is set to None, then no pings will be performed.
+#
+#  When a ping is sent, the client has ``websocket_ping_timeout`` seconds to
+#  respond. If no response is received within this period, the connection will be
+#  closed from the server side.
+#  Default: 0
+# c.ServerApp.websocket_ping_interval = 0
+
+## Configure the websocket ping timeout in seconds.
+#
+#  See ``websocket_ping_interval`` for details.
+#  Default: 0
+# c.ServerApp.websocket_ping_timeout = 0
 
 ## The base URL for websockets,
 #          if it differs from the HTTP server (hint: it almost certainly doesn't).
