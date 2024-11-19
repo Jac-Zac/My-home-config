@@ -320,26 +320,21 @@ _mainScript_() {
 	  # Use the Brew file instead
 	  brew bundle install
     git clone https://github.com/Jac-Zac/paleofetch-mac-prettier.git $HOME/.config/paleofetch-mac-prettier && cd $HOME/.config/paleofetch-mac-prettier && make install && cd
-	  ARCH = "false"
-	  echo
 
   # If it is not arch linux
-  elif ! [ -x "$(command -v pacman)" ]; then
-	  _NotArchLinuxInstall_
-	  exit
   else
 	  # Set arch linux flag
 	  ARCH = "true"
   fi
 
+  # Do this anyway
+  _shell_config_
+  _Nvim_
+
   read -p "{$bold}{$yellow}Do you want to install everything I have on my mac ? (Enter Yes or No): ${reset}" answer
   if [[ $answer == "Yes" || $answer == "yes" || $answer == "Y" || $answer == "y" ]]; then
       _packages_installation_
   fi
-
-  # Do this anyway
-  _shell_config_
-  _Nvim_
 
   echo "${green}Everything has been installed{$reset}"
 }
