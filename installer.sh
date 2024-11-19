@@ -117,6 +117,9 @@ _NotArchLinuxInstall_() {
   # zsh-autosuggestions
   git clone https://github.com/zsh-users/zsh-autosuggestions.git ~/.config/shell/zsh-autosuggestions/
 
+  # powerlevel10k
+  git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.config/shell/powerlevel10k
+
   # Install lsd
   cargo install lsd
 
@@ -177,6 +180,7 @@ _shell_config_() {
   # plugins and themes
   git clone https://github.com/zsh-users/zsh-autosuggestions.git $HOME/.config/shell/zsh-autosuggestions
   git clone https://github.com/zdharma-continuum/fast-syntax-highlighting.git $HOME/.config/shell/fast-syntax-highlighting
+  git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.config/shell/powerlevel10k
 
   # tmux configuration with word theme
   git clone https://github.com/arcticicestudio/nord-tmux.git ${HOME}/.config/tmux/themes/nord-tmux
@@ -185,6 +189,7 @@ _shell_config_() {
 
   # Create the simlink
   ln -s ~/.config/shell/profile ~/.zprofile
+  source .zprofile 
 }
 
 _macSystemPrefs_() {
@@ -254,8 +259,7 @@ _brew_installation_() {
 _packages_installation_ () {
 
   # Install brew packages and applications
-  brew bundle -v
-  brew cleanup
+  brew bundle install --file=~/.config/brewfile/Brewfile
 }
 
 _Nvim_() {
@@ -321,6 +325,7 @@ _mainScript_() {
 
   # Do this anyway
   _shell_config_
+
   _Nvim_
 
   read -p "{$bold}{$yellow}Do you want to install everything I have on my mac ? (Enter Yes or No): ${reset}" answer
@@ -328,7 +333,7 @@ _mainScript_() {
       _packages_installation_
 	    # Use the Brew file instead
 	    brew bundle install
-      git clone https://github.com/Jac-Zac/paleofetch-mac-prettier.git $HOME/.config/paleofetch-mac-prettier && cd $HOME/.config/paleofetch-mac-prettier && make install && cd
+      git clone https://github.com/Jac-Zac/paleofetch-mac-prettier.git $HOME/.config/paleofetch-mac-prettier && cd $HOME/.config/paleofetch-mac-prettier && sudo make install && cd
   fi
   echo "${green}Everything has been installed{$reset}"
 }
