@@ -175,8 +175,8 @@ _shell_config_() {
   fi
 
   # Copy my configuration
-  rsync -r .config $HOME
-  rsync .config/shell/profile $HOME/.config/shell/profile
+  cp -r .config $HOME
+  cp .config/shell/profile $HOME/.config/shell/profile
 
   # plugins and themes
   git clone https://github.com/zsh-users/zsh-autosuggestions.git $HOME/.config/shell/zsh-autosuggestions
@@ -322,6 +322,7 @@ _mainScript_() {
 	  # Use the Brew file instead
 	  brew bundle install
     git clone https://github.com/Jac-Zac/paleofetch-mac-prettier.git $HOME/.config/paleofetch-mac-prettier && cd $HOME/.config/paleofetch-mac-prettier && make install && cd
+	  ARCH = "false"
 	  echo
 
   # If it is not arch linux
