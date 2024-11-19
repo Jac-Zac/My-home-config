@@ -180,30 +180,26 @@ _shell_config_() {
 
   # plugins and themes
   git clone https://github.com/zsh-users/zsh-autosuggestions.git $HOME/.config/shell/zsh-autosuggestions
-  git clone https://github.com/z-shell/fast-syntax-highlighting.git $HOME/.config/shell/fast-syntax-highlighting
+  git clone https://github.com/zdharma-continuum/fast-syntax-highlighting.git $HOME/.config/shell/fast-syntax-highlighting
 
-  # tmux configuration with nord theme
+  # tmux configuration with word theme
   git clone https://github.com/arcticicestudio/nord-tmux.git ${HOME}/.config/tmux/themes/nord-tmux
 
-  # Create the link
   cd
 
+  # Create the simlink
   ln -s ~/.config/shell/profile ~/.zprofile
-
 }
 
 _macSystemPrefs_() {
 
   echo "${bold}Install yabai${reset}"
   brew install koekeishiya/formulae/yabai
-  # brew install jandedobbeleer/oh-my-posh/oh-my-posh
-  brew install yabai
-  brew install skhd
+  brew install koekeishiya/formulae/skhd
   brew tap FelixKratz/formulae
-  # brew install svim
   brew install borders
   # Useful for pair programming or shearing terminal etc
-  brew install tmate
+  # brew install tmate
 
   echo "${bold}You should enable yabai after you finish everything up${reset}"
 
@@ -224,20 +220,11 @@ _macSystemPrefs_() {
   # ---------------------------
   #
   # Make repeat command even faster
-
   defaults write -g KeyRepeat -int 1
   defaults write -g InitialKeyRepeat -int 15
 
   # Automatically hide menu bar
   defaults write NSGlobalDomain _HIHideMenuBar -bool true
-
-  # info "Disable opening and closing window animations"
-  # defaults write NSGlobalDomain NSAutomaticWindowAnimationsEnabled -bool false
-
-  # Top right screen corner → Desktop
-  # defaults write com.apple.dock wvous-tr-corner -int 2
-  # defaults write com.apple.dock wvous-tr-modifier -int 2
-
 
   # Dock Settings
   # ---------------------------
@@ -256,18 +243,17 @@ _macSystemPrefs_() {
 }
 
 _brew_installation_() {
-
-# If brew is installed exit else brew install
-if [[ $(command -v brew) == "" ]]; then
-    echo "Installing brew"
-	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-	echo
-	echo "${green}brew installed${reset}"
-else
-	echo
-	echo "${green}You already have brew installed; it will be updated${reset}"
-	brew update && brew upgrade
-fi
+  # If brew is installed exit else brew install
+  if [[ $(command -v brew) == "" ]]; then
+      echo "Installing brew"
+	  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+	  echo
+	  echo "${green}brew installed${reset}"
+  else
+	  echo
+	  echo "${green}You already have brew installed; it will be updated${reset}"
+	  brew update && brew upgrade
+  fi
 }
 
 _packages_installation_ () {
@@ -275,20 +261,15 @@ _packages_installation_ () {
   # Install brew packages and applications
   brew bundle -v
   brew cleanup
-
 }
 
 _Nvim_() {
+  echo "${bold}Installing nvim essentials${reset}"
 
- echo "${bold}Installing nvim essentials${reset}"
+  git clone https://github.com/Jac-Zac/astronvim_jaczac ~/.config/nvim/
+  nvim --headless -c 'quitall'
 
- git clone --depth 1 https://github.com/AstroNvim/AstroNvim ~/.config/nvim
-
- git clone https://github.com/Jac-Zac/astronvim_jaczac ~/.config/nvim/lua/user
-
- nvim --headless -c 'quitall'
-
- echo "${green}My nvim configuration has been successfully installed${reset}"
+  echo "${green}My nvim configuration has been successfully installed${reset}"
 }
 
 
@@ -352,16 +333,16 @@ _mainScript_() {
 	  ARCH = "true"
   fi
 
+  read -p "{$bold}{$yellow}Do you want to install everything I have on my mac ? (Enter Yes or No): ${reset}" answer
+  if [[ $answer == "Yes" || $answer == "yes" || $answer == "Y" || $answer == "y" ]]; then
+      _packages_installation_
+  fi
+
   # Do this anyway
   _shell_config_
   _Nvim_
 
-  read -p "{$bold}{$yellow}Do you want to install everything I have on my mac ? (Enter Yes or No): ${reset}" answer
-  if [[ $answer == "Yes" || $answer == "yes" || $answer == "Y" || $answer == "y" ]]; then
-      _packages_installation_
-      echo "${green}Everything has been installed{$reset}"
-  fi
-
+  echo "${green}Everything has been installed{$reset}"
 }
 # End main function
 

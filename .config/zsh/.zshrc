@@ -2,8 +2,8 @@ paleofetch
 
 # History in cache directory:
 HISTSIZE=2000
-# HISTFILESIZE=5000
-# HISTFILE=~/.cache/zsh/zsh_history
+HISTFILESIZE=5000
+HISTFILE=~/.cache/zsh/zsh_history
 
 # Load aliases and shortcuts if existent.
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/aliases/aliasrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/aliases/aliasrc"

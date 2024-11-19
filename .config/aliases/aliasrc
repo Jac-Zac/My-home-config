@@ -3,7 +3,6 @@
 # Aliases
 alias gopen="open \$(git config --get remote.origin.url)" # Open the github directory on the browser
 alias todo="vim ~/Github/University/TODO.md"
-alias firefox="open /Applications/Firefox\ Nightly.app"
 alias safari="open /Applications/Safari.app"
 alias showD="defaults write com.apple.finder CreateDesktop -bool true;killall Finder" # show the Dock
 alias hideD="defaults write com.apple.finder CreateDesktop -bool false;killall Finder" # hide the Dock
@@ -33,7 +32,6 @@ alias mtype='tt --notheme -showwpm'
 alias intel='arch -arch x86_64'
 alias jl='jupyter lab'
 alias cat='bat'
-alias f='fcd'
 alias oo='cd ~/Documents/second_brain'
 alias ltree='lsd --tree'
 alias openvpn="/opt/homebrew/opt/openvpn/sbin/openvpn"
@@ -61,3 +59,4 @@ alias lex="open https://open.spotify.com/show/2MAi0BvDc6GTFvKFPXnkCL"
 alias chat="open https://web.whatsapp.com/" # Open whatsapp
 alias youtube="open https://www.youtube.com/"
 alias github="open https://github.com/"
+

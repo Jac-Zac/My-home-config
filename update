@@ -241,11 +241,10 @@ bytesToHuman $count
 
 ## Updating things 
 
-# Updating oh-my-zsh related stuff
+# Updating zsh plugins 
 cd $HOME/.config/shell/fast-syntax-highlighting && git pull
 cd $HOME/.config/shell/powerlevel10k && git pull
 cd $HOME/.config/shell/zsh-autosuggestions && git pull
-cd /Users/jaczac/Library/Application\ Support/Übersicht/widgets/simple-bar && git stash && git pull && git stash pop
 cd
 
 rm -r .npm
