@@ -176,7 +176,6 @@ _shell_config_() {
 
   # Copy my configuration
   cp -r .config $HOME
-  cp .config/shell/profile $HOME/.config/shell/profile
 
   # plugins and themes
   git clone https://github.com/zsh-users/zsh-autosuggestions.git $HOME/.config/shell/zsh-autosuggestions
@@ -199,7 +198,6 @@ _macSystemPrefs_() {
   brew tap FelixKratz/formulae
   brew install borders
   # Useful for pair programming or shearing terminal etc
-  # brew install tmate
 
   echo "${bold}You should enable yabai after you finish everything up${reset}"
 
