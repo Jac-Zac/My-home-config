@@ -151,7 +151,7 @@ _shell_config_() {
   mkdir .cache/wget
 
   # Check if you are running arch linux
-  if $ARCH; then
+  if [ "$ARCH" = "true" ]; then
 	  echo "${green}${bold}You are runing Arch linux (Nice !)${reset}"
 	  echo
 	  sudo pacman -Sy base-devel rsync neovim zsh xorg xorg-xinit xorg-server neofetch tmux htop bpytop lsd firefox alacritty
@@ -169,9 +169,6 @@ _shell_config_() {
 	  yay nerd-fonts-complete
           sh -c "$(curl -fsSL https://raw.githubusercontent.com/mut-ex/minimal-functional-fox/master/install.sh)"
 	  echo
-  else
-  # Copy the fonts
-  	git clone https://github.com/shaunsingh/SFMono-Nerd-Font-Ligaturized.git ~/Library/Font
   fi
 
   # Copy my configuration
@@ -317,13 +314,8 @@ _mainScript_() {
 	  echo "${bold}Checking for brew${reset}"
 	  _brew_installation_
 
-	  # Use the Brew file instead
-	  brew bundle install
-    git clone https://github.com/Jac-Zac/paleofetch-mac-prettier.git $HOME/.config/paleofetch-mac-prettier && cd $HOME/.config/paleofetch-mac-prettier && make install && cd
-
-  # If it is not arch linux
   else
-	  # Set arch linux flag
+	  _NotArchLinuxInstall_
 	  ARCH = "true"
   fi
 
@@ -334,8 +326,10 @@ _mainScript_() {
   read -p "{$bold}{$yellow}Do you want to install everything I have on my mac ? (Enter Yes or No): ${reset}" answer
   if [[ $answer == "Yes" || $answer == "yes" || $answer == "Y" || $answer == "y" ]]; then
       _packages_installation_
+	    # Use the Brew file instead
+	    brew bundle install
+      git clone https://github.com/Jac-Zac/paleofetch-mac-prettier.git $HOME/.config/paleofetch-mac-prettier && cd $HOME/.config/paleofetch-mac-prettier && make install && cd
   fi
-
   echo "${green}Everything has been installed{$reset}"
 }
 # End main function
