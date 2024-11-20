@@ -26,9 +26,9 @@ return {
 	animated_icons = true, -- Set to true if you want to use animated icons
 
 	font = {
-		text = "JetBrainsMono Nerd Font", -- Used for text
+		text = "JetBrainsMono Nerd Font",  -- Used for text
 		numbers = "JetBrainsMono Nerd Font", -- Used for numbers
-		icons = "SF Pro Text", -- Used for icons (or NerdFont)
+		icons = "SF Pro Text",             -- Used for icons (or NerdFont)
 		app_icons = "sketchybar-app-font", -- Used for app icons
 		sizes = {
 			text = 13.0,
