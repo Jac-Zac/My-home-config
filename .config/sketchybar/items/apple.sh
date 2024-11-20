@@ -6,7 +6,7 @@ POPUP_CLICK_SCRIPT='sketchybar --set $NAME popup.drawing=toggle'
 apple_logo=(
   shadow=on
   icon=$APPLE
-  icon.color=$GREEN
+  # icon.color=$WHITE
   icon.padding_right=5
   icon.padding_left=20
   label.drawing=off
