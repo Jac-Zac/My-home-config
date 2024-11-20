@@ -118,3 +118,4 @@ space_menu_swap:subscribe("swap_menus_and_spaces", function(env)
 end)
 
 return menu_watcher
+
