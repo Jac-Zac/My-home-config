@@ -228,7 +228,7 @@ _macSystemPrefs_() {
 
   # Dock Settings
   # ---------------------------
-  info "Remove the auto-hiding Dock delay"
+  echo "Remove the auto-hiding Dock delay"
   defaults write com.apple.dock autohide-delay -float 0
 
   # info "Remove the animation when hiding/showing the Dock"
@@ -237,7 +237,7 @@ _macSystemPrefs_() {
   # info "Automatically hide and show the Dock"
   defaults write com.apple.dock autohide -bool true
 
-  info "Show only open applications in the Dock"
+  echo "Show only open applications in the Dock"
   defaults write com.apple.dock static-only -bool true
 
 }
