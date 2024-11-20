@@ -1,9 +1,8 @@
 #!/bin/bash
 
 calendar=(
-  icon.color=$BLUE
+  # icon.color=$BLUE
   label.color=$WHITE
-  label.padding_right=5
   update_freq=30
   script="$PLUGIN_DIR/calendar.sh"
 )

@@ -7,4 +7,6 @@ sketchybar --add event input_change 'AppleSelectedInputSourcesChangedNotificatio
     --add item input right\
     --set input script="$PLUGIN_DIR/input.sh" \
           icon=􀇳 \
+          label.font="$FONT:Regular:10" \
+          label.y_offset=-1\
     --subscribe input input_change 
