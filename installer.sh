@@ -212,35 +212,52 @@ _macSystemPrefs_() {
   # ---------------------------
   #
   # Make repeat command even faster
+  echo "Configuring Keyboard Repete..."
   defaults write -g KeyRepeat -int 1
   defaults write -g InitialKeyRepeat -int 15
 
-  # Automatically hide menu bar
-  defaults write NSGlobalDomain _HIHideMenuBar -bool true
+  echo "Configuring macOS system preferences..."
 
-  # Dock Settings
-  # ---------------------------
-  echo "Remove the auto-hiding Dock delay"
+  # Dock settings
+  echo "Configuring Dock..."
   defaults write com.apple.dock autohide-delay -float 0
-
-  # info "Remove the animation when hiding/showing the Dock"
   defaults write com.apple.dock autohide-time-modifier -float 0
-
-  # info "Automatically hide and show the Dock"
   defaults write com.apple.dock autohide -bool true
-
-  echo "Show only open applications in the Dock"
   defaults write com.apple.dock static-only -bool true
 
+  # Finder settings
+  echo "Configuring Finder..."
   # Avoid creating .DS_Store files on network or USB volumes
   defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
   defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 
+  # Show hidden files in Finder
+  # defaults write com.apple.finder AppleShowAllFiles -bool true
+
+  # Screenshot settings
+  echo "Configuring screenshot settings..."
   # Save screenshots in PNG format
   defaults write com.apple.screencapture type -string "png"
-
   # Change default screenshot location
   defaults write com.apple.screencapture location -string "${HOME}/Downloads"
+
+  # System settings
+  # echo "Configuring system settings..."
+  # Disable the "Are you sure you want to open this application?" dialog
+  # defaults write com.apple.LaunchServices LSQuarantine -bool false
+
+  # Trackpad settings
+  # echo "Configuring trackpad..."
+  # Enable tap to click
+  # defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+
+  # Restart affected applications
+  echo "Restarting affected applications..."
+  killall Dock
+  killall Finder
+  killall SystemUIServer
+
+  echo "macOS system preferences configuration complete!"
 }
 
 _brew_installation_() {
@@ -333,6 +350,10 @@ _mainScript_() {
       _packages_installation_
 	    # Use the Brew file instead
       git clone https://github.com/Jac-Zac/paleofetch-mac-prettier.git $HOME/.config/paleofetch-mac-prettier && cd $HOME/.config/paleofetch-mac-prettier && sudo make install && cd
+
+      # Start yabai
+      yabai --start-service
+      skhd --start-service
   fi
   echo "${green}Everything has been installed{$reset}"
 
