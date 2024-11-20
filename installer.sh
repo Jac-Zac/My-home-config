@@ -357,6 +357,7 @@ _mainScript_() {
       # Start yabai
       yabai --start-service
       skhd --start-service
+      brew services start borders
   fi
   echo "${green}Everything has been installed{$reset}"
 
