@@ -7,9 +7,9 @@ return {
 	bar_margin_padding = 15,
 
 	item_height = 20,
-	item_padding = 5,
+	item_padding = 7,
 	item_corner_radius = 4,
-	item_spacing = 5,
+	item_spacing = 7,
 
 	group_spacing = 16,
 	popup_border_width = 2,
@@ -26,9 +26,9 @@ return {
 	animated_icons = true, -- Set to true if you want to use animated icons
 
 	font = {
-		text = "JetBrainsMono Nerd Font",  -- Used for text
+		text = "JetBrainsMono Nerd Font", -- Used for text
 		numbers = "JetBrainsMono Nerd Font", -- Used for numbers
-		icons = "SF Pro Text",             -- Used for icons (or NerdFont)
+		icons = "SF Pro Text", -- Used for icons (or NerdFont)
 		app_icons = "sketchybar-app-font", -- Used for app icons
 		sizes = {
 			text = 13.0,

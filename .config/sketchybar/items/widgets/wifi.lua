@@ -15,55 +15,12 @@ sbar.exec(
 
 local popup_width = 200
 
--- TODO: Add This in the popup
 local wifi_up = sbar.add("item", "widgets.wifi1", {
 	drawing = false,
-	-- position = "right",
-	-- padding_left = -5,
-	-- width = 0,
-	-- icon = {
-	--   padding_right = 0,
-	--   font = {
-	--     style = settings.font.style_map["Bold"],
-	--     size = 9.0,
-	--   },
-	--   string = icons.wifi.upload,
-	-- },
-	-- label = {
-	--   font = {
-	--     family = settings.font.numbers,
-	--     style = settings.font.style_map["Bold"],
-	--     size = 9.0,
-	--   },
-	--   color = colors.red,
-	--   string = "??? Bps",
-	-- },
-	-- y_offset = 4,
 })
 
--- TODO: Add This in the popoup
 local wifi_down = sbar.add("item", "widgets.wifi2", {
 	drawing = false,
-	-- position = "right",
-	-- padding_left = -5,
-	-- icon = {
-	--   padding_right = 0,
-	--   font = {
-	--     style = settings.font.style_map["Bold"],
-	--     size = 9.0,
-	--   },
-	--   string = icons.wifi.download,
-	-- },
-	-- label = {
-	--   font = {
-	--     family = settings.font.numbers,
-	--     style = settings.font.style_map["Bold"],
-	--     size = 9.0,
-	--   },
-	--   color = colors.blue,
-	--   string = "??? Bps",
-	-- },
-	-- y_offset = -4,
 })
 
 local wifi = sbar.add("item", "widgets.wifi.padding", {
@@ -77,8 +34,6 @@ local wifi = sbar.add("item", "widgets.wifi.padding", {
 -- Background around the item
 local wifi_bracket = sbar.add("bracket", "widgets.wifi.bracket", {
 	wifi.name,
-	-- wifi_up.name,
-	-- wifi_down.name
 }, {
 	popup = { align = "center", height = 30 },
 })
@@ -206,14 +161,15 @@ wifi:subscribe({ "wifi_change", "system_woke" }, function(env)
 	end)
 end)
 
-local function hide_details()
-	wifi_bracket:set({ popup = { drawing = false } })
-end
-
 local function toggle_details()
-	local should_draw = wifi_bracket:query().popup.drawing == "off"
+	local current_drawing = wifi_bracket:query().popup.drawing
+	local should_draw = current_drawing == "off"
+
+	-- Toggle popup visibility
+	wifi_bracket:set({ popup = { drawing = should_draw } })
+
+	-- If opening the popup, refresh the details
 	if should_draw then
-		wifi_bracket:set({ popup = { drawing = true } })
 		sbar.exec("networksetup -getcomputername", function(result)
 			hostname:set({ label = result })
 		end)
@@ -229,15 +185,15 @@ local function toggle_details()
 		sbar.exec("networksetup -getinfo Wi-Fi | awk -F 'Router: ' '/^Router: / {print $2}'", function(result)
 			router:set({ label = result })
 		end)
-	else
-		hide_details()
 	end
 end
 
 wifi_up:subscribe("mouse.clicked", toggle_details)
 wifi_down:subscribe("mouse.clicked", toggle_details)
 wifi:subscribe("mouse.clicked", toggle_details)
-wifi:subscribe("mouse.exited.global", hide_details)
+
+-- Remove the mouse exited event to prevent popup from automatically closing
+-- wifi:subscribe("mouse.exited.global", hide_details)
 
 local function copy_label_to_clipboard(env)
 	local label = sbar.query(env.NAME).label.value
@@ -253,4 +209,3 @@ hostname:subscribe("mouse.clicked", copy_label_to_clipboard)
 ip:subscribe("mouse.clicked", copy_label_to_clipboard)
 mask:subscribe("mouse.clicked", copy_label_to_clipboard)
 router:subscribe("mouse.clicked", copy_label_to_clipboard)
-
