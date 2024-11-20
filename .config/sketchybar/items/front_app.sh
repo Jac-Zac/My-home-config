@@ -1,7 +1,7 @@
 #!/bin/bash
 
 front_app=(
-  label.padding_right=10
+  label.drawing=off
   icon.background.drawing=on
   display=active
   label.color=$WHITE
