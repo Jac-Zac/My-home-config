@@ -2,10 +2,11 @@ local colors = require("colors")
 local icons = require("icons")
 local settings = require("settings")
 
--- Apple menu alias configuration
-local apple = sbar.add("alias", "com.apple.systemuiserver", {
+-- Apple item configuration
+local apple = sbar.add("item", {
 	icon = {
 		font = { size = settings.font.sizes.icons },
+		-- TODO set a custom icon for this click script
 		string = icons.apple,
 		align = "center",
 		color = colors.white,
@@ -16,11 +17,9 @@ local apple = sbar.add("alias", "com.apple.systemuiserver", {
 	label = {
 		drawing = false,
 	},
-	background = {
-		-- Your background settings here
-	},
 	align = "center",
-	update_freq = 1,
+	-- TODO set a custom menu for thsi click script
+	click_script = "$CONFIG_DIR/helpers/menus/bin/menus -s 0",
 })
 
 -- Add a spacer after the apple

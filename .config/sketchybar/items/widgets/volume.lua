@@ -67,41 +67,39 @@ volume_percent:subscribe("volume_change", function(env)
 		icon = icons.volume._0
 		color = colors.grey
 	end
-
 	local lead = ""
 	if volume < 10 then
 		lead = "0"
 	end
-
 	volume_icon:set({ icon = { string = icon, color = color } })
 	volume_slider:set({ slider = { percentage = volume } })
 end)
 
-local function volume_collapse_details()
-	local drawing = volume_bracket:query().popup.drawing == "on"
-	if not drawing then
-		return
-	end
-	volume_bracket:set({ popup = { drawing = false } })
-	sbar.remove("/volume.device\\.*/")
-end
-
 local current_audio_device = "None"
+
 local function volume_toggle_details(env)
 	if env.BUTTON == "right" then
 		sbar.exec("open /System/Library/PreferencePanes/Sound.prefpane")
 		return
 	end
 
-	local should_draw = volume_bracket:query().popup.drawing == "off"
+	local current_drawing = volume_bracket:query().popup.drawing
+	local should_draw = current_drawing == "off"
+
+	-- Toggle popup visibility
+	volume_bracket:set({ popup = { drawing = should_draw } })
+
+	-- If opening the popup, refresh the details
 	if should_draw then
-		volume_bracket:set({ popup = { drawing = true } })
 		sbar.exec("SwitchAudioSource -t output -c", function(result)
 			current_audio_device = result:sub(1, -2)
 			sbar.exec("SwitchAudioSource -a -t output", function(available)
 				current = current_audio_device
 				local color = colors.grey
 				local counter = 0
+
+				-- Remove any existing device items first
+				sbar.remove("/volume.device\\.*/")
 
 				for device in string.gmatch(available, "[^\r\n]+") do
 					local color = colors.grey
@@ -116,18 +114,16 @@ local function volume_toggle_details(env)
 						width = popup_width,
 						label = { string = device, color = color },
 						click_script = 'SwitchAudioSource -s "'
-							.. device
-							.. '" && sketchybar --set /volume.device\\.*/ label.color='
-							.. colors.grey
-							.. " --set $NAME label.color="
-							.. colors.white,
+								.. device
+								.. '" && sketchybar --set /volume.device\\.*/ label.color='
+								.. colors.grey
+								.. " --set $NAME label.color="
+								.. colors.white,
 					})
 					counter = counter + 1
 				end
 			end)
 		end)
-	else
-		volume_collapse_details()
 	end
 end
 
@@ -139,5 +135,8 @@ end
 volume_icon:subscribe("mouse.clicked", volume_toggle_details)
 volume_icon:subscribe("mouse.scrolled", volume_scroll)
 volume_percent:subscribe("mouse.clicked", volume_toggle_details)
-volume_percent:subscribe("mouse.exited.global", volume_collapse_details)
 volume_percent:subscribe("mouse.scrolled", volume_scroll)
+
+-- Remove the mouse.exited.global event to prevent popup from automatically closing
+-- volume_percent:subscribe("mouse.exited.global", volume_collapse_details)
+
