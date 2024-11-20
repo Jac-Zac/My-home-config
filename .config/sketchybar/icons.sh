@@ -31,12 +31,12 @@ YABAI_FLOAT=􀢌
 YABAI_GRID=􀧍
 
 # Battery Icons
-BATTERY_100=
-BATTERY_75=
-BATTERY_50=
-BATTERY_25=
-BATTERY_0=
-BATTERY_CHARGING=
+BATTERY_100=􀛨
+BATTERY_75=􀺸
+BATTERY_50=􀺶
+BATTERY_25=􀛩
+BATTERY_0=􀛪
+BATTERY_CHARGING=􀢋
 
 # Volume Icons
 VOLUME_100=􀊩
@@ -56,8 +56,8 @@ MODE_VISUAL=􀂿
 MODE_CMD=􀂙
 MODE_PENDING=􀈏
 
-CLOCK=
-CALENDAR=
+CLOCK=􀐫
+CALENDAR=􀉉
 
 
 # Material Design Icons
@@ -106,7 +106,7 @@ export ICON_PEN=󰏬 # curve
 export ICON_REMOTEDESKTOP=󰢹 # vmware, utm
 
 export ICON_CLOCK=󰥔 # clock, timewarrior, tty-clock
-export ICON_CALENDAR=󰃭 # calendar
+export ICON_CALENDAR=􀉉 # calendar
 
 export ICON_WIFI=󰖩
 export ICON_WIFI_OFF=󰖪

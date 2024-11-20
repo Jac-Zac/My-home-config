@@ -39,30 +39,3 @@ cpu_user=(
   background.drawing=on
   background.color=$TRANSPARENT
 )
-
-status_bracket=(
-  shadow=on
-  background.height=30
-  background.color=$BACKGROUND_2
-  background.border_color=$BACKGROUND_2
-  blur_radius=30
-)
-
-sketchybar --add item cpu.top right              \
-           --set cpu.top "${cpu_top[@]}"         \
-                                                 \
-           --add item cpu.percent right          \
-           --set cpu.percent "${cpu_percent[@]}" \
-                                                 \
-           --add graph cpu.sys right 75          \
-           --set cpu.sys "${cpu_sys[@]}"         \
-                                                 \
-           --add graph cpu.user right 75         \
-           --set cpu.user "${cpu_user[@]}"
-
-# bracket for everything
-sketchybar --add bracket status                        \
-                cpu.top cpu.percent cpu.sys cpu.user    \
-                brew github.bell wifi input volume_icon \
-                calendar time \
-           --set status "${status_bracket[@]}"
