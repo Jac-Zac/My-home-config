@@ -16,9 +16,9 @@ do
   PAD_LEFT=3
   PAD_RIGHT=3
   if [[ $i == 0 ]]; then
-    PAD_LEFT=8
+    PAD_LEFT=5
   elif [[ $i == $(($LENGTH-1)) ]]; then
-    PAD_RIGHT=8
+    PAD_RIGHT=5
   fi
 
 
@@ -32,30 +32,15 @@ do
                                     padding_left=$PAD_LEFT                     \
                                     padding_right=$PAD_RIGHT                   \
                                     background.color=${COLORS_SPACE[i]}        \
-                                    background.corner_radius=5                 \
-                                    background.height=20                       \
+                                    background.corner_radius=4                 \
+                                    background.height=18                       \
                                     icon=${ICONS_SPACE[i]}                     \
-                                    label.font="Hack Nerd Font:Bold:14.0"      \
+                                    label.font="Hack Nerd Font:10.0"      \
                                     icon.color=${COLORS_SPACE[i]}              \
                                     label="_"                                  \
                                     label.color=${COLORS_SPACE[i]}             \
-                                    icon.y_offset=1.5                          \
-                                    label.y_offset=0             \
-                                    label.font.size=13             \
+                                    label.padding_right=5             \
+                                    label.padding_left=2             \
+                                    icon.padding_left=5             \
              --subscribe space.$sid front_app_switched window_change
 done
-
-# Space bracket
-sketchybar --add bracket spaces '/space\..*/'                        \
-           --set         spaces background.color=$BACKGROUND_2      \
-                                  blur_radius=30                    \
-                                  shadow=on                         \
-                                  background.border_color=$WHITE   \
-                                  background.border_width=0        \
-                                  icon.highlight_color=$BACKGROUND_2\
-                                  icon.padding_left=6               \
-                                  icon.padding_right=2              \
-                                  label.color=$YELLOW               \
-                                  label.highlight_color=$BACKGROUND_2 \
-                                  label.padding_left=2              \
-                                  label.padding_right=6             \

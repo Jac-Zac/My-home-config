@@ -1,5 +1,6 @@
 #!/bin/bash
 
+export OFF=0xFF000000
 export BLACK=0xff2e3440
 export WHITE=0xffd8dee9
 export RED=0xffbf616a

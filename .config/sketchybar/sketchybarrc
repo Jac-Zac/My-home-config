@@ -11,7 +11,7 @@ PLUGIN_DIR="$CONFIG_DIR/plugins" # Directory where all the plugin scripts are st
 FONT="JetBrainsMono Nerd Font"
 ICON_FONT="sf-symols"
 
-PADDINGS=3 # All paddings use this value (icon, label, background)
+PADDINGS=4 # All paddings use this value (icon, label, background)
 
 # Setting up and starting the helper process
 HELPER=git.felix.helper
@@ -19,27 +19,27 @@ killall helper
 (cd $CONFIG_DIR/helper && make)
 $CONFIG_DIR/helper/helper $HELPER > /dev/null 2>&1 &
 
-# Unload the macOS on screen indicator overlay for volume change
+# Unload the MacOS on screen indicator overlay for volume change
 launchctl unload -F /System/Library/LaunchAgents/com.apple.OSDUIHelper.plist > /dev/null 2>&1 &
 
 # Setting up the general bar appearance of the bar
 bar=(
-  height=40
+  height=32
   # color=$BAR_COLOR
   # color="0xbf2e3440"
-  color=$TRANSPARENT
-  blur_radius=30
+  # color=$TRANSPARENT
+  color=$OFF
   border_width=0
   border_color=$BAR_BORDER_COLOR
   shadow=off
   position=top
-  sticky=on
+  sticky=oon
   padding_right=0
   padding_left=0
-  y_offset=1
-  margin=10
+  y_offset=0
+  margin=0
   topmost=window
-  corner_radius=5
+  corner_radius=0
 )
 
 sketchybar --bar "${bar[@]}"
@@ -48,19 +48,16 @@ sketchybar --bar "${bar[@]}"
 defaults=(
   updates=when_shown
   # icon.font="$FONT:Bold:12.0"
-  icon.font="$FONT:Regular:12.0"
+  icon.font="$FONT:Regular:14.0"
   icon.color=$ICON_COLOR
   icon.padding_left=$PADDINGS
   icon.padding_right=$PADDINGS
-  label.font="$FONT:Regular:11.0"
+  label.font="$FONT:Regular:12.0"
   label.color=$LABEL_COLOR
   label.padding_left=$PADDINGS
   label.padding_right=$PADDINGS
   padding_right=$PADDINGS
   padding_left=$PADDINGS
-  background.height=30
-  background.corner_radius=9
-  background.border_width=0
   popup.background.border_width=1
   popup.background.corner_radius=9
   popup.background.border_color=$POPUP_BORDER_COLOR
@@ -74,26 +71,19 @@ sketchybar --default "${defaults[@]}"
 
 # Left
 source "$ITEM_DIR/apple.sh"
-# source "$ITEM_DIR/svim.sh"
 source "$ITEM_DIR/spaces.sh"
 # source "$ITEM_DIR/yabai.sh"
 
 # Center
-# source "$ITEM_DIR/spotify.sh"
-# source "$ITEM_DIR/media.sh"
 source "$ITEM_DIR/front_app.sh"
 
 # Right
 source "$ITEM_DIR/time.sh"
 source "$ITEM_DIR/calendar.sh"
-# source "$ITEM_DIR/weather.sh"
-# source "$ITEM_DIR/brew.sh"
-# source "$ITEM_DIR/github.sh"
 source "$ITEM_DIR/wifi.sh"
 source "$ITEM_DIR/battery.sh"
 source "$ITEM_DIR/input.sh"
 source "$ITEM_DIR/volume.sh"
-source "$ITEM_DIR/cpu.sh"
 
 sketchybar --hotload on
 

@@ -21,10 +21,8 @@ volume_icon=(
   icon.width=0
   icon.align=left
   icon.color=$GREY
-  icon.font="$FONT:Regular:14.0"
   label.width=25
   label.align=left
-  label.font="$FONT:Regular:14.0"
 )
 
 sketchybar --add slider volume right            \
