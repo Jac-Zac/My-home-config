@@ -4,7 +4,6 @@ require("items.widgets.wifi")
 require("items.widgets.volume")
 require("items.widgets.control_center")
 require("items.widgets.passwords")
-require("items.widgets.keyboard")
 
 -- require("items.widgets.metrics")
 -- require("items.widgets.notifications")

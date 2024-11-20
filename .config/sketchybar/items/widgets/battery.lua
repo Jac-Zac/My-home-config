@@ -9,7 +9,8 @@ local battery = sbar.add("item", "widgets.battery", {
 		drawing = true,
 	},
 	label = {
-		drawing = false,
+		drawing = true,
+		padding_left = settings.item_padding,
 	},
 	padding_right = settings.item_padding,
 	padding_left = settings.item_padding,
@@ -73,7 +74,7 @@ battery:subscribe({ "routine", "power_source_change", "system_woke" }, function(
 				color = color,
 			},
 			label = {
-				drawing = false,
+				drawing = true,
 				string = lead .. label,
 			},
 		})
@@ -90,7 +91,7 @@ battery:subscribe("mouse.clicked", function(env)
 			local charge_found, _, charge = batt_info:find("(%d+)%%")
 			local charge_label = charge_found and charge .. "%" or "Unknown"
 			local label = found and remaining:gsub(":", ".") .. "hrs Remaining (" .. charge_label .. ")"
-					or "00:00 Remaining (" .. charge_label .. ")"
+				or "00:00 Remaining (" .. charge_label .. ")"
 			remaining_time:set({ label = { string = label } })
 		end)
 	end
