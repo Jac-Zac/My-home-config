@@ -1,0 +1,8 @@
+#!/usr/bin/env lua
+
+-- Load the sketchybar-package and prepare the helper binaries
+require("helpers")
+require("init")
+
+-- Enable hot reloading
+sbar.exec("sketchybar --hotload true")
