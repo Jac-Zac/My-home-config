@@ -20,7 +20,7 @@ local control_center = sbar.add("item", "widgets.control_center", {
 })
 
 -- Add a spacer after the control_center
-sbar.add("item", "apple.spacer", {
+sbar.add("item", "control_center.spacer", {
 	position = "right",
 	width = settings.item_spacing,
 	background = { drawing = false },
