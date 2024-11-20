@@ -20,7 +20,7 @@ local passwords = sbar.add("item", "widgets.passwords", {
 })
 
 -- Add a spacer after the passwords
-sbar.add("item", "apple.spacer", {
+sbar.add("item", "passwords.spacer", {
 	position = "right",
 	width = settings.item_spacing,
 	background = { drawing = false },

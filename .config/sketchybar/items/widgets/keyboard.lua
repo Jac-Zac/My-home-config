@@ -20,7 +20,7 @@ local keyboard = sbar.add("item", "widgets.keyboard", {
 })
 
 -- Add a spacer after the keyboard
-sbar.add("item", "apple.spacer", {
+sbar.add("item", "keyboard.spacer", {
 	position = "right",
 	width = settings.item_spacing,
 	background = { drawing = false },
