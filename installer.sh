@@ -351,6 +351,9 @@ _mainScript_() {
 	    # Use the Brew file instead
       git clone https://github.com/Jac-Zac/paleofetch-mac-prettier.git $HOME/.config/paleofetch-mac-prettier && cd $HOME/.config/paleofetch-mac-prettier && sudo make install && cd
 
+      # Adding yabai scripting additions
+      echo "$(whoami) ALL=(root) NOPASSWD: sha256:$(shasum -a 256 $(which yabai) | cut -d " " -f 1) $(which yabai) --load-sa" | sudo tee /private/etc/sudoers.d/yabai
+
       # Start yabai
       yabai --start-service
       skhd --start-service
