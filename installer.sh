@@ -231,6 +231,16 @@ _macSystemPrefs_() {
 
   echo "Show only open applications in the Dock"
   defaults write com.apple.dock static-only -bool true
+
+  # Avoid creating .DS_Store files on network or USB volumes
+  defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+  defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
+
+  # Save screenshots in PNG format
+  defaults write com.apple.screencapture type -string "png"
+
+  # Change default screenshot location
+  defaults write com.apple.screencapture location -string "${HOME}/Downloads"
 }
 
 _brew_installation_() {
