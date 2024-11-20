@@ -353,11 +353,17 @@ _mainScript_() {
 
       # Adding yabai scripting additions
       echo "$(whoami) ALL=(root) NOPASSWD: sha256:$(shasum -a 256 $(which yabai) | cut -d " " -f 1) $(which yabai) --load-sa" | sudo tee /private/etc/sudoers.d/yabai
+      # Install sketchybar Lua
+      (git clone https://github.com/FelixKratz/SbarLua.git /tmp/SbarLua && cd /tmp/SbarLua/ && make install && rm -rf /tmp/SbarLua/)
+      # Install sketchybar-app-font
+      curl -L https://github.com/kvndrsslr/sketchybar-app-font/releases/download/v2.0.28/sketchybar-app-font.ttf -o $HOME/Library/Fonts/sketchybar-app-font.ttf
 
       # Start yabai
       yabai --start-service
       skhd --start-service
       brew services start borders
+      brew services start sketchybar
+
   fi
   echo "${green}Everything has been installed{$reset}"
 
