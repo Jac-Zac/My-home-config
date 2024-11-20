@@ -193,14 +193,6 @@ _shell_config_() {
 }
 
 _macSystemPrefs_() {
-
-  echo "${bold}Install yabai${reset}"
-  brew install koekeishiya/formulae/yabai
-  brew install koekeishiya/formulae/skhd
-  brew tap FelixKratz/formulae
-  brew install borders
-  # Useful for pair programming or shearing terminal etc
-
   echo "${bold}You should enable yabai after you finish everything up${reset}"
 
   echo
@@ -239,7 +231,6 @@ _macSystemPrefs_() {
 
   echo "Show only open applications in the Dock"
   defaults write com.apple.dock static-only -bool true
-
 }
 
 _brew_installation_() {
@@ -317,6 +308,7 @@ _mainScript_() {
 	  # If the system is macos run the following
 	  echo "${bold}Checking for brew${reset}"
 	  _brew_installation_
+    _macSystemPrefs_
 
   else
 	  _NotArchLinuxInstall_
@@ -326,16 +318,15 @@ _mainScript_() {
   # Do this anyway
   _shell_config_
 
-  _Nvim_
-
-  read -p "{$bold}{$yellow}Do you want to install everything I have on my mac ? (Enter Yes or No): ${reset}" answer
+  read -p "{$bold}{$yellow} Do you want to install everything I have on my mac ? (Enter Yes or No): ${reset}" answer
   if [[ $answer == "Yes" || $answer == "yes" || $answer == "Y" || $answer == "y" ]]; then
       _packages_installation_
 	    # Use the Brew file instead
-	    brew bundle install
       git clone https://github.com/Jac-Zac/paleofetch-mac-prettier.git $HOME/.config/paleofetch-mac-prettier && cd $HOME/.config/paleofetch-mac-prettier && sudo make install && cd
   fi
   echo "${green}Everything has been installed{$reset}"
+
+  _Nvim_
 }
 # End main function
 
