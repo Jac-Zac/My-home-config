@@ -11,6 +11,12 @@ local battery = sbar.add("item", "widgets.battery", {
 	label = {
 		drawing = true,
 		padding_left = settings.item_padding,
+		-- y_offset = -1,
+		font = {
+			family = settings.font.numbers,
+			style = settings.font.style_map["Regular"],
+			size = settings.font.sizes.numbers,
+		},
 	},
 	padding_right = settings.item_padding,
 	padding_left = settings.item_padding,
@@ -21,7 +27,7 @@ local remaining_time = sbar.add("item", {
 	label = {
 		font = {
 			family = settings.font.numbers,
-			style = settings.font.style_map["Bold"],
+			style = settings.font.style_map["Regular"],
 			size = settings.font.sizes.numbers,
 		},
 		string = "??:??h",

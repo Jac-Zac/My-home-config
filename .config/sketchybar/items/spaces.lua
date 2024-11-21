@@ -15,6 +15,11 @@ for i = 1, 9, 1 do
 			padding_right = settings.item_padding,
 			color = colors.grey,
 			highlight_color = colors.bar.bg,
+			font = {
+				family = settings.font.numbers,
+				style = settings.font.style_map["Semibold"],
+				size = settings.font.sizes.numbers + 1.0,
+			},
 			align = "center",
 		},
 		background = {

@@ -15,13 +15,13 @@ sbar.exec(
 
 local popup_width = 200
 
-local wifi_up = sbar.add("item", "widgets.wifi1", {
-	drawing = false,
-})
-
-local wifi_down = sbar.add("item", "widgets.wifi2", {
-	drawing = false,
-})
+-- local wifi_up = sbar.add("item", "widgets.wifi1", {
+-- 	drawing = false,
+-- })
+--
+-- local wifi_down = sbar.add("item", "widgets.wifi2", {
+-- 	drawing = false,
+-- })
 
 local wifi = sbar.add("item", "widgets.wifi.padding", {
 	position = "right",
@@ -35,7 +35,10 @@ local wifi = sbar.add("item", "widgets.wifi.padding", {
 local wifi_bracket = sbar.add("bracket", "widgets.wifi.bracket", {
 	wifi.name,
 }, {
-	popup = { align = "center", height = 30 },
+	popup = {
+		align = "center",
+		height = 30,
+	},
 })
 
 local ssid = sbar.add("item", {
@@ -45,15 +48,16 @@ local ssid = sbar.add("item", {
 	icon = {
 		padding_right = 16,
 		font = {
-			style = settings.font.style_map["Bold"],
-			size = settings.font.sizes.icons,
+			style = settings.font.style_map["Regular"],
+			size = settings.font.sizes.text,
 		},
 		string = icons.wifi.router,
 	},
 	width = popup_width,
 	label = {
 		font = {
-			style = settings.font.style_map["Bold"],
+			style = settings.font.style_map["SemiBold"],
+			size = settings.font.sizes.icons,
 		},
 		max_chars = 18,
 		string = "????????????",
@@ -71,6 +75,10 @@ local hostname = sbar.add("item", {
 		width = popup_width / 2,
 	},
 	label = {
+		font = {
+			style = settings.font.style_map["Regular"],
+			size = settings.font.sizes.text,
+		},
 		max_chars = 20,
 		string = "????????????",
 		width = popup_width / 2,
@@ -88,6 +96,10 @@ local ip = sbar.add("item", {
 		width = popup_width / 2,
 	},
 	label = {
+		font = {
+			style = settings.font.style_map["Regular"],
+			size = settings.font.sizes.text,
+		},
 		string = "???.???.???.???",
 		width = popup_width / 2,
 		align = "right",
@@ -105,6 +117,10 @@ local mask = sbar.add("item", {
 		width = popup_width / 2,
 	},
 	label = {
+		font = {
+			style = settings.font.style_map["Regular"],
+			size = settings.font.sizes.text,
+		},
 		string = "???.???.???.???",
 		width = popup_width / 2,
 		align = "right",
@@ -122,32 +138,36 @@ local router = sbar.add("item", {
 		width = popup_width / 2,
 	},
 	label = {
+		font = {
+			style = settings.font.style_map["Regular"],
+			size = settings.font.sizes.text,
+		},
 		string = "???.???.???.???",
 		width = popup_width / 2,
 		align = "right",
 	},
 })
 
-sbar.add("item", { position = "right", width = settings.group_paddings })
-
-wifi_up:subscribe("network_update", function(env)
-	local up_color = (env.upload == "000 Bps") and colors.grey or colors.red
-	local down_color = (env.download == "000 Bps") and colors.grey or colors.blue
-	wifi_up:set({
-		icon = { color = up_color },
-		label = {
-			string = env.upload,
-			color = up_color,
-		},
-	})
-	wifi_down:set({
-		icon = { color = down_color },
-		label = {
-			string = env.download,
-			color = down_color,
-		},
-	})
-end)
+-- sbar.add("item", { position = "right", width = settings.group_paddings })
+--
+-- wifi_up:subscribe("network_update", function(env)
+-- 	local up_color = (env.upload == "000 Bps") and colors.grey or colors.red
+-- 	local down_color = (env.download == "000 Bps") and colors.grey or colors.blue
+-- 	wifi_up:set({
+-- 		icon = { color = up_color },
+-- 		label = {
+-- 			string = env.upload,
+-- 			color = up_color,
+-- 		},
+-- 	})
+-- 	wifi_down:set({
+-- 		icon = { color = down_color },
+-- 		label = {
+-- 			string = env.download,
+-- 			color = down_color,
+-- 		},
+-- 	})
+-- end)
 
 wifi:subscribe({ "wifi_change", "system_woke" }, function(env)
 	sbar.exec("ipconfig getifaddr en0", function(ip)
@@ -188,12 +208,9 @@ local function toggle_details()
 	end
 end
 
-wifi_up:subscribe("mouse.clicked", toggle_details)
-wifi_down:subscribe("mouse.clicked", toggle_details)
+-- wifi_up:subscribe("mouse.clicked", toggle_details)
+-- wifi_down:subscribe("mouse.clicked", toggle_details)
 wifi:subscribe("mouse.clicked", toggle_details)
-
--- Remove the mouse exited event to prevent popup from automatically closing
--- wifi:subscribe("mouse.exited.global", hide_details)
 
 local function copy_label_to_clipboard(env)
 	local label = sbar.query(env.NAME).label.value

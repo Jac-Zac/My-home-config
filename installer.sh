@@ -230,6 +230,7 @@ _macSystemPrefs_() {
   # Avoid creating .DS_Store files on network or USB volumes
   defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
   defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
+  defaults write com.apple.finder DisableAllAnimations -bool true
 
   # Show hidden files in Finder
   # defaults write com.apple.finder AppleShowAllFiles -bool true

@@ -11,7 +11,7 @@ local apple = sbar.add("item", {
 		align = "center",
 		color = colors.white,
 		drawing = true,
-		padding_left = settings.bar_margin_padding,
+		padding_left = settings.bar_margin_padding + settings.item_padding,
 		padding_right = settings.item_padding,
 	},
 	label = {
