@@ -25,22 +25,5 @@ return {
 	icons = "sf-symbols", -- Options: "sf-symbols", "nerdfont"
 	animated_icons = true, -- Set to true if you want to use animated icons
 
-	font = {
-		text = "JetBrainsMono Nerd Font", -- Used for text
-		numbers = "JetBrainsMono Nerd Font", -- Used for numbers
-		icons = "SF Pro Text", -- Used for icons (or NerdFont)
-		app_icons = "sketchybar-app-font", -- Used for app icons
-		sizes = {
-			text = 13.0,
-			numbers = 13.0,
-			icons = 14.0,
-			app_icons = 15.0,
-		},
-		style_map = {
-			["Regular"] = "Regular",
-			["Medium"] = "SemiBold",
-			["Bold"] = "Bold",
-			["Black"] = "ExtraBold",
-		},
-	},
+	font = require("helpers.default_font"),
 }

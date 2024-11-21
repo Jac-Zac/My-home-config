@@ -8,9 +8,10 @@ local time = sbar.add("item", {
 	label = {
 		font = {
 			family = settings.font.numbers,
-			style = settings.font.style_map["Bold"],
-			size = settings.font.sizes.numbers,
+			style = settings.font.style_map["Semibold"],
+			size = settings.font.sizes.numbers + 1.0,
 		},
+
 		string = "", -- Will be set by the subscription
 		color = colors.white,
 		align = "center",
@@ -30,17 +31,12 @@ local date = sbar.add("item", {
 		align = "right",
 		font = {
 			family = settings.font.numbers,
-			style = settings.font.style_map["Bold"],
+			style = settings.font.style_map["Regular"],
 		},
 	},
 	position = "right",
 	update_freq = 30,
 	padding_left = settings.item_padding,
-	padding_right = settings.item_padding,
-	background = {
-		-- color = colors.transparent,
-		-- corner_radius = 0,
-	},
 })
 
 -- Subscribe to update the time and date
@@ -54,4 +50,8 @@ end)
 
 date:subscribe("mouse.clicked", function(env)
 	sbar.exec("open -a Calendar")
+end)
+
+time:subscribe("mouse.clicked", function(env)
+	sbar.exec("open -a 'Clock' --args --open-timer")
 end)

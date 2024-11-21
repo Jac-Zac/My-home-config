@@ -3,10 +3,6 @@ local settings = require("settings")
 local app_icons = require("helpers.app_icons")
 local events = require("events")
 
-local function getAppIcon(app_name)
-	return app_icons[app_name] or app_icons["default"]
-end
-
 local space_id = sbar.exec("yabai -m query --windows --window | jq -r '.space'")
 
 local front_app = sbar.add("item", "front_app", {
@@ -14,32 +10,34 @@ local front_app = sbar.add("item", "front_app", {
 		drawing = true,
 		color = colors.white,
 		font = {
-			style = settings.font.style_map["Black"],
+			family = settings.font.numbers,
+			style = settings.font.style_map["Semibold"],
+			size = settings.font.sizes.numbers,
 		},
 	},
 	icon = {
-		drawing = true,
-		padding_right = settings.item_padding,
-		font = {
-			size = settings.font.sizes.app_icons,
-			family = settings.font.app_icons,
+		background = {
+			drawing = true,
+			image = {
+				scale = 0.6,
+				padding_right = settings.item_padding,
+			},
 		},
-		string = getAppIcon("default"),
-		color = colors.green,
 	},
 	updates = true,
 	space = space_id,
 })
 
 front_app:subscribe("mouse.entered", function(env)
-	local selected = env.SELECTED == "true"
 	sbar.animate("elastic", 10, function()
 		front_app:set({
 			background = {
 				color = colors.bg2,
 			},
 			icon = {
-				padding_left = settings.item_padding,
+				background = {
+					image = { scale = 0.5 },
+				},
 			},
 			label = {
 				padding_right = settings.item_padding,
@@ -50,14 +48,15 @@ front_app:subscribe("mouse.entered", function(env)
 end)
 
 front_app:subscribe("mouse.exited", function(env)
-	local selected = env.SELECTED == "true"
 	sbar.animate("elastic", 10, function()
 		front_app:set({
 			background = {
 				color = colors.transparent,
 			},
 			icon = {
-				padding_left = 0,
+				background = {
+					image = { scale = 0.6 },
+				},
 			},
 			label = {
 				padding_right = 0,
@@ -67,44 +66,63 @@ front_app:subscribe("mouse.exited", function(env)
 	end)
 end)
 
-front_app:subscribe("front_app_switched", function(env)
-	sbar.animate("elastic", 10, function()
-		local space_id = sbar.exec("yabai -m query --windows --window | jq -r '.space'", function(space_id, exit_code)
-			front_app:set({
-				label = {
-					drawing = true,
-					string = env.INFO,
+-- Animate app icon back to 1.0
+local function end_bounce_animation()
+	sbar.animate("tanh", 10, function()
+		front_app:set({
+			icon = {
+				background = {
+					image = { scale = 0.6 },
 				},
-				icon = {
-					drawing = true,
-					font = {
-						size = settings.font.sizes.app_icons,
-						family = settings.font.app_icons,
-					},
-					string = getAppIcon(env.INFO),
-				},
-				space = space_id,
-			})
-		end)
+			},
+		})
 	end)
+end
+
+-- Make app icon slightly bigger before returning back to regular size
+local function start_bounce_animation()
+	sbar.animate("tanh", 10, function()
+		front_app:set({
+			icon = {
+				background = {
+					image = { scale = 0.8 },
+				},
+			},
+		})
+	end)
+	-- Short delay so that full animation can occur
+	sbar.exec("sleep 0.30 && echo 'finishing bounce'", end_bounce_animation)
+end
+
+front_app:subscribe("front_app_switched", function(env)
+	front_app:set({
+		icon = {
+			background = {
+				image = "app." .. env.INFO,
+			},
+		},
+		label = {
+			drawing = true,
+			string = env.INFO,
+		},
+		space = space_id,
+	})
+	start_bounce_animation()
 end)
 
 front_app:subscribe("mouse.clicked", function(env)
-	-- Trigger and animate actions
 	sbar.trigger("swap_menus_and_spaces")
 	sbar.animate("elastic", 10, function()
-		sbar.exec("yabai -m query --windows --window | jq -r '.space'", function(space_id, exit_code)
-			front_app:set({
-				background = {
-					color = colors.bg2,
-				},
-				label = {
-					drawing = true,
-				},
-				updates = true,
-				space = space_id,
-			})
-		end)
+		front_app:set({
+			background = {
+				color = colors.bg2,
+			},
+			label = {
+				drawing = true,
+			},
+			updates = true,
+			space = space_id,
+		})
 	end)
 end)
 

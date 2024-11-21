@@ -41,7 +41,7 @@ local volume_slider = sbar.add("slider", popup_width, {
 		background = {
 			height = 6,
 			corner_radius = 3,
-			color = colors.bg2,
+			color = colors.grey,
 		},
 		knob = {
 			string = "􀀁",
@@ -114,11 +114,11 @@ local function volume_toggle_details(env)
 						width = popup_width,
 						label = { string = device, color = color },
 						click_script = 'SwitchAudioSource -s "'
-								.. device
-								.. '" && sketchybar --set /volume.device\\.*/ label.color='
-								.. colors.grey
-								.. " --set $NAME label.color="
-								.. colors.white,
+							.. device
+							.. '" && sketchybar --set /volume.device\\.*/ label.color='
+							.. colors.grey
+							.. " --set $NAME label.color="
+							.. colors.white,
 					})
 					counter = counter + 1
 				end
@@ -139,4 +139,3 @@ volume_percent:subscribe("mouse.scrolled", volume_scroll)
 
 -- Remove the mouse.exited.global event to prevent popup from automatically closing
 -- volume_percent:subscribe("mouse.exited.global", volume_collapse_details)
-
