@@ -36,7 +36,10 @@ front_app:subscribe("mouse.entered", function(env)
 			},
 			icon = {
 				background = {
-					image = { scale = 0.5 },
+					image = {
+						scale = 0.5,
+						padding_left = 3,
+					},
 				},
 			},
 			label = {
@@ -55,11 +58,14 @@ front_app:subscribe("mouse.exited", function(env)
 			},
 			icon = {
 				background = {
-					image = { scale = 0.6 },
+					image = {
+						scale = 0.6,
+						padding_left = 0,
+					},
 				},
 			},
 			label = {
-				padding_right = 0,
+				padding_left = 0,
 			},
 			updates = true,
 		})
