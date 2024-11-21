@@ -242,6 +242,11 @@ _macSystemPrefs_() {
   # Change default screenshot location
   defaults write com.apple.screencapture location -string "${HOME}/Downloads"
 
+  # Change f3 and f4 to change keyboard brightness 
+  cp utilities/com.local.KeyRemapping.plist ~/Library/LaunchAgents/
+  launchctl load ~/Library/LaunchAgents/com.local.KeyRemapping.plist
+
+
   # System settings
   # echo "Configuring system settings..."
   # Disable the "Are you sure you want to open this application?" dialog
