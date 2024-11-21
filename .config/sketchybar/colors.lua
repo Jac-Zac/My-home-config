@@ -18,7 +18,7 @@ return {
 		border = 0xff3b4252, -- Nord1
 	},
 	popup = {
-		bg = 0xff3b4252, -- Nord1
+		bg = 0xbf2e3440, -- Nord1 transparent
 		border = 0xff81a1c1, -- Nord9
 	},
 	spaces = {
