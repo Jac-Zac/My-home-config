@@ -48,7 +48,8 @@ local ssid = sbar.add("item", {
 	icon = {
 		padding_right = 16,
 		font = {
-			style = settings.font.style_map["Regular"],
+			font = settings.font.text,
+			style = settings.font.style_map["Bold"],
 			size = settings.font.sizes.text,
 		},
 		string = icons.wifi.router,
@@ -73,6 +74,11 @@ local hostname = sbar.add("item", {
 		align = "left",
 		string = "Hostname:",
 		width = popup_width / 2,
+		font = {
+			font = settings.font.text,
+			style = settings.font.style_map["Bold"],
+			size = settings.font.sizes.text,
+		},
 	},
 	label = {
 		font = {
@@ -94,6 +100,11 @@ local ip = sbar.add("item", {
 		align = "left",
 		string = "IP:",
 		width = popup_width / 2,
+		font = {
+			font = settings.font.text,
+			style = settings.font.style_map["Bold"],
+			size = settings.font.sizes.text,
+		},
 	},
 	label = {
 		font = {
@@ -115,6 +126,11 @@ local mask = sbar.add("item", {
 		align = "left",
 		string = "Subnet mask:",
 		width = popup_width / 2,
+		font = {
+			font = settings.font.text,
+			style = settings.font.style_map["Bold"],
+			size = settings.font.sizes.text,
+		},
 	},
 	label = {
 		font = {
@@ -136,6 +152,11 @@ local router = sbar.add("item", {
 		align = "left",
 		string = "Router:",
 		width = popup_width / 2,
+		font = {
+			font = settings.font.text,
+			style = settings.font.style_map["Bold"],
+			size = settings.font.sizes.text,
+		},
 	},
 	label = {
 		font = {
