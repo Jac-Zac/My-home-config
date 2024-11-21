@@ -18,13 +18,23 @@ local volume_icon = sbar.add("item", "widgets.volume2", {
 	padding_left = settings.item_padding,
 	icon = {
 		drawing = true,
-		width = 18,
+		width = 22,
 		align = "center",
 	},
 })
 
 local volume_bracket = sbar.add("bracket", "widgets.volume.bracket", { volume_icon.name }, {
-	popup = { align = "center" },
+	popup = {
+		-- drawing = "toggle",
+		drawing = false,
+		align = "center",
+		blur_radius = settings.popup_blur_radius,
+		background = {
+			border_color = colors.popup.border,
+			border_width = settings.popup_border_width,
+			corner_radius = settings.popup_border_radius,
+		},
+	},
 })
 
 local volume_slider = sbar.add("slider", popup_width, {
@@ -114,11 +124,11 @@ local function volume_toggle_details(env)
 						width = popup_width,
 						label = { string = device, color = color },
 						click_script = 'SwitchAudioSource -s "'
-							.. device
-							.. '" && sketchybar --set /volume.device\\.*/ label.color='
-							.. colors.grey
-							.. " --set $NAME label.color="
-							.. colors.white,
+								.. device
+								.. '" && sketchybar --set /volume.device\\.*/ label.color='
+								.. colors.grey
+								.. " --set $NAME label.color="
+								.. colors.white,
 					})
 					counter = counter + 1
 				end

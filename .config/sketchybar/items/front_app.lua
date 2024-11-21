@@ -85,7 +85,7 @@ local function start_bounce_animation()
 		front_app:set({
 			icon = {
 				background = {
-					image = { scale = 0.8 },
+					image = { scale = 0.7 },
 				},
 			},
 		})

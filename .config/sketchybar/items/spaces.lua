@@ -30,8 +30,8 @@ for i = 1, 9, 1 do
 		popup = {
 			background = {
 				border_width = settings.popup_border_width,
-				border_color = colors.blue,
-				corner_radius = settings.item_corner_radius,
+				border_color = colors.popup.border,
+				corner_radius = settings.popup_border_radius,
 				drawing = true, -- Make sure popup can draw
 			},
 		},

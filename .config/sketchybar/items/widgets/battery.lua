@@ -89,7 +89,18 @@ end)
 
 battery:subscribe("mouse.clicked", function(env)
 	local drawing = battery:query().popup.drawing
-	battery:set({ popup = { drawing = "toggle", align = "center" } })
+	battery:set({
+		popup = {
+			drawing = "toggle",
+			align = "center",
+			blur_radius = settings.popup_blur_radius,
+			background = {
+				border_color = colors.popup.border,
+				border_width = settings.popup_border_width,
+				corner_radius = settings.popup_border_radius,
+			},
+		},
+	})
 
 	if drawing == "off" then
 		sbar.exec("pmset -g batt", function(batt_info)
@@ -97,7 +108,7 @@ battery:subscribe("mouse.clicked", function(env)
 			local charge_found, _, charge = batt_info:find("(%d+)%%")
 			local charge_label = charge_found and charge .. "%" or "Unknown"
 			local label = found and remaining:gsub(":", ".") .. "hrs Remaining (" .. charge_label .. ")"
-				or "00:00 Remaining (" .. charge_label .. ")"
+					or "00:00 Remaining (" .. charge_label .. ")"
 			remaining_time:set({ label = { string = label } })
 		end)
 	end
