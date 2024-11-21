@@ -56,17 +56,15 @@ local function update_menus(space_id)
 			if id == 1 then
 				menu_items[id]:set({
 					icon = {
-						drawing = false,
-					},
-					label = {
-						padding_left = settings.item_spacing,
-						padding_right = settings.item_spacing,
 						drawing = true,
-						string = "/",
+						padding_left = 2.0,
+						-- padding_right = 0,
+						string = "􀄫",
 						color = colors.white,
 						font = {
-							family = settings.font.text,
-							style = settings.font.style_map["Heavy"],
+							family = settings.font.icons,
+							style = settings.font.style_map["Semibold"],
+							size = settings.font.sizes.text - 1.0,
 						},
 					},
 					drawing = true,
@@ -113,7 +111,7 @@ space_menu_swap:subscribe("swap_menus_and_spaces", function(env)
 	else
 		menu_watcher:set({ updates = true })
 		sbar.exec("yabai -m query --windows --window | jq -r '.space'", function(space_id, exit_code)
-			update_menus(space_id)                   -- Update menus based on the active space
+			update_menus(space_id) -- Update menus based on the active space
 			sbar.set("/menu\\..*/", { drawing = true }) -- Show updated menus
 		end)
 	end
