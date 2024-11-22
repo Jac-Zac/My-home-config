@@ -1,6 +1,13 @@
-all:
-	(cd cpu_load && $(MAKE))
-	(cd memory_load && $(MAKE))
-	(cd hdd_load && $(MAKE))
-	(cd network_load && $(MAKE))
-	(cd media_player && $(MAKE))
+BINARY_NAME = apple_menu
+FRAMEWORKS = -framework Cocoa -framework SwiftUI -framework MediaPlayer -framework CoreAudio -framework CoreBluetooth -framework IOKit
+
+bin/$(BINARY_NAME): apple_menu.swift | bin
+	swiftc $< $(FRAMEWORKS) -o $@
+
+bin:
+	mkdir -p bin
+
+clean:
+	rm -rf bin
+
+.PHONY: clean 
