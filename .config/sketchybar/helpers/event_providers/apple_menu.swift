@@ -471,14 +471,14 @@ struct CircularProgressView: View {
                 Circle()
                     .trim(from: 0, to: CGFloat(progress))
                     .stroke(color, style: StrokeStyle(lineWidth: 5, lineCap: .round))
-                    .frame(width: 45, height: 45)
+                    .frame(width: 38, height: 38)
                     .rotationEffect(.degrees(-90))
                 
                 Image(systemName: icon)
                     .font(.system(size: 14))
                     .foregroundColor(color)
             }
-            .padding(.top, 15)
+            .padding(.top, 10)
             
             Text("\(Int(progress * 100))%")
                 .font(.system(size: 12, weight: .medium))
@@ -647,7 +647,7 @@ struct ContentView: View {
                         Image(nsImage: profileImage)
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 40, height: 40)
+                            .frame(width: 20, height: 20)
                             .clipShape(Circle())
                             .overlay(Circle().stroke(Color.white.opacity(0.2), lineWidth: 2))
                     } else {
@@ -664,7 +664,7 @@ struct ContentView: View {
                         // Username with dynamic adjustments
                     Text(username)
                         .foregroundColor(.white)
-                        .font(.system(size: 11, weight: .semibold)) // Adjust font size based on length
+                        .font(.system(size: 10, weight: .semibold)) // Adjust font size based on length
                         .multilineTextAlignment(.leading)
                         .lineLimit(2) // Limit to two lines if necessary
                         .frame(maxWidth: .infinity, alignment: .leading) // Allow full width usage
@@ -813,10 +813,10 @@ struct ContentView: View {
                 Spacer()
 
                 LazyVGrid(columns: [
-                    GridItem(.flexible(), spacing: 5),
-                    GridItem(.flexible(), spacing: 5),
-                    GridItem(.flexible(), spacing: 5),
-                    GridItem(.flexible(), spacing: 5)
+                    GridItem(.flexible(), spacing: 60),
+                    GridItem(.flexible(), spacing: 60),
+                    GridItem(.flexible(), spacing: 60),
+                    GridItem(.flexible(), spacing: 60)
                 ], spacing: 0) {
                     CircularProgressView(
                         progress: statsController.batteryLevel,
@@ -839,7 +839,7 @@ struct ContentView: View {
                         color: Color(Colors.red)
                     )
                 }
-                .padding(.horizontal, 30)
+                .padding(.horizontal, 50)
                 .padding(.vertical, 20)
 
             }
@@ -1504,7 +1504,7 @@ class WeatherController: ObservableObject {
         }
         
         let urlString = "https://api.openweathermap.org/data/2.5/forecast?q=\(encodedCity)&appid=\(apiKey)&units=metric"
-        
+
         guard let url = URL(string: urlString) else {
             print("Error: Could not create URL from string")
             return
