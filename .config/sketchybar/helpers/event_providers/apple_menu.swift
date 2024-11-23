@@ -3,13 +3,10 @@ import SwiftUI
 import MediaPlayer
 import IOKit
 import IOKit.ps
-import IOKit.hid
 import IOKit.pwr_mgt
 import CoreAudio
-import Foundation
 import CoreBluetooth
-import CoreGraphics
-import CoreAudioTypes
+import Foundation
 import AppKit
 
 
@@ -466,7 +463,7 @@ struct CircularProgressView: View {
     var iconSize: CGFloat = 15 // Default icon size
     
     var body: some View {
-        VStack(spacing: 15) {
+        VStack(spacing: 10) {
             ZStack {
                 Circle()
                     .trim(from: 0, to: CGFloat(progress))
@@ -475,17 +472,17 @@ struct CircularProgressView: View {
                     .rotationEffect(.degrees(-90))
                 
                 Image(systemName: icon)
-                    .font(.system(size: 14))
+                    .font(.system(size: 12))
                     .foregroundColor(color)
             }
             .padding(.top, 10)
             
             Text("\(Int(progress * 100))%")
-                .font(.system(size: 12, weight: .medium))
+                .font(.system(size: 11, weight: .medium))
                 .foregroundColor(color)
-                .padding(.bottom, 12)
+                .padding(.bottom, 10)
         }
-        .frame(width: 90, height: 110)
+        .frame(width: 80, height: 100)
         .background(Color(Colors.cardBackground))
         .cornerRadius(12)
     }
@@ -564,52 +561,107 @@ extension Bundle {
     }
 }
 
-class BrightnessController: ObservableObject {
-    @Published var keyboardBrightness: Float = 0.5 {
-        didSet {
-            updateKeyboardBrightness()
+import CoreBluetooth
+import Foundation
+import SwiftUI
+
+class BluetoothManager: NSObject, ObservableObject {
+    @Published var isScanning = false
+    @Published var isPoweredOn = false
+    @Published var discoveredDevices: [CBPeripheral] = []
+    @Published var connectedDevice: CBPeripheral?
+    
+    private var centralManager: CBCentralManager!
+    
+    override init() {
+        super.init()
+        centralManager = CBCentralManager(delegate: nil, queue: .main)
+        centralManager.delegate = self
+    }
+    
+    // Start scanning for devices
+    func startScanning() {
+        guard isPoweredOn else {
+            print("Bluetooth is not powered on")
+            return
+        }
+        
+        isScanning = true
+        discoveredDevices.removeAll()
+        centralManager.scanForPeripherals(withServices: nil, options: nil)
+    }
+    
+    // Stop scanning for devices
+    func stopScanning() {
+        centralManager.stopScan()
+        isScanning = false
+    }
+    
+    // Connect to a specific device
+    func connect(to peripheral: CBPeripheral) {
+        centralManager.connect(peripheral, options: nil)
+    }
+    
+    // Disconnect from the current device
+    func disconnect() {
+        if let peripheral = connectedDevice {
+            centralManager.cancelPeripheralConnection(peripheral)
         }
     }
     
-    @Published var displayBrightness: Float = 0.5 {
-        didSet {
-            updateDisplayBrightness()
+    // Toggle Bluetooth power state (if supported by the platform)
+    func toggleBluetooth() {
+        // Note: Direct Bluetooth power toggling isn't available through public APIs
+        // Users need to go to Settings to change Bluetooth state
+        print("Please use System Settings to toggle Bluetooth")
+    }
+}
+
+// MARK: - CBCentralManagerDelegate
+extension BluetoothManager: CBCentralManagerDelegate {
+    func centralManagerDidUpdateState(_ central: CBCentralManager) {
+        switch central.state {
+        case .poweredOn:
+            isPoweredOn = true
+            print("Bluetooth is powered on")
+        case .poweredOff:
+            isPoweredOn = false
+            discoveredDevices.removeAll()
+            connectedDevice = nil
+            print("Bluetooth is powered off")
+        case .resetting:
+            print("Bluetooth is resetting")
+        case .unauthorized:
+            print("Bluetooth is unauthorized")
+        case .unsupported:
+            print("Bluetooth is unsupported")
+        case .unknown:
+            print("Bluetooth state is unknown")
+        @unknown default:
+            print("Unknown Bluetooth state")
         }
     }
     
-    init() {
-        initializeBrightnessLevels()
+    func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral,
+                       advertisementData: [String: Any], rssi RSSI: NSNumber) {
+        if !discoveredDevices.contains(peripheral) {
+            discoveredDevices.append(peripheral)
+        }
     }
-
-    private func initializeBrightnessLevels() {
-        keyboardBrightness = getCurrentKeyboardBrightness()
-        displayBrightness = getCurrentDisplayBrightness()
+    
+    func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
+        connectedDevice = peripheral
+        stopScanning()
+        print("Connected to \(peripheral.name ?? "Unknown Device")")
     }
-
-    private func getCurrentKeyboardBrightness() -> Float {
-        
-        // Tmp
-        return 0.5
+    
+    func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
+        print("Failed to connect to \(peripheral.name ?? "Unknown Device"): \(error?.localizedDescription ?? "Unknown error")")
     }
-
-    private func getCurrentDisplayBrightness() -> Float {
-        
-        // Tmp
-        return 0.5
-    }
-
-    func setKeyboardBrightness(level: Float) {
-    }
-
-    func setDisplayBrightness(level: Float) {
-    }
-
-    func updateKeyboardBrightness() { // Change from private to internal or public
-        setKeyboardBrightness(level: keyboardBrightness)
-    }
-
-    func updateDisplayBrightness() {
-        setDisplayBrightness(level: displayBrightness)
+    
+    func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
+        connectedDevice = nil
+        print("Disconnected from \(peripheral.name ?? "Unknown Device")")
     }
 }
 
@@ -617,7 +669,7 @@ struct ContentView: View {
     @StateObject private var statsController = StatsController()
     @StateObject private var mediaController = MediaController()
     @StateObject private var weatherController = WeatherController()
-    @StateObject private var brightnessController = BrightnessController()
+    // @StateObject private var brightnessController = BrightnessController()
     @State private var isMouseInside = false
     @State private var uptime: String = getUptime()
     let username: String = NSFullUserName()
@@ -639,15 +691,15 @@ struct ContentView: View {
 
     private var profileSection: some View {
         VStack(spacing: 2) {
-            HStack(spacing: 4) {
+            HStack(spacing: 0) {
                 // Profile image and name
-                HStack(spacing: 8) {
+                HStack(spacing: 4) {
                     // Profile Image
                     if let profileImage = getUserProfileImage() {
                         Image(nsImage: profileImage)
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 20, height: 20)
+                            .frame(width: 15, height: 15)
                             .clipShape(Circle())
                             .overlay(Circle().stroke(Color.white.opacity(0.2), lineWidth: 2))
                     } else {
@@ -766,39 +818,39 @@ struct ContentView: View {
         .padding(.horizontal, 30)
     }
 
-    private var brightnessControlSection: some View {
-        VStack {
-            Text("Brightness Controls")
-                .font(.headline)
-                .foregroundColor(.white)
-            
-            // Keyboard Brightness
-            VStack {
-                Text("Keyboard Brightness")
-                    .foregroundColor(.white)
-                    .font(.subheadline)
-                Slider(value: $brightnessController.keyboardBrightness, in: 0...1, onEditingChanged: { _ in
-                    brightnessController.updateKeyboardBrightness()
-                })
-                    .accentColor(.green)
-            }.padding()
-            
-            // Display Brightness
-            VStack {
-                Text("Display Brightness")
-                    .foregroundColor(.white)
-                    .font(.subheadline)
-                Slider(value: $brightnessController.displayBrightness, in: 0...1, onEditingChanged: { _ in
-                    brightnessController.updateDisplayBrightness()
-                })
-                    .accentColor(.blue)
-            }.padding()
-        }
-        .padding()
-        .background(Color(Colors.cardBackground))
-        .cornerRadius(8)
-        .padding(.horizontal, 30)
-    }
+    // private var brightnessControlSection: some View {
+    //     VStack {
+    //         Text("Brightness Controls")
+    //             .font(.headline)
+    //             .foregroundColor(.white)
+    //         
+    //         // Keyboard Brightness
+    //         VStack {
+    //             Text("Keyboard Brightness")
+    //                 .foregroundColor(.white)
+    //                 .font(.subheadline)
+    //             Slider(value: $brightnessController.keyboardBrightness, in: 0...1, onEditingChanged: { _ in
+    //                 brightnessController.updateKeyboardBrightness()
+    //             })
+    //                 .accentColor(.green)
+    //         }.padding()
+    //         
+    //         // Display Brightness
+    //         VStack {
+    //             Text("Display Brightness")
+    //                 .foregroundColor(.white)
+    //                 .font(.subheadline)
+    //             Slider(value: $brightnessController.displayBrightness, in: 0...1, onEditingChanged: { _ in
+    //                 brightnessController.updateDisplayBrightness()
+    //             })
+    //                 .accentColor(.blue)
+    //         }.padding()
+    //     }
+    //     .padding()
+    //     .background(Color(Colors.cardBackground))
+    //     .cornerRadius(8)
+    //     .padding(.horizontal, 30)
+    // }
 
 
     var body: some View {
@@ -808,15 +860,15 @@ struct ContentView: View {
             VStack(spacing: 15) {
                 profileSection
                 mediaPlayerSection
-                brightnessControlSection
+                // brightnessControlSection
                 
                 Spacer()
 
                 LazyVGrid(columns: [
-                    GridItem(.flexible(), spacing: 60),
-                    GridItem(.flexible(), spacing: 60),
-                    GridItem(.flexible(), spacing: 60),
-                    GridItem(.flexible(), spacing: 60)
+                    GridItem(.flexible(), spacing: -23),
+                    GridItem(.flexible(), spacing: -23),
+                    GridItem(.flexible(), spacing: -23),
+                    GridItem(.flexible(), spacing: -23)
                 ], spacing: 0) {
                     CircularProgressView(
                         progress: statsController.batteryLevel,
@@ -839,7 +891,7 @@ struct ContentView: View {
                         color: Color(Colors.red)
                     )
                 }
-                .padding(.horizontal, 50)
+                .padding(.horizontal, 17)
                 .padding(.vertical, 20)
 
             }
@@ -1369,8 +1421,8 @@ struct ActionButton: View {
         Button(action: action) {
             Image(systemName: icon)
                 .foregroundColor(color)
-                .font(.system(size: 14))
-                .frame(width: 32, height: 32)
+                .font(.system(size: 13))
+                .frame(width: 30, height: 30)
                 .background(Color(Colors.cardBackground))
                 .cornerRadius(8)
         }
@@ -1628,30 +1680,127 @@ struct WeatherCondition: Codable {
     let icon: String
 }
 
-struct Day: Codable {
-    let maxtemp_f: Double
-    let mintemp_f: Double
-    // let condition: Condition
-}
 
-// Add a helper function to get day name from date string
-private func getDayName(from dateString: String) -> String {
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "yyyy-MM-dd"
-    
-    guard let date = dateFormatter.date(from: dateString) else { return "" }
-    
-    dateFormatter.dateFormat = "EEE" // "EEE" gives abbreviated day name (Mon, Tue, etc.)
-    return dateFormatter.string(from: date)
-}
-
-// Move CalendarView out of ContentView and place it at file level
-struct CalendarView: View {
+// First, let's separate the calendar content into a simpler view
+struct CalendarContentView: View {
     private let weekDays = ["S", "M", "T", "W", "T", "F", "S"]
-    private let date: Date
+    let date: Date
+    
+    var body: some View {
+        VStack(spacing: 12) {
+            // Month and Year
+            Text(date.formatted(.dateTime.month(.wide).year()))
+                .foregroundColor(.white)
+                .font(.system(size: 14, weight: .semibold))
+            
+            // Week days
+            HStack(spacing: 8) {
+                ForEach(weekDays, id: \.self) { day in
+                    Text(day)
+                        .font(.system(size: 12))
+                        .foregroundColor(day == "S" ? Color(Colors.red) : Color.white)
+                        .frame(width: 20)
+                }
+            }
+            
+            // Calendar grid
+            CalendarGridView(date: date)
+        }
+        .padding(.vertical, 16)
+        .padding(.horizontal, 15)
+    }
+}
+
+// Separate grid view
+struct CalendarGridView: View {
+    let date: Date
+    
+    var body: some View {
+        VStack(spacing: 8) {
+            ForEach(0..<6) { row in
+                HStack(spacing: 8) {
+                    ForEach(0..<7) { column in
+                        let index = row * 7 + column
+                        if index < days.count {
+                            DayCell(day: days[index])
+                        } else {
+                            Text("")
+                                .frame(width: 20)
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    private var days: [DayItem] {
+        generateDaysInMonth()
+    }
+    
+    private func generateDaysInMonth() -> [DayItem] {
+        var days: [DayItem] = []
+        let calendar = Calendar.current
+        
+        let firstDayOfMonth = calendar.date(from: calendar.dateComponents([.year, .month], from: date))!
+        let firstWeekday = calendar.component(.weekday, from: firstDayOfMonth) - 1
+        
+        let previousMonth = calendar.date(byAdding: .month, value: -1, to: firstDayOfMonth)!
+        let daysInPreviousMonth = calendar.range(of: .day, in: .month, for: previousMonth)!.count
+        
+        // Previous month days
+        for day in (daysInPreviousMonth - firstWeekday + 1)...daysInPreviousMonth {
+            days.append(DayItem(number: "\(day)", isCurrentMonth: false, isToday: false))
+        }
+        
+        // Current month days
+        let daysInMonth = calendar.range(of: .day, in: .month, for: firstDayOfMonth)!.count
+        let currentDay = calendar.component(.day, from: date)
+        
+        for day in 1...daysInMonth {
+            days.append(DayItem(number: "\(day)", 
+                              isCurrentMonth: true, 
+                              isToday: day == currentDay))
+        }
+        
+        // Next month days
+        let remainingDays = 42 - days.count
+        for day in 1...remainingDays {
+            days.append(DayItem(number: "\(day)", isCurrentMonth: false, isToday: false))
+        }
+        
+        return days
+    }
+}
+
+// Simplified day cell
+struct DayCell: View {
+    let day: DayItem
+    
+    var body: some View {
+        Text(day.number)
+            .font(.system(size: 12))
+            .foregroundColor(
+                day.isCurrentMonth 
+                    ? (day.isToday ? .white : .white.opacity(0.7)) 
+                    : .white.opacity(0.3)
+            )
+            .frame(width: 20)
+            .fontWeight(day.isToday ? .bold : .regular)
+    }
+}
+
+// Day item model
+struct DayItem {
+    let number: String
+    let isCurrentMonth: Bool
+    let isToday: Bool
+}
+
+// Main calendar view with date initialization
+struct CalendarView: View {
+    let date: Date
     
     init() {
-        // Get date from sketchybar's date item
         let dateTask = Process()
         dateTask.launchPath = "/usr/bin/env"
         dateTask.arguments = ["sketchybar", "--query", "date"]
@@ -1665,107 +1814,16 @@ struct CalendarView: View {
         
         if let dateInfo = try? JSONSerialization.jsonObject(with: dateData, options: []) as? [String: Any],
            let dateString = dateInfo["label"] as? String {
-            // Parse the date string from sketchybar
             let formatter = DateFormatter()
-            formatter.dateFormat = "E MMM d"  // Format matching sketchybar's date format
-            if let parsedDate = formatter.date(from: dateString) {
-                self.date = parsedDate
-            } else {
-                self.date = Date()  // Fallback to current date if parsing fails
-            }
+            formatter.dateFormat = "E MMM d"
+            self.date = formatter.date(from: dateString) ?? Date()
         } else {
-            self.date = Date()  // Fallback to current date if query fails
+            self.date = Date()
         }
     }
     
     var body: some View {
-        GeometryReader { geometry in
-            let spacing = (geometry.size.width - 30 - (20 * 7)) / 6 // Calculate dynamic spacing
-            
-            VStack(spacing: 12) {
-                // Month and Year
-                Text(date.formatted(.dateTime.month(.wide).year()))
-                    .foregroundColor(.white)
-                    .font(.system(size: 14, weight: .semibold))
-                
-                // Week days
-                HStack(spacing: spacing) {
-                    ForEach(weekDays, id: \.self) { day in
-                        Text(day)
-                            .font(.system(size: 12))
-                            .foregroundColor(day == "S" ? Color(Colors.red) : Color.white)
-                            .frame(width: 20)
-                    }
-                }
-                
-                // Calendar grid
-                let days = generateDaysInMonth()
-                VStack(spacing: 8) {
-                    ForEach(0..<6) { row in
-                        HStack(spacing: spacing) {
-                            ForEach(0..<7) { column in
-                                let index = row * 7 + column
-                                if index < days.count {
-                                    let day = days[index]
-                                    Text(day.number)
-                                        .font(.system(size: 12))
-                                        .foregroundColor(day.isCurrentMonth ? 
-                                            (day.isToday ? .white : .white.opacity(0.7)) : 
-                                            .white.opacity(0.3))
-                                        .frame(width: 20)
-                                        .fontWeight(day.isToday ? .bold : .regular)
-                                } else {
-                                    Text("")
-                                        .frame(width: 20)
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            .padding(.vertical, 16)
-            .padding(.horizontal, 15)
-            .frame(maxWidth: .infinity)
-        }
-        .frame(height: 220)
-    }
-    
-    private struct DayItem {
-        let number: String
-        let isCurrentMonth: Bool
-        let isToday: Bool
-    }
-    
-    private func generateDaysInMonth() -> [DayItem] {
-        var days: [DayItem] = []
-        
-        // Get the first day of the month
-        let firstDayOfMonth = Calendar.current.date(from: Calendar.current.dateComponents([.year, .month], from: date))!
-        
-        // Get the weekday of the first day (0 = Sunday)
-        let firstWeekday = Calendar.current.component(.weekday, from: firstDayOfMonth) - 1
-        
-        // Add days from previous month
-        let previousMonth = Calendar.current.date(byAdding: .month, value: -1, to: firstDayOfMonth)!
-        let daysInPreviousMonth = Calendar.current.range(of: .day, in: .month, for: previousMonth)!.count
-        for day in (daysInPreviousMonth - firstWeekday + 1)...daysInPreviousMonth {
-            days.append(DayItem(number: "\(day)", isCurrentMonth: false, isToday: false))
-        }
-        
-        // Add days from current month
-        let daysInMonth = Calendar.current.range(of: .day, in: .month, for: firstDayOfMonth)!.count
-        let currentDay = Calendar.current.component(.day, from: date)
-        for day in 1...daysInMonth {
-            days.append(DayItem(number: "\(day)", isCurrentMonth: true, isToday: day == currentDay))
-        }
-        
-        // Add days from next month
-        let remainingDays = 42 - days.count // 6 rows * 7 days = 42
-        for day in 1...remainingDays {
-            days.append(DayItem(number: "\(day)", isCurrentMonth: false, isToday: false))
-        }
-        
-        return days
+        CalendarContentView(date: date)
     }
 }
 
@@ -1847,9 +1905,18 @@ struct CalendarPanelView: View {
             VStack(spacing: 16) {
                 PanelTitle(title: "Date And Weather Info")
 
-                // Calendar section
+                // FIX: This needs fixing I get the following error when I have this activated: 
+                // === AttributeGraph: cycle detected through attribute 3792 ===
+                // === AttributeGraph: cycle detected through attribute 4384 ===
+                // === AttributeGraph: cycle detected through attribute 5240 ===
+                // === AttributeGraph: cycle detected through attribute 10568 ===
+                // === AttributeGraph: cycle detected through attribute 17844 ===
+                // === AttributeGraph: cycle detected through attribute 17844 ===
                 Card(
-                    content: AnyView(CalendarView()),
+                    content: AnyView(
+                        CalendarView()
+                            .frame(maxWidth: .infinity)
+                    ),
                     backgroundColor: Color(Colors.cardBackground),
                     padding: EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0),
                     backgroundImage: nil
