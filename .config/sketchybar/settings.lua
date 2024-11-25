@@ -7,9 +7,9 @@ return {
 	bar_margin_padding = 18,
 
 	item_height = 20,
-	item_padding = 7,
+	item_padding = 8,
 	item_corner_radius = 4,
-	item_spacing = 7,
+	item_spacing = 6,
 
 	group_spacing = 16,
 	popup_border_width = 2,

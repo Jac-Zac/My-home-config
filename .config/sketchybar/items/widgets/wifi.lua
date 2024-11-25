@@ -47,9 +47,9 @@ local ssid = sbar.add("item", {
 	label = {
 		font = {
 			style = settings.font.style_map["SemiBold"],
-			size = settings.font.sizes.icons,
+			size = settings.font.sizes.text,
 		},
-		max_chars = 18,
+		max_chars = 25,
 		string = "????????????",
 	},
 })
@@ -88,32 +88,6 @@ local ip = sbar.add("item", {
 	icon = {
 		align = "left",
 		string = "IP:",
-		width = popup_width / 2,
-		font = {
-			font = settings.font.text,
-			style = settings.font.style_map["Bold"],
-			size = settings.font.sizes.text,
-		},
-	},
-	label = {
-		font = {
-			style = settings.font.style_map["Regular"],
-			size = settings.font.sizes.text,
-		},
-		string = "???.???.???.???",
-		width = popup_width / 2,
-		align = "right",
-	},
-})
-
-local mask = sbar.add("item", {
-	position = "popup." .. wifi_bracket.name,
-	padding_left = settings.popup_padding,
-	padding_right = settings.popup_padding,
-	width = popup_width,
-	icon = {
-		align = "left",
-		string = "Subnet mask:",
 		width = popup_width / 2,
 		font = {
 			font = settings.font.text,
@@ -188,9 +162,6 @@ local function toggle_details()
 		sbar.exec("ipconfig getsummary en0 | awk -F ' SSID : '  '/ SSID : / {print $2}'", function(result)
 			ssid:set({ label = result })
 		end)
-		sbar.exec("networksetup -getinfo Wi-Fi | awk -F 'Subnet mask: ' '/^Subnet mask: / {print $2}'", function(result)
-			mask:set({ label = result })
-		end)
 		sbar.exec("networksetup -getinfo Wi-Fi | awk -F 'Router: ' '/^Router: / {print $2}'", function(result)
 			router:set({ label = result })
 		end)
@@ -211,5 +182,4 @@ end
 ssid:subscribe("mouse.clicked", copy_label_to_clipboard)
 hostname:subscribe("mouse.clicked", copy_label_to_clipboard)
 ip:subscribe("mouse.clicked", copy_label_to_clipboard)
-mask:subscribe("mouse.clicked", copy_label_to_clipboard)
 router:subscribe("mouse.clicked", copy_label_to_clipboard)

@@ -15,7 +15,7 @@ local icons = {
 		clipboard = "􀉄",
 		keyboard = "􀇳",
 		control_center = "􀜊",
-		passwords = "􀟖",
+		passwords = "􀎡",
 
 		switch = {
 			on = "􁏮",

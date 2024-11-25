@@ -3,7 +3,8 @@
 options=(
 	style=round
 	width=6.0
-	hidpi=off
+	# For high res displays render the borders in High Res
+	hidpi=on
 	active_color=0xFFA3BE8C
 	inactive_color=0xFF4C566A 
 )
