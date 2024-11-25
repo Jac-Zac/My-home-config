@@ -16,7 +16,7 @@ local time = sbar.add("item", {
 		color = colors.white,
 		align = "center",
 		padding_left = settings.item_padding,
-		padding_right = settings.bar_margin_padding + settings.item_padding,
+		padding_right = settings.bar_margin_padding,
 	},
 	position = "right",
 	update_freq = 30,
@@ -67,7 +67,7 @@ time:subscribe("mouse.clicked", function(env)
 end)
 
 date:subscribe("mouse.clicked", function(env)
-	toggle_menu()
+	sbar.exec("open -a Calendar")
 end)
 
 -- Handle window closing when clicking outside
@@ -78,18 +78,7 @@ time:subscribe("mouse.clicked.outside", function(env)
 	end
 end)
 
-date:subscribe("mouse.clicked.outside", function(env)
-	if menu_visible then
-		sbar.exec("pkill -SIGUSR1 apple_menu")
-		menu_visible = false
-	end
-end)
-
 -- -- Prevent window from closing when clicking inside
 time:subscribe("mouse.clicked.inside", function(env)
-	return
-end)
-
-date:subscribe("mouse.clicked.inside", function(env)
 	return
 end)
