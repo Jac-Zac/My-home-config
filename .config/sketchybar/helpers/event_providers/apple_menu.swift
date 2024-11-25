@@ -703,13 +703,14 @@ struct ContentView: View {
                     }
                     .padding(.horizontal, 16)
                 }
-                .frame(height: 110) // Increased height
+                .frame(height: 110) 
             ),
             backgroundColor: Color(Colors.cardBackground),
             padding: EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0),
             backgroundImage: nil
         )
         .padding(.horizontal, 30)
+        .padding(.vertical, 20)
     }
 
 
@@ -719,12 +720,12 @@ struct ContentView: View {
             VisualEffectView(material: .hudWindow, blendingMode: .behindWindow)
                 .edgesIgnoringSafeArea(.all)
 
-            VStack(spacing: 15) {
+            VStack(spacing: 0) {
                 profileSection
                     .background(
                         RoundedRectangle(cornerRadius: 12)
                             .fill(Color(Colors.cardBackground).opacity(0.5))
-                            .blur(radius: 5)
+                            .blur(radius: 15)
                     )
                     .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 2)
 
@@ -732,7 +733,7 @@ struct ContentView: View {
                     .background(
                         RoundedRectangle(cornerRadius: 12)
                             .fill(Color(Colors.cardBackground).opacity(0.5))
-                            .blur(radius: 5)
+                            .blur(radius: 15)
                     )
                     .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 2)
 
@@ -772,7 +773,7 @@ struct ContentView: View {
                 .background(
                     RoundedRectangle(cornerRadius: 12)
                         .fill(Color(Colors.cardBackground).opacity(0.5))
-                        .blur(radius: 5)
+                        .blur(radius: 15)
                 )
                 .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 2)
             }
