@@ -11,10 +11,11 @@ for i = 1, 9, 1 do
 		},
 		label = {
 			string = string.format("%02d", i),
+			-- string = i,
 			padding_left = settings.item_padding,
 			padding_right = settings.item_padding,
-			color = colors.grey,
-			highlight_color = colors.bar.bg,
+			color = colors.quicksilver,
+			highlight_color = colors.bar.black,
 			font = {
 				family = settings.font.numbers,
 				style = settings.font.style_map["Semibold"],
@@ -24,7 +25,7 @@ for i = 1, 9, 1 do
 		},
 		background = {
 			height = settings.item_height,
-			color = colors.transparent, -- Start transparent
+			color = colors.transparent,
 			corner_radius = settings.item_corner_radius,
 		},
 		popup = {

@@ -263,34 +263,34 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         // Parse responses and position window
         if let yabaiInfo = try? JSONSerialization.jsonObject(with: yabaiData, options: []) as? [String: Any],
-           let displayIndex = yabaiInfo["index"] as? Int,
-           let frame = yabaiInfo["frame"] as? [String: Double],
-           let itemInfo = try? JSONSerialization.jsonObject(with: sketchyData, options: []) as? [String: Any],
-           let boundingRects = itemInfo["bounding_rects"] as? [String: Any],
-           let displayRect = boundingRects["display-\(displayIndex)"] as? [String: Any],
-           let _ = displayRect["origin"] as? [Double] {
+            let displayIndex = yabaiInfo["index"] as? Int,
+            let frame = yabaiInfo["frame"] as? [String: Double],
+            let itemInfo = try? JSONSerialization.jsonObject(with: sketchyData, options: []) as? [String: Any],
+            let boundingRects = itemInfo["bounding_rects"] as? [String: Any],
+            let displayRect = boundingRects["display-\(displayIndex)"] as? [String: Any],
+            let _ = displayRect["origin"] as? [Double] {
             
             let displayX = frame["x"] ?? 0
             let displayWidth = frame["w"] ?? 0
             let displayHeight = frame["h"] ?? 0
             let windowWidth: CGFloat = displayWidth * 0.20  // 20% of screen width
             
-            // Position at left edge of screen for menu, right edge for calendar
+            // Position at top edge of screen for both menu and calendar
             let windowY = displayHeight - topOffset
             let windowX: CGFloat
             if currentPanel == .menu {
-                windowX = displayX + CGFloat(gapSize)
+                windowX = displayX + CGFloat(gapSize - 1)
             } else {
                 // For calendar panel, position at right edge of screen
-                windowX = displayX + displayWidth - windowWidth - CGFloat(gapSize)
+                windowX = displayX + displayWidth - windowWidth - CGFloat(gapSize - 1)
             }
             
             window = NSWindow(
                 contentRect: NSRect(
                     x: windowX,  // Use calculated windowX
-                    y: CGFloat(gapSize),
+                    y: windowY - (windowY / 1.7) + CGFloat(2),  // Adjust y to position at top
                     width: windowWidth,
-                    height: windowY - CGFloat(gapSize)
+                    height: (windowY / 1.7) - CGFloat(gapSize)
                 ),
                 styleMask: [],  // Empty style mask prevents all window controls including resizing
                 backing: .buffered,
@@ -298,16 +298,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             )
             
             // Force the window size
-            window?.setContentSize(NSSize(width: windowWidth, height: windowY - CGFloat(gapSize)))
+            window?.setContentSize(NSSize(width: windowWidth, height: (windowY / 1.7)))
             
             // Add size constraint
             if let window = window {
-                window.maxSize = NSSize(width: windowWidth, height: windowY - CGFloat(gapSize))
-                window.minSize = NSSize(width: windowWidth, height: windowY - CGFloat(gapSize))
+                window.maxSize = NSSize(width: windowWidth, height: (windowY / 1.7) - CGFloat(gapSize))
+                window.minSize = NSSize(width: windowWidth, height: (windowY / 1.7) - CGFloat(gapSize))
             }
-            
         }
-        
+                
         window?.contentView = NSHostingView(rootView: contentView)
         window?.backgroundColor = .clear
         window?.isMovableByWindowBackground = false
@@ -463,26 +462,26 @@ struct CircularProgressView: View {
     var iconSize: CGFloat = 15 // Default icon size
     
     var body: some View {
-        VStack(spacing: 10) {
+        VStack(spacing: 15) {
             ZStack {
                 Circle()
                     .trim(from: 0, to: CGFloat(progress))
-                    .stroke(color, style: StrokeStyle(lineWidth: 5, lineCap: .round))
-                    .frame(width: 38, height: 38)
+                    .stroke(color, style: StrokeStyle(lineWidth: 6, lineCap: .round))
+                    .frame(width: 50, height: 50)
                     .rotationEffect(.degrees(-90))
                 
                 Image(systemName: icon)
-                    .font(.system(size: 12))
+                    .font(.system(size: 14))
                     .foregroundColor(color)
             }
             .padding(.top, 10)
             
             Text("\(Int(progress * 100))%")
-                .font(.system(size: 11, weight: .medium))
+                .font(.system(size: iconSize, weight: .medium))
                 .foregroundColor(color)
-                .padding(.bottom, 10)
+                .padding(.bottom, 5)
         }
-        .frame(width: 80, height: 100)
+        .frame(width: 110, height: 110)
         .background(Color(Colors.cardBackground))
         .cornerRadius(12)
     }
@@ -561,169 +560,10 @@ extension Bundle {
     }
 }
 
-class BluetoothManager: NSObject, ObservableObject {
-    @Published var isScanning = false
-    @Published var isPoweredOn = false
-    @Published var discoveredDevices: [CBPeripheral] = []
-    @Published var connectedDevices: Set<CBPeripheral> = []
-    
-    private var centralManager: CBCentralManager!
-    private var peripheralDelegate: PeripheralDelegate?
-    
-    override init() {
-        super.init()
-        self.peripheralDelegate = PeripheralDelegate()
-        centralManager = CBCentralManager(delegate: nil, queue: .main)
-        centralManager.delegate = self
-    }
-    
-    func startScanning() {
-        guard isPoweredOn else {
-            print("Bluetooth is not powered on")
-            return
-        }
-        
-        isScanning = true
-        discoveredDevices.removeAll()
-        // Scan for all devices initially
-        centralManager.scanForPeripherals(withServices: nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey: false])
-    }
-    
-    func stopScanning() {
-        centralManager.stopScan()
-        isScanning = false
-    }
-    
-    func connect(to peripheral: CBPeripheral) {
-        peripheral.delegate = peripheralDelegate
-        centralManager.connect(peripheral, options: nil)
-    }
-    
-    func disconnect(from peripheral: CBPeripheral) {
-        centralManager.cancelPeripheralConnection(peripheral)
-    }
-    
-    func disconnect() {
-        connectedDevices.forEach { peripheral in
-            centralManager.cancelPeripheralConnection(peripheral)
-        }
-    }
-    
-    // Method to retrieve connected peripherals
-    func retrieveConnectedPeripherals() {
-        // Instead of looking for specific services, we'll get all connected peripherals
-        // that the app knows about
-        let peripherals = centralManager.retrieveConnectedPeripherals(withServices: [])
-        
-        peripherals.forEach { peripheral in
-            if !connectedDevices.contains(peripheral) {
-                connectedDevices.insert(peripheral)
-            }
-        }
-    }
-}
-
-// MARK: - CBCentralManagerDelegate
-extension BluetoothManager: CBCentralManagerDelegate {
-    func centralManagerDidUpdateState(_ central: CBCentralManager) {
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            
-            switch central.state {
-            case .poweredOn:
-                self.isPoweredOn = true
-                self.retrieveConnectedPeripherals()
-                print("Bluetooth is powered on")
-            case .poweredOff:
-                self.isPoweredOn = false
-                self.discoveredDevices.removeAll()
-                self.connectedDevices.removeAll()
-                print("Bluetooth is powered off")
-            case .resetting:
-                self.connectedDevices.removeAll()
-                print("Bluetooth is resetting")
-            case .unauthorized:
-                print("Bluetooth is unauthorized")
-            case .unsupported:
-                print("Bluetooth is unsupported")
-            case .unknown:
-                print("Bluetooth state is unknown")
-            @unknown default:
-                print("Unknown Bluetooth state")
-            }
-        }
-    }
-    
-    func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral,
-                       advertisementData: [String: Any], rssi RSSI: NSNumber) {
-        DispatchQueue.main.async { [weak self] in
-            if let self = self, !self.discoveredDevices.contains(peripheral) {
-                self.discoveredDevices.append(peripheral)
-                print("Discovered device: \(peripheral.name ?? "Unknown")")
-            }
-        }
-    }
-    
-    func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.connectedDevices.insert(peripheral)
-            self.stopScanning()
-            peripheral.delegate = self.peripheralDelegate
-            // Start discovering services
-            peripheral.discoverServices(nil)
-            print("Connected to \(peripheral.name ?? "Unknown Device")")
-        }
-    }
-    
-    func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
-        DispatchQueue.main.async {
-            print("Failed to connect to \(peripheral.name ?? "Unknown Device"): \(error?.localizedDescription ?? "Unknown error")")
-        }
-    }
-    
-    func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
-        DispatchQueue.main.async { [weak self] in
-            self?.connectedDevices.remove(peripheral)
-            print("Disconnected from \(peripheral.name ?? "Unknown Device")")
-        }
-    }
-}
-
-// MARK: - PeripheralDelegate
-class PeripheralDelegate: NSObject, CBPeripheralDelegate {
-    func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
-        guard error == nil else {
-            print("Error discovering services: \(error!.localizedDescription)")
-            return
-        }
-        
-        print("Discovered services for \(peripheral.name ?? "Unknown Device"):")
-        peripheral.services?.forEach { service in
-            print("Service: \(service.uuid)")
-            peripheral.discoverCharacteristics(nil, for: service)
-        }
-    }
-    
-    func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
-        guard error == nil else {
-            print("Error discovering characteristics: \(error!.localizedDescription)")
-            return
-        }
-        
-        print("Discovered characteristics for service \(service.uuid):")
-        service.characteristics?.forEach { characteristic in
-            print("Characteristic: \(characteristic.uuid)")
-        }
-    }
-}
-
 struct ContentView: View {
     @StateObject private var statsController = StatsController()
     @StateObject private var mediaController = MediaController()
     @StateObject private var weatherController = WeatherController()
-    // @StateObject private var bluetoothManager = BluetoothManager()
-    // @StateObject private var brightnessController = BrightnessController()
     @State private var isMouseInside = false
     @State private var uptime: String = getUptime()
     let username: String = NSFullUserName()
@@ -873,95 +713,33 @@ struct ContentView: View {
     }
 
 
-    // private var bluetoothControlSection: some View {
-    //     // Update the Connected Devices section to use connectedDevices instead of connectedDevice
-    //     VStack(alignment: .leading, spacing: 8) {
-    //         Text("Connected Devices")
-    //             .font(.subheadline)
-    //             .foregroundColor(.white)
-    //             .padding(.horizontal)
-    //         
-    //         if bluetoothManager.connectedDevices.isEmpty {
-    //             Text("No connected devices")
-    //                 .foregroundColor(.gray)
-    //                 .padding()
-    //         } else {
-    //             ScrollView {
-    //                 LazyVStack(spacing: 8) {
-    //                     ForEach(Array(bluetoothManager.connectedDevices), id: \.identifier) { device in
-    //                         HStack {
-    //                             Text(device.name ?? "Unknown Device")
-    //                                 .foregroundColor(.white)
-    //                             Spacer()
-    //                             Button("Disconnect") {
-    //                                 bluetoothManager.disconnect(from: device)
-    //                             }
-    //                             .foregroundColor(Color(Colors.red))
-    //                         }
-    //                         .padding()
-    //                         .background(Color(Colors.cardBackground).opacity(0.3))
-    //                         .cornerRadius(6)
-    //                     }
-    //                 }
-    //                 .padding(.horizontal, 5)
-    //             }
-    //         }
-    //     }
-    // }
-    //
-    // private var brightnessControlSection: some View {
-    //     VStack {
-    //         Text("Brightness Controls")
-    //             .font(.headline)
-    //             .foregroundColor(.white)
-    //         
-    //         // Keyboard Brightness
-    //         VStack {
-    //             Text("Keyboard Brightness")
-    //                 .foregroundColor(.white)
-    //                 .font(.subheadline)
-    //             Slider(value: $brightnessController.keyboardBrightness, in: 0...1, onEditingChanged: { _ in
-    //                 brightnessController.updateKeyboardBrightness()
-    //             })
-    //                 .accentColor(.green)
-    //         }.padding()
-    //         
-    //         // Display Brightness
-    //         VStack {
-    //             Text("Display Brightness")
-    //                 .foregroundColor(.white)
-    //                 .font(.subheadline)
-    //             Slider(value: $brightnessController.displayBrightness, in: 0...1, onEditingChanged: { _ in
-    //                 brightnessController.updateDisplayBrightness()
-    //             })
-    //                 .accentColor(.blue)
-    //         }.padding()
-    //     }
-    //     .padding()
-    //     .background(Color(Colors.cardBackground))
-    //     .cornerRadius(8)
-    //     .padding(.horizontal, 30)
-    // }
-
-
     var body: some View {
         ZStack {
-            Color(Colors.panelBackground).blur(radius: 10) // Apply blur effect
-            
+            // Blurred background using VisualEffectView
+            VisualEffectView(material: .hudWindow, blendingMode: .behindWindow)
+                .edgesIgnoringSafeArea(.all)
+
             VStack(spacing: 15) {
                 profileSection
+                    .background(
+                        RoundedRectangle(cornerRadius: 12)
+                            .fill(Color(Colors.cardBackground).opacity(0.5))
+                            .blur(radius: 5)
+                    )
+                    .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 2)
+
                 mediaPlayerSection
-                // bluetoothControlSection
-                // brightnessControlSection
-                
-                Spacer()
+                    .background(
+                        RoundedRectangle(cornerRadius: 12)
+                            .fill(Color(Colors.cardBackground).opacity(0.5))
+                            .blur(radius: 5)
+                    )
+                    .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 2)
 
                 LazyVGrid(columns: [
-                    GridItem(.flexible(), spacing: -23),
-                    GridItem(.flexible(), spacing: -23),
-                    GridItem(.flexible(), spacing: -23),
-                    GridItem(.flexible(), spacing: -23)
-                ], spacing: 0) {
+                    GridItem(.flexible(), spacing: 15), // Adjust spacing as needed
+                    GridItem(.flexible(), spacing: 15)
+                ], spacing: 20) { // Adjust vertical spacing as needed
                     CircularProgressView(
                         progress: statsController.batteryLevel,
                         icon: batteryIcon(level: statsController.batteryLevel, isCharging: statsController.isCharging),
@@ -977,25 +755,34 @@ struct ContentView: View {
                         icon: "memorychip",
                         color: Color(Colors.yellow)
                     )
-                    CircularProgressView(
-                        progress: statsController.diskUsage,
-                        icon: "internaldrive",
-                        color: Color(Colors.red)
-                    )
-                }
-                .padding(.horizontal, 17)
-                .padding(.vertical, 20)
 
+                    CircularProgressView(
+                        progress: statsController.cpuUsage,
+                        icon: "cpu",
+                        color: Color(Colors.orange)
+                    )
+                    // CircularProgressView(
+                    //     progress: statsController.diskUsage,
+                    //     icon: "internaldrive",
+                    //     color: Color(Colors.red)
+                    // )
+                }
+                .padding(.horizontal, 30)
+                .padding(.vertical, 20)
+                .background(
+                    RoundedRectangle(cornerRadius: 12)
+                        .fill(Color(Colors.cardBackground).opacity(0.5))
+                        .blur(radius: 5)
+                )
+                .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 2)
             }
-            
-            Spacer()
 
             mouseTrackingOverlay
         }
         .cornerRadius(12)
         .overlay(
             RoundedRectangle(cornerRadius: 12)
-                .stroke(Color(Colors.green), lineWidth: 4) // Use Colors.green for border
+                .stroke(Color(Colors.green), lineWidth: 4)
         )
         .onReceive(uptimeTimer) { _ in
             uptime = getUptime()
@@ -1070,28 +857,39 @@ app.run()
 
 class StatsController: ObservableObject {
     @Published private(set) var memoryUsage: Double = 0.0
-    @Published private(set) var diskUsage: Double = 0.0
+    // @Published private(set) var diskUsage: Double = 0.0
+    @Published private(set) var cpuUsage: Double = 0.0
     @Published private(set) var batteryLevel: Double = 0.0
     @Published private(set) var isCharging: Bool = false
     @Published private(set) var volumeLevel: Double = 0.0
     @Published private(set) var isMuted: Bool = false
     
-    private var timer: Timer?
+    private var generalTimer: Timer? // Declare the general timer
+    private var cpuTimer: Timer? // Declare the CPU timer
+    private var previousTicks: (user: Float, system: Float, idle: Float, nice: Float)?
+
     
-    init() {
-        timer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { [weak self] _ in
-            self?.updateStats()
+       init() {
+        // General stats updated every second
+        generalTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
+            self?.updateGeneralStats()
         }
-        updateStats()
+        updateGeneralStats()
+
+        // CPU usage updated more frequently
+        cpuTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { [weak self] _ in
+            self?.updateCPUUsage()
+        }
+        updateCPUUsage()
     }
-    
-    private func updateStats() {
+
+    private func updateGeneralStats() {
         updateMemoryUsage()
-        updateDiskUsage()
+        // updateDiskUsage()
         updateBatteryStatus()
         updateVolumeLevel()
     }
-    
+
     private func updateMemoryUsage() {
         var stats = vm_statistics64()
         var size = mach_msg_type_number_t(MemoryLayout<vm_statistics64>.size / MemoryLayout<integer_t>.size)
@@ -1115,24 +913,60 @@ class StatsController: ObservableObject {
         }
     } 
 
-    private func updateDiskUsage() {
-        let fileURL = URL(fileURLWithPath: "/")
-        do {
-            let values = try fileURL.resourceValues(forKeys: [.volumeTotalCapacityKey, .volumeAvailableCapacityKey])
-            if let total = values.volumeTotalCapacity,
-               let available = values.volumeAvailableCapacity {
-                let used = Double(total - available)
-                let usage = used / Double(total)
+    // private func updateDiskUsage() {
+    //     let fileURL = URL(fileURLWithPath: "/")
+    //     do {
+    //         let values = try fileURL.resourceValues(forKeys: [.volumeTotalCapacityKey, .volumeAvailableCapacityKey])
+    //         if let total = values.volumeTotalCapacity,
+    //            let available = values.volumeAvailableCapacity {
+    //             let used = Double(total - available)
+    //             let usage = used / Double(total)
+    //             
+    //             DispatchQueue.main.async {
+    //                 self.diskUsage = usage
+    //             }
+    //         }
+    //     } catch {
+    //         print("Error getting disk usage: \(error)")
+    //     }
+    // }
+
+    private func updateCPUUsage() {
+        var hostInfo = host_cpu_load_info()
+        var size = mach_msg_type_number_t(MemoryLayout.size(ofValue: hostInfo) / MemoryLayout<Int32>.size)
+        let result = withUnsafeMutablePointer(to: &hostInfo) {
+            $0.withMemoryRebound(to: integer_t.self, capacity: Int(size)) {
+                host_statistics(mach_host_self(), HOST_CPU_LOAD_INFO, $0, &size)
+            }
+        }
+        
+        if result == KERN_SUCCESS {
+            let user = Float(hostInfo.cpu_ticks.0)
+            let system = Float(hostInfo.cpu_ticks.1)
+            let idle = Float(hostInfo.cpu_ticks.2)
+            let nice = Float(hostInfo.cpu_ticks.3)
+            
+            if let previous = previousTicks {
+                let userDiff = user - previous.user
+                let systemDiff = system - previous.system
+                let idleDiff = idle - previous.idle
+                let niceDiff = nice - previous.nice
+                
+                let totalDiff = userDiff + systemDiff + idleDiff + niceDiff
+                let usage = (userDiff + systemDiff + niceDiff) / totalDiff
                 
                 DispatchQueue.main.async {
-                    self.diskUsage = usage
+                    self.cpuUsage = Double(usage) // Convert Float to Double
                 }
             }
-        } catch {
-            print("Error getting disk usage: \(error)")
+            
+            // Save the current values for the next calculation
+            previousTicks = (user: user, system: system, idle: idle, nice: nice)
+        } else {
+            print("Failed to fetch CPU statistics: \(result)")
         }
     }
-    
+
     private func updateBatteryStatus() {
         if let powerSource = IOPSCopyPowerSourcesInfo()?.takeRetainedValue(),
            let sources = IOPSCopyPowerSourcesList(powerSource)?.takeRetainedValue() as? [CFTypeRef] {
@@ -1206,7 +1040,8 @@ class StatsController: ObservableObject {
     }
     
     deinit {
-        timer?.invalidate()
+        generalTimer?.invalidate()
+        cpuTimer?.invalidate()
     }
 }
 
@@ -1944,7 +1779,7 @@ struct ClockView: View {
     }
 }
 
-// Add this new struct for panel titles
+// Add this new strict for panel titles
 struct PanelTitle: View {
     let title: String
     
@@ -1973,13 +1808,14 @@ struct CalendarPanelView: View {
 
     var body: some View {
         ZStack {
-            // Background color
-            Color(Colors.panelBackground)
+            // Blurred background using VisualEffectView
+            VisualEffectView(material: .hudWindow, blendingMode: .behindWindow)
+                .edgesIgnoringSafeArea(.all)
 
             VStack(spacing: 16) {
                 PanelTitle(title: "Date And Weather Info")
 
-                // Calendar section
+                // Calendar section with blur and shadow
                 Card(
                     content: AnyView(
                         CalendarView()
@@ -1990,8 +1826,14 @@ struct CalendarPanelView: View {
                     backgroundImage: nil
                 )
                 .padding(.horizontal, 30)
+                .background(
+                    RoundedRectangle(cornerRadius: 12)
+                        .fill(Color(Colors.cardBackground).opacity(0.5))
+                        .blur(radius: 10)
+                )
+                .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 2)
 
-                // Clock section
+                // Clock section with blur and shadow
                 Card(
                     content: AnyView(ClockView()),
                     backgroundColor: Color(Colors.cardBackground),
@@ -1999,10 +1841,22 @@ struct CalendarPanelView: View {
                     backgroundImage: nil
                 )
                 .padding(.horizontal, 30)
+                .background(
+                    RoundedRectangle(cornerRadius: 12)
+                        .fill(Color(Colors.cardBackground).opacity(0.5))
+                        .blur(radius: 10)
+                )
+                .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 2)
 
-                // Weather section
+                // Weather section with shadow
                 WeatherView(weatherController: weatherController)
                     .padding(.horizontal, 10)
+                    .background(
+                        RoundedRectangle(cornerRadius: 12)
+                            .fill(Color(Colors.cardBackground).opacity(0.5))
+                            .blur(radius: 10)
+                    )
+                    .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 2)
 
                 Spacer()
             }
@@ -2024,3 +1878,21 @@ struct CalendarPanelView: View {
     }
 }
 
+// Custom VisualEffectView
+struct VisualEffectView: NSViewRepresentable {
+    let material: NSVisualEffectView.Material
+    let blendingMode: NSVisualEffectView.BlendingMode
+
+    func makeNSView(context: Context) -> NSVisualEffectView {
+        let visualEffectView = NSVisualEffectView()
+        visualEffectView.material = material
+        visualEffectView.blendingMode = blendingMode
+        visualEffectView.state = .active
+        return visualEffectView
+    }
+
+    func updateNSView(_ visualEffectView: NSVisualEffectView, context: Context) {
+        visualEffectView.material = material
+        visualEffectView.blendingMode = blendingMode
+    }
+}

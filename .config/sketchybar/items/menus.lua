@@ -28,7 +28,7 @@ for i = 1, max_items do
 		icon = { drawing = false },
 		label = {
 			padding_right = settings.item_spacing,
-			color = colors.grey,
+			color = colors.quicksilver,
 		},
 		click_script = "$CONFIG_DIR/helpers/menus/bin/menus -s " .. i,
 	})
@@ -111,7 +111,7 @@ space_menu_swap:subscribe("swap_menus_and_spaces", function(env)
 	else
 		menu_watcher:set({ updates = true })
 		sbar.exec("yabai -m query --windows --window | jq -r '.space'", function(space_id, exit_code)
-			update_menus(space_id) -- Update menus based on the active space
+			update_menus(space_id)                   -- Update menus based on the active space
 			sbar.set("/menu\\..*/", { drawing = true }) -- Show updated menus
 		end)
 	end

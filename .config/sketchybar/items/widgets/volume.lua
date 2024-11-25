@@ -16,7 +16,7 @@ local volume_icon = sbar.add("item", "widgets.volume2", {
 	padding_left = settings.item_padding,
 	icon = {
 		drawing = true,
-		width = 22,
+		width = 21,
 		align = "center",
 		color = colors.white,
 	},
