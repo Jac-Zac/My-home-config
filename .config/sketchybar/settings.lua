@@ -4,7 +4,7 @@ return {
 	bar_padding = 0,
 	bar_margin = 0,
 	bar_blur_radius = 0,
-	bar_margin_padding = 15,
+	bar_margin_padding = 18,
 
 	item_height = 20,
 	item_padding = 7,
