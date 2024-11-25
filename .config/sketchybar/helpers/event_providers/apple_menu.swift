@@ -722,7 +722,7 @@ struct ContentView: View {
     @StateObject private var statsController = StatsController()
     @StateObject private var mediaController = MediaController()
     @StateObject private var weatherController = WeatherController()
-    @StateObject private var bluetoothManager = BluetoothManager()
+    // @StateObject private var bluetoothManager = BluetoothManager()
     // @StateObject private var brightnessController = BrightnessController()
     @State private var isMouseInside = false
     @State private var uptime: String = getUptime()
@@ -753,7 +753,7 @@ struct ContentView: View {
                         Image(nsImage: profileImage)
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 15, height: 15)
+                            .frame(width: 30, height: 30)
                             .clipShape(Circle())
                             .overlay(Circle().stroke(Color.white.opacity(0.2), lineWidth: 2))
                     } else {
@@ -873,42 +873,42 @@ struct ContentView: View {
     }
 
 
-    private var bluetoothControlSection: some View {
-        // Update the Connected Devices section to use connectedDevices instead of connectedDevice
-        VStack(alignment: .leading, spacing: 8) {
-            Text("Connected Devices")
-                .font(.subheadline)
-                .foregroundColor(.white)
-                .padding(.horizontal)
-            
-            if bluetoothManager.connectedDevices.isEmpty {
-                Text("No connected devices")
-                    .foregroundColor(.gray)
-                    .padding()
-            } else {
-                ScrollView {
-                    LazyVStack(spacing: 8) {
-                        ForEach(Array(bluetoothManager.connectedDevices), id: \.identifier) { device in
-                            HStack {
-                                Text(device.name ?? "Unknown Device")
-                                    .foregroundColor(.white)
-                                Spacer()
-                                Button("Disconnect") {
-                                    bluetoothManager.disconnect(from: device)
-                                }
-                                .foregroundColor(Color(Colors.red))
-                            }
-                            .padding()
-                            .background(Color(Colors.cardBackground).opacity(0.3))
-                            .cornerRadius(6)
-                        }
-                    }
-                    .padding(.horizontal, 5)
-                }
-            }
-        }
-    }
-
+    // private var bluetoothControlSection: some View {
+    //     // Update the Connected Devices section to use connectedDevices instead of connectedDevice
+    //     VStack(alignment: .leading, spacing: 8) {
+    //         Text("Connected Devices")
+    //             .font(.subheadline)
+    //             .foregroundColor(.white)
+    //             .padding(.horizontal)
+    //         
+    //         if bluetoothManager.connectedDevices.isEmpty {
+    //             Text("No connected devices")
+    //                 .foregroundColor(.gray)
+    //                 .padding()
+    //         } else {
+    //             ScrollView {
+    //                 LazyVStack(spacing: 8) {
+    //                     ForEach(Array(bluetoothManager.connectedDevices), id: \.identifier) { device in
+    //                         HStack {
+    //                             Text(device.name ?? "Unknown Device")
+    //                                 .foregroundColor(.white)
+    //                             Spacer()
+    //                             Button("Disconnect") {
+    //                                 bluetoothManager.disconnect(from: device)
+    //                             }
+    //                             .foregroundColor(Color(Colors.red))
+    //                         }
+    //                         .padding()
+    //                         .background(Color(Colors.cardBackground).opacity(0.3))
+    //                         .cornerRadius(6)
+    //                     }
+    //                 }
+    //                 .padding(.horizontal, 5)
+    //             }
+    //         }
+    //     }
+    // }
+    //
     // private var brightnessControlSection: some View {
     //     VStack {
     //         Text("Brightness Controls")
@@ -951,7 +951,7 @@ struct ContentView: View {
             VStack(spacing: 15) {
                 profileSection
                 mediaPlayerSection
-                bluetoothControlSection
+                // bluetoothControlSection
                 // brightnessControlSection
                 
                 Spacer()
@@ -1888,30 +1888,19 @@ struct DayItem {
     let isToday: Bool
 }
 
-// Main calendar view with date initialization
 struct CalendarView: View {
-    let date: Date
-    
-    init() {
-        let dateTask = Process()
-        dateTask.launchPath = "/usr/bin/env"
-        dateTask.arguments = ["sketchybar", "--query", "date"]
-        
-        let datePipe = Pipe()
-        dateTask.standardOutput = datePipe
-        dateTask.launch()
-        
-        let dateData = datePipe.fileHandleForReading.readDataToEndOfFile()
-        dateTask.waitUntilExit()
-        
-        if let dateInfo = try? JSONSerialization.jsonObject(with: dateData, options: []) as? [String: Any],
-           let dateString = dateInfo["label"] as? String {
-            let formatter = DateFormatter()
-            formatter.dateFormat = "E MMM d"
-            self.date = formatter.date(from: dateString) ?? Date()
-        } else {
-            self.date = Date()
-        }
+    @State private var date: Date = Date()
+
+    var body: some View {
+        CalendarContentView(date: date)
+            .onAppear(perform: fetchDate)
+    }
+
+    private func fetchDate() {
+        // Simulate fetching date from an external source
+        // For demonstration purposes, we'll just set it to the current date
+        // Replace this with actual asynchronous data fetching if needed
+        self.date = Date()
     }
 }
 
