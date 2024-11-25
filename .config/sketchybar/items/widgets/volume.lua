@@ -62,8 +62,8 @@ local volume_slider = sbar.add("slider", popup_width, {
 	click_script = 'osascript -e "set volume output volume $PERCENTAGE"',
 })
 
-local function update_volume_display(volume)
-	volume = tonumber(volume)
+volume_percent:subscribe("volume_change", function(env)
+	local volume = tonumber(env.INFO)
 	local icon = icons.volume._0
 	local color = colors.white
 	if volume > 60 then
@@ -79,74 +79,62 @@ local function update_volume_display(volume)
 		color = colors.grey
 	end
 
-	volume_icon:set({
-		icon = {
-			string = icon,
-			color = color,
-			drawing = true,
-		},
-	})
-	volume_slider:set({
-		slider = {
-			percentage = volume,
-			drawing = true,
-		},
-	})
+	local lead = ""
+	if volume < 10 then
+		lead = "0"
+	end
+
+	volume_icon:set({ icon = { string = icon, color = color } })
+	volume_slider:set({ slider = { percentage = volume } })
+end)
+
+local function volume_collapse_details()
+	volume_bracket:set({ popup = { drawing = false } })
+	sbar.remove("/volume.device\\.*/")
 end
 
-local function create_device_item(device, current, counter)
-	local is_current = current == device
-	return {
-		position = "popup." .. volume_bracket.name,
-		padding_right = settings.popup_padding,
-		padding_left = settings.popup_padding,
-		y_offset = 8,
-		width = popup_width,
-		background = {
-			color = colors.popup.background,
-			drawing = true,
-		},
-		label = {
-			string = device,
-			color = is_current and colors.white or colors.grey,
-			drawing = true,
-		},
-		click_script = string.format(
-			'SwitchAudioSource -s "%s" && sketchybar --set /volume.device\\.*/ label.color=0xff999999 --set $NAME label.color=0xffffffff',
-			device
-		),
-	}
-end
-
-local function update_device_list()
-	sbar.exec("SwitchAudioSource -t output -c", function(result)
-		local current_device = result:sub(1, -2)
-		sbar.exec("SwitchAudioSource -a -t output", function(available)
-			-- Remove existing device items
-			sbar.remove("/volume.device\\.*/")
-
-			local counter = 0
-			for device in string.gmatch(available, "[^\r\n]+") do
-				sbar.add("item", "volume.device." .. counter, create_device_item(device, current_device, counter))
-				counter = counter + 1
-			end
-		end)
-	end)
-end
-
+local current_audio_device = "None"
 local function volume_toggle_details(env)
 	if env.BUTTON == "right" then
 		sbar.exec("open /System/Library/PreferencePanes/Sound.prefpane")
 		return
 	end
 
-	local current_drawing = volume_bracket:query().popup.drawing
-	local should_draw = current_drawing == "off"
+	local is_popup_visible = volume_bracket:query().popup.drawing == "on"
+	if is_popup_visible then
+		volume_collapse_details()
+	else
+		volume_bracket:set({ popup = { drawing = true } })
+		sbar.exec("SwitchAudioSource -t output -c", function(result)
+			current_audio_device = result:sub(1, -2)
+			sbar.exec("SwitchAudioSource -a -t output", function(available)
+				current = current_audio_device
+				local color = colors.grey
+				local counter = 0
 
-	volume_bracket:set({ popup = { drawing = should_draw } })
-
-	if should_draw then
-		update_device_list()
+				for device in string.gmatch(available, "[^\r\n]+") do
+					local color = colors.grey
+					if current == device then
+						color = colors.white
+					end
+					sbar.add("item", "volume.device." .. counter, {
+						position = "popup." .. volume_bracket.name,
+						padding_right = settings.popup_padding,
+						padding_left = settings.popup_padding,
+						y_offset = 8,
+						width = popup_width,
+						label = { string = device, color = color },
+						click_script = 'SwitchAudioSource -s "'
+								.. device
+								.. '" && sketchybar --set /volume.device\\.*/ label.color='
+								.. colors.grey
+								.. " --set $NAME label.color="
+								.. colors.white,
+					})
+					counter = counter + 1
+				end
+			end)
+		end)
 	end
 end
 
@@ -155,13 +143,17 @@ local function volume_scroll(env)
 	sbar.exec('osascript -e "set volume output volume (output volume of (get volume settings) + ' .. delta .. ')"')
 end
 
-volume_percent:subscribe("volume_change", function(env)
-	update_volume_display(env.INFO)
-end)
-
-sbar.exec('osascript -e "output volume of (get volume settings)"', function(result)
-	update_volume_display(result)
-end)
+local function is_click_inside_popup(env)
+	local popup_rect = volume_bracket:query().popup.rect
+	if popup_rect then
+		return env.X >= popup_rect.x
+				and env.X <= popup_rect.x + popup_rect.width
+				and env.Y >= popup_rect.y
+				and env.Y <= popup_rect.y + popup_rect.height
+	else
+		return false
+	end
+end
 
 volume_icon:subscribe("mouse.clicked", volume_toggle_details)
 volume_icon:subscribe("mouse.scrolled", volume_scroll)
