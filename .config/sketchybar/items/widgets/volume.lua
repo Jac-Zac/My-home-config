@@ -51,7 +51,7 @@ local volume_slider = sbar.add("slider", popup_width, {
 		background = {
 			height = 6,
 			corner_radius = 3,
-			color = colors.grey,
+			color = colors.quicksilver,
 		},
 		knob = {
 			string = "􀀁",
@@ -109,11 +109,11 @@ local function volume_toggle_details(env)
 			current_audio_device = result:sub(1, -2)
 			sbar.exec("SwitchAudioSource -a -t output", function(available)
 				current = current_audio_device
-				local color = colors.grey
+				local color = colors.quicksilver
 				local counter = 0
 
 				for device in string.gmatch(available, "[^\r\n]+") do
-					local color = colors.grey
+					local color = colors.quicksilver
 					if current == device then
 						color = colors.white
 					end
@@ -127,7 +127,7 @@ local function volume_toggle_details(env)
 						click_script = 'SwitchAudioSource -s "'
 								.. device
 								.. '" && sketchybar --set /volume.device\\.*/ label.color='
-								.. colors.grey
+								.. colors.quicksilver
 								.. " --set $NAME label.color="
 								.. colors.white,
 					})

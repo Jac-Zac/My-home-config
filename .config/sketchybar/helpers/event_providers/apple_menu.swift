@@ -644,7 +644,7 @@ struct ContentView: View {
             Divider()
                 .background(Color.white.opacity(0.1))
                 .padding(.horizontal, 20)
-                .padding(.vertical, 20)
+                .padding(.vertical, 15)
         }
     }
 
@@ -686,7 +686,7 @@ struct ContentView: View {
                                 .lineLimit(1)
                         }
                         
-                        Spacer()
+                        // Spacer()
                         
                         // Media controls
                         HStack(spacing: 20) {
@@ -710,7 +710,6 @@ struct ContentView: View {
             backgroundImage: nil
         )
         .padding(.horizontal, 30)
-        .padding(.vertical, 20)
     }
 
 
@@ -720,7 +719,7 @@ struct ContentView: View {
             VisualEffectView(material: .hudWindow, blendingMode: .behindWindow)
                 .edgesIgnoringSafeArea(.all)
 
-            VStack(spacing: 0) {
+            VStack(spacing: 10) {
                 profileSection
                     .background(
                         RoundedRectangle(cornerRadius: 12)

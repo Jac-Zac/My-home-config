@@ -6,7 +6,7 @@ local settings = require("settings")
 local passwords = sbar.add("item", "widgets.passwords", {
 	position = "right",
 	icon = {
-		font = { size = settings.font.sizes.icons - 2 },
+		font = { size = settings.font.sizes.icons },
 		string = icons.passwords,
 		color = colors.white,
 		drawing = true,
