@@ -561,25 +561,22 @@ extension Bundle {
     }
 }
 
-import CoreBluetooth
-import Foundation
-import SwiftUI
-
 class BluetoothManager: NSObject, ObservableObject {
     @Published var isScanning = false
     @Published var isPoweredOn = false
     @Published var discoveredDevices: [CBPeripheral] = []
-    @Published var connectedDevice: CBPeripheral?
+    @Published var connectedDevices: Set<CBPeripheral> = []
     
     private var centralManager: CBCentralManager!
+    private var peripheralDelegate: PeripheralDelegate?
     
     override init() {
         super.init()
+        self.peripheralDelegate = PeripheralDelegate()
         centralManager = CBCentralManager(delegate: nil, queue: .main)
         centralManager.delegate = self
     }
     
-    // Start scanning for devices
     func startScanning() {
         guard isPoweredOn else {
             print("Bluetooth is not powered on")
@@ -588,80 +585,136 @@ class BluetoothManager: NSObject, ObservableObject {
         
         isScanning = true
         discoveredDevices.removeAll()
-        centralManager.scanForPeripherals(withServices: nil, options: nil)
+        // Scan for all devices initially
+        centralManager.scanForPeripherals(withServices: nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey: false])
     }
     
-    // Stop scanning for devices
     func stopScanning() {
         centralManager.stopScan()
         isScanning = false
     }
     
-    // Connect to a specific device
     func connect(to peripheral: CBPeripheral) {
+        peripheral.delegate = peripheralDelegate
         centralManager.connect(peripheral, options: nil)
     }
     
-    // Disconnect from the current device
+    func disconnect(from peripheral: CBPeripheral) {
+        centralManager.cancelPeripheralConnection(peripheral)
+    }
+    
     func disconnect() {
-        if let peripheral = connectedDevice {
+        connectedDevices.forEach { peripheral in
             centralManager.cancelPeripheralConnection(peripheral)
         }
     }
     
-    // Toggle Bluetooth power state (if supported by the platform)
-    func toggleBluetooth() {
-        // Note: Direct Bluetooth power toggling isn't available through public APIs
-        // Users need to go to Settings to change Bluetooth state
-        print("Please use System Settings to toggle Bluetooth")
+    // Method to retrieve connected peripherals
+    func retrieveConnectedPeripherals() {
+        // Instead of looking for specific services, we'll get all connected peripherals
+        // that the app knows about
+        let peripherals = centralManager.retrieveConnectedPeripherals(withServices: [])
+        
+        peripherals.forEach { peripheral in
+            if !connectedDevices.contains(peripheral) {
+                connectedDevices.insert(peripheral)
+            }
+        }
     }
 }
 
 // MARK: - CBCentralManagerDelegate
 extension BluetoothManager: CBCentralManagerDelegate {
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
-        switch central.state {
-        case .poweredOn:
-            isPoweredOn = true
-            print("Bluetooth is powered on")
-        case .poweredOff:
-            isPoweredOn = false
-            discoveredDevices.removeAll()
-            connectedDevice = nil
-            print("Bluetooth is powered off")
-        case .resetting:
-            print("Bluetooth is resetting")
-        case .unauthorized:
-            print("Bluetooth is unauthorized")
-        case .unsupported:
-            print("Bluetooth is unsupported")
-        case .unknown:
-            print("Bluetooth state is unknown")
-        @unknown default:
-            print("Unknown Bluetooth state")
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            
+            switch central.state {
+            case .poweredOn:
+                self.isPoweredOn = true
+                self.retrieveConnectedPeripherals()
+                print("Bluetooth is powered on")
+            case .poweredOff:
+                self.isPoweredOn = false
+                self.discoveredDevices.removeAll()
+                self.connectedDevices.removeAll()
+                print("Bluetooth is powered off")
+            case .resetting:
+                self.connectedDevices.removeAll()
+                print("Bluetooth is resetting")
+            case .unauthorized:
+                print("Bluetooth is unauthorized")
+            case .unsupported:
+                print("Bluetooth is unsupported")
+            case .unknown:
+                print("Bluetooth state is unknown")
+            @unknown default:
+                print("Unknown Bluetooth state")
+            }
         }
     }
     
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral,
                        advertisementData: [String: Any], rssi RSSI: NSNumber) {
-        if !discoveredDevices.contains(peripheral) {
-            discoveredDevices.append(peripheral)
+        DispatchQueue.main.async { [weak self] in
+            if let self = self, !self.discoveredDevices.contains(peripheral) {
+                self.discoveredDevices.append(peripheral)
+                print("Discovered device: \(peripheral.name ?? "Unknown")")
+            }
         }
     }
     
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
-        connectedDevice = peripheral
-        stopScanning()
-        print("Connected to \(peripheral.name ?? "Unknown Device")")
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.connectedDevices.insert(peripheral)
+            self.stopScanning()
+            peripheral.delegate = self.peripheralDelegate
+            // Start discovering services
+            peripheral.discoverServices(nil)
+            print("Connected to \(peripheral.name ?? "Unknown Device")")
+        }
     }
     
     func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
-        print("Failed to connect to \(peripheral.name ?? "Unknown Device"): \(error?.localizedDescription ?? "Unknown error")")
+        DispatchQueue.main.async {
+            print("Failed to connect to \(peripheral.name ?? "Unknown Device"): \(error?.localizedDescription ?? "Unknown error")")
+        }
     }
     
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
-        connectedDevice = nil
-        print("Disconnected from \(peripheral.name ?? "Unknown Device")")
+        DispatchQueue.main.async { [weak self] in
+            self?.connectedDevices.remove(peripheral)
+            print("Disconnected from \(peripheral.name ?? "Unknown Device")")
+        }
+    }
+}
+
+// MARK: - PeripheralDelegate
+class PeripheralDelegate: NSObject, CBPeripheralDelegate {
+    func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
+        guard error == nil else {
+            print("Error discovering services: \(error!.localizedDescription)")
+            return
+        }
+        
+        print("Discovered services for \(peripheral.name ?? "Unknown Device"):")
+        peripheral.services?.forEach { service in
+            print("Service: \(service.uuid)")
+            peripheral.discoverCharacteristics(nil, for: service)
+        }
+    }
+    
+    func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
+        guard error == nil else {
+            print("Error discovering characteristics: \(error!.localizedDescription)")
+            return
+        }
+        
+        print("Discovered characteristics for service \(service.uuid):")
+        service.characteristics?.forEach { characteristic in
+            print("Characteristic: \(characteristic.uuid)")
+        }
     }
 }
 
@@ -669,6 +722,7 @@ struct ContentView: View {
     @StateObject private var statsController = StatsController()
     @StateObject private var mediaController = MediaController()
     @StateObject private var weatherController = WeatherController()
+    @StateObject private var bluetoothManager = BluetoothManager()
     // @StateObject private var brightnessController = BrightnessController()
     @State private var isMouseInside = false
     @State private var uptime: String = getUptime()
@@ -818,6 +872,43 @@ struct ContentView: View {
         .padding(.horizontal, 30)
     }
 
+
+    private var bluetoothControlSection: some View {
+        // Update the Connected Devices section to use connectedDevices instead of connectedDevice
+        VStack(alignment: .leading, spacing: 8) {
+            Text("Connected Devices")
+                .font(.subheadline)
+                .foregroundColor(.white)
+                .padding(.horizontal)
+            
+            if bluetoothManager.connectedDevices.isEmpty {
+                Text("No connected devices")
+                    .foregroundColor(.gray)
+                    .padding()
+            } else {
+                ScrollView {
+                    LazyVStack(spacing: 8) {
+                        ForEach(Array(bluetoothManager.connectedDevices), id: \.identifier) { device in
+                            HStack {
+                                Text(device.name ?? "Unknown Device")
+                                    .foregroundColor(.white)
+                                Spacer()
+                                Button("Disconnect") {
+                                    bluetoothManager.disconnect(from: device)
+                                }
+                                .foregroundColor(Color(Colors.red))
+                            }
+                            .padding()
+                            .background(Color(Colors.cardBackground).opacity(0.3))
+                            .cornerRadius(6)
+                        }
+                    }
+                    .padding(.horizontal, 5)
+                }
+            }
+        }
+    }
+
     // private var brightnessControlSection: some View {
     //     VStack {
     //         Text("Brightness Controls")
@@ -860,6 +951,7 @@ struct ContentView: View {
             VStack(spacing: 15) {
                 profileSection
                 mediaPlayerSection
+                bluetoothControlSection
                 // brightnessControlSection
                 
                 Spacer()
@@ -1821,10 +1913,6 @@ struct CalendarView: View {
             self.date = Date()
         }
     }
-    
-    var body: some View {
-        CalendarContentView(date: date)
-    }
 }
 
 struct ClockView: View {
@@ -1891,27 +1979,18 @@ struct PanelTitle: View {
 }
 
 struct CalendarPanelView: View {
-    @StateObject private var statsController = StatsController()
     @StateObject private var weatherController = WeatherController()
     @State private var isMouseInside = false
 
     var body: some View {
         ZStack {
-            // Add the blurred background
+            // Background color
             Color(Colors.panelBackground)
 
-            // VisualEffectBlur(material: .sidebar) // You can choose different materials
-            
             VStack(spacing: 16) {
                 PanelTitle(title: "Date And Weather Info")
 
-                // FIX: This needs fixing I get the following error when I have this activated: 
-                // === AttributeGraph: cycle detected through attribute 3792 ===
-                // === AttributeGraph: cycle detected through attribute 4384 ===
-                // === AttributeGraph: cycle detected through attribute 5240 ===
-                // === AttributeGraph: cycle detected through attribute 10568 ===
-                // === AttributeGraph: cycle detected through attribute 17844 ===
-                // === AttributeGraph: cycle detected through attribute 17844 ===
+                // Calendar section
                 Card(
                     content: AnyView(
                         CalendarView()
@@ -1943,7 +2022,7 @@ struct CalendarPanelView: View {
         .cornerRadius(12)
         .overlay(
             RoundedRectangle(cornerRadius: 12)
-                .stroke(Color(Colors.green), lineWidth: 4) // Use Colors.green for border
+                .stroke(Color(Colors.green), lineWidth: 4)
         )
     }
 
