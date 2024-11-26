@@ -11,11 +11,10 @@ for i = 1, 9, 1 do
 		},
 		label = {
 			string = string.format("%02d", i),
-			-- string = i,
-			padding_left = settings.item_padding,
-			padding_right = settings.item_padding,
+			-- remove left padding since there is already two numbers
+			padding_left = settings.item_padding - 2.0,
 			color = colors.quicksilver,
-			highlight_color = colors.bar.black,
+			highlight_color = colors.white,
 			font = {
 				family = settings.font.numbers,
 				style = settings.font.style_map["Semibold"],

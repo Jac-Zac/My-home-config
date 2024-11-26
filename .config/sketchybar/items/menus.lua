@@ -1,8 +1,9 @@
 local colors = require("colors")
 local settings = require("settings")
-local app_icons = require("helpers.app_icons")
--- local front_app = require("items.front_app")
 local events = require("events") -- Import events
+
+-- To improve (maybe you can add a way to press on them and then move trough them
+-- with boxes around like in the default menu bar)
 
 -- Then create your menu_watcher
 local menu_watcher = sbar.add("item", {
@@ -15,7 +16,7 @@ local space_menu_swap = sbar.add("item", {
 	updates = true,
 })
 
-local max_items = 15
+local max_items = 10
 local menu_items = {}
 
 for i = 1, max_items do
@@ -41,10 +42,9 @@ local menu_padding = sbar.add("item", "menu.padding", {
 local function update_menus(space_id)
 	sbar.exec("$CONFIG_DIR/helpers/menus/bin/menus -l", function(menus)
 		sbar.set("/menu\\..*/", { drawing = false })
-		-- menu_padding:set({ drawing = true })
+		menu_padding:set({ drawing = true })
 
 		local id = 1
-
 		for menu in string.gmatch(menus, "[^\r\n]+") do
 			local label = ""
 			local icon = nil
@@ -54,8 +54,6 @@ local function update_menus(space_id)
 				menu_items[id]:set({
 					icon = {
 						drawing = true,
-						padding_left = 2.0,
-						-- padding_right = 0,
 						string = "􀄫",
 						color = colors.white,
 						font = {
@@ -108,7 +106,7 @@ space_menu_swap:subscribe("swap_menus_and_spaces", function(env)
 	else
 		menu_watcher:set({ updates = true })
 		sbar.exec("yabai -m query --windows --window | jq -r '.space'", function(space_id, exit_code)
-			update_menus(space_id) -- Update menus based on the active space
+			update_menus(space_id)                   -- Update menus based on the active space
 			sbar.set("/menu\\..*/", { drawing = true }) -- Show updated menus
 		end)
 	end

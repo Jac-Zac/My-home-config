@@ -32,7 +32,7 @@ front_app:subscribe("mouse.entered", function(env)
 	sbar.animate("elastic", 10, function()
 		front_app:set({
 			background = {
-				color = colors.bg2,
+				color = colors.spaces.active,
 			},
 			icon = {
 				background = {
@@ -45,6 +45,7 @@ front_app:subscribe("mouse.entered", function(env)
 			label = {
 				padding_right = settings.item_padding,
 			},
+			padding_right = 0,
 			updates = true,
 		})
 	end)
@@ -66,6 +67,7 @@ front_app:subscribe("mouse.exited", function(env)
 			},
 			label = {
 				padding_left = 0,
+				padding_right = settings.item_padding - 5,
 			},
 			updates = true,
 		})
@@ -121,7 +123,7 @@ front_app:subscribe("mouse.clicked", function(env)
 	sbar.animate("elastic", 10, function()
 		front_app:set({
 			background = {
-				color = colors.bg2,
+				color = colors.spaces.active,
 			},
 			label = {
 				drawing = true,
