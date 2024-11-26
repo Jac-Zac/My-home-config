@@ -7,18 +7,19 @@ local popup_width = 250
 local volume_percent = sbar.add("item", "widgets.volume1", {
 	position = "right",
 	icon = { drawing = false },
-	label = { drawing = false },
+	label = {
+		drawing = false,
+	},
 })
 
 local volume_icon = sbar.add("item", "widgets.volume2", {
 	position = "right",
-	padding_right = settings.item_padding,
+	padding_right = settings.item_padding - 3.0,
 	padding_left = settings.item_padding,
 	icon = {
 		drawing = true,
 		width = 21,
 		align = "center",
-		color = colors.white,
 	},
 })
 
@@ -44,19 +45,17 @@ local volume_slider = sbar.add("slider", popup_width, {
 	background = {
 		height = 80,
 		y_offset = 20,
-		color = colors.popup.background,
 	},
 	slider = {
-		highlight_color = colors.spaces.active,
+		highlight_color = colors.quicksilver,
 		background = {
 			height = 6,
 			corner_radius = 3,
-			color = colors.quicksilver,
+			color = colors.bg2,
 		},
 		knob = {
 			string = "􀀁",
 			drawing = true,
-			color = colors.white,
 		},
 	},
 	click_script = 'osascript -e "set volume output volume $PERCENTAGE"',
@@ -143,29 +142,7 @@ local function volume_scroll(env)
 	sbar.exec('osascript -e "set volume output volume (output volume of (get volume settings) + ' .. delta .. ')"')
 end
 
-local function is_click_inside_popup(env)
-	local popup_rect = volume_bracket:query().popup.rect
-	if popup_rect then
-		return env.X >= popup_rect.x
-				and env.X <= popup_rect.x + popup_rect.width
-				and env.Y >= popup_rect.y
-				and env.Y <= popup_rect.y + popup_rect.height
-	else
-		return false
-	end
-end
-
 volume_icon:subscribe("mouse.clicked", volume_toggle_details)
 volume_icon:subscribe("mouse.scrolled", volume_scroll)
 volume_percent:subscribe("mouse.clicked", volume_toggle_details)
 volume_percent:subscribe("mouse.scrolled", volume_scroll)
-
--- Add a new subscription to close the popup when clicking outside
-sbar.subscribe("mouse.clicked.global", function(env)
-	if env.BUTTON == "left" and not is_click_inside_popup(env) then
-		local is_popup_visible = volume_bracket:query().popup.drawing == "on"
-		if is_popup_visible then
-			volume_collapse_details()
-		end
-	end
-end)
