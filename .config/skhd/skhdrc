@@ -1,6 +1,7 @@
-# open iTerm
+# open kitty
 cmd + shift - return : open -a kitty
-cmd - 0 : open -a /Applications/Firefox\ Nightly.app/
+# open Zen
+cmd - 0 : open -a /Applications/Zen\ Browser.app
 
 # swap window
 # I have added those script inside the /usr/local/bin/
@@ -13,23 +14,8 @@ alt - j : yabai -m window --focus west
 alt - k : yabai -m window --focus east
 alt - l : yabai -m window --focus north
 
-# swap managed window
-# alt + shift - h : yabai -m window --swap south
-# alt + shift - j : yabai -m window --swap west
-# alt + shift - k : yabai -m window --swap east
-# alt + shift - l : yabai -m window --swap north
 
-# move managed window
-# cmd - h : yabai -m window --warp north
-# cmd - j: yabai -m window --warp west
-# cmd - k : yabai -m window --warp south
-# cmd - l : yabai -m window --warp east
-#
-# fast focus desktop move FaceTime to do only if it is active
-# cmd - 1 : yabai -m space --focus 1; yabai -m window $(yabai -m query --windows | jq '.[] | select( .app == "FaceTime" )'.id) --space 1
-# cmd - 2 : yabai -m space --focus 2; yabai -m window $(yabai -m query --windows | jq '.[] | select( .app == "FaceTime" )'.id) --space 2
-# cmd - 3 : yabai -m space --focus 3; yabai -m window $(yabai -m query --windows | jq '.[] | select( .app == "FaceTime" )'.id) --space 3
-#
+# Focus the display number i
 cmd - 1 : yabai -m space --focus 1
 cmd - 2 : yabai -m space --focus 2
 cmd - 3 : yabai -m space --focus 3
@@ -39,7 +25,6 @@ cmd - 6 : yabai -m space --focus 6
 cmd - 7 : yabai -m space --focus 7
 cmd - 8 : yabai -m space --focus 8
 cmd - 9 : yabai -m space --focus 9
-cmd - 0 : yabai -m space --focus 10
 
 # Move between spaces faster
 # I have added those script inside the /usr/local/bin/
@@ -47,20 +32,19 @@ cmd - j : space_cycle_prev.sh
 cmd - k : space_cycle_next.sh 
 
 # Move the windows faster
-cmd + shift - j : yabai -m window --space  prev; yabai -m space --focus prev
-cmd + shift - k : yabai -m window --space  next; yabai -m space --focus next
+cmd + shift - j : yabai -m window --space  prev --focus
+cmd + shift - k : yabai -m window --space  next --focus
 
-# send window to desktop and follow focus
-cmd + shift - 1 : yabai -m window --space  1
-cmd + shift - 2 : yabai -m window --space  2
-cmd + shift - 3 : yabai -m window --space  3
-cmd + shift - 4 : yabai -m window --space  4
-cmd + shift - 5 : yabai -m window --space  5
-cmd + shift - 6 : yabai -m window --space  6
-cmd + shift - 7 : yabai -m window --space  7
-cmd + shift - 8 : yabai -m window --space  8
-cmd + shift - 9 : yabai -m window --space  9
-cmd + shift - 0 : yabai -m window --space  10
+# send window to desktop and focus
+cmd + shift - 1 : yabai -m window --space  1 --focus
+cmd + shift - 2 : yabai -m window --space  2 --focus
+cmd + shift - 3 : yabai -m window --space  3 --focus
+cmd + shift - 4 : yabai -m window --space  4 --focus
+cmd + shift - 5 : yabai -m window --space  5 --focus
+cmd + shift - 6 : yabai -m window --space  6 --focus
+cmd + shift - 7 : yabai -m window --space  7 --focus
+cmd + shift - 8 : yabai -m window --space  8 --focus
+cmd + shift - 9 : yabai -m window --space  9 --focus
 
 # toggle float mode yabai
 cmd + shift - f : yabai -m config --toggle layout float
@@ -73,5 +57,5 @@ cmd + shift - t : yabai -m window --toggle float;\
            yabai -m window --grid 4:4:1:1:2:2
 
 # Restart Yabai
-lctrl + alt + cmd - q : yabai --restart-service && skhd --restart-service
+lctrl + alt + cmd - q : yabai --restart-service && skhd --restart-service && brew services restart borders && brew services restart sketchybar
 lctrl + alt + cmd + shift - q : osascript -e 'tell app "System Events" to log out'
