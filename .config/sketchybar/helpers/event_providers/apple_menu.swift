@@ -953,10 +953,16 @@ class StatsController: ObservableObject {
                 let niceDiff = nice - previous.nice
                 
                 let totalDiff = userDiff + systemDiff + idleDiff + niceDiff
-                let usage = (userDiff + systemDiff + niceDiff) / totalDiff
                 
-                DispatchQueue.main.async {
-                    self.cpuUsage = Double(usage) // Convert Float to Double
+                if totalDiff > 0 {
+                    let usage = (userDiff + systemDiff + niceDiff) / totalDiff
+                    DispatchQueue.main.async {
+                        self.cpuUsage = Double(usage)
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        self.cpuUsage = 0.0 // Default value when no usage can be calculated
+                    }
                 }
             }
             
