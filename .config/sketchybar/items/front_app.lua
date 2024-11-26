@@ -3,8 +3,10 @@ local settings = require("settings")
 local app_icons = require("helpers.app_icons")
 local events = require("events")
 
+-- Query the current space ID
 local space_id = sbar.exec("yabai -m query --windows --window | jq -r '.space'")
 
+-- Create the front app item
 local front_app = sbar.add("item", "front_app", {
 	label = {
 		drawing = true,
@@ -28,80 +30,63 @@ local front_app = sbar.add("item", "front_app", {
 	space = space_id,
 })
 
-front_app:subscribe("mouse.entered", function(env)
-	sbar.animate("elastic", 10, function()
-		front_app:set({
+-- Helper function to set the front app state
+local function set_front_app_state(state)
+	front_app:set({
+		background = { color = state.background_color or colors.transparent },
+		icon = {
 			background = {
-				color = colors.spaces.active,
-			},
-			icon = {
-				background = {
-					image = {
-						scale = 0.5,
-						padding_left = 3,
-					},
+				image = {
+					scale = state.icon_scale or 0.6,
+					padding_left = state.icon_padding_left or 0,
 				},
 			},
-			label = {
-				padding_right = settings.item_padding,
-			},
-			padding_right = 0,
-			updates = true,
-		})
-	end)
-end)
-
-front_app:subscribe("mouse.exited", function(env)
-	sbar.animate("elastic", 10, function()
-		front_app:set({
-			background = {
-				color = colors.transparent,
-			},
-			icon = {
-				background = {
-					image = {
-						scale = 0.6,
-						padding_left = 0,
-					},
-				},
-			},
-			label = {
-				padding_left = 0,
-				padding_right = settings.item_padding - 5,
-			},
-			updates = true,
-		})
-	end)
-end)
-
--- Animate app icon back to 1.0
-local function end_bounce_animation()
-	sbar.animate("tanh", 10, function()
-		front_app:set({
-			icon = {
-				background = {
-					image = { scale = 0.6 },
-				},
-			},
-		})
-	end)
+		},
+		label = {
+			padding_right = state.label_padding_right or settings.item_padding,
+			padding_left = state.label_padding_left or 0,
+		},
+		updates = state.updates or true,
+	})
 end
 
--- Make app icon slightly bigger before returning back to regular size
+-- Bounce animation helpers
 local function start_bounce_animation()
 	sbar.animate("tanh", 10, function()
-		front_app:set({
-			icon = {
-				background = {
-					image = { scale = 0.7 },
-				},
-			},
-		})
+		set_front_app_state({ icon_scale = 0.7 })
 	end)
-	-- Short delay so that full animation can occur
-	sbar.exec("sleep 0.30 && echo 'finishing bounce'", end_bounce_animation)
+	sbar.exec("sleep 0.30 && echo 'finishing bounce'", function()
+		sbar.animate("tanh", 10, function()
+			set_front_app_state({ icon_scale = 0.6 })
+		end)
+	end)
 end
 
+-- Event: Mouse entered
+front_app:subscribe("mouse.entered", function()
+	sbar.animate("elastic", 10, function()
+		set_front_app_state({
+			background_color = colors.spaces.active,
+			icon_scale = 0.5,
+			icon_padding_left = 3,
+			label_padding_right = settings.item_padding,
+		})
+	end)
+end)
+
+-- Event: Mouse exited
+front_app:subscribe("mouse.exited", function()
+	sbar.animate("elastic", 10, function()
+		set_front_app_state({
+			background_color = colors.transparent,
+			icon_scale = 0.6,
+			icon_padding_left = 0,
+			label_padding_right = settings.item_padding - 5,
+		})
+	end)
+end)
+
+-- Event: Front app switched
 front_app:subscribe("front_app_switched", function(env)
 	front_app:set({
 		icon = {
@@ -118,18 +103,15 @@ front_app:subscribe("front_app_switched", function(env)
 	start_bounce_animation()
 end)
 
-front_app:subscribe("mouse.clicked", function(env)
+-- Event: Mouse clicked
+front_app:subscribe("mouse.clicked", function()
 	sbar.trigger("swap_menus_and_spaces")
 	sbar.animate("elastic", 10, function()
-		front_app:set({
-			background = {
-				color = colors.spaces.active,
-			},
-			label = {
-				drawing = true,
-			},
-			updates = true,
-			space = space_id,
+		set_front_app_state({
+			icon_scale = 0.5,
+			icon_padding_left = 3,
+			label_padding_right = settings.item_padding,
+			background_color = colors.spaces.active,
 		})
 	end)
 end)

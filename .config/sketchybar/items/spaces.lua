@@ -3,16 +3,14 @@ local settings = require("settings")
 
 local spaces = {}
 
-for i = 1, 9, 1 do
+-- Helper function to add a space item
+local function add_space(i)
 	local space = sbar.add("space", "space." .. i, {
 		space = i,
-		icon = {
-			drawing = true,
-		},
+		icon = { drawing = true },
 		label = {
 			string = string.format("%02d", i),
-			-- remove left padding since there is already two numbers
-			padding_left = settings.item_padding - 2.0,
+			padding_left = settings.item_padding - 2.0, -- Adjust padding for two-digit numbers
 			color = colors.quicksilver,
 			highlight_color = colors.white,
 			font = {
@@ -32,21 +30,24 @@ for i = 1, 9, 1 do
 				border_width = settings.popup_border_width,
 				border_color = colors.popup.border,
 				corner_radius = settings.popup_border_radius,
-				drawing = true, -- Make sure popup can draw
+				drawing = true, -- Enable popup drawing
 			},
 		},
 	})
 
-	spaces[i] = space
-
-	-- Padding space
+	-- Add padding space
 	sbar.add("space", "space.padding." .. i, {
 		space = i,
 		script = "",
 		width = settings.spacings,
 	})
 
-	local space_popup = sbar.add("item", {
+	return space
+end
+
+-- Helper function to add a popup for a space
+local function add_space_popup(space)
+	return sbar.add("item", {
 		position = "popup." .. space.name,
 		background = {
 			padding_left = settings.popup_border_width,
@@ -57,7 +58,11 @@ for i = 1, 9, 1 do
 			},
 		},
 	})
+end
 
+-- Subscribe to events for a space
+local function subscribe_to_space_events(space, space_popup)
+	-- Handle space changes
 	space:subscribe("space_change", function(env)
 		local selected = env.SELECTED == "true"
 		space:set({
@@ -69,10 +74,11 @@ for i = 1, 9, 1 do
 			background = {
 				color = selected and colors.spaces.active or colors.spaces.inactive,
 			},
-			width = selected and 30 or 30,
+			width = 30, -- Fixed width for simplicity
 		})
 	end)
 
+	-- Handle mouse clicks
 	space:subscribe("mouse.clicked", function(env)
 		if env.BUTTON == "other" then
 			space_popup:set({ background = { image = "space." .. env.SID } })
@@ -83,16 +89,27 @@ for i = 1, 9, 1 do
 		end
 	end)
 
+	-- Handle mouse hover (enter/exit)
 	space:subscribe("mouse.entered", function(env)
 		space_popup:set({ background = { image = "space." .. env.SID } })
 		space:set({ popup = { drawing = "toggle" } })
 	end)
 
-	space:subscribe("mouse.exited", function(_)
+	space:subscribe("mouse.exited", function()
 		space:set({ popup = { drawing = false } })
 	end)
 end
 
+-- Add spaces and configure subscriptions
+for i = 1, 9 do
+	local space = add_space(i)
+	local space_popup = add_space_popup(space)
+
+	spaces[i] = space
+	subscribe_to_space_events(space, space_popup)
+end
+
+-- Observer for space-window updates
 local space_window_observer = sbar.add("item", {
 	drawing = false,
 	updates = true,
