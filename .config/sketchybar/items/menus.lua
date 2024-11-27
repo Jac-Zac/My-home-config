@@ -5,6 +5,7 @@ local events = require("events") -- Event subscription
 -- Constants
 local MAX_ITEMS = 10
 local MENU_SCRIPT = "$CONFIG_DIR/helpers/menus/bin/menus"
+local ANIMATION_TIME = 5
 
 -- Helper function to safely execute a shell command
 local function exec_command(command, callback)
@@ -25,7 +26,6 @@ local space_menu_swap = sbar.add("item", { drawing = false, updates = true })
 local menu_items = {}
 for i = 1, MAX_ITEMS do
 	local menu = sbar.add("item", "menu." .. i, {
-		padding_right = settings.item_spacing,
 		drawing = false,
 		icon = { drawing = false },
 		label = {
@@ -39,6 +39,21 @@ end
 
 -- Padding item to handle spacing
 local menu_padding = sbar.add("item", "menu.padding", { drawing = false, width = 5 })
+
+-- Animate the appearance of menu labels
+local function animate_menu_labels()
+	for i, menu_item in ipairs(menu_items) do
+		local delay = (i - 1) * 0.035 -- Stagger animations by 0.035 seconds per item
+		sbar.exec("sleep " .. delay, function()
+			sbar.animate("tanh", ANIMATION_TIME, function()
+				menu_item:set({
+					label = { color = colors.quicksilver },
+					drawing = true,
+				})
+			end)
+		end)
+	end
+end
 
 -- Update the menu items dynamically
 local function update_menus(space_id)
@@ -78,37 +93,37 @@ local function update_menus(space_id)
 					label = {
 						string = menu,
 						font = { family = settings.font.text, style = settings.font.style_map["Semibold"] },
+						color = colors.quicksilver, -- Default label color
 					},
-					drawing = true,
+					drawing = false, -- Temporarily hide for animation
 					space = space_id,
 				})
 			end
 
 			id = id + 1
 		end
+
+		-- Animate menu label appearance
+		animate_menu_labels()
 	end)
 end
 
--- Handle menu visibility and updates on app switch
-menu_watcher:subscribe("front_app_switched", function()
-	exec_command("yabai -m query --windows --window | jq -r '.space'", function(space_id)
-		update_menus(space_id)
-		-- Ensure menus are drawn after updating
-		sbar.set("/menu\\..*/", { drawing = true })
-	end)
-end)
+-- Track menu visibility
+local menu_visible = false
 
 -- Toggle menu visibility and update based on space swap
 space_menu_swap:subscribe("swap_menus_and_spaces", function()
-	local is_drawing = menu_items[1]:query().geometry.drawing == "on"
-	if is_drawing then
+	if menu_visible then
+		-- Hide the menus
+		menu_visible = false
 		menu_watcher:set({ updates = false })
 		sbar.set("/menu\\..*/", { drawing = false })
 	else
+		-- Show the menus
+		menu_visible = true
 		menu_watcher:set({ updates = true })
 		exec_command("yabai -m query --windows --window | jq -r '.space'", function(space_id)
 			update_menus(space_id)
-			sbar.set("/menu\\..*/", { drawing = true })
 		end)
 	end
 end)
