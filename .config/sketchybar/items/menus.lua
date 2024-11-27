@@ -86,6 +86,7 @@ local function update_menus(space_id)
 					},
 					drawing = true,
 					space = space_id,
+					padding_right = settings.item_spacing,
 				})
 			else
 				-- Regular menu item with a label
@@ -97,6 +98,7 @@ local function update_menus(space_id)
 					},
 					drawing = false, -- Temporarily hide for animation
 					space = space_id,
+					padding_right = settings.item_spacing,
 				})
 			end
 

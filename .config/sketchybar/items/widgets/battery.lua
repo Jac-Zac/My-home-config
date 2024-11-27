@@ -92,12 +92,6 @@ battery:subscribe("mouse.clicked", function(env)
         popup = {
             drawing = "toggle",
             align = "center",
-            blur_radius = settings.popup_blur_radius,
-            background = {
-                border_color = colors.popup.border,
-                border_width = settings.popup_border_width,
-                corner_radius = settings.popup_border_radius,
-            },
         },
     })
 
