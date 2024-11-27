@@ -214,7 +214,7 @@ _macSystemPrefs_() {
   # Make repeat command even faster
   echo "Configuring Keyboard Repete..."
   defaults write -g KeyRepeat -int 1
-  defaults write -g InitialKeyRepeat -int 10
+  defaults write -g InitialKeyRepeat -int 15
 
   echo "Configuring macOS system preferences..."
 

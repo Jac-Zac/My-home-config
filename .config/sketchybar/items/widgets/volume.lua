@@ -27,13 +27,6 @@ local volume_bracket = sbar.add("bracket", "widgets.volume.bracket", { volume_ic
 	popup = {
 		drawing = false,
 		align = "center",
-		blur_radius = settings.popup_blur_radius,
-		background = {
-			border_color = colors.popup.border,
-			border_width = settings.popup_border_width,
-			corner_radius = settings.popup_border_radius,
-			color = colors.popup.background,
-		},
 	},
 })
 

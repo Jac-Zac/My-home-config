@@ -15,12 +15,17 @@ local icons = {
 		clipboard = "􀉄",
 		keyboard = "􀇳",
 		control_center = "􀜊",
-		passwords = "􀎡",
+
+		lock = {
+			close = "􀎡",
+			open = "􀎥",
+		},
 
 		switch = {
 			on = "􁏮",
 			off = "􁏯",
 		},
+
 		volume = {
 			_100 = "􀊩",
 			_66 = "􀊧",
