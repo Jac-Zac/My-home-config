@@ -56,10 +56,18 @@ local function animate_menu_labels()
 end
 
 -- Update the menu items dynamically
+-- Update the menu items dynamically
 local function update_menus(space_id)
 	exec_command(MENU_SCRIPT .. " -l", function(menus)
-		-- Hide all menus initially
-		sbar.set("/menu\\..*/", { drawing = false })
+		-- Completely reset all menu items
+		for i, menu_item in ipairs(menu_items) do
+			menu_item:set({
+				label = { string = "" },
+				icon = { drawing = false },
+				drawing = false,
+			})
+		end
+
 		menu_padding:set({ drawing = true })
 
 		local id = 1
@@ -96,7 +104,7 @@ local function update_menus(space_id)
 						font = { family = settings.font.text, style = settings.font.style_map["Semibold"] },
 						color = colors.quicksilver, -- Default label color
 					},
-					drawing = false, -- Temporarily hide for animation
+					drawing = false,        -- Temporarily hide for animation
 					space = space_id,
 					padding_right = settings.item_spacing,
 				})
@@ -116,12 +124,12 @@ local menu_visible = false
 -- Toggle menu visibility and update based on space swap
 space_menu_swap:subscribe("swap_menus_and_spaces", function()
 	if menu_visible then
-		-- Hide the menus
+		-- Reset menus only when explicitly called again
 		menu_visible = false
 		menu_watcher:set({ updates = false })
 		sbar.set("/menu\\..*/", { drawing = false })
 	else
-		-- Show the menus
+		-- Show the menus if they are not already visible
 		menu_visible = true
 		menu_watcher:set({ updates = true })
 		exec_command("yabai -m query --windows --window | jq -r '.space'", function(space_id)
@@ -130,5 +138,13 @@ space_menu_swap:subscribe("swap_menus_and_spaces", function()
 	end
 end)
 
+space_menu_swap:subscribe("front_app_switched", function(env)
+	if menu_visible then
+		-- If menus are currently visible, update them for the new app's space
+		exec_command("yabai -m query --windows --window | jq -r '.space'", function(space_id)
+			update_menus(space_id)
+		end)
+	end
+end)
 -- Return the main menu watcher object
 return menu_watcher
