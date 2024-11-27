@@ -3,112 +3,112 @@ local colors = require("colors")
 local settings = require("settings")
 
 local battery = sbar.add("item", "widgets.battery", {
-	position = "right",
-	update_freq = 2,
-	icon = {
-		drawing = true,
-	},
-	label = {
-		drawing = true,
-		padding_left = settings.item_padding,
-		font = {
-			family = settings.font.numbers,
-			style = settings.font.style_map["Regular"],
-			size = settings.font.sizes.numbers,
-		},
-	},
-	padding_right = settings.item_padding,
-	padding_left = settings.item_padding,
+    position = "right",
+    update_freq = 2,
+    icon = {
+        drawing = true,
+    },
+    label = {
+        drawing = true,
+        padding_left = settings.item_padding,
+        font = {
+            family = settings.font.numbers,
+            style = settings.font.style_map["Regular"],
+            size = settings.font.sizes.numbers,
+        },
+    },
+    padding_right = settings.item_padding,
+    padding_left = settings.item_padding,
 })
 
 local remaining_time = sbar.add("item", {
-	position = "popup." .. battery.name,
-	label = {
-		font = {
-			family = settings.font.numbers,
-			style = settings.font.style_map["Regular"],
-			size = settings.font.sizes.numbers,
-		},
-		string = "??:??h",
-		padding_right = settings.item_padding,
-		padding_left = settings.item_padding,
-	},
+    position = "popup." .. battery.name,
+    label = {
+        font = {
+            family = settings.font.numbers,
+            style = settings.font.style_map["Regular"],
+            size = settings.font.sizes.numbers,
+        },
+        string = "??:??h",
+        padding_right = settings.item_padding,
+        padding_left = settings.item_padding,
+    },
 })
 
 battery:subscribe({ "routine", "power_source_change", "system_woke" }, function()
-	sbar.exec("pmset -g batt", function(batt_info)
-		local icon = "!"
-		local label = "?"
+    sbar.exec("pmset -g batt", function(batt_info)
+        local icon = "!"
+        local label = "?"
 
-		local found, _, charge = batt_info:find("(%d+)%%")
-		if found then
-			charge = tonumber(charge)
-			label = charge .. "%"
-		end
+        local found, _, charge = batt_info:find("(%d+)%%")
+        if found then
+            charge = tonumber(charge)
+            label = charge .. "%"
+        end
 
-		local color = colors.white
-		local charging, _, _ = batt_info:find("AC Power")
+        local color = colors.white
+        local charging, _, _ = batt_info:find("AC Power")
 
-		if charging then
-			icon = icons.battery.charging
-			color = colors.green
-		else
-			if found and charge > 80 then
-				icon = icons.battery._100
-			elseif found and charge > 60 then
-				icon = icons.battery._75
-			elseif found and charge > 40 then
-				icon = icons.battery._50
-			elseif found and charge > 20 then
-				icon = icons.battery._25
-				color = colors.orange
-			else
-				icon = icons.battery._0
-				color = colors.red
-			end
-		end
+        if charging then
+            icon = icons.battery.charging
+            color = colors.green
+        else
+            if found and charge > 80 then
+                icon = icons.battery._100
+            elseif found and charge > 60 then
+                icon = icons.battery._75
+            elseif found and charge > 40 then
+                icon = icons.battery._50
+            elseif found and charge > 20 then
+                icon = icons.battery._25
+                color = colors.orange
+            else
+                icon = icons.battery._0
+                color = colors.red
+            end
+        end
 
-		local lead = ""
-		if found and charge < 10 then
-			lead = "0"
-		end
+        local lead = ""
+        if found and charge < 10 then
+            lead = "0"
+        end
 
-		battery:set({
-			icon = {
-				string = icon,
-				color = color,
-			},
-			label = {
-				drawing = true,
-				string = lead .. label,
-			},
-		})
-	end)
+        battery:set({
+            icon = {
+                string = icon,
+                color = color,
+            },
+            label = {
+                drawing = true,
+                string = lead .. label,
+            },
+        })
+    end)
 end)
 
 battery:subscribe("mouse.clicked", function(env)
-	local drawing = battery:query().popup.drawing
-	battery:set({
-		popup = {
-			drawing = "toggle",
-			align = "center",
-			blur_radius = settings.popup_blur_radius,
-			background = {
-				border_color = colors.popup.border,
-				border_width = settings.popup_border_width,
-				corner_radius = settings.popup_border_radius,
-			},
-		},
-	})
+    local drawing = battery:query().popup.drawing
+    battery:set({
+        popup = {
+            drawing = "toggle",
+            align = "center",
+            blur_radius = settings.popup_blur_radius,
+            background = {
+                border_color = colors.popup.border,
+                border_width = settings.popup_border_width,
+                corner_radius = settings.popup_border_radius,
+            },
+        },
+    })
 
-	if drawing == "off" then
-		sbar.exec("pmset -g batt", function(batt_info)
-			local found, _, remaining = batt_info:find(" (%d+:%d+) remaining")
-			local charge_found, _, charge = batt_info:find("(%d+)%%")
-			local charge_label = charge_found and charge .. "%" or "Unknown"
-			local label = found and remaining:gsub(":", ".") .. "hrs Remaining (" .. charge_label .. ")"
-					or "00:00 Remaining (" .. charge_label .. ")"
-			remaining_time:set({ label = { string = label } })
-		end)
-	end
+    if drawing == "off" then
+        sbar.exec("pmset -g batt", function(batt_info)
+            local found, _, remaining = batt_info:find(" (%d+:%d+) remaining")
+            local charge_found, _, charge = batt_info:find("(%d+)%%")
+            local charge_label = charge_found and charge .. "%" or "Unknown"
+            local label = found and remaining:gsub(":", ".") .. "hrs Remaining (" .. charge_label .. ")"
+                or "00:00 Remaining (" .. charge_label .. ")"
+            remaining_time:set({ label = { string = label } })
+        end)
+    end
 end)
