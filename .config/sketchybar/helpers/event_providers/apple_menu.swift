@@ -1470,10 +1470,10 @@ class WeatherController: ObservableObject {
         var city = ""
         
         for line in lines {
-            if line.starts(with: "OPENWEATHER_API_KEY=") {
-                apiKey = String(line.dropFirst("OPENWEATHER_API_KEY=".count))
-            } else if line.starts(with: "WEATHER_CITY=") {
-                city = String(line.dropFirst("WEATHER_CITY=".count))
+            if line.starts(with: "OPEN_WEATHER_API_KEY=") {
+                apiKey = String(line.dropFirst("OPEN_WEATHER_API_KEY=".count))
+            } else if line.starts(with: "CITY=") {
+                city = String(line.dropFirst("CITY=".count))
             }
         }
         
@@ -1489,6 +1489,8 @@ class WeatherController: ObservableObject {
         }
         
         let urlString = "https://api.openweathermap.org/data/2.5/forecast?q=\(encodedCity)&appid=\(apiKey)&units=metric"
+
+        print(urlString)
 
         guard let url = URL(string: urlString) else {
             print("Error: Could not create URL from string")
