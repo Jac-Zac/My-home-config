@@ -5,12 +5,14 @@ A modern, feature-rich configuration for [SketchyBar](https://felixkratz.github.
 ## ✨ Features
 
 - 🎨 **Modern Design**
+
   - Clean and minimal aesthetic with blur effects
   - Fully customizable colors and transparency
   - Rounded corners with dynamic borders
   - Consistent spacing and padding system
 
 - 📊 **System Monitoring**
+
   - Real-time CPU usage tracking
   - Memory utilization metrics
   - Network traffic monitoring (up/down)
@@ -18,6 +20,7 @@ A modern, feature-rich configuration for [SketchyBar](https://felixkratz.github.
   - Disk usage tracking
 
 - 🎵 **Media Controls**
+
   - Current track information
   - Dynamic album artwork display
   - Media player controls
@@ -27,6 +30,7 @@ A modern, feature-rich configuration for [SketchyBar](https://felixkratz.github.
     - Brave Browser
 
 - 🔔 **Smart Notifications**
+
   - Homebrew updates counter
   - Mail notifications
   - Message indicators
@@ -51,6 +55,7 @@ A modern, feature-rich configuration for [SketchyBar](https://felixkratz.github.
 ## 📦 Key Components
 
 ### Core Files
+
 - `sketchybarrc` - Main entry point (Lua)
 - `init.lua` - Initial configuration and module loading
 - `bar.lua` - Bar appearance and behavior settings
@@ -59,18 +64,20 @@ A modern, feature-rich configuration for [SketchyBar](https://felixkratz.github.
 - `icons.lua` - Icon definitions (SF Symbols/NerdFont)
 
 ### Modules
+
 - **System Widgets** - CPU, Memory, Battery, Network monitoring
 - **Media Controls** - Music player integration and controls
 - **Space Management** - Workspace organization and navigation
 - **Application Tracking** - Active window and application monitoring
-- **Notification Center** - System and application notifications
+<!-- - **Notification Center** - System and application notifications -->
 
 ## 🎨 Customization
 
 The configuration is highly modular and customizable through:
+
 - Color schemes
 - Font selections
-- Icon sets (SF Symbols or NerdFont)
+- Icon sets SF Symbols
 - Layout adjustments
 - Widget behavior
 - Event triggers
@@ -78,11 +85,13 @@ The configuration is highly modular and customizable through:
 ## 🔧 Event System
 
 Built-in C-based event providers for:
+
 - CPU monitoring
 - Memory usage
-- Network traffic
 - Disk usage
-- Weather information
+- Weather information:
+  > You need to create a free account at [this link](https://home.openweathermap.org/):
+  > And add update the `env` file in the `helpers/event_providers` and call it `.env` insteaed
 
 ## 📚 Additional Resources
 

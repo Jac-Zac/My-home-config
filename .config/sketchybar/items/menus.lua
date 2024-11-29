@@ -3,20 +3,9 @@ local settings = require("settings")
 local events = require("events") -- Event subscription
 
 -- Constants
-local MAX_ITEMS = 10
+local MAX_ITEMS = 7
 local MENU_SCRIPT = "$CONFIG_DIR/helpers/menus/bin/menus"
 local ANIMATION_TIME = 5
-
--- Helper function to safely execute a shell command
-local function exec_command(command, callback)
-	sbar.exec(command, function(output, exit_code)
-		if exit_code == 0 and callback then
-			callback(output)
-		else
-			print("Command failed: " .. command)
-		end
-	end)
-end
 
 -- Initialize the menu watcher
 local menu_watcher = sbar.add("item", { drawing = false, updates = false })
@@ -43,7 +32,7 @@ local menu_padding = sbar.add("item", "menu.padding", { drawing = false, width =
 -- Animate the appearance of menu labels
 local function animate_menu_labels()
 	for i, menu_item in ipairs(menu_items) do
-		local delay = (i - 1) * 0.035 -- Stagger animations by 0.035 seconds per item
+		local delay = (i - 1) * 0.030 -- Stagger animations by 0.030 seconds per item
 		sbar.exec("sleep " .. delay, function()
 			sbar.animate("tanh", ANIMATION_TIME, function()
 				menu_item:set({
@@ -56,18 +45,10 @@ local function animate_menu_labels()
 end
 
 -- Update the menu items dynamically
--- Update the menu items dynamically
 local function update_menus(space_id)
-	exec_command(MENU_SCRIPT .. " -l", function(menus)
-		-- Completely reset all menu items
-		for i, menu_item in ipairs(menu_items) do
-			menu_item:set({
-				label = { string = "" },
-				icon = { drawing = false },
-				drawing = false,
-			})
-		end
-
+	sbar.exec(MENU_SCRIPT .. " -l", function(menus)
+		-- Hide all menus initially
+		sbar.set("/menu\\..*/", { drawing = false })
 		menu_padding:set({ drawing = true })
 
 		local id = 1
@@ -132,7 +113,7 @@ space_menu_swap:subscribe("swap_menus_and_spaces", function()
 		-- Show the menus if they are not already visible
 		menu_visible = true
 		menu_watcher:set({ updates = true })
-		exec_command("yabai -m query --windows --window | jq -r '.space'", function(space_id)
+		sbar.exec("yabai -m query --windows --window | jq -r '.space'", function(space_id)
 			update_menus(space_id)
 		end)
 	end
@@ -140,11 +121,17 @@ end)
 
 space_menu_swap:subscribe("front_app_switched", function(env)
 	if menu_visible then
-		-- If menus are currently visible, update them for the new app's space
-		exec_command("yabai -m query --windows --window | jq -r '.space'", function(space_id)
+		-- Hide all old menu items
+		menu_watcher:set({ updates = true })
+		-- Change to the new menus
+		sbar.exec("yabai -m query --windows --window | jq -r '.space'", function(space_id)
 			update_menus(space_id)
 		end)
+	else
+		menu_watcher:set({ updates = false })
+		sbar.set("/menu\\..*/", { drawing = false })
 	end
 end)
+
 -- Return the main menu watcher object
 return menu_watcher
