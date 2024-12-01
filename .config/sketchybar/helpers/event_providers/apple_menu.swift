@@ -1490,8 +1490,6 @@ class WeatherController: ObservableObject {
         
         let urlString = "https://api.openweathermap.org/data/2.5/forecast?q=\(encodedCity)&appid=\(apiKey)&units=metric"
 
-        print(urlString)
-
         guard let url = URL(string: urlString) else {
             print("Error: Could not create URL from string")
             return
@@ -1683,8 +1681,16 @@ struct CalendarGridView: View {
         let daysInPreviousMonth = calendar.range(of: .day, in: .month, for: previousMonth)!.count
         
         // Previous month days
-        for day in (daysInPreviousMonth - firstWeekday + 1)...daysInPreviousMonth {
-            days.append(DayItem(number: "\(day)", isCurrentMonth: false, isToday: false))
+        // for day in (daysInPreviousMonth - firstWeekday + 1)...daysInPreviousMonth {
+        //     days.append(DayItem(number: "\(day)", isCurrentMonth: false, isToday: false))
+        // }
+
+        // Previous month days
+        if firstWeekday > 0 {
+            let startDay = max(1, daysInPreviousMonth - firstWeekday + 1)
+            for day in startDay...daysInPreviousMonth {
+                days.append(DayItem(number: "\(day)", isCurrentMonth: false, isToday: false))
+            }
         }
         
         // Current month days
@@ -1740,9 +1746,6 @@ struct CalendarView: View {
     }
 
     private func fetchDate() {
-        // Simulate fetching date from an external source
-        // For demonstration purposes, we'll just set it to the current date
-        // Replace this with actual asynchronous data fetching if needed
         self.date = Date()
     }
 }

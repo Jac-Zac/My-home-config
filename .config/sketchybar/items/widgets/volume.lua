@@ -82,7 +82,6 @@ end)
 
 local function volume_collapse_details()
 	volume_bracket:set({ popup = { drawing = false } })
-	sbar.remove("/volume.device\\.*/")
 end
 
 local current_audio_device = "None"
