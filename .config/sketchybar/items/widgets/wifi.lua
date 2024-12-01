@@ -166,7 +166,17 @@ local function toggle_details()
 	end
 end
 
-wifi:subscribe("mouse.clicked", toggle_details)
+local function hide_details()
+	wifi_bracket:set({ popup = { drawing = false } })
+end
+
+local function open_alias()
+	sbar.exec("$CONFIG_DIR/helpers/menus/bin/menus -s 'Control Center,WiFi'")
+end
+
+wifi:subscribe("mouse.entered", toggle_details)
+wifi:subscribe("mouse.clicked", open_alias)
+wifi:subscribe("mouse.exited.global", hide_details)
 
 local function copy_label_to_clipboard(env)
 	local label = sbar.query(env.NAME).label.value

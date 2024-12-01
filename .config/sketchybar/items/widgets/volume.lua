@@ -117,11 +117,11 @@ local function volume_toggle_details(env)
 						width = popup_width,
 						label = { string = device, color = color },
 						click_script = 'SwitchAudioSource -s "'
-							.. device
-							.. '" && sketchybar --set /volume.device\\.*/ label.color='
-							.. colors.quicksilver
-							.. " --set $NAME label.color="
-							.. colors.white,
+								.. device
+								.. '" && sketchybar --set /volume.device\\.*/ label.color='
+								.. colors.quicksilver
+								.. " --set $NAME label.color="
+								.. colors.white,
 					})
 					counter = counter + 1
 				end

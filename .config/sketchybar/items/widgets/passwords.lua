@@ -21,28 +21,26 @@ local passwords = sbar.add("item", "widgets.passwords", {
 })
 
 -- Handle mouse enter and exit events
-passwords:subscribe("mouse.entered", function(env)
-	sbar.animate("tanh", 10, function()
-		passwords:set({
-			icon = {
-				string = icons.lock.open,
-				padding_left = settings.item_padding,
-				padding_right = settings.item_padding,
-				width = settings.item_height + settings.item_padding,
-			},
-		})
-	end)
+passwords:subscribe("mouse.clicked", function(env)
+	passwords:set({
+		icon = {
+			string = icons.lock.open,
+			padding_left = settings.item_padding,
+			padding_right = settings.item_padding,
+			width = settings.item_height + settings.item_padding,
+		},
+	})
 end)
 
-passwords:subscribe("mouse.exited", function(env)
-	sbar.animate("tanh", 10, function()
-		passwords:set({
-			icon = {
-				string = icons.lock.close,
-				padding_left = settings.item_padding,
-				padding_right = settings.item_padding,
-				width = settings.item_height + settings.item_padding,
-			},
-		})
-	end)
+passwords:subscribe("mouse.exited.global", function(env)
+	-- sbar.animate("tanh", 10, function()
+	passwords:set({
+		icon = {
+			string = icons.lock.close,
+			padding_left = settings.item_padding,
+			padding_right = settings.item_padding,
+			width = settings.item_height + settings.item_padding,
+		},
+	})
+	-- end)
 end)
