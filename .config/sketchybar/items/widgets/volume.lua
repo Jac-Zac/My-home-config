@@ -92,42 +92,37 @@ local function volume_toggle_details(env)
 		return
 	end
 
-	local is_popup_visible = volume_bracket:query().popup.drawing == "on"
-	if is_popup_visible then
-		volume_collapse_details()
-	else
-		volume_bracket:set({ popup = { drawing = true } })
-		sbar.exec("SwitchAudioSource -t output -c", function(result)
-			current_audio_device = result:sub(1, -2)
-			sbar.exec("SwitchAudioSource -a -t output", function(available)
-				current = current_audio_device
-				local color = colors.quicksilver
-				local counter = 0
+	volume_bracket:set({ popup = { drawing = true } })
+	sbar.exec("SwitchAudioSource -t output -c", function(result)
+		current_audio_device = result:sub(1, -2)
+		sbar.exec("SwitchAudioSource -a -t output", function(available)
+			current = current_audio_device
+			local color = colors.quicksilver
+			local counter = 0
 
-				for device in string.gmatch(available, "[^\r\n]+") do
-					local color = colors.quicksilver
-					if current == device then
-						color = colors.white
-					end
-					sbar.add("item", "volume.device." .. counter, {
-						position = "popup." .. volume_bracket.name,
-						padding_right = settings.popup_padding,
-						padding_left = settings.popup_padding,
-						y_offset = 8,
-						width = popup_width,
-						label = { string = device, color = color },
-						click_script = 'SwitchAudioSource -s "'
-								.. device
-								.. '" && sketchybar --set /volume.device\\.*/ label.color='
-								.. colors.quicksilver
-								.. " --set $NAME label.color="
-								.. colors.white,
-					})
-					counter = counter + 1
+			for device in string.gmatch(available, "[^\r\n]+") do
+				local color = colors.quicksilver
+				if current == device then
+					color = colors.white
 				end
-			end)
+				sbar.add("item", "volume.device." .. counter, {
+					position = "popup." .. volume_bracket.name,
+					padding_right = settings.popup_padding,
+					padding_left = settings.popup_padding,
+					y_offset = 8,
+					width = popup_width,
+					label = { string = device, color = color },
+					click_script = 'SwitchAudioSource -s "'
+							.. device
+							.. '" && sketchybar --set /volume.device\\.*/ label.color='
+							.. colors.quicksilver
+							.. " --set $NAME label.color="
+							.. colors.white,
+				})
+				counter = counter + 1
+			end
 		end)
-	end
+	end)
 end
 
 local function volume_scroll(env)
@@ -135,7 +130,8 @@ local function volume_scroll(env)
 	sbar.exec('osascript -e "set volume output volume (output volume of (get volume settings) + ' .. delta .. ')"')
 end
 
-volume_icon:subscribe("mouse.clicked", volume_toggle_details)
+volume_icon:subscribe("mouse.entered", volume_toggle_details)
+volume_icon:subscribe("mouse.exited.global", volume_collapse_details)
 volume_icon:subscribe("mouse.scrolled", volume_scroll)
 volume_percent:subscribe("mouse.clicked", volume_toggle_details)
 volume_percent:subscribe("mouse.scrolled", volume_scroll)

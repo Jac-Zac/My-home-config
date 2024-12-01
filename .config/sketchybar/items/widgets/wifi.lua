@@ -177,6 +177,7 @@ end
 wifi:subscribe("mouse.entered", toggle_details)
 wifi:subscribe("mouse.clicked", open_alias)
 wifi:subscribe("mouse.exited.global", hide_details)
+-- wifi:subscribe("mouse.exited", hide_details)
 
 local function copy_label_to_clipboard(env)
 	local label = sbar.query(env.NAME).label.value
