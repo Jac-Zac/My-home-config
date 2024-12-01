@@ -105,10 +105,11 @@ battery:subscribe("mouse.entered", function(env)
 			local charge_found, _, charge = batt_info:find("(%d+)%%")
 			local charge_label = charge_found and charge .. "%" or "Unknown"
 			local label = found and remaining:gsub(":", ".") .. "hrs Remaining (" .. charge_label .. ")"
-					or "00:00 Remaining (" .. charge_label .. ")"
+				or "00:00 Remaining (" .. charge_label .. ")"
 			remaining_time:set({ label = { string = label } })
 		end)
 	end
 end)
 
-battery:subscribe("mouse.exited.global", hide_details)
+-- battery:subscribe("mouse.exited.global", hide_details)
+battery:subscribe("mouse.exited", hide_details)
