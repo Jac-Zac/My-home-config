@@ -19,6 +19,8 @@ local battery = sbar.add("item", "widgets.battery", {
 	},
 	padding_right = settings.item_padding,
 	padding_left = settings.item_padding,
+
+	click_script = "$CONFIG_DIR/helpers/menus/bin/menus -s 'Control Center,Battery'",
 })
 
 local remaining_time = sbar.add("item", {
@@ -105,7 +107,7 @@ battery:subscribe("mouse.entered", function(env)
 			local charge_found, _, charge = batt_info:find("(%d+)%%")
 			local charge_label = charge_found and charge .. "%" or "Unknown"
 			local label = found and remaining:gsub(":", ".") .. "hrs Remaining (" .. charge_label .. ")"
-				or "00:00 Remaining (" .. charge_label .. ")"
+					or "00:00 Remaining (" .. charge_label .. ")"
 			remaining_time:set({ label = { string = label } })
 		end)
 	end

@@ -12,6 +12,7 @@ local wifi = sbar.add("item", "widgets.wifi.padding", {
 	padding_right = settings.item_padding,
 	label = { drawing = false },
 	icon = { drawing = true },
+	click_script = "$CONFIG_DIR/helpers/menus/bin/menus -s 'Control Center,WiFi'",
 })
 
 -- Background around the item
@@ -170,12 +171,7 @@ local function hide_details()
 	wifi_bracket:set({ popup = { drawing = false } })
 end
 
-local function open_alias()
-	sbar.exec("$CONFIG_DIR/helpers/menus/bin/menus -s 'Control Center,WiFi'")
-end
-
 wifi:subscribe("mouse.entered", toggle_details)
-wifi:subscribe("mouse.clicked", open_alias)
 wifi:subscribe("mouse.exited.global", hide_details)
 -- wifi:subscribe("mouse.exited", hide_details)
 
