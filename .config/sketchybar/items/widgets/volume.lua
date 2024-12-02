@@ -81,13 +81,8 @@ volume_percent:subscribe("volume_change", function(env)
 end)
 
 local function volume_collapse_details()
-	local drawing = volume_bracket:query().popup.drawing == "on"
-	if not drawing then
-		return
-	end
-
-	volume_bracket:set({ popup = { drawing = false } })
 	sbar.remove("/volume.device\\.*/")
+	volume_bracket:set({ popup = { drawing = false } })
 end
 
 local current_audio_device = "None"
@@ -95,6 +90,15 @@ local function volume_toggle_details(env)
 	if env.BUTTON == "right" then
 		sbar.exec("open /System/Library/PreferencePanes/Sound.prefpane")
 		return
+	end
+
+	-- Only remove if any volume device items exist
+	-- Completely clear out any existing volume device items before adding new ones
+	local existing_items = sbar.query("/volume.device\\.*")
+	if existing_items then
+		for _, item in ipairs(existing_items) do
+			sbar.remove(item)
+		end
 	end
 
 	volume_bracket:set({ popup = { drawing = true } })
