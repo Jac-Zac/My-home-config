@@ -91,7 +91,7 @@ Built-in C-based event providers for:
 - Disk usage
 - Weather information:
   > You need to create a free account at [this link](https://home.openweathermap.org/):
-  > And add update the `env` file in the `helpers/event_providers` and call it `.env` insteaed
+  > And add update the `.env` file in the `helpers/event_providers`
 
 ## 📚 Additional Resources
 
