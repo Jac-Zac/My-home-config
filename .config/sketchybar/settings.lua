@@ -12,7 +12,7 @@ return {
 	item_spacing = 6,
 
 	group_spacing = 16,
-	popup_border_width = 2,
+	popup_border_width = 3,
 	popup_border_radius = 4,
 	popup_blur_radius = 6,
 	-- popup_y_offset = 4,
