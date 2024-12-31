@@ -1,0 +1,35 @@
+font-family = "Inconsolata LGC Nerd Font Mono"
+font-size = 11.5
+
+# Theme settings
+theme = Nord
+
+# Hide while typing
+mouse-hide-while-typing = true
+
+# Save the state at which I closed it
+# window-save-state = always
+
+# Inherit working directory
+window-inherit-working-directory = true
+
+# Sett padding config
+window-padding-balance = true
+window-padding-x = 20, 20
+window-padding-y = 20, 20
+
+# Disable every decoration
+macos-titlebar-style = hidden
+macos-window-shadow = false
+
+# Custom icon settings
+# macos-icon-frame = plastic
+# macos-icon-ghost-color = 
+
+# Nice security input things 
+macos-auto-secure-input=true
+macos-secure-input-indication=true
+
+# Quick terminal globally available
+keybind =global:cmd+shift+space=toggle_quick_terminal
+quick-terminal-animation-duration=0.1
