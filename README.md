@@ -30,7 +30,7 @@
 - **OS** • `MacOS/Arch Linux`
 - **WM** • [`yabai`](https://github.com/koekeishiya/yabai)
 - **Shell** • [`zsh`](https://www.zsh.org/) -> [`powerlevel10k`](https://github.com/romkatv/powerlevel10k)
-- **Terminal** • [`kitty`](https://github.com/kovidgoyal/kitty)
+- **Terminal** • [`Ghostty`](https://github.com/ghostty-org/ghostty)
 - **Editor** • [`Neovim`](https://github.com/neovim/neovim/)
 - **Theme** • [`Nord`](https://github.com/arcticicestudio/nord-iterm2)
 - **Font** • [`Inconsolata Nerd`](https://github.com/ryanoasis/nerd-fonts)
