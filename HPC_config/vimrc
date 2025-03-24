@@ -1,0 +1,34 @@
+" Use a line cursor within insert mode and a block cursor everywhere else
+let &t_SI = "\e[6 q"  " Set cursor to a line in insert mode (Ps = 6)
+let &t_EI = "\e[2 q"  " Set cursor to a block in normal mode (Ps = 2)
+
+" Enable syntax highlighting
+syntax on
+
+" Show line numbers
+set number
+
+" Enable relative line numbers
+set relativenumber
+
+" Disable compatibility with vi
+set nocompatible
+
+" Enable file type detection and load plugins
+filetype plugin on
+
+" Enable automatic indentation based on file type
+filetype indent on
+
+" Use spaces instead of tabs
+set expandtab
+
+" Set tab width to 4 spaces
+set tabstop=4
+set shiftwidth=4
+
+" Highlight the current line
+" set cursorline
+
+" Enable mouse support
+set mouse=a

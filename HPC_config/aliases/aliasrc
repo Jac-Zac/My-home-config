@@ -1,0 +1,2 @@
+alias l="ls -la"
+alias grep="grep --color"

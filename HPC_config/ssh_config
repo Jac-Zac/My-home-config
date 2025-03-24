@@ -1,0 +1,6 @@
+Host alias_name
+    HostName ip
+    User username
+    IdentityFile ~/.ssh/key
+    RemoteCommand cat /etc/motd;zsh -l
+    RequestTTY yes
