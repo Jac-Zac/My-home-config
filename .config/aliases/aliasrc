@@ -25,6 +25,7 @@ alias rm="rm -v"
 alias grep="grep --color"
 alias ls="lsd"
 alias ta="tmux attach"
+alias tl="tmux ls"
 
 
 # alias find="fd"
