@@ -16,7 +16,8 @@ window-inherit-working-directory = true
 # Sett padding config
 window-padding-balance = true
 window-padding-x = 20, 20
-window-padding-y = 20, 20
+# window-padding-y = 20, 20
+window-padding-y = 15, 5
 
 # Disable every decoration
 macos-titlebar-style = hidden
@@ -39,4 +40,3 @@ quick-terminal-animation-duration=0.1
 
 # Set copy on select to work correctly with my clipboard
 copy-on-select = true
-
