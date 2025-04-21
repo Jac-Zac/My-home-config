@@ -18,12 +18,16 @@ alias v="nvim"
 alias vi="nvim"
 alias df="duf"
 alias ps="procs"
-alias cp="cp -iv"
 alias ping="gping"
+alias cp="cp -iv"
 alias mv="mv -iv"
 alias rm="rm -v"
 alias grep="grep --color"
 alias ls="lsd"
+alias ta="tmux attach"
+
+
+# alias find="fd"
 alias l="lsd -la"
 alias top='btop'
 alias mpv='mpv --geometry=50%'
@@ -31,7 +35,7 @@ alias history='history 1'
 alias mtype='tt --notheme -showwpm'
 alias intel='arch -arch x86_64'
 alias jl='jupyter lab'
-alias cat='bat'
+# alias cat='bat'
 alias oo='cd ~/Documents/second_brain'
 alias ltree='lsd --tree'
 alias openvpn="/opt/homebrew/opt/openvpn/sbin/openvpn"
@@ -60,3 +64,26 @@ alias chat="open https://web.whatsapp.com/" # Open whatsapp
 alias youtube="open https://www.youtube.com/"
 alias github="open https://github.com/"
 
+
+# Set custom commands
+# Set up fast movement with fuzzy finding
+show_file_or_dir_preview="if [ -d {} ]; then lsd --tree {} --color=always --icon=always | head -200; else bat -n --color=always --line-range :500 {}; fi"
+
+# Set Up Autojump Functions 
+f() {
+    cd "$(autojump -s | awk -F'\t' '{if (system("[ -d \"" $2 "\" ]") == 0) print $2}' | fzf --height 40% --reverse --border --ansi --preview $show_file_or_dir_preview)"
+}
+
+# New function to close current tmux session
+tq() {
+    # Check if inside tmux
+    if [ -n "$TMUX" ]; then
+        # Kill the current tmux session
+        tmux kill-session -t "$(tmux display-message -p '#S')"
+    else
+        echo "Not inside a tmux session."
+    fi
+}
+
+# Set up a function to open tmux instance inside a git repository
+t() tmux_git_search.sh
