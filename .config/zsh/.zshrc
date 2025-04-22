@@ -121,5 +121,5 @@ zle -N snack_recent_widget
 bindkey '^V' snack_recent_widget
 
 # To add zoxide
-eval "$(zoxide init zsh)"
+eval "$(zoxide init --cmd cd zsh)"
 
