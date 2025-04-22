@@ -36,8 +36,10 @@ yabai -m config right_padding                15
 yabai -m config window_gap                   15
 
 # Rules to move open applications in a specific space
-yabai -m rule --add app="Zen Browser"   space=1
-yabai -m rule --add app="WhatsApp"   space=5
+yabai -m rule --add app="Zen Browser" space=1
+yabai -m rule --add app="Ghostty" space=2
+# yabai -m rule --add app="Claude" space=2
+yabai -m rule --add app="WhatsApp"   space=4
 
 # ===== Rules ==================================
 
@@ -46,7 +48,7 @@ yabai -m rule --add label="Clock" app="^Clock$" title=".*" manage=off
 yabai -m rule --add label="App Store" app="^App Store$" manage=off
 yabai -m rule --add label="Activity Monitor" app="^Activity Monitor$" manage=off
 yabai -m rule --add label="Raycast" app="^Raycast$" title="^Raycast Settings$" manage=off
-yabai -m rule --add label="KeePassXC" app="^KeePassXC$" manage=off
+# yabai -m rule --add label="KeePassXC" app="^KeePassXC$" manage=off
 yabai -m rule --add label="Mail" app="^Mail$" manage=off
 yabai -m rule --add label="Calculator" app="^Calculator$" manage=off
 yabai -m rule --add label="Dictionary" app="^Dictionary$" manage=off
@@ -54,7 +56,8 @@ yabai -m rule --add label="Software Update" title="Software Update" manage=off
 yabai -m rule --add label="Time Machine" app="^Time Machine$" title=".*" manage=off
 yabai -m rule --add label="About This Mac" app="System Information" title="About This Mac" manage=off
 yabai -m rule --add label="Finder" app="^Finder$" title=".*" manage=off
-yabai -m rule --add app="^Zen Browser$" title="^Opening" manage=off
+# yabai -m rule --add app="Zen Browser" title="^Opening.*" manage=off
+
 
 # ====== Signal ===================================
 
