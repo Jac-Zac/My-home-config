@@ -72,7 +72,7 @@ show_file_or_dir_preview="if [ -d {} ]; then lsd --tree {} --color=always --icon
 
 # Set Up Autojump Functions 
 f() {
-    cd "$(autojump -s | awk -F'\t' '{if (system("[ -d \"" $2 "\" ]") == 0) print $2}' | fzf --height 40% --reverse --border --ansi --preview $show_file_or_dir_preview)"
+    cd "$(zoxide query --list | fzf --height 40% --reverse --border --ansi --preview $show_file_or_dir_preview)"
 }
 
 # New function to close current tmux session
