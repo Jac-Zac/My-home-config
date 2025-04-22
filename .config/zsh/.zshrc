@@ -23,11 +23,6 @@ zmodload zsh/complist
 compinit
 _comp_options+=(globdots)		# Include hidden files.
 
-# Set bindings
-bindkey -s ^t "tmux_git_search.sh\n"
-bindkey -s ^f "f\n"
-bindkey -s "^g" 'lazygit\n'
-
 # VIM
 #########################
 
@@ -39,8 +34,8 @@ export KEYTIMEOUT=1
 bindkey '^R' history-incremental-pattern-search-backward
 
 # Edit line in vim buffer ctrl-v
-autoload edit-command-line; zle -N edit-command-line
-bindkey '^v' edit-command-line
+# autoload edit-command-line; zle -N edit-command-line
+# bindkey '^v' edit-command-line
 # Enter vim buffer from normal mode
 autoload -U edit-command-line && zle -N edit-command-line && bindkey -M vicmd "^v" edit-command-line
 
@@ -113,5 +108,18 @@ source $HOME/.config/shell/fast-syntax-highlighting/fast-syntax-highlighting.plu
 # # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
 [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
 
-# To add autojump
-[ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
+# Set bindings
+bindkey -s ^f "f\n"
+bindkey -s "^g" 'lazygit\n'
+bindkey -s ^t "t\n"
+
+# Recent files search
+function snack_recent_widget() {
+  nvim +":lua require('snacks').picker.recent()"
+}
+zle -N snack_recent_widget
+bindkey '^V' snack_recent_widget
+
+# To add zoxide
+eval "$(zoxide init zsh)"
+
