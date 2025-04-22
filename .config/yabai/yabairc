@@ -36,10 +36,13 @@ yabai -m config right_padding                15
 yabai -m config window_gap                   15
 
 # Rules to move open applications in a specific space
-yabai -m rule --add app="Zen Browser" space=1
-yabai -m rule --add app="Ghostty" space=2
-# yabai -m rule --add app="Claude" space=2
-yabai -m rule --add app="WhatsApp"   space=4
+yabai -m rule --add app="Zen Browser"           space=1
+yabai -m rule --add app="Ghostty"               space=2
+yabai -m rule --add app="Perplexity"            space=3
+yabai -m rule --add app="WhatsApp"              space=4
+
+# yabai -m rule --add app="FaceTime"   space=4
+# yabai -m rule --add app="Microsoft Teams"   space=4
 
 # ===== Rules ==================================
 
@@ -56,7 +59,6 @@ yabai -m rule --add label="Software Update" title="Software Update" manage=off
 yabai -m rule --add label="Time Machine" app="^Time Machine$" title=".*" manage=off
 yabai -m rule --add label="About This Mac" app="System Information" title="About This Mac" manage=off
 yabai -m rule --add label="Finder" app="^Finder$" title=".*" manage=off
-# yabai -m rule --add app="Zen Browser" title="^Opening.*" manage=off
 
 
 # ====== Signal ===================================
