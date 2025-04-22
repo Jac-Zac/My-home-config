@@ -70,7 +70,7 @@ alias github="open https://github.com/"
 # Set up fast movement with fuzzy finding
 show_file_or_dir_preview="if [ -d {} ]; then lsd --tree {} --color=always --icon=always | head -200; else bat -n --color=always --line-range :500 {}; fi"
 
-# Set Up Autojump Functions 
+# Set Up zeoxide Functions 
 f() {
     cd "$(zoxide query --list | fzf --height 40% --reverse --border --ansi --preview $show_file_or_dir_preview)"
 }
