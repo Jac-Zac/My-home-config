@@ -89,5 +89,5 @@ tq() {
 
 # Set up a function to open tmux instance inside a git repository
 t() {
-  tmux_git_search.sh "$@"
+  tmux-sessionizer "$@"
 }
