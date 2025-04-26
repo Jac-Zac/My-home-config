@@ -17,7 +17,7 @@ window-inherit-working-directory = true
 window-padding-balance = true
 window-padding-x = 20, 20
 # window-padding-y = 20, 20
-window-padding-y = 15, 5
+window-padding-y = 15, 10
 
 # Disable every decoration
 macos-titlebar-style = hidden
@@ -40,3 +40,13 @@ quick-terminal-animation-duration=0.1
 
 # Set copy on select to work correctly with my clipboard
 copy-on-select = true
+
+# keybind =global:cmd+shift+space=toggle_quick_terminal
+# Enable command t to tmux start the search
+
+# Map to Control T
+keybind = cmd+t=text:\x01t
+# Map to Control A
+keybind = cmd+a=text:\x01
+# Map to Control f
+keybind = cmd+f=text:\x06

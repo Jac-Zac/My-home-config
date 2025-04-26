@@ -1,0 +1,102 @@
+#!/usr/bin/env bash
+
+# 1. Start or switch to a tmux session named after the current directory
+function tmux_start() {
+  local session_name="${PWD##*/}"
+  session_name="${session_name//./_}"
+
+  if [ -n "$TMUX" ]; then
+    if ! tmux has-session -t "$session_name" 2>/dev/null; then
+      TMUX='' tmux new-session -Ad -s "$session_name" -c "$PWD"
+    fi
+    tmux switch-client -t "$session_name"
+  else
+    tmux new-session -As "$session_name" -c "$PWD"
+  fi
+}
+
+# 2. Stop (kill) the current tmux session or the server if not inside tmux
+function tmux_stop() {
+  if [ -n "$TMUX" ]; then
+    tmux kill-session -t "$(tmux display-message -p '#S')"
+  else
+    echo "Not in a tmux session. Killing tmux server."
+    tmux kill-server
+  fi
+}
+
+# 3. List and attach/switch to sessions via fzf
+function tmux_fzf_attach() {
+  local session
+
+  # List sessions with color codes for fzf display
+  session=$(tmux list-sessions -F "#{session_name}: #{session_windows} windows (created #{t:session_created})" | \
+    sed -E 's/^([^:]+):/\x1b[33m\1\x1b[0m:/' | \
+    fzf --height 40% --reverse --border --ansi \
+        --preview '
+          # Strip ANSI color codes from the selected line
+          line=$(echo {} | sed -E "s/\x1b\\[[0-9;]*m//g")
+          # Extract session name before colon
+          session_name=${line%%:*}
+          # List windows for that session with color
+          tmux list-windows -t "$session_name" -F "Window #{window_index}: #{window_name} (#{pane_current_command})" | sed "s/.*/\\x1b[33m&\\x1b[0m/"
+        ' \
+        --preview-window=right:40%:wrap \
+        --prompt="Select tmux session: ")
+
+  # If no selection, exit
+  [ -z "$session" ] && return
+
+  # Remove color codes from the selected session line
+  session=$(echo "$session" | sed -E 's/\x1b\[[0-9;]*m//g')
+
+  # Extract session name before the first colon
+  session="${session%%:*}"
+
+  # Attach or switch to the session
+  if [ -n "$TMUX" ]; then
+    tmux switch-client -t "$session"
+  else
+    tmux attach-session -t "$session"
+  fi
+}
+
+# 4. List and switch to any window across all sessions via fzf
+function tmux_fzf_window() {
+  local target session window
+  target=$(tmux list-windows -a -F "#S:#I:#W" | \
+    while IFS=: read -r s i w; do
+      printf "\e[35m%s\e[0m:%s:\e[37m%s\e[0m\n" "$s" "$i" "$w"
+    done | fzf --height 40% --reverse --border --ansi --prompt="Select tmux window: ")
+  [ -z "$target" ] && return
+
+  # Strip ANSI codes
+  target=$(echo "$target" | sed 's/\x1b\[[0-9;]*m//g')
+  session=${target%%:*}
+  window=$(echo "$target" | cut -d: -f2)
+
+  if [ -n "$TMUX" ]; then
+    tmux switch-client -t "$session"
+    tmux select-window -t "$session:$window"
+  else
+    tmux attach-session -t "$session" \; select-window -t "$window"
+  fi
+}
+
+# 5. List and kill a session via fzf
+function tmux_fzf_kill() {
+  local session
+  session=$(tmux list-sessions -F "#{session_name}" |
+    fzf --height 40% --reverse --border --ansi \
+        --preview 'tmux list-windows -t {} -F "Window #{window_index}: #{window_name} (#{pane_current_command})" | sed "s/.*/\\x1b[31m&\\x1b[0m/"' \
+        --preview-window=right:60%:wrap \
+        --prompt="Kill tmux session: ")
+  [ -z "$session" ] && return
+
+  tmux kill-session -t "$session"
+}
+
+# 6. Shortcut to tmux-sessionizer (if installed)
+function tmux_sessionize() {
+  tmux-sessionizer
+}
