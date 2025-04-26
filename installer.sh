@@ -182,8 +182,6 @@ _shell_config_() {
   git clone https://github.com/zdharma-continuum/fast-syntax-highlighting.git $HOME/.config/shell/fast-syntax-highlighting
   git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.config/shell/powerlevel10k
   git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
-  # Get the tmux sessionizer script
-  wget https://raw.githubusercontent.com/Jac-Zac/tmux-sessionizer/refs/heads/master/tmux-sessionizer ~/.config/scripts/
 
   cd
 

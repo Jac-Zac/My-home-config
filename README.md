@@ -145,6 +145,7 @@ _I use [nord theme](https://addons.mozilla.org/en-US/firefox/addon/nord-theme-co
 - [`SponsorBlock`](https://sponsor.ajay.app/)
 - [`Temp Mail`](https://addons.mozilla.org/en-US/firefox/addon/temp-mail/)
 - [`Stylus`](https://addons.mozilla.org/en-US/firefox/addon/styl-us/)
+- [`Vimium`](https://addons.mozilla.org/en-US/firefox/addon/vimium-ff/) with custom [nord theme](https://github.com/Foldex/vimium-dark-themes/tree/master)
 
 > And use [nord theme for youtube](https://github.com/MajesticWaffle/Youtube-Nord-Theme) and this for [whatsapp](https://github.com/vednoc/dark-whatsapp)
 

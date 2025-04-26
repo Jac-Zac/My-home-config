@@ -24,9 +24,6 @@ alias mv="mv -iv"
 alias rm="rm -v"
 alias grep="grep --color"
 alias ls="lsd"
-alias ta="tmux attach"
-alias tl="tmux ls"
-
 
 # alias find="fd"
 alias l="lsd -la"
@@ -75,19 +72,15 @@ f() {
     cd "$(zoxide query --list | fzf --height 40% --reverse --border --ansi --preview $show_file_or_dir_preview)"
 }
 
-# New function to close current tmux session
-tq() {
-    # Check if inside tmux
-    if [ -n "$TMUX" ]; then
-        # Kill the current tmux session
-        tmux kill-session -t "$(tmux display-message -p '#S')"
-    else
-        echo "Not inside a tmux session. Thus killing server"
-        tmux kill-server
-    fi
-}
+# Load tmux functions
+if [ -f $XDG_CONFIG_HOME/scripts/tmux-utils ]; then
+  source $XDG_CONFIG_HOME/scripts/tmux-utils
+fi
 
-# Set up a function to open tmux instance inside a git repository
-t() {
-  tmux-sessionizer "$@"
-}
+# Aliases for quick use:
+alias t='tmux_start'        # start/switch
+alias tq='tmux_stop'        # quit session or server
+alias tl='tmux_fzf_attach'  # attach via fzf to the listed sessions
+alias tw='tmux_fzf_window'  # switch window via fzf
+alias tk='tmux_fzf_kill'    # kill session via fzf
+alias tf='tmux_sessionize'  # sessionizer

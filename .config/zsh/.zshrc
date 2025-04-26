@@ -111,15 +111,7 @@ source $HOME/.config/shell/fast-syntax-highlighting/fast-syntax-highlighting.plu
 # Set bindings
 bindkey -s ^f "f\n"
 bindkey -s "^g" 'lazygit\n'
-bindkey -s ^t "t\n"
-
-# Recent files search
-function snack_recent_widget() {
-  nvim +":lua require('snacks').picker.recent()"
-}
-zle -N snack_recent_widget
-bindkey '^V' snack_recent_widget
 
 # To add zoxide
-eval "$(zoxide init --cmd cd zsh)"
+eval "$(zoxide init zsh)"
 
