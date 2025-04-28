@@ -72,12 +72,40 @@ f() {
     cd "$(zoxide query --list | fzf --height 40% --reverse --border --ansi --preview $show_file_or_dir_preview)"
 }
 
+
+# Find applications
+fa() {
+  yabai -m query --windows |
+    jq -r '.[] | "\(.id)\t\(.app)\t\(.title)"' |
+    awk -F $'\t' '
+      { printf "\033[36m%-5s\033[0m\t\033[35m%-20s\033[0m\t%s\n",
+               $1, $2, $3 }
+    ' |
+    fzf \
+      --ansi \
+      --delimiter=$'\t' \
+      --with-nth=2,3 \
+      --height=40% \
+      --reverse \
+      --border \
+      --prompt="Window: " \
+      --header=$'\033[36mApp\033[0m               \033[0mTitle' \
+      --preview-window="right,60%,border-left" \
+      --preview="
+        yabai -m query --windows --window {1} |
+        jq -r '\"App:    \(.app)\nTitle:  \(.title)\nID:     \(.id)\nSpace:  \(.space)\nDisplay: \(.display)\nFrame:  \(.frame.x) \(.frame.y) \(.frame.w) \(.frame.h)\"' |
+        bat --style=plain --color=always --language=yaml --line-range :20
+      " \
+      --bind 'enter:execute(yabai -m window --focus {1})+abort'
+}
+
 # Load tmux functions
 if [ -f $XDG_CONFIG_HOME/scripts/tmux-utils ]; then
   source $XDG_CONFIG_HOME/scripts/tmux-utils
 fi
 
 # Aliases for quick use:
+alias ta='tmux attach'       # shortcut
 alias t='tmux_start'        # start/switch
 alias tq='tmux_stop'        # quit session or server
 alias tl='tmux_fzf_attach'  # attach via fzf to the listed sessions
