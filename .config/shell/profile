@@ -1,5 +1,10 @@
 export EDITOR="nvim"
-export BROWSER="Zen Browser"
+# export BROWSER="Zen\ Browser"
+# export TERM="xterm-256color"
+
+if [[ "$TERM_PROGRAM" == "ghostty" ]]; then
+    export TERM=xterm-256color
+fi
 
 # clean up
 export ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh"
@@ -33,5 +38,8 @@ PATH="/opt/homebrew/sbin:$PATH"
 
 # Adding local bin to my path for pipx
 PATH="$HOME/.local/bin:$PATH"
+
+# Deduplicate PATH (zsh-compatible)
+typeset -U PATH
 
 export PATH
