@@ -1,5 +1,8 @@
 paleofetch
 
+# At the top of .zshrc
+[[ -f ~/.zprofile ]] && source ~/.zprofile
+
 # History in cache directory:
 HISTSIZE=5000
 SAVEHIST=5000
