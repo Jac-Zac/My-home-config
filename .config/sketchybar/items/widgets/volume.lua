@@ -15,7 +15,7 @@ local volume_percent = sbar.add("item", "widgets.volume1", {
 })
 local volume_icon = sbar.add("item", "widgets.volume2", {
 	position = "right",
-	padding_right = settings.item_padding - 3.0,
+	padding_right = settings.item_padding,
 	padding_left = settings.item_padding,
 	icon = {
 		drawing = true,
@@ -75,56 +75,43 @@ volume_percent:subscribe("volume_change", function(env)
 	volume_icon:set({ icon = { string = icon, color = color } })
 	volume_slider:set({ slider = { percentage = volume } })
 end)
-local function volume_collapse_details()
-	-- Remove only the device items we know we've created
-	for _, item_name in ipairs(created_device_items) do
-		sbar.remove(item_name)
-	end
-	-- Clear the list of created items
-	created_device_items = {}
-	volume_bracket:set({ popup = { drawing = false } })
-end
-local current_audio_device = "None"
 local function volume_toggle_details(env)
 	if env.BUTTON == "right" then
 		sbar.exec("open /System/Library/PreferencePanes/Sound.prefpane")
 		return
 	end
+
 	local is_popup_visible = volume_bracket:query().popup.drawing == "on"
+
 	if is_popup_visible then
 		volume_bracket:set({ popup = { drawing = false } })
-		-- Remove only the device items we know we've created
 		for _, item_name in ipairs(created_device_items) do
 			sbar.remove(item_name)
 		end
-		-- Clear the list of created items
 		created_device_items = {}
 	else
-		volume_bracket:set({ popup = { drawing = true } })
-		-- Remove any existing device items we previously created
+		-- Remove previous device items before opening
 		for _, item_name in ipairs(created_device_items) do
 			sbar.remove(item_name)
 		end
-		-- Clear the list of created items
 		created_device_items = {}
 
 		sbar.exec("SwitchAudioSource -t output -c", function(result)
 			current_audio_device = result:sub(1, -2)
+
 			sbar.exec("SwitchAudioSource -a -t output", function(available)
-				current = current_audio_device
-				local color = colors.quicksilver
 				local counter = 0
+				local new_items = {}
+
 				for device in string.gmatch(available, "[^\r\n]+") do
-					local color = colors.quicksilver
-					if current == device then
-						color = colors.white
-					end
+					local color = (device == current_audio_device) and colors.white or colors.quicksilver
 					local item_name = "volume.device." .. counter
+
 					sbar.add("item", item_name, {
 						position = "popup." .. volume_bracket.name,
 						padding_right = settings.popup_padding,
 						padding_left = settings.popup_padding,
-						y_offset = 8,
+						y_offset = 8 + (counter * 20),
 						width = popup_width,
 						label = { string = device, color = color },
 						click_script = 'SwitchAudioSource -s "'
@@ -134,21 +121,38 @@ local function volume_toggle_details(env)
 								.. " --set $NAME label.color="
 								.. colors.white,
 					})
-					-- Track the created item
-					table.insert(created_device_items, item_name)
+
+					table.insert(new_items, item_name)
 					counter = counter + 1
 				end
+
+				-- Update created items
+				created_device_items = new_items
+
+				-- Now open the popup after items have been created
+				volume_bracket:set({ popup = { drawing = true } })
 			end)
 		end)
 	end
 end
+
 local function volume_scroll(env)
 	local delta = env.SCROLL_DELTA
 	sbar.exec('osascript -e "set volume output volume (output volume of (get volume settings) + ' .. delta .. ')"')
 end
-volume_icon:subscribe("mouse.entered", volume_toggle_details)
-volume_icon:subscribe("mouse.exited.global", volume_collapse_details)
+
+-- Prevent closing if hovering over the popup
+volume_bracket:subscribe("mouse.entered", function()
+	volume_bracket:set({ popup = { drawing = true } })
+end)
+
+volume_icon:subscribe("mouse.exited.global", function()
+	local is_popup_visible = volume_bracket:query().popup.drawing == "on"
+	if is_popup_visible then
+		sbar.exec("sleep 0.2 && sketchybar --set " .. volume_bracket.name .. " popup.drawing=off")
+	end
+end)
+
 volume_icon:subscribe("mouse.scrolled", volume_scroll)
 volume_percent:subscribe("mouse.clicked", volume_toggle_details)
 volume_percent:subscribe("mouse.scrolled", volume_scroll)
-

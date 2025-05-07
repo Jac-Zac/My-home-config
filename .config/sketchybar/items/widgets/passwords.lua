@@ -10,10 +10,11 @@ local passwords = sbar.add("item", "widgets.passwords", {
 		string = icons.lock.close,
 		color = colors.white,
 		drawing = true,
+		width = settings.item_height + settings.item_padding,
 		padding_left = settings.item_padding,
 		padding_right = settings.item_padding,
-		width = settings.item_height + settings.item_padding,
 	},
+	padding_left = settings.item_padding,
 	label = {
 		drawing = false,
 	},
@@ -25,9 +26,9 @@ passwords:subscribe("mouse.clicked", function(env)
 	passwords:set({
 		icon = {
 			string = icons.lock.open,
+			width = settings.item_height + settings.item_padding,
 			padding_left = settings.item_padding,
 			padding_right = settings.item_padding,
-			width = settings.item_height + settings.item_padding,
 		},
 	})
 end)
@@ -37,9 +38,9 @@ passwords:subscribe("mouse.exited.global", function(env)
 	passwords:set({
 		icon = {
 			string = icons.lock.close,
+			width = settings.item_height + settings.item_padding,
 			padding_left = settings.item_padding,
 			padding_right = settings.item_padding,
-			width = settings.item_height + settings.item_padding,
 		},
 	})
 	-- end)
