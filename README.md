@@ -172,26 +172,20 @@ _I have also added latex compiling on the fly with_ [`neotex`](https://github.co
 
 1. This is to clone the repository without old commits, and enter inside it ⏳
 
-```
-
+```bash
 git clone https://github.com/Jac-Zac/My-home-config.git --depth=1 && cd My-home-config
-
 ```
 
 2. This command give execute permission to the script
 
-```
-
+```bash
 chmod +x installer.sh
-
 ```
 
 3. Run the script. If you want to get some more information you can start by running `./installer -h`
 
-```
-
+```bash
 ./installer.sh
-
 ```
 
 > You should close your terminal windows and open a new one, to reload the configurations
@@ -211,29 +205,8 @@ _You should try to keep your system up to date, also follow the [`instruction un
 - [`this`](https://github.com/mengfeng/clean-my-mac) script to clean up any junk that has build up.
 - [`ncdu`](https://github.com/rofl0r/ncdu) to check for big files and directory that I can delete
 - [`tmate`](https://tmate.io/) for instant terminal sharing and pair programming
+- [`sesh`](https://github.com/joshmedeski/sesh) to improve my tmux experience
 - [`atuin`](https://github.com/atuinsh/atuin) better command for history with `ctr-r`
-
-#### Checking for malware
-
-Moreover it is always a good measure to check if you have any malware installed by using [`clamav`](https://github.com/Cisco-Talos/clamav).
-
-###### To use it just run:
-
-```
-
-sudo freshclam
-
-```
-
-> If you get an error try copy the sample configuration file to a new file and comment out `Example` side the file.
-
-###### Wait for it to finish and then:
-
-```
-
-sudo clamscan -r --bell -i /
-
-```
 
 ## Keybinds
 
@@ -246,7 +219,7 @@ I use <kbd>command</kbd> AKA super key (on GNU/Linux) as my main modifier
 | <kbd>command + shift + enter</kbd>  | Spawn terminal                   |
 | <kbd>command + n</kbd>              | Swap new windows                 |
 | <kbd>command + 0</kbd>              | Open Zen Browser                 |
-| <kbd>command + p</kbd>              | Launch Raycast                   |
+| <kbd>command + space</kbd>          | Launch Raycast                   |
 | <kbd>command + w</kbd>              | Close Window                     |
 | <kbd>command + q</kbd>              | Close Application                |
 | <kbd>cotrol + [1-0]</kbd>           | Change workspace                 |
@@ -267,14 +240,12 @@ I have just added support for other Linux distros at least to have a decent conf
 
 > Other possible interesting things:
 
+- https://github.com/Patato777/dotfiles
+- https://github.com/terroo/wallset.git
+
+```bash
+sudo nvram boot-args=-arm64e_preview_abi
 ```
-
-https://github.com/Patato777/dotfiles
-https://github.com/terroo/wallset.git
-
-```
-
-    sudo nvram boot-args=-arm64e_preview_abi
 
 Create a certificate and compile yabai to then switch it s
 https://www.simple-bar.com/
