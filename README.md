@@ -134,8 +134,6 @@ I run zen in compact mode and use the following keybindings
 
 ### A possible good idea is to use:
 
-https://github.com/arkenfox/user.js/
-
 _I use [nord theme](https://addons.mozilla.org/en-US/firefox/addon/nord-theme-cool/?utm_source=addons.mozilla.org&utm_medium=referral&utm_content=search) and I changed my new tabs to black pages. And I use brave search_
 
 - [`zuBlock Origin`](https://ublockorigin.com)
@@ -154,22 +152,8 @@ _I use [nord theme](https://addons.mozilla.org/en-US/firefox/addon/nord-theme-co
 </details>
 
 <details>
-	<summary><strong>Better file listing</strong></summary>
-
-> I have aliased ls to [`lsd`](https://github.com/Peltoche/lsd), to make it look better and have icons
-
-![showcase](.assets/lsd.png)
-
-_If you are not interested in using it just uncommon the following line in the .zshrc file_
-
-    alias ls="lsd"
-
-</details>
-
-<details>
 	<summary><strong>My nvim confiuguration</strong></summary>
 
-[![My Skills](https://skillicons.dev/icons?i=js,html,css,wasm)](https://skillicons.dev)
 ![showcase](.assets/nvim.png)
 
 Look into https://github.com/AstroNvim/AstroNvim
