@@ -1,0 +1,167 @@
+// Load with --load-config examples/2.jsonc
+// Note that you must replace the image path to an existing image to display it.
+
+{
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+  "logo": {
+    "padding": {
+      "top": 1,
+      "right": 4,
+      "left": 1,
+    },
+  },
+  "display": {
+    "separator": "  ",
+    // "constants": ["──────────────────────────────"],
+    "constants": ["───────────────────────────"],
+  },
+  "modules": [
+    // {
+    //     "type": "custom",
+    //     "format": "┌{$1}{$1}┐",
+    //     "outputColor": "90"
+    // },
+    // {
+    //     "type": "title",
+    //     "keyWidth": 10
+    // },
+    // {
+    //     "type": "custom",
+    //     "format": "└{$1}{$1}┘",
+    //     "outputColor": "90"
+    // },
+    // {
+    //     "type": "custom",
+    //     "format": " {#90}  {#31}  {#32}  {#33}  {#34}  {#35}  {#36}  {#37}  {#38}  {#39}       {#38}  {#37}  {#36}  {#35}  {#34}  {#33}  {#32}  {#31}  {#90}"
+    // },
+    "break",
+    {
+      "type": "custom",
+      "format": "┌{$1}{$1}┐",
+      "outputColor": "90",
+    },
+    "break",
+    {
+      "type": "os",
+      "key": "{icon} OS",
+      "keyColor": "yellow",
+    },
+    {
+      "type": "kernel",
+      "key": "│ ├",
+      "keyColor": "yellow",
+    },
+    {
+      "type": "terminal",
+      "key": "│ ├",
+      "keyColor": "yellow",
+    },
+    {
+      "type": "packages",
+      "key": "└ └󰏖",
+      "keyColor": "yellow",
+    },
+    "break",
+    {
+      "type": "host",
+      "key": "󰌢 PC",
+      "format": "{family} ({vendor})",
+      "keyColor": "green",
+    },
+    {
+      "type": "cpu",
+      "key": "│ ├󰻠",
+      "keyColor": "green",
+      "format": "{1} {2} @ {7}",
+    },
+    // {
+    //   "type": "gpu",
+    //   "key": "│ ├󰍛",
+    //   "keyColor": "green",
+    // },
+    {
+      "type": "memory",
+      "key": "│ ├󰑭",
+      "keyColor": "green",
+      "percent": {
+        "type": 3, // show number + bar
+        "green": 30,
+        "yellow": 70,
+      },
+      "format": "{percentage-bar} [{used} / {total}] ({percentage})",
+    },
+    {
+      "type": "battery",
+      "key": "└ └",
+      "keyColor": "green",
+      "percent": {
+        "type": 3,
+        "green": 30,
+        "yellow": 70,
+      },
+      "format": "{capacity-bar} [{time-hours} hours, {time-minutes} minutes] ({capacity})",
+    },
+    "break",
+    {
+      "type": "uptime",
+      "key": "󰅐 HW",
+      "keyColor": "blue",
+      "format": "Uptime [{1} days, {2} hours, {3} minutes]",
+    },
+    // {
+    //   "type": "localip",
+    //   "key": "│ ├󰩟",
+    //   "compact": true,
+    //   "keyColor": "blue",
+    // },
+    {
+      "type": "media",
+      "key": "│ ├󰝚",
+      "keyColor": "blue",
+    },
+    {
+      "type": "sound",
+      "key": "│ ├",
+      "percent": {
+        "type": 3, // 3 means show both percentage number and bar
+        "green": 30, // values below 30% are green
+        "yellow": 70, // 30-70% yellow, above 70% red
+      },
+      "format": "{volume-percentage-bar} {name}",
+      "keyColor": "blue",
+    },
+    {
+      "type": "wifi",
+      "key": "└ └",
+      "percent": {
+        "type": 3,
+        "green": 30,
+        "yellow": 70,
+      },
+      "format": "{signal-quality-bar} {ssid}",
+      "keyColor": "blue",
+    },
+    {
+      "type": "player",
+      "key": "│ ├󰥠",
+      "keyColor": "cyan",
+    },
+    {
+      "type": "media",
+      "key": "└ └󰝚",
+      "keyColor": "cyan",
+    },
+    "break",
+    {
+      "type": "custom",
+      "format": "└{$1}{$1}┘",
+      "outputColor": "90",
+    },
+    // "break",
+    {
+      "type": "custom",
+      "format": " {#90}  {#31}  {#32}  {#33}  {#34}  {#35}  {#36}  {#37}  {#38}       {#37}  {#36}  {#35}  {#34}  {#33}  {#32}  {#31}  {#90}",
+    },
+    "break",
+  ],
+}
