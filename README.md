@@ -34,7 +34,7 @@
 - **Editor** • [`Neovim`](https://github.com/neovim/neovim/)
 - **Theme** • [`Nord`](https://github.com/arcticicestudio/nord-iterm2)
 - **Font** • [`Inconsolata Nerd`](https://github.com/ryanoasis/nerd-fonts)
-- **System information** • [`paleofetch`](https://github.com/Jac-Zac/paleofetch-mac-prettier)
+- **System information** • [`fastfetch`](https://github.com/fastfetch-cli/fastfetch)
 - **Fuzzy finder** • [`fzf`](https://github.com/junegunn/fzf)
 - **Launcher** • [`skhd`](https://github.com/koekeishiya/skhd) and [`Raycast`](https://www.raycast.com/)
 - **Terminal multiplexer** • [`tmux`](https://github.com/tmux/tmux)
