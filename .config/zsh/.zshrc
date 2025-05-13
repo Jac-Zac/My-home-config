@@ -1,4 +1,4 @@
-paleofetch
+fastfetch
 
 # At the top of .zshrc
 [[ -f ~/.zprofile ]] && source ~/.zprofile
@@ -118,3 +118,8 @@ bindkey -s "^g" 'lazygit\n'
 # To add zoxide
 eval "$(zoxide init zsh)"
 
+# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+fpath=(/Users/jaczac/.docker/completions $fpath)
+autoload -Uz compinit
+compinit
+# End of Docker CLI completions
