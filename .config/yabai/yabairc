@@ -6,13 +6,15 @@ sudo yabai --load-sa
 # global settings
 yabai -m config external_bar                 all:33:0\
                 mouse_follows_focus         off\
+                focus_follow_mouse          off\
                 window_placement            first_child\
                 window_placement            second_child\
                 window_shadow               float\
+                window_opacity_duration     0.2\
                 window_opacity              on\
                 active_window_opacity       1.0\
                 normal_window_opacity       0.9\
-                insert_feedback_color       0xff61afef\
+                insert_feedback_color       0xff9dd274\
                 split_ratio                 0.50\
                 auto_balance                on\
                 mouse_modifier              alt\
@@ -39,7 +41,7 @@ yabai -m config window_gap                   15
 yabai -m rule --add app="Zen Browser"           space=1
 yabai -m rule --add app="Ghostty"               space=2
 yabai -m rule --add app="WhatsApp"              space=3
-yabai -m rule --add app="Perplexity"            space=7
+yabai -m rule --add app="Perplexity"            space=4
 
 # yabai -m rule --add app="FaceTime"   space=4
 # yabai -m rule --add app="Microsoft Teams"   space=4
