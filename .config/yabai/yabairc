@@ -40,8 +40,7 @@ yabai -m config window_gap                   15
 # Rules to move open applications in a specific space
 yabai -m rule --add app="Zen Browser"           space=1
 yabai -m rule --add app="Ghostty"               space=2
-yabai -m rule --add app="WhatsApp"              space=3
-yabai -m rule --add app="Perplexity"            space=4
+yabai -m rule --add app="WhatsApp"              space=5
 
 # yabai -m rule --add app="FaceTime"   space=4
 # yabai -m rule --add app="Microsoft Teams"   space=4

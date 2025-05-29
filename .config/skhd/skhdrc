@@ -3,6 +3,8 @@ cmd + shift - return : open -a ghostty; yabai -m space --focus 2
 
 # open Zen
 cmd - 0 : open -a /Applications/Zen\ Browser.app
+# open WhatsApp
+cmd - m : open -a /Applications/WhatsApp.app/
 
 # swap window
 # I have added those script inside the /usr/local/bin/
