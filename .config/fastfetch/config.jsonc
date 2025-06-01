@@ -39,6 +39,7 @@
       "type": "custom",
       "format": "┌{$1}{$1}┐",
       "outputColor": "90",
+      // "outputColor": "39",
     },
     "break",
     {
@@ -125,11 +126,12 @@
       "type": "sound",
       "key": "│ ├{icon}",
       "percent": {
-        "type": 9, // 3 means show both percentage number and bar
+        "type": 3, // 3 means show both percentage number and bar
         "green": 30, // values below 30% are green
         "yellow": 70, // 30-70% yellow, above 70% red
       },
-      "format": "{name} ({volume-percentage})",
+      // "format": "{name} ({volume-percentage})",
+      "format": "{volume-percentage-bar} {name}",
       "keyColor": "blue",
     },
     // "format": "{volume-percentage-bar} {name}",
@@ -165,6 +167,7 @@
       "type": "custom",
       "format": "└{$1}{$1}┘",
       "outputColor": "90",
+      // "outputColor": "39",
     },
     // "break",
     {
