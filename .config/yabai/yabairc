@@ -41,6 +41,7 @@ yabai -m config window_gap                   15
 yabai -m rule --add app="Zen Browser"           space=1
 yabai -m rule --add app="Ghostty"               space=2
 yabai -m rule --add app="WhatsApp"              space=5
+yabai -m rule --add app="Slack"                 space=5
 
 # yabai -m rule --add app="FaceTime"   space=4
 # yabai -m rule --add app="Microsoft Teams"   space=4

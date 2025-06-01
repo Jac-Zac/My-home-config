@@ -6,6 +6,9 @@ if [[ "$TERM_PROGRAM" == "ghostty" ]]; then
     export TERM=xterm-256color
 fi
 
+# Adding syntax  highlighting for man pages
+export MANPAGER="nvim +Man!"
+
 # clean up
 export ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh"
 export XDG_CONFIG_HOME="$HOME/.config"
