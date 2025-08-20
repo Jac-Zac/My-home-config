@@ -1,5 +1,5 @@
 font-family = "Inconsolata LGC Nerd Font Mono"
-font-size = 12
+font-size = 13
 
 # Theme settings
 theme = Nord
@@ -43,10 +43,16 @@ copy-on-select = true
 
 # keybind =global:cmd+shift+space=toggle_quick_terminal
 # Enable command t to tmux start the search
+#
 
-# Map to Control T
+# Set alt
+macos-option-as-alt = true
+
+# Map to Control A + t
 keybind = cmd+t=text:\x01t
 # Map to Control A
 keybind = cmd+a=text:\x01
-# Map to Control f
-keybind = cmd+f=text:\x06
+# Map to Control P
+keybind = cmd+p=text:\x10
+# Map to Control F
+# keybind = cmd+f=text:\x06
