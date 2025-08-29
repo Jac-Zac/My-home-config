@@ -13,7 +13,8 @@ mkdir ~/.cache/zsh
 mkdir ~/.config/shell/
 
 # Copy config
-cp -r zsh ~/.config
+cp -r zsh/ ~/.config
+mv -r ~/.config/zshrc ~/.config/.zshrc
 
 # Fast synatx hilighting
 git clone https://github.com/zdharma/fast-syntax-highlighting ~/.config/shell/fast-syntax-highlighting
