@@ -141,4 +141,4 @@ precmd() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 source $XDG_CONFIG_HOME/shell/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # zsh syntax highlighting
-source $XDG_CONFIG_HOME/shell/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+source $XDG_CONFIG_HOME/shell/fast-syntax-highlighting/F-Sy-H.plugin.zsh
