@@ -12,6 +12,9 @@ mkdir ~/.cache/zsh
 # Set shell dir
 mkdir ~/.config/shell/
 
+# Copy config
+cp -r zsh ~/.config
+
 # Fast synatx hilighting
 git clone https://github.com/zdharma/fast-syntax-highlighting ~/.config/shell/fast-syntax-highlighting
 
