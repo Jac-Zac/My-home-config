@@ -94,6 +94,7 @@ bindkey -M menuselect 'left' vi-backward-char
 bindkey -M menuselect 'down' vi-down-line-or-history
 bindkey -M menuselect 'up' vi-up-line-or-history
 bindkey -M menuselect 'right' vi-forward-char
+
 # Fix backspace bug when switching modes
 bindkey "^?" backward-delete-char
 
