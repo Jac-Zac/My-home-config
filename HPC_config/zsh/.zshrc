@@ -61,12 +61,6 @@ _comp_options+=(globdots)               # Include hidden files.
 # Set up fast movement with fuzzy finding
 show_file_or_dir_preview="if [ -d {} ]; then lsd --tree {} --color=always --icon=always | head -200; else bat -n --color=always --line-range :500 {}; fi"
 
-# Set Up Autojump Functions
-f() {
-    cd "$(autojump -s | awk -F'\t' '{if (system("[ -d \"" $2 "\" ]") == 0) print $2}' | fzf --height 40% --reverse --border --ansi --preview $show_file_or_dir_preview)"
-}
-
-bindkey -s "^f" 'f\n'
 bindkey -s "^g" 'lazygit\n'
 
 # VIM
