@@ -32,3 +32,6 @@ set shiftwidth=4
 
 " Enable mouse support
 set mouse=a
+
+" copy to system clipboard
+set clipboard=unnamedplus
