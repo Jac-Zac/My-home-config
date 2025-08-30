@@ -100,3 +100,13 @@ function tmux_fzf_kill() {
 function tmux_sessionize() {
   tmux-sessionizer
 }
+
+ssh() {
+  if [ -n "$TMUX" ]; then
+    tmux rename-window "$1"
+  fi
+  command ssh "$@"
+  if [ -n "$TMUX" ]; then
+    tmux set-window-option automatic-rename on >/dev/null
+  fi
+}
