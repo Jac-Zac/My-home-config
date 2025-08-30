@@ -1,2 +1,5 @@
 alias l="ls -la"
 alias grep="grep --color"
+
+alias gst="git status"
+alias gd="git diff"
