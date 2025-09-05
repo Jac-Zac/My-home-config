@@ -16,6 +16,11 @@ local icons = {
 		keyboard = "􀇳",
 		control_center = "􀜊",
 
+		keyboards = {
+			international = "AZ",
+			italian = "IT",
+		},
+
 		lock = {
 			close = "􀎡",
 			open = "􀎥",
@@ -46,6 +51,8 @@ local icons = {
 			download = "􀄩",
 			connected = "􀙇",
 			disconnected = "􀙈",
+			hotspost = "􀉤",
+			vpn = "􀞛",
 			router = "􁓤",
 		},
 		media = {
