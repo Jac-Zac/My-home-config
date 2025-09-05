@@ -1,4 +1,37 @@
+# Tmux theme and neovim plugins
 .config/tmux/themes/nord-tmux
 .config/nvim/plugged
+
+# Git config (contains personal info)
 .config/git
+
+# macOS
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+*.cache
+
+# Editor files
+*~
+*.swp
+*.swo
+.vscode/
+.idea/
+
+# Package files
+node_modules/
+.npm/
+.cargo/
+
+# OS generated files
+*.pid
+*.lock

@@ -3,7 +3,7 @@
 </h1>
 
 <p align="center">
-  <img width="60%" hight="100%" src="https://raw.githubusercontent.com/Jac-Zac/My-home-config/master/.assets/logo.png"/>
+  <img width="60%" height="100%" src="https://raw.githubusercontent.com/Jac-Zac/My-home-config/master/.assets/logo.png"/>
 </p>
 
 <p align="center">
@@ -18,7 +18,18 @@
 	This configuration repo contains everything to set up my terminal from scratch in two scripts. It also has a very easy way to update your old configuration to keep it up to date.
 </p>
 
-## Configuration :computer:<img alt="" align="right" src="https://img.shields.io/github/repo-size/Jac-Zac/My-Home-Config?color=gree&style=flat-square"/>
+## Table of Contents
+
+- [Configuration](#configuration-computer)
+- [Motivation](#motivation-)
+- [Installation](#installation-memo)
+- [Troubleshooting](#troubleshooting)  
+- [Maintenance](#maintenance-gear)
+- [Keybinds](#keybinds)
+- [Arch Linux](#arch-linux)
+- [Problems](#problems-)
+
+## Configuration :computer: <img alt="" align="right" src="https://img.shields.io/github/repo-size/Jac-Zac/My-Home-Config?color=green&style=flat-square"/>
 
   <img href=".assets/new_showcase.png" src="https://raw.githubusercontent.com/Jac-Zac/My-home-config/master/.assets/new_showcase.png" alt="minimal" align="right" width="400px"/>
 </a>
@@ -73,7 +84,7 @@ _You should always keep your configuration up to date, luckily there is a straig
 
 ### Customizations 🔧
 
-##### This setup is made for macOS, and perhaps GNU\Linux in the future
+##### This setup is made for macOS, and perhaps GNU/Linux in the future
 
 > YouTube from the terminal can be watched thanks to [`ytfzf`](https://github.com/pystardust/ytfzf)
 
@@ -152,7 +163,7 @@ _I use [nord theme](https://addons.mozilla.org/en-US/firefox/addon/nord-theme-co
 </details>
 
 <details>
-	<summary><strong>My nvim confiuguration</strong></summary>
+	<summary><strong>My nvim configuration</strong></summary>
 
 ![showcase](.assets/nvim.png)
 
@@ -165,6 +176,16 @@ _I have also added latex compiling on the fly with_ [`neotex`](https://github.co
 </details>
 
 ## Installation :memo:
+
+### Prerequisites
+
+Before running the installation script, ensure you have:
+
+- **macOS**: macOS 10.15 (Catalina) or later
+- **Linux**: A supported distribution (Arch Linux, Ubuntu, Debian, Fedora, openSUSE)
+- **Shell**: `zsh` shell (the script will install and configure it if not present)
+- **Internet Connection**: Required for downloading packages and configurations
+- **Admin Access**: `sudo` privileges for installing system packages
 
 > You have to be in zsh shell for this installation, if you are running an old version of macOS you might need to switch away from bash
 
@@ -182,7 +203,7 @@ git clone https://github.com/Jac-Zac/My-home-config.git --depth=1 && cd My-home-
 chmod +x installer.sh
 ```
 
-3. Run the script. If you want to get some more information you can start by running `./installer -h`
+3. Run the script. If you want to get some more information you can start by running `./installer.sh -h`
 
 ```bash
 ./installer.sh
@@ -190,9 +211,26 @@ chmod +x installer.sh
 
 > You should close your terminal windows and open a new one, to reload the configurations
 
-_You can run `./install -s` to only install the command prompt configurations_
+_You can run `./installer.sh -s` to only install the command prompt configurations_
 
 **Installation Completed !**
+
+## Troubleshooting
+
+### Common Issues
+
+- **Permission Denied**: Ensure you have `sudo` privileges and the script has execute permissions (`chmod +x installer.sh`)
+- **Command Not Found**: Make sure you're in the correct directory with the installer script
+- **Network Issues**: Check your internet connection if downloads fail
+- **Homebrew Installation Failed (macOS)**: Try installing Homebrew manually first: `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
+
+### Getting Help
+
+If you encounter issues:
+1. Check the error message carefully
+2. Ensure all prerequisites are met
+3. Try running the script with verbose output
+4. Open an issue on GitHub with details about your system and the error
 
 ## Maintenance :gear:
 
@@ -222,7 +260,7 @@ I use <kbd>command</kbd> AKA super key (on GNU/Linux) as my main modifier
 | <kbd>command + space</kbd>          | Launch Raycast                   |
 | <kbd>command + w</kbd>              | Close Window                     |
 | <kbd>command + q</kbd>              | Close Application                |
-| <kbd>cotrol + [1-0]</kbd>           | Change workspace                 |
+| <kbd>control + [1-0]</kbd>           | Change workspace                 |
 | <kbd>command + shift + [1-0]</kbd>  | Move focused window to workspace |
 | <kbd>command + shift + [hjkl]</kbd> | Resize client                    |
 | <kbd>command + [hjkl]</kbd>         | Change focus by direction        |
