@@ -3,32 +3,32 @@
 #      Set echo Colors     #
 ############################
 
-red=`tput setaf 1`
-green=`tput setaf 2`
-yellow=`tput setaf 3`
-blue=`tput setaf 4`
-reset=`tput sgr0`
+red=$(tput setaf 1)
+green=$(tput setaf 2)
+yellow=$(tput setaf 3)
+blue=$(tput setaf 4)
+reset=$(tput sgr0)
 bold=$(tput bold);
-underline=`tput smul`
-rm_underline=`tput rmul`
+underline=$(tput smul)
+rm_underline=$(tput rmul)
 
 ############################
 #     General functions    #
 ############################
 _safeExit_() {
   trap - INT TERM EXIT
-  exit ${1:-0}
+  exit "${1:-0}"
 }
 
 _seekConfirmation_() {
   # v1.0.0
-  echo "${bold}$@${reset}"
+  echo "${bold}$*${reset}"
   while true; do
     read -r -p " (y/n) " yn
     case $yn in
       [Yy]*) return 0 ;;
       [Nn]*) return 1 ;;
-      *) echo "Pleas answer yes or no" ;;
+      *) echo "Please answer yes or no" ;;
     esac
   done
 }
@@ -77,7 +77,8 @@ _commandLineTools_() {
       sleep 5
     done
 
-    local x=$(find '/Applications' -maxdepth 1 -regex '.*/Xcode[^ ]*.app' -print -quit)
+    local x
+    x=$(find '/Applications' -maxdepth 1 -regex '.*/Xcode[^ ]*.app' -print -quit)
     if [ -e "$x" ]; then
       sudo xcode-select -s "$x"
       sudo xcodebuild -license accept
@@ -98,18 +99,19 @@ _NotArchLinuxInstall_() {
 
   ### Install zsh, neofetch, curl, wget, git, make, cargo on almost any distribution
   packagesNeeded='zsh curl wget git make cargo'
-  if [ -x "$(command -v apk)" ];       then sudo apk add --no-cache $packagesNeeded
-  elif [ -x "$(command -v apt-get)" ]; then sudo apt-get install $packagesNeeded
-  elif [ -x "$(command -v dnf)" ];     then sudo dnf install $packagesNeeded
-  elif [ -x "$(command -v zypper)" ];  then sudo zypper install $packagesNeeded
+  if [ -x "$(command -v apk)" ];       then sudo apk add --no-cache "$packagesNeeded"
+  elif [ -x "$(command -v apt-get)" ]; then sudo apt-get install "$packagesNeeded"
+  elif [ -x "$(command -v dnf)" ];     then sudo dnf install "$packagesNeeded"
+  elif [ -x "$(command -v zypper)" ];  then sudo zypper install "$packagesNeeded"
   else echo "FAILED TO INSTALL PACKAGE: Package manager not found. You must manually install: $packagesNeeded">&2; fi
 
   # Install nerd font
   mkdir -p ~/.local/share/fonts
-  cd ~/.local/share/fonts && curl -fLo "Droid Sans Mono for Powerline Nerd Font Complete.otf" https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/DroidSansMono/complete/Droid%20Sans%20Mono%20Nerd%20Font%20Complete.otf
+  cd ~/.local/share/fonts || exit
+  curl -fLo "Droid Sans Mono for Powerline Nerd Font Complete.otf" https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/DroidSansMono/complete/Droid%20Sans%20Mono%20Nerd%20Font%20Complete.otf
 
   # Back to home directory
-  cd
+  cd || exit
 
   # Fast synatx hilighting
   git clone https://github.com/zdharma/fast-syntax-highlighting ~/.config/shell/fast-syntax-highlighting
@@ -124,7 +126,7 @@ _NotArchLinuxInstall_() {
   cargo install lsd
 
   # Change owner
-  sudo chown -R $(whoami) .config
+  sudo chown -R "$(whoami)" .config
 
   # Move lsd to the PATH
   sudo mv .cargo/bin/lsd /usr/local/bin/
@@ -132,15 +134,17 @@ _NotArchLinuxInstall_() {
   # Remove .cargo
   sudo rm -r .cargo
 
-  echo 'source $HOME/.config/shell/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh' >>~/.config/shell/profile
-  echo 'alias ls= "lsd"' >>~/.config/shell/profile
-  echo 'neofetch' >>~/.config/shell/profile
+  {
+    echo "source \$HOME/.config/shell/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
+    echo 'alias ls= "lsd"'
+    echo 'neofetch'
+  } >>~/.config/shell/profile
 
   # Change default shell to zsh
-  chsh -s $(which zsh)
+  chsh -s "$(which zsh)"
 
   echo "${green}The installation completed successfully ${reset}"
-  echo "${bold}Change your terminal emulator fonts and use Droid Sans Mono Nerd and then restart your terminal${bold}"
+  echo "${bold}Change your terminal emulator fonts and use Droid Sans Mono Nerd and then restart your terminal${reset}"
 
 }
 
@@ -155,19 +159,19 @@ _shell_config_() {
 
   # Check if you are running arch linux
   if [ "$ARCH" = "true" ]; then
-	  echo "${green}${bold}You are runing Arch linux (Nice !)${reset}"
+	  echo "${green}${bold}You are running Arch linux (Nice !)${reset}"
 	  echo
 	  sudo pacman -Sy base-devel rsync neovim zsh xorg xorg-xinit xorg-server neofetch tmux htop bpytop lsd firefox alacritty
-	  chsh -s $(which zsh)
+	  chsh -s "$(which zsh)"
 	  ln -s ~/.config/x11/xprofile ~/.xprofile
 	  mkdir packages
 	  git clone https://github.com/LukeSmithxyz/st.git ~/packages/st
 	  git clone https://github.com/LukeSmithxyz/dwm.git ~/packages/dwn
-	  git clone https://aur.archlinux.org/yay.git $HOME/packages/yay
+	  git clone https://aur.archlinux.org/yay.git "$HOME"/packages/yay
 	  cp dwm_config.h ~/packages/dwm/config.h
-	  cd $HOME/package/dwm
+	  cd "$HOME"/package/dwm || exit
 	  sudo make && make install
-	  cd $HOME/packages/yay
+	  cd "$HOME"/packages/yay || exit
 	  makepkg -si
 	  yay nerd-fonts-complete
           sh -c "$(curl -fsSL https://raw.githubusercontent.com/mut-ex/minimal-functional-fox/master/install.sh)"
@@ -175,18 +179,19 @@ _shell_config_() {
   fi
 
   # Copy my configuration
-  cp -r .config $HOME
+  cp -r .config "$HOME"
 
   # plugins and themes
-  git clone https://github.com/zsh-users/zsh-autosuggestions.git $HOME/.config/shell/zsh-autosuggestions
-  git clone https://github.com/zdharma-continuum/fast-syntax-highlighting.git $HOME/.config/shell/fast-syntax-highlighting
+  git clone https://github.com/zsh-users/zsh-autosuggestions.git "$HOME"/.config/shell/zsh-autosuggestions
+  git clone https://github.com/zdharma-continuum/fast-syntax-highlighting.git "$HOME"/.config/shell/fast-syntax-highlighting
   git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.config/shell/powerlevel10k
   git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
 
-  cd
+  cd || exit
 
-  # Create the simlink
+  # Create the simlink  
   ln -s ~/.config/shell/profile ~/.zprofile
+  # shellcheck disable=SC1091
   source .zprofile 
 }
 
@@ -295,25 +300,27 @@ _update_() {
   echo
 
   # Updating config
-  rsync .profile $HOME/.profile
-  rsync .zprofile $HOME/.zprofile
-  rsync -r .config $HOME
+  rsync .profile "$HOME"/.profile
+  rsync .zprofile "$HOME"/.zprofile
+  rsync -r .config "$HOME"
 
   # Updating oh-my-zsh related stuff
-  cd $HOME/.config/shell/fast-syntax-highlighting && git pull
-  cd $HOME/.config/shell/zsh-autosuggestions && git pull
+  cd "$HOME"/.config/shell/fast-syntax-highlighting || exit
+  git pull
+  cd "$HOME"/.config/shell/zsh-autosuggestions || exit
+  git pull
 
   # If MacOS
   if [ "$(uname)" = "Darwin" ] ; then
 			  brew update && brew upgrade
   # If linux
   elif [ "$(uname)" = "Linux" ]; then
-			  echo >> $HOME/.zprofile
-			  echo "[ "$(tty)" = "/dev/tty1" ] && ! pidof -s Xorg >/dev/null 2>&1 && exec startx" >> $HOME/.zprofile
+			  echo >> "$HOME"/.zprofile
+			  echo "[ \"$(tty)\" = \"/dev/tty1\" ] && ! pidof -s Xorg >/dev/null 2>&1 && exec startx" >> "$HOME"/.zprofile
 			  sudo pacman -Syu
   fi
 
-  cd
+  cd || exit
 
   echo "${green}You system is now up to date with my current configuration${reset}"
 }
@@ -325,7 +332,7 @@ _update_() {
 
 _mainScript_() {
 
-    echo "${bold}${underline}Welcome to JacZac's Dotfiles automatic installation${reset}${no_underline}"
+    echo "${bold}${underline}Welcome to JacZac's Dotfiles automatic installation${reset}${rm_underline}"
     echo
 
   # If MacOS
@@ -338,25 +345,26 @@ _mainScript_() {
 
   else
 	  _NotArchLinuxInstall_
-	  ARCH = "true"
+	  ARCH="true"
   fi
 
   # Do this anyway
   _shell_config_
 
-  read -p "{$bold}{$yellow} Do you want to install everything I have on my mac ? (Enter Yes or No): ${reset}" answer
+  read -r -p "${bold}${yellow} Do you want to install everything I have on my mac ? (Enter Yes or No): ${reset}" answer
   if [[ $answer == "Yes" || $answer == "yes" || $answer == "Y" || $answer == "y" ]]; then
       _packages_installation_
 	    # Use the Brew file instead
       # git clone https://github.com/Jac-Zac/paleofetch-mac-prettier.git $HOME/.config/paleofetch-mac-prettier && cd $HOME/.config/paleofetch-mac-prettier && sudo make install && cd
-      break install fastfetch
+      # install fastfetch
+      brew install fastfetch
 
       # Adding yabai scripting additions
-      echo "$(whoami) ALL=(root) NOPASSWD: sha256:$(shasum -a 256 $(which yabai) | cut -d " " -f 1) $(which yabai) --load-sa" | sudo tee /private/etc/sudoers.d/yabai
+      echo "$(whoami) ALL=(root) NOPASSWD: sha256:$(shasum -a 256 "$(which yabai)" | cut -d " " -f 1) $(which yabai) --load-sa" | sudo tee /private/etc/sudoers.d/yabai
       # Install sketchybar Lua
       (git clone https://github.com/FelixKratz/SbarLua.git /tmp/SbarLua && cd /tmp/SbarLua/ && make install && rm -rf /tmp/SbarLua/)
       # Install sketchybar-app-font
-      curl -L https://github.com/kvndrsslr/sketchybar-app-font/releases/download/v2.0.28/sketchybar-app-font.ttf -o $HOME/Library/Fonts/sketchybar-app-font.ttf
+      curl -L https://github.com/kvndrsslr/sketchybar-app-font/releases/download/v2.0.28/sketchybar-app-font.ttf -o "$HOME"/Library/Fonts/sketchybar-app-font.ttf
 
 
       # Start yabai
