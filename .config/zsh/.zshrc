@@ -112,10 +112,6 @@ source $HOME/.config/shell/fast-syntax-highlighting/fast-syntax-highlighting.plu
 # # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
 [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
 
-# Set bindings
-bindkey -s ^f "f\n"
-bindkey -s "^g" 'lazygit\n'
-
 # To add zoxide
 eval "$(zoxide init zsh)"
 
@@ -124,3 +120,5 @@ fpath=(/Users/jaczac/.docker/completions $fpath)
 autoload -Uz compinit
 compinit
 # End of Docker CLI completions
+
+. "$HOME/.local/share/../bin/env"
