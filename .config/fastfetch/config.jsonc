@@ -110,8 +110,12 @@
       "keyColor": "green",
       "percent": {
         "type": 3,
-        "green": 30,
-        "yellow": 70,
+        "green": 50,
+        "yellow": 20,
+      },
+      "outputColor": {
+        "Charging": "blue",
+        "default": "white",
       },
       "format": "{capacity-bar} [{time-hours} h, {time-minutes} min] [{status}]",
     },
@@ -136,14 +140,14 @@
     },
     // "format": "{volume-percentage-bar} {name}",
     {
-      "type": "wifi",
-      "key": "└ └{icon}",
+      "type": "brightness",
+      "key": "└ └󰃠", // pick any icon you like
       "percent": {
-        "type": 3,
-        "green": 30,
-        "yellow": 70,
+        "type": 3, // 3 = number + bar
+        "green": 40, // below 40% = green
+        "yellow": 75, // 40–75% = yellow, above 75% = red
       },
-      "format": "{signal-quality-bar} {ssid}",
+      "format": "{percentage-bar} Brightness level {percentage}", // add {name} if you want the display name
       "keyColor": "blue",
     },
     // "break",
