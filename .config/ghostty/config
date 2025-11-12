@@ -43,7 +43,6 @@ copy-on-select = true
 
 # keybind =global:cmd+shift+space=toggle_quick_terminal
 # Enable command t to tmux start the search
-#
 
 # Set alt
 macos-option-as-alt = true
@@ -56,3 +55,6 @@ keybind = cmd+a=text:\x01
 keybind = cmd+p=text:\x10
 # Map to Control F
 # keybind = cmd+f=text:\x06
+
+# Map Command Enter for nvim
+keybind = cmd+enter=text:\x1b[27;5;13~
