@@ -29,9 +29,6 @@ set shiftwidth=4
 
 " Highlight the current line
 " set cursorline
-
-" Enable mouse support
-set mouse=a
-
+"
 " copy to system clipboard
 set clipboard=unnamedplus
