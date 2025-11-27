@@ -38,9 +38,8 @@
 - **Fuzzy finder** • [`fzf`](https://github.com/junegunn/fzf)
 - **Launcher** • [`skhd`](https://github.com/koekeishiya/skhd) and [`Raycast`](https://www.raycast.com/)
 - **Terminal multiplexer** • [`tmux`](https://github.com/tmux/tmux)
-- **Resource monitor** • [`btop`](https://github.com/aristocratos/btop) _(aliased to top)_
 - **Browser** • [`Zen Browser`](https://www.zen-browser.app/)
-- **Wallpapers** • [`Fall`](https://wallpaper.dog/large/10812699.jpg)
+- **Wallpapers** • [`Southern Live Oak`](https://www.unitus.it/wp-content/uploads/2024/09/pexels-veeterzy-38136-scaled.jpg)
 
 ## Motivation 💭
 
@@ -214,21 +213,21 @@ I use <kbd>command</kbd> AKA super key (on GNU/Linux) as my main modifier
 
 #### Keyboard ⌨️
 
-| Keybind                             | Action                           |
-| ----------------------------------- | -------------------------------- |
-| <kbd>command + shift + enter</kbd>  | Spawn terminal                   |
-| <kbd>command + n</kbd>              | Swap new windows                 |
-| <kbd>command + 0</kbd>              | Open Zen Browser                 |
-| <kbd>command + space</kbd>          | Launch Raycast                   |
-| <kbd>command + w</kbd>              | Close Window                     |
-| <kbd>command + q</kbd>              | Close Application                |
-| <kbd>cotrol + [1-0]</kbd>           | Change workspace                 |
-| <kbd>command + shift + [1-0]</kbd>  | Move focused window to workspace |
-| <kbd>command + shift + [hjkl]</kbd> | Resize client                    |
-| <kbd>command + [hjkl]</kbd>         | Change focus by direction        |
-| <kbd>command + shift + space</kbd>  | Set window to floating mode      |
-| <kbd>command + shift + t</kbd>      | Set window in the center         |
-| <kbd>lctrl + alt + cmd + q</kbd>    | Restart yabai                    |
+| Keybind                             | Action                              |
+| ----------------------------------- | ----------------------------------- |
+| <kbd>command + shift + enter</kbd>  | Spawn terminal                      |
+| <kbd>command + n</kbd>              | Swap new windows                    |
+| <kbd>command + 0</kbd>              | Open Zen Browser                    |
+| <kbd>command + space</kbd>          | Launch Raycast                      |
+| <kbd>command + w</kbd>              | Close Window                        |
+| <kbd>command + q</kbd>              | Close Application                   |
+| <kbd>cotrol + [1-0]</kbd>           | Change workspace                    |
+| <kbd>command + shift + [1-0]</kbd>  | Move focused window to workspace    |
+| <kbd>command + shift + [hjkl]</kbd> | Resize client                       |
+| <kbd>command + [h-l]</kbd>          | Change focus by direction           |
+| <kbd>command + shift + space</kbd>  | Set window to floating mode         |
+| <kbd>command + shift + t</kbd>      | Set window in the center (and back) |
+| <kbd>lctrl + alt + cmd + q</kbd>    | Restart yabai                       |
 
 ## Other things 📚
 
