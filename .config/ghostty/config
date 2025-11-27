@@ -40,7 +40,6 @@ quick-terminal-animation-duration=0.1
 
 # Set copy on select to work correctly with my clipboard
 copy-on-select = true
-
 # keybind =global:cmd+shift+space=toggle_quick_terminal
 # Enable command t to tmux start the search
 
