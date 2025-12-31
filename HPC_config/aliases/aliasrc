@@ -1,5 +1,14 @@
 alias l="ls -la"
 alias grep="grep --color"
 
-alias gst="git status"
-alias gd="git diff"
+# git aliases
+alias g='git'
+alias gs='git status'
+alias gaa='git add --all'
+alias gb='git branch'
+alias gst='git status'
+alias gcam='git commit -a -m'
+alias gco='git checkout'
+alias gd='git diff'
+alias gp='git push'
+alias gr='git remote'

@@ -1,4 +1,7 @@
-#
+# At the top of .zshrc
+[[ -f ~/.zprofile ]] && source ~/.zprofile
+
+
 # .zshrc is sourced in interactive shells.
 # It should contain commands to set up aliases,
 # functions, options, key bindings, etc.
