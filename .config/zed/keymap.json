@@ -1,0 +1,186 @@
+// Zed keymap
+//
+// For information on binding keys, see the Zed
+// documentation: https://zed.dev/docs/key-bindings
+//
+// To see the default key bindings run `zed: open default keymap`
+// from the command palette.
+[
+  {
+    "context": "Editor && vim_mode == normal && !menu",
+    "bindings": {
+      "space w": "workspace::Save",
+      "space f f": "file_finder::Toggle",
+      "space f s": "pane::DeploySearch",
+
+      "space t": "terminal_panel::ToggleFocus",
+
+      "space l f": "editor::Format",
+      "space l a": "editor::ToggleCodeActions",
+      "space l r": "editor::Rename",
+      "space l R": "editor::FindAllReferences",
+      "space l y": "editor::GoToTypeDefinition",
+      "space l h": "editor::ShowSignatureHelp",
+
+      "|": "pane::SplitRight",
+      "-": "pane::SplitDown",
+      "space q": "pane::CloseActiveItem",
+    },
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      ", m": "markdown::OpenPreview",
+    },
+  },
+  {
+    // Run the task to open the typst preview
+    "context": "Editor",
+    "bindings": {
+      ", t": ["task::Spawn", { "task_name": "Open Typst Preview" }],
+    },
+  },
+  {
+    "context": "Pane",
+    "use_key_equivalents": true,
+    "bindings": {
+      "space 1": ["pane::ActivateItem", 0],
+      "space 2": ["pane::ActivateItem", 1],
+      "space 3": ["pane::ActivateItem", 2],
+      "space 4": ["pane::ActivateItem", 3],
+      "space 5": ["pane::ActivateItem", 4],
+      "space 6": ["pane::ActivateItem", 5],
+      "space 7": ["pane::ActivateItem", 6],
+      "space 8": ["pane::ActivateItem", 7],
+      "space 9": ["pane::ActivateItem", 8],
+      "space 0": "pane::ActivateLastItem",
+    },
+  },
+  {
+    "context": "VimControl && !menu || !Editor && !Terminal",
+    "bindings": {
+      "ctrl-h": "workspace::ActivatePaneLeft",
+      "ctrl-l": "workspace::ActivatePaneRight",
+      "ctrl-k": "workspace::ActivatePaneUp",
+      "ctrl-j": "workspace::ActivatePaneDown",
+    },
+  },
+  // Default keybindings
+  {
+    "context": "Workspace",
+    "bindings": {
+      // "shift shift": "file_finder::Toggle"
+    },
+  },
+  {
+    "context": "Editor && vim_mode == insert",
+    "bindings": {
+      // "j k": "vim::NormalBefore"
+    },
+  },
+  {
+    "context": "GitCommit > Editor",
+    "bindings": {
+      "cmd-enter": null,
+    },
+  },
+  {
+    "context": "GitPanel",
+    "bindings": {
+      "cmd-enter": null,
+    },
+  },
+  {
+    "context": "CommitEditor > Editor",
+    "bindings": {
+      "cmd-enter": null,
+    },
+  },
+  {
+    "context": "GitDiff > Editor",
+    "bindings": {
+      "cmd-enter": null,
+    },
+  },
+  {
+    "context": "((Editor && jupyter) && !ContextEditor)",
+    "bindings": {
+      "ctrl-shift-enter": null,
+    },
+  },
+  {
+    "bindings": {
+      "cmd-o": "repl::ClearOutputs",
+    },
+  },
+  {
+    "context": "((vim_mode == helix_normal || vim_mode == helix_select) && !menu)",
+    "bindings": {
+      "ctrl-c": null,
+    },
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "ctrl-x ctrl-;": null,
+    },
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "alt-;": null,
+    },
+  },
+  {
+    "context": "vim_mode == visual",
+    "bindings": {
+      "g c": null,
+    },
+  },
+  {
+    "context": "vim_mode == operator",
+    "bindings": {
+      "g c": null,
+    },
+  },
+  {
+    "context": "vim_mode == normal",
+    "bindings": {
+      "g c": null,
+    },
+  },
+  {
+    "context": "((vim_mode == helix_normal || vim_mode == helix_select) && !menu)",
+    "bindings": {
+      "space c": "editor::ToggleComments",
+    },
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "cmd-/": [
+        "editor::ToggleComments",
+        {
+          "advance_downwards": false,
+        },
+      ],
+    },
+  },
+  {
+    "context": "vim_mode == visual",
+    "bindings": {
+      "space c": "vim::ToggleComments",
+    },
+  },
+  {
+    "context": "((Editor && jupyter) && !ContextEditor)",
+    "bindings": {
+      "cmd-enter": "repl::RunInPlace",
+    },
+  },
+  {
+    "bindings": {
+      "cmd-r": "repl::Restart",
+    },
+  },
+]
