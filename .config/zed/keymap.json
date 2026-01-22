@@ -9,7 +9,16 @@
   {
     "context": "Editor && vim_mode == normal && !menu",
     "bindings": {
+      "|": "pane::SplitRight",
+      "-": "pane::SplitDown",
+    },
+  },
+  {
+    // "context": "Editor && vim_mode == normal && vim_operator == none && !menu",
+    "context": "Editor && (vim_mode == normal || vim_mode == visual) && !VimWaiting && !menu",
+    "bindings": {
       "space w": "workspace::Save",
+      "space f": "file_finder::Toggle",
       "space f f": "file_finder::Toggle",
       "space f s": "pane::DeploySearch",
 
@@ -22,8 +31,6 @@
       "space l y": "editor::GoToTypeDefinition",
       "space l h": "editor::ShowSignatureHelp",
 
-      "|": "pane::SplitRight",
-      "-": "pane::SplitDown",
       "space q": "pane::CloseActiveItem",
     },
   },
@@ -41,8 +48,8 @@
     },
   },
   {
-    "context": "Pane",
-    "use_key_equivalents": true,
+    "context": "Editor && vim_mode == normal",
+    "use_key_equivalents": false,
     "bindings": {
       "space 1": ["pane::ActivateItem", 0],
       "space 2": ["pane::ActivateItem", 1],
