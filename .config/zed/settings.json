@@ -7,6 +7,7 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "restore_on_startup": "launchpad",
   "buffer_font_family": "Inconsolata LGC Nerd Font Propo",
   "ssh_connections": [
     {
@@ -14,50 +15,42 @@
       "args": [],
       "projects": [
         {
-          "paths": [
-            "/u/ipauser/jzacchigna"
-          ]
-        }
-      ]
+          "paths": ["/u/ipauser/jzacchigna"],
+        },
+      ],
     },
     {
       "host": "cineca",
       "args": [],
       "projects": [
         {
-          "paths": [
-            "/leonardo/home/userexternal/jzacchig"
-          ]
-        }
-      ]
+          "paths": ["/leonardo/home/userexternal/jzacchig"],
+        },
+      ],
     },
     {
       "host": "mini",
       "args": [],
       "projects": [
         {
-          "paths": [
-            "/home/jaczac"
-          ]
-        }
-      ]
+          "paths": ["/home/jaczac"],
+        },
+      ],
     },
     {
       "host": "tina",
       "args": [],
       "projects": [
         {
-          "paths": [
-            "/home/tina"
-          ]
-        }
-      ]
+          "paths": ["/home/tina"],
+        },
+      ],
     },
     {
       "host": "mini_home",
       "args": [],
-      "projects": []
-    }
+      "projects": [],
+    },
   ],
   "agent": {
     "default_profile": "ask",
@@ -103,6 +96,17 @@
   },
   "which_key": {
     "enabled": true,
+  },
+  "languages": {
+    "Python": {
+      "language_servers": [
+        // Disable basedpyright and enable ty, and otherwise
+        // use the default configuration.
+        "ty",
+        "!basedpyright",
+        "...",
+      ],
+    },
   },
   "lsp": {
     "tinymist": {
