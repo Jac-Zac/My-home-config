@@ -31,14 +31,14 @@
 - **WM** • [`yabai`](https://github.com/koekeishiya/yabai)
 - **Shell** • [`zsh`](https://www.zsh.org/) -> [`powerlevel10k`](https://github.com/romkatv/powerlevel10k)
 - **Terminal** • [`Ghostty`](https://github.com/ghostty-org/ghostty)
+- **Fuzzy Finder** • [`Television`](https://github.com/alexpasmantier/television)
+- **Session Manager** • [`sesh`](https://github.com/joshmedeski/sesh) + [`tmux`](https://github.com/tmux/tmux)
 - **Editor** • [`Neovim`](https://github.com/neovim/neovim/)
 - **Theme** • [`Nord`](https://github.com/arcticicestudio/nord-iterm2)
 - **Font** • [`Inconsolata Nerd`](https://github.com/ryanoasis/nerd-fonts)
 - **System information** • [`fastfetch`](https://github.com/fastfetch-cli/fastfetch)
-- **Fuzzy finder** • [`fzf`](https://github.com/junegunn/fzf)
-- **Launcher** • [`skhd`](https://github.com/koekeishiya/skhd) and [`Raycast`](https://www.raycast.com/)
-- **Terminal multiplexer** • [`tmux`](https://github.com/tmux/tmux)
-- **Browser** • [`Zen Browser`](https://www.zen-browser.app/)
+- **Launcher** • [`Raycast`](https://www.raycast.com/)
+- **Browser** • [`Helium`](https://github.com/imputnet/helium) / [`Zen Browser`](https://www.zen-browser.app/)
 - **Wallpapers** • [`Southern Live Oak`](https://www.unitus.it/wp-content/uploads/2024/09/pexels-veeterzy-38136-scaled.jpg)
 
 ## Motivation 💭
@@ -47,7 +47,7 @@ _I mainly created this to always have my config with me, but I would really be h
 
 ### Updating :calendar:
 
-**Have you already installed everything but your version lack behind ?** :thinking:
+**Have you already installed everything but your version lacks behind?** :thinking:
 
 _You should always keep your configuration up to date, luckily there is a straightforward and noob-proof solution._
 
@@ -89,7 +89,7 @@ _You should always keep your configuration up to date, luckily there is a straig
 </details>
 
 <details>
-	<summary><strong>Edit you shell configurations</strong></summary>
+	<summary><strong>Edit your shell configurations</strong></summary>
 
 > Shell configurations
 
@@ -101,28 +101,45 @@ _You can also edit your prompt in the [`~/.config/zsh/.p10k.zsh`](.config/zsh/.p
 </details>
 
 <details>
-	<summary><strong>iTerm configuration</strong></summary>
+	<summary><strong>Television + sesh</strong></summary>
 
-> Everything related to my iTerm
+> I use [`Television`](https://github.com/alexpasmantier/television) as my fuzzy finder with the [`sesh`](https://github.com/joshmedeski/sesh) channel for session management.
 
-**I use iTerm in minimal mode with tab bar on the bottom and border-less setting.**
+- Press `prefix + t` in tmux to open the sesh session picker
+- Television also provides shell integration with `Ctrl+T` for file picking and `Ctrl+R` for history
 
-If you'd like to see images on iTerm you can use [`imgcat`](https://pypi.org/project/imgcat/).
+### Recommended Configuration
 
-![showcase](.assets/iterm.png)
+```bash
+# Install Television
+brew install television
 
-_You can also go to your iTerm preferences and import the iTerm_profile.json that you can find in the cloned directory_
+# Install sesh
+brew install sesh
 
-> To have a bit of space I also suggest to add 20px of padding, set it under advanced > margin
+# Update channels for latest community integrations
+tv update-channels
+```
 
 </details>
 
 <details>
-	<summary><strong>Zen Configuration</strong></summary>
+	<summary><strong>Helium Browser</strong></summary>
 
-> My Zen configuration allows me to browse the web with more freedom then ever before. Furthermore use 1.1.1.1 as your DNS Server
+> [`Helium`](https://github.com/imputnet/helium) is a privacy-first, fast Chromium-based browser. I use it alongside Zen Browser for different use cases.
 
-I run zen in compact mode and use the following keybindings
+- Privacy-focused with unbiased ad-blocking
+- No bloat or unnecessary features
+- Available at [helium.computer](https://helium.computer/)
+
+</details>
+
+<details>
+	<summary><strong>Zen Browser</strong></summary>
+
+> My Zen configuration allows me to browse the web with more freedom than ever before. Furthermore use 1.1.1.1 as your DNS Server
+
+I run Zen in compact mode and use the following keybindings
 
 ### Mappings
 
@@ -135,7 +152,7 @@ I run zen in compact mode and use the following keybindings
 
 _I use [nord theme](https://addons.mozilla.org/en-US/firefox/addon/nord-theme-cool/?utm_source=addons.mozilla.org&utm_medium=referral&utm_content=search) and I changed my new tabs to black pages. And I use brave search_
 
-- [`zuBlock Origin`](https://ublockorigin.com)
+- [`uBlock Origin`](https://ublockorigin.com)
 - [`LocalCDN`](https://www.localcdn.org/)
 - [`HTTPS Everywhere`](https://www.eff.org/https-everywhere)
 - [`Privacy Badger`](https://privacybadger.org/)
@@ -151,7 +168,7 @@ _I use [nord theme](https://addons.mozilla.org/en-US/firefox/addon/nord-theme-co
 </details>
 
 <details>
-	<summary><strong>My nvim confiuguration</strong></summary>
+	<summary><strong>My nvim configuration</strong></summary>
 
 ![showcase](.assets/nvim.png)
 
@@ -201,11 +218,12 @@ _You should try to keep your system up to date, also follow the [`instruction un
 
 ###### And I also use:
 
-- [`this`](https://github.com/mengfeng/clean-my-mac) script to clean up any junk that has build up.
+- [`this`](https://github.com/mengfeng/clean-my-mac) script to clean up any junk that has built up.
 - [`ncdu`](https://github.com/rofl0r/ncdu) to check for big files and directory that I can delete
 - [`tmate`](https://tmate.io/) for instant terminal sharing and pair programming
 - [`sesh`](https://github.com/joshmedeski/sesh) to improve my tmux experience
-- [`atuin`](https://github.com/atuinsh/atuin) better command for history with `ctr-r`
+- [`atuin`](https://github.com/atuinsh/atuin) better command for history with `Ctrl-r`
+- [`Television`](https://github.com/alexpasmantier/television) a fast, fuzzy picker for everything
 
 ## Keybinds
 
@@ -217,17 +235,20 @@ I use <kbd>command</kbd> AKA super key (on GNU/Linux) as my main modifier
 | ----------------------------------- | ----------------------------------- |
 | <kbd>command + shift + enter</kbd>  | Spawn terminal                      |
 | <kbd>command + n</kbd>              | Swap new windows                    |
-| <kbd>command + 0</kbd>              | Open Zen Browser                    |
+| <kbd>command + 0</kbd>              | Open Browser                        |
 | <kbd>command + space</kbd>          | Launch Raycast                      |
 | <kbd>command + w</kbd>              | Close Window                        |
 | <kbd>command + q</kbd>              | Close Application                   |
-| <kbd>cotrol + [1-0]</kbd>           | Change workspace                    |
+| <kbd>control + [1-0]</kbd>           | Change workspace                    |
 | <kbd>command + shift + [1-0]</kbd>  | Move focused window to workspace    |
 | <kbd>command + shift + [hjkl]</kbd> | Resize client                       |
 | <kbd>command + [h-l]</kbd>          | Change focus by direction           |
 | <kbd>command + shift + space</kbd>  | Set window to floating mode         |
 | <kbd>command + shift + t</kbd>      | Set window in the center (and back) |
 | <kbd>lctrl + alt + cmd + q</kbd>    | Restart yabai                       |
+| <kbd>prefix + t</kbd>               | Open sesh (tmux)                    |
+| <kbd>Ctrl + t</kbd>                | Shell autocomplete (tv)             |
+| <kbd>Ctrl + r</kbd>                | Shell history (tv)                  |
 
 ## Other things 📚
 
@@ -270,12 +291,5 @@ I think I will do it if some asks for it
 
 If you happen to run into some problems you can just open an issue, I'll try to solve it as soon as possible. Otherwise you can contact me by sending me an email.
 
-Need to fix some things looking at this: https://github.com/FelixKratz/dotfiles/blob/master/.install.sh
-
-Maybe switch to lua sketchybar
-
 > It is not been tested for a bit. Therefore feedback are appreciated
 
-```
-
-```
