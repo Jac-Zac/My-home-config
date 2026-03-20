@@ -40,6 +40,10 @@ cat_all() {
   fi
 }
 
+sesh-root() {
+  cd "$(tmux display-message -pF '#{session_path}')"
+}
+
 # Better commands
 alias v="nvim"
 alias vi="nvim"
@@ -81,11 +85,11 @@ alias gco='git checkout'
 alias gd='git diff'
 alias gp='git push'
 alias gr='git remote'
+alias lg='lazygit'
 
 # web searches
 alias youtube="open https://www.youtube.com/"
 alias github="open https://github.com/"
-
 
 # Set custom commands
 # Set up fast movement with fuzzy finding
@@ -96,43 +100,30 @@ f() {
     cd "$(zoxide query --list | fzf --height 40% --reverse --border --ansi --preview $show_file_or_dir_preview)"
 }
 
+# 1. Start or switch to a tmux session named after the current directory
+function tmux_start() {
+  local session_name="${PWD##*/}"
+  session_name="${session_name//./_}"
 
-# Find applications
-fa() {
-  yabai -m query --windows |
-    jq -r '.[] | "\(.id)\t\(.app)\t\(.title)"' |
-    awk -F $'\t' '
-      { printf "\033[36m%-5s\033[0m\t\033[35m%-20s\033[0m\t%s\n",
-               $1, $2, $3 }
-    ' |
-    fzf \
-      --ansi \
-      --delimiter=$'\t' \
-      --with-nth=2,3 \
-      --height=40% \
-      --reverse \
-      --border \
-      --prompt="Window: " \
-      --header=$'\033[36mApp\033[0m               \033[0mTitle' \
-      --preview-window="right,60%,border-left" \
-      --preview="
-        yabai -m query --windows --window {1} |
-        jq -r '\"App:    \(.app)\nTitle:  \(.title)\nID:     \(.id)\nSpace:  \(.space)\nDisplay: \(.display)\nFrame:  \(.frame.x) \(.frame.y) \(.frame.w) \(.frame.h)\"' |
-        bat --style=plain --color=always --language=yaml --line-range :20
-      " \
-      --bind 'enter:execute(yabai -m window --focus {1})+abort'
+  if [ -n "$TMUX" ]; then
+    if ! tmux has-session -t "$session_name" 2>/dev/null; then
+      TMUX='' tmux new-session -Ad -s "$session_name" -c "$PWD"
+    fi
+    tmux switch-client -t "$session_name"
+  else
+    tmux new-session -As "$session_name" -c "$PWD"
+  fi
 }
 
-# Load tmux functions
-if [ -f $XDG_CONFIG_HOME/scripts/tmux-utils ]; then
-  source $XDG_CONFIG_HOME/scripts/tmux-utils
-fi
+# 2. Stop (kill) the current tmux session or the server if not inside tmux
+function tmux_stop() {
+  if [ -n "$TMUX" ]; then
+    tmux kill-session -t "$(tmux display-message -p '#S')"
+  else
+    echo "Not in a tmux session. Killing tmux server."
+    tmux kill-server
+  fi
+}
 
-# Aliases for quick use:
-alias ta='tmux attach'       # shortcut
 alias t='tmux_start'        # start/switch
 alias tq='tmux_stop'        # quit session or server
-alias tl='tmux_fzf_attach'  # attach via fzf to the listed sessions
-alias tw='tmux_fzf_window'  # switch window via fzf
-alias tk='tmux_fzf_kill'    # kill session via fzf
-alias tf='tmux_sessionize'  # sessionizer

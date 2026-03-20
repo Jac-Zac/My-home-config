@@ -1,6 +1,5 @@
 fastfetch
 
-# At the top of .zshrc
 [[ -f ~/.zprofile ]] && source ~/.zprofile
 
 # History in cache directory:
@@ -21,9 +20,10 @@ setopt INC_APPEND_HISTORY
 
 # # Basic auto/tab complete:
 autoload -U compinit
+ZSH_COMPDUMP="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompdump"
 zstyle ':completion:*' menu select matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 zmodload zsh/complist
-compinit
+compinit -C
 _comp_options+=(globdots)		# Include hidden files.
 
 # VIM
@@ -34,7 +34,7 @@ bindkey -v
 export KEYTIMEOUT=1
 
 # Enable searching through history
-bindkey '^R' history-incremental-pattern-search-backward
+# bindkey '^R' history-incremental-pattern-search-backward
 
 # Edit line in vim buffer ctrl-v
 # autoload edit-command-line; zle -N edit-command-line
@@ -92,13 +92,9 @@ zle-line-init() {
 }
 zle -N zle-line-init
 echo -ne '\e[5 q' # Use beam shape cursor on startup.
-precmd() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 
 # Disable annoying sounds 
 unsetopt BEEP
-
-# Load fzf configurations
-[ -f ~/.config/fzf/fzf.zsh ] && source ~/.config/fzf/fzf.zsh
 
 # zsh auto-suggestion
 source $HOME/.config/shell/zsh-autosuggestions/zsh-autosuggestions.zsh
@@ -115,10 +111,13 @@ source $HOME/.config/shell/fast-syntax-highlighting/fast-syntax-highlighting.plu
 # To add zoxide
 eval "$(zoxide init zsh)"
 
-# The following lines have been added by Docker Desktop to enable Docker CLI completions.
-fpath=(/Users/jaczac/.docker/completions $fpath)
-autoload -Uz compinit
-compinit
-# End of Docker CLI completions
+# Tv shell integration
+# eval "$(tv init zsh)"
+eval "$(tv init zsh | sed 's/history -n -1 0/fc -ln -1 0/')"
 
-. "$HOME/.local/share/../bin/env"
+# Ghoosty shell integration
+# if [ -n "${GHOSTTY_RESOURCES_DIR}" ]; then
+#   source "${GHOSTTY_RESOURCES_DIR}/shell-integration/zsh/ghostty-integration"
+# fi
+
+export PATH="$HOME/.local/bin:$PATH"
