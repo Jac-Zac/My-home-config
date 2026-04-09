@@ -1,7 +1,15 @@
 #!/bin/sh
 
 # Aliases
-alias gopen="open \$(git config --get remote.origin.url)" # Open the github directory on the browser
+gopen() {
+  local url
+  url=$(git remote get-url origin 2>/dev/null || git remote get-url thlm 2>/dev/null)
+  url="${url#git@github.com:}"
+  url="${url#https://github.com/}"
+  url="${url%.git}"
+  open "https://github.com/$url"
+}
+
 alias todo="vim ~/Github/University/TODO.md"
 alias safari="open /Applications/Safari.app"
 alias showD="defaults write com.apple.finder CreateDesktop -bool true;killall Finder" # show the Dock
@@ -40,7 +48,7 @@ cat_all() {
   fi
 }
 
-sesh-root() {
+shome() {
   cd "$(tmux display-message -pF '#{session_path}')"
 }
 
@@ -96,9 +104,11 @@ alias github="open https://github.com/"
 show_file_or_dir_preview="if [ -d {} ]; then lsd --tree {} --color=always --icon=always | head -200; else bat -n --color=always --line-range :500 {}; fi"
 
 # Set Up zoxide Functions 
-f() {
-    cd "$(zoxide query --list | fzf --height 40% --reverse --border --ansi --preview $show_file_or_dir_preview)"
-}
+# f() {
+#     cd "$(zoxide query --list | fzf --height 40% --reverse --border --ansi --preview $show_file_or_dir_preview)"
+# }
+
+alias f="tv zoxide --inline"
 
 # 1. Start or switch to a tmux session named after the current directory
 function tmux_start() {
