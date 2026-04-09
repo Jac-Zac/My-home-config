@@ -1,7 +1,7 @@
 brew update && brew upgrade
 git -C ~/.config/shell/fast-syntax-highlighting pull
-git -C ~/.config/shell/powerlevel10k
-git -C ~/.config/shell/zsh-autosuggestions
+git -C ~/.config/shell/powerlevel10k pull
+git -C ~/.config/shell/zsh-autosuggestions pull
 tv update-channels
 brew doctor 
 mac-cleanup
