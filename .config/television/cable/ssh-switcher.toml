@@ -8,6 +8,7 @@ command = "grep -E '^Host(name)? ' $HOME/.ssh/config | tr -s ' ' | cut -d' ' -f2
 
 [preview]
 command = "awk '/^Host / { found=0 } /^Host (.*[[:space:]])?'{}'([[:space:]])?$/ { found=1 } found' $HOME/.ssh/config | bat -n --color=always -l ssh_config -p"
+# command = "awk '/^Host / { found=0 } /^Host (.*[[:space:]])?'{}'([[:space:]].*)?$/ { found=1 } found' $HOME/.ssh/config"
 
 [keybindings]
 enter = "actions:connect"
