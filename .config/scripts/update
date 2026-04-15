@@ -4,6 +4,6 @@ git -C ~/.config/shell/powerlevel10k pull
 git -C ~/.config/shell/zsh-autosuggestions pull
 tv update-channels
 brew doctor 
-mac-cleanup
 sudo purge
+mole
 rm -rf ~/.npm
