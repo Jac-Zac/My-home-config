@@ -6,6 +6,9 @@ if [[ "$TERM_PROGRAM" == "ghostty" ]]; then
     export TERM=xterm-256color
 fi
 
+# force snacks.nvim to detect Ghostty inside tmux
+export SNACKS_GHOSTTY=1
+
 # Adding syntax  highlighting for man pages
 export MANPAGER="nvim +Man!"
 
