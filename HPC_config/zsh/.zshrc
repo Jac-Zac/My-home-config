@@ -73,8 +73,8 @@ bindkey -s "^g" 'lazygit\n'
 bindkey -v
 export KEYTIMEOUT=1
 
-# Enable searching through history
-bindkey '^R' history-incremental-pattern-search-backward
+# fzf key bindings (Ctrl+R history, Ctrl+T files, Ctrl+C dirs)
+source <(fzf --zsh)
 
 # Edit line in vim buffer ctrl-v
 autoload edit-command-line; zle -N edit-command-line
