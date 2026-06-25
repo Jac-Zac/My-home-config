@@ -23,3 +23,6 @@ git clone https://github.com/zdharma/fast-syntax-highlighting ~/.config/shell/fa
 
 # zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-autosuggestions.git ~/.config/shell/zsh-autosuggestions/
+
+# Install fzf (mostly for history search)
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.config/shell/fzf/ && ~/.config/shell/fzf/install --bin
