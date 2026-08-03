@@ -1,14 +1,12 @@
 font-family = "Inconsolata LGC Nerd Font Mono"
 font-size = 14
+adjust-cell-height = 25%
 
 # Theme settings
 theme = Nord
 
 # Hide while typing
 mouse-hide-while-typing = true
-
-# Save the state at which I closed it
-# window-save-state = always
 
 # Inherit working directory
 window-inherit-working-directory = true
@@ -36,22 +34,35 @@ macos-secure-input-indication=true
 
 # Quick terminal globally available
 # keybind =global:cmd+shift+space=toggle_quick_terminal
-quick-terminal-animation-duration=0.1
+# quick-terminal-animation-duration=0.1
+
+# notify-on-command-finish = unfocused
+notify-on-command-finish-action = no-bell,notify
+# notify-on-command-finish-action = bell, notify
+# notify-on-command-finish-after = 5s
+notify-on-command-finish-after = 30s
+
 
 # Set copy on select to work correctly with my clipboard
 copy-on-select = true
 # keybind =global:cmd+shift+space=toggle_quick_terminal
 # Enable command t to tmux start the search
 
+
 # Set alt
 macos-option-as-alt = true
 
 # Map to Control A + t
 keybind = cmd+t=text:\x01t
+# Map to Control A + s
+keybind = cmd+s=text:\x01s
+# Map to Control A + s
+keybind = cmd+x=text:\x01x
 # Map to Control A
 keybind = cmd+a=text:\x01
 # Map to Control P
 keybind = cmd+p=text:\x10
+keybind = cmd+s=text:\x01s
 # Map to Control F
 # keybind = cmd+f=text:\x06
 
