@@ -220,7 +220,7 @@ _You should try to keep your system up to date, also follow the [`instruction un
 
 - [`this`](https://github.com/mengfeng/clean-my-mac) script to clean up any junk that has built up.
 - [`ncdu`](https://github.com/rofl0r/ncdu) to check for big files and directory that I can delete
-- [`tmate`](https://tmate.io/) for instant terminal sharing and pair programming
+- [`upterm`](https://upterm.dev/) for instant terminal sharing and pair programming
 - [`sesh`](https://github.com/joshmedeski/sesh) to improve my tmux experience
 - [`atuin`](https://github.com/atuinsh/atuin) better command for history with `Ctrl-r`
 - [`Television`](https://github.com/alexpasmantier/television) a fast, fuzzy picker for everything
