@@ -5,9 +5,6 @@ sudo yabai --load-sa
 
 # global settings
 yabai -m config external_bar                 all:33:0\
-                mouse_follows_focus         off\
-                focus_follow_mouse          off\
-                window_placement            first_child\
                 window_placement            second_child\
                 window_shadow               float\
                 window_opacity_duration     0.2\
@@ -25,23 +22,20 @@ yabai -m config external_bar                 all:33:0\
                 window_animation_easing     ease_in_expo\
                 layout                      bsp\
 
-# yabai -m config menubar_opacity 0.0
-# yabai -m config mouse_follows_focus on
-#
-# yabai -m config split_ratio                  0.55
-# yabai -m config auto_balance                 on # Auto focus on mouse that is what I want
-
-yabai -m config top_padding                  15
-yabai -m config bottom_padding               15
-yabai -m config left_padding                 15
-yabai -m config right_padding                15
-yabai -m config window_gap                   15
+yabai -m config top_padding                  13
+yabai -m config bottom_padding               13
+yabai -m config left_padding                 13
+yabai -m config right_padding                13
+yabai -m config window_gap                   13
 
 # Rules to move open applications in a specific space
-yabai -m rule --add app="Zen Browser"           space=1
-yabai -m rule --add app="Ghostty"               space=2
-yabai -m rule --add app="WhatsApp"              space=5
-yabai -m rule --add app="Slack"                 space=5
+yabai -m rule --add app="^Zen Browser$"           space=1
+yabai -m rule --add app="^Helium$"                space=1
+yabai -m rule --add app="^Ghostty$"               space=2
+yabai -m rule --add app="^ChatGPT$"               space=3
+yabai -m rule --add app="^T3 Code$"               space=3
+yabai -m rule --add app="^WhatsApp$"              space=5
+# yabai -m rule --add app="Slack"                 space=5
 
 # yabai -m rule --add app="FaceTime"   space=4
 # yabai -m rule --add app="Microsoft Teams"   space=4
@@ -53,7 +47,7 @@ yabai -m rule --add label="Clock" app="^Clock$" title=".*" manage=off
 yabai -m rule --add label="App Store" app="^App Store$" manage=off
 yabai -m rule --add label="Activity Monitor" app="^Activity Monitor$" manage=off
 yabai -m rule --add label="Raycast" app="^Raycast$" title="^Raycast Settings$" manage=off
-# yabai -m rule --add label="KeePassXC" app="^KeePassXC$" manage=off
+yabai -m rule --add label="Canary Mail" app="^Canary Mail$" manage=off
 yabai -m rule --add label="Mail" app="^Mail$" manage=off
 yabai -m rule --add label="Calculator" app="^Calculator$" manage=off
 yabai -m rule --add label="Dictionary" app="^Dictionary$" manage=off
@@ -67,3 +61,8 @@ yabai -m rule --add label="Finder" app="^Finder$" title=".*" manage=off
 
 # Add signal to make yabai focus the other window when I close one
 yabai -m signal --add event=window_destroyed action="yabai -m query --windows --window &> /dev/null || yabai -m window --focus recent || yabai -m window --focus first"
+
+# Move browsers to external display when it is plugged in, move back on unplug.
+# Only touches Zen Browser / Helium if actually running (see on_display_change.sh).
+yabai -m signal --add label="browser_to_external" event=display_added action="$HOME/.config/yabai/on_display_change.sh added"
+yabai -m signal --add label="browser_to_laptop" event=display_removed action="$HOME/.config/yabai/on_display_change.sh removed"
