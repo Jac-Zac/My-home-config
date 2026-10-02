@@ -1,16 +1,22 @@
 # open terminal emulator and move to its corresponding space
-cmd + shift - return : open -a ghostty; yabai -m space --focus 2
+cmd + shift - return: open -a ghostty
+# cmd + shift - return : open -a ghostty; yabai -m space --focus 2
 
 # open Zen
-cmd - 0 : open -a /Applications/Zen\ Browser.app; yabai -m space --focus 1
+# cmd - 0 : open -a /Applications/Zen\ Browser.app
+
+# open Helium
+cmd - 0 : open -a /Applications/Helium.app
 
 # open WhatsApp
 cmd - m : open -a /Applications/WhatsApp.app/; yabai -m space --focus 5
 
+# open GPT 
+cmd - g : open -a /Applications/ChatGPT.app; yabai -m space --focus 3
+
 # swap window
-# I have added those script inside the /usr/local/bin/
-cmd + shift - h : cycle_clockwise.sh
-cmd + shift - l : cycle_counterclockwise.sh
+cmd + shift - h : $HOME/.config/skhd/cycle_clockwise.sh
+cmd + shift - l : $HOME/.config/skhd/cycle_counterclockwise.sh
 
 # Focus the display number i
 cmd - 1 : yabai -m space --focus 1
@@ -24,9 +30,8 @@ cmd - 8 : yabai -m space --focus 8
 cmd - 9 : yabai -m space --focus 9
 
 # Move between spaces faster
-# I have added those script inside the /usr/local/bin/
-cmd - j : space_cycle_prev.sh
-cmd - k : space_cycle_next.sh 
+cmd - j : $HOME/.config/skhd/space_cycle_prev.sh
+cmd - k : $HOME/.config/skhd/space_cycle_next.sh
 cmd - h : yabai -m window --focus west
 cmd - l : yabai -m window --focus east
 
@@ -49,7 +54,7 @@ cmd + shift - 9 : yabai -m window --space  9 --focus
 cmd + shift - f : yabai -m config --toggle layout float
 
 # Bsp mode yabai
-cmd + shift - b : yabai -m config --toggle layout bsp
+cmd + shift - space : yabai -m config --toggle layout bsp
 
 # float / unfloat window and center on screen
 cmd + shift - t : yabai -m window --toggle float;\
