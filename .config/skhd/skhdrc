@@ -12,7 +12,7 @@ cmd - 0 : open -a /Applications/Helium.app
 cmd - m : open -a /Applications/WhatsApp.app/; yabai -m space --focus 5
 
 # open GPT 
-cmd - g : open -a /Applications/ChatGPT.app; yabai -m space --focus 3
+cmd - g : open -a /Applications/ChatGPT.app;
 
 # swap window
 cmd + shift - h : $HOME/.config/skhd/cycle_clockwise.sh

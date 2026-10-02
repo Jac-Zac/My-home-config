@@ -32,10 +32,13 @@ yabai -m config window_gap                   13
 yabai -m rule --add app="^Zen Browser$"           space=1
 yabai -m rule --add app="^Helium$"                space=1
 yabai -m rule --add app="^Ghostty$"               space=2
-yabai -m rule --add app="^ChatGPT$"               space=3
 yabai -m rule --add app="^T3 Code$"               space=3
 yabai -m rule --add app="^WhatsApp$"              space=5
-# yabai -m rule --add app="Slack"                 space=5
+yabai -m rule --add app="Slack"                   space=5
+
+# NOTE: This is not set because I want it to be flexible in case I'm using another monitor
+# If I do use another monitor I would ideally keep it in the page 1
+# yabai -m rule --add app="^ChatGPT$"               space=3
 
 # yabai -m rule --add app="FaceTime"   space=4
 # yabai -m rule --add app="Microsoft Teams"   space=4
@@ -62,7 +65,15 @@ yabai -m rule --add label="Finder" app="^Finder$" title=".*" manage=off
 # Add signal to make yabai focus the other window when I close one
 yabai -m signal --add event=window_destroyed action="yabai -m query --windows --window &> /dev/null || yabai -m window --focus recent || yabai -m window --focus first"
 
-# Move browsers to external display when it is plugged in, move back on unplug.
-# Only touches Zen Browser / Helium if actually running (see on_display_change.sh).
+# On plug/unplug: space 1 <-> external display, ChatGPT <-> space 1/3
+# (ChatGPT is auto-opened if not running). See on_display_change.sh.
+# Remove-first: yabairc can be re-sourced into a running daemon (which keeps
+# signals in memory), and duplicate labels are allowed, so a bare --add would
+# stack a second handler per reload. Sequential dupes both run (the mkdir lock
+# only serializes concurrent runs) — harmless today thanks to append-never-wipe
+# state, but doubled work/log noise and a real second event arriving mid-run
+# would be dropped as "another run in progress".
+yabai -m signal --remove label="browser_to_external" >/dev/null 2>&1 || true
+yabai -m signal --remove label="browser_to_laptop" >/dev/null 2>&1 || true
 yabai -m signal --add label="browser_to_external" event=display_added action="$HOME/.config/yabai/on_display_change.sh added"
 yabai -m signal --add label="browser_to_laptop" event=display_removed action="$HOME/.config/yabai/on_display_change.sh removed"
