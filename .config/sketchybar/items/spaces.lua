@@ -25,14 +25,14 @@ local function add_space(i)
 			color = colors.transparent,
 			corner_radius = settings.item_corner_radius,
 		},
-		popup = {
-			background = {
-				border_width = settings.popup_border_width,
-				border_color = colors.popup.border,
-				corner_radius = settings.popup_border_radius,
-				drawing = true, -- Enable popup drawing
-			},
-		},
+		-- popup = {
+		-- 	background = {
+		-- 		border_width = settings.popup_border_width,
+		-- 		border_color = colors.popup.border,
+		-- 		corner_radius = settings.popup_border_radius,
+		-- 		drawing = true, -- Enable popup drawing
+		-- 	},
+		-- },
 	})
 
 	-- Add padding space
@@ -90,18 +90,18 @@ local function subscribe_to_space_events(space, space_popup)
 	end)
 
 	-- Handle mouse hover (enter/exit)
-	space:subscribe("mouse.entered", function(env)
-		space_popup:set({ background = { image = "space." .. env.SID } })
-		space:set({ popup = { drawing = "toggle" } })
-	end)
-
-	space:subscribe("mouse.exited", function()
-		space:set({ popup = { drawing = false } })
-	end)
+	-- space:subscribe("mouse.entered", function(env)
+	-- 	space_popup:set({ background = { image = "space." .. env.SID } })
+	-- 	space:set({ popup = { drawing = "toggle" } })
+	-- end)
+	--
+	-- space:subscribe("mouse.exited", function()
+	-- 	space:set({ popup = { drawing = false } })
+	-- end)
 end
 
 -- Add spaces and configure subscriptions
-for i = 1, 9 do
+for i = 1, 10 do
 	local space = add_space(i)
 	local space_popup = add_space_popup(space)
 
