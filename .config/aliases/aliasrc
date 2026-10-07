@@ -21,9 +21,21 @@ _ask() {
   open "https://www.perplexity.ai/search?q=$(jq -nr --arg q "$*" '$q | @uri')"
 }
 
+
+_q() {
+  if [ -z "$*" ]; then
+    open "https://www.perplexity.ai/"
+    return
+  fi
+
+  opencode run -m "opencode/hy3-preview-free" --agent plan --dir /tmp "$*"
+}
+
 alias ask='noglob _ask'
+alias q='noglob _q'
 
 alias todo="vim ~/Github/University/TODO.md"
+alias ptodo="vim /Users/jaczac/Github/Parallx/TODO.md"
 alias safari="open /Applications/Safari.app"
 alias showD="defaults write com.apple.finder CreateDesktop -bool true;killall Finder" # show the Dock
 alias hideD="defaults write com.apple.finder CreateDesktop -bool false;killall Finder" # hide the Dock
@@ -79,6 +91,7 @@ alias cat='bat'
 
 # alias find="fd"
 alias l="lsd -la"
+alias co="codex --yolo"
 alias top='btop'
 alias mpv='mpv --geometry=50%'
 alias history='history 1'
@@ -149,3 +162,25 @@ function tmux_stop() {
 
 alias t='tmux_start'        # start/switch
 alias tq='tmux_stop'        # quit session or server
+
+# Start an ngrok tunnel and print its public URL as soon as it is assigned.
+# Examples: ngshare 7575; ngshare http 3000; ngshare tcp 22; ngshare start my-tunnel
+ngshare() (
+  if [ "$#" -eq 0 ]; then
+    printf 'Usage: ngshare PORT_OR_URL [ngrok options]\n       ngshare http|tcp|tls|start ...\n' >&2
+    return 2
+  fi
+  case "$1" in
+    http|tcp|tls|start) ;;
+    *) set -- http "$@" ;;
+  esac
+  set -o pipefail
+  command ngrok "$@" --log stdout --log-format json 2>&1 |
+    command jq --unbuffered -Rr '
+      fromjson? // {msg: ., lvl: "error"}
+      | if .msg == "started tunnel" then
+          "\nPublic URL: \(.url)\nKeep this terminal running; Ctrl+C stops sharing.\n"
+        elif (.lvl == "error" or .lvl == "eror" or .lvl == "crit" or .lvl == "warn") then
+          "ngrok: \(.msg)\(if .err then " — " + (.err | tostring) else "" end)"
+        else empty end'
+)

@@ -153,6 +153,7 @@ I run Zen in compact mode and use the following keybindings
 _I use [nord theme](https://addons.mozilla.org/en-US/firefox/addon/nord-theme-cool/?utm_source=addons.mozilla.org&utm_medium=referral&utm_content=search) and I changed my new tabs to black pages. And I use brave search_
 
 - [`uBlock Origin`](https://ublockorigin.com)
+  - I suggest the [0xMH YouTube Shorts blocker](https://github.com/0xMH/ublock-youtube-shorts) to hide Shorts.
 - [`LocalCDN`](https://www.localcdn.org/)
 - [`HTTPS Everywhere`](https://www.eff.org/https-everywhere)
 - [`Privacy Badger`](https://privacybadger.org/)
