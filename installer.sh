@@ -235,6 +235,13 @@ _macSystemPrefs_() {
   defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
   defaults write com.apple.finder DisableAllAnimations -bool true
 
+  # Reduce Motion: space-switch slide becomes a fast fade — feels instant
+  # with yabai tiling and lowers WindowServer work. Personal preference,
+  # not a yabai requirement (the fast path is `sudo yabai --load-sa`;
+  # keep yabai `skip_window_focus_animation` off while SA loads).
+  echo "Enabling Reduce Motion..."
+  defaults write com.apple.universalaccess reduceMotion -bool true
+
   # Show hidden files in Finder
   # defaults write com.apple.finder AppleShowAllFiles -bool true
 
