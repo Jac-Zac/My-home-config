@@ -207,7 +207,7 @@ chmod +x installer.sh
 
 > You should close your terminal windows and open a new one, to reload the configurations
 
-_You can run `./install -s` to only install the command prompt configurations_
+_Run `./installer.sh -r` on a machine that already has the packages to only restore the configuration (shell, tmux, yabai, sketchybar...)_
 
 **Installation Completed !**
 

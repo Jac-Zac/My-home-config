@@ -12,3 +12,13 @@ alias gco='git checkout'
 alias gd='git diff'
 alias gp='git push'
 alias gr='git remote'
+alias ls="ls --color=auto"
+alias v="vim"
+
+# Slurm
+alias sq='squeue -u $USER'
+alias sqa='squeue -u $USER -o "%.10i %.20j %.8T %.10M %.6D %R"'
+alias sinfo-idle='sinfo -t idle'
+alias sacct-today='sacct -X -S today -o JobID,JobName,State,Elapsed,ExitCode'
+# Interactive shell on a compute node: sint [extra srun args]
+sint() { srun --pty "$@" zsh -l; }

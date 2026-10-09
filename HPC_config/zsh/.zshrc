@@ -1,7 +1,3 @@
-# At the top of .zshrc
-[[ -f ~/.zprofile ]] && source ~/.zprofile
-
-
 # .zshrc is sourced in interactive shells.
 # It should contain commands to set up aliases,
 # functions, options, key bindings, etc.
@@ -44,6 +40,8 @@ setopt COMPLETE_IN_WORD
 HISTSIZE=5000
 SAVEHIST=5000
 HISTFILE=~/.cache/zsh/zsh_history
+setopt SHARE_HISTORY HIST_IGNORE_DUPS HIST_IGNORE_SPACE EXTENDED_HISTORY
+unsetopt BEEP
 
 # Load aliases and shortcuts if existent.
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/aliases/aliasrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/aliases/aliasrc"
@@ -58,13 +56,8 @@ PS1="%B%{$fg[cyan]%}[%{$fg[magenta]%}%n%{$fg[blue]%}@%{$fg[green]%}%m %{$fg[yell
 autoload -U compinit
 zstyle ':completion:*' menu select matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 zmodload zsh/complist
-compinit
+compinit -d "$ZSH_COMPDUMP"
 _comp_options+=(globdots)               # Include hidden files.
-
-# Set up fast movement with fuzzy finding
-show_file_or_dir_preview="if [ -d {} ]; then lsd --tree {} --color=always --icon=always | head -200; else bat -n --color=always --line-range :500 {}; fi"
-
-bindkey -s "^g" 'lazygit\n'
 
 # VIM
 #########################
@@ -74,7 +67,7 @@ bindkey -v
 export KEYTIMEOUT=1
 
 # fzf key bindings (Ctrl+R history, Ctrl+T files, Ctrl+C dirs)
-source <(fzf --zsh)
+command -v fzf >/dev/null && source <(fzf --zsh)
 
 # Edit line in vim buffer ctrl-v
 autoload edit-command-line; zle -N edit-command-line
@@ -139,4 +132,4 @@ precmd() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 source $XDG_CONFIG_HOME/shell/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # zsh syntax highlighting
-source $XDG_CONFIG_HOME/shell/fast-syntax-highlighting/F-Sy-H.plugin.zsh
+source $XDG_CONFIG_HOME/shell/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
