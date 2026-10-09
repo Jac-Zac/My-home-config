@@ -1,11 +1,8 @@
 local colors = require("colors")
 local settings = require("settings")
-local app_icons = require("helpers.app_icons")
-local events = require("events")
 
--- Query the current space ID
-local space_id = sbar.exec("yabai -m query --windows --window | jq -r '.space'")
-
+-- Front app shows on all spaces (no space pinning: sbar.exec is async,
+-- so the old `local space_id = sbar.exec(...)` was always nil anyway).
 -- Create the front app item
 local front_app = sbar.add("item", "front_app", {
 	label = {
@@ -27,7 +24,6 @@ local front_app = sbar.add("item", "front_app", {
 		},
 	},
 	updates = true,
-	space = space_id,
 })
 
 -- Helper function to set the front app state
@@ -50,40 +46,36 @@ local function set_front_app_state(state)
 	})
 end
 
--- Bounce animation helpers
+-- Bounce animation helpers (delay, no sleep fork)
 local function start_bounce_animation()
 	sbar.animate("tanh", 10, function()
 		set_front_app_state({ icon_scale = 0.7 })
 	end)
-	sbar.exec("sleep 0.30 && echo 'finishing bounce'", function()
+	sbar.delay(0.30, function()
 		sbar.animate("tanh", 10, function()
 			set_front_app_state({ icon_scale = 0.6 })
 		end)
 	end)
 end
 
--- Event: Mouse entered
+-- Event: Mouse entered (instant highlight, no animation timers)
 front_app:subscribe("mouse.entered", function()
-	sbar.animate("elastic", 10, function()
-		set_front_app_state({
-			background_color = colors.spaces.active,
-			icon_scale = 0.5,
-			icon_padding_left = 3,
-			label_padding_right = settings.item_padding,
-		})
-	end)
+	set_front_app_state({
+		background_color = colors.spaces.active,
+		icon_scale = 0.5,
+		icon_padding_left = 3,
+		label_padding_right = settings.item_padding,
+	})
 end)
 
 -- Event: Mouse exited
 front_app:subscribe("mouse.exited", function()
-	sbar.animate("elastic", 10, function()
-		set_front_app_state({
-			background_color = colors.transparent,
-			icon_scale = 0.6,
-			icon_padding_left = 0,
-			label_padding_right = settings.item_padding - 5,
-		})
-	end)
+	set_front_app_state({
+		background_color = colors.transparent,
+		icon_scale = 0.6,
+		icon_padding_left = 0,
+		label_padding_right = settings.item_padding - 5,
+	})
 end)
 
 -- Event: Front app switched
@@ -98,7 +90,6 @@ front_app:subscribe("front_app_switched", function(env)
 			drawing = true,
 			string = env.INFO,
 		},
-		space = space_id,
 	})
 	start_bounce_animation()
 end)
@@ -106,14 +97,12 @@ end)
 -- Event: Mouse clicked
 front_app:subscribe("mouse.clicked", function()
 	sbar.trigger("swap_menus_and_spaces")
-	sbar.animate("elastic", 10, function()
-		set_front_app_state({
-			icon_scale = 0.5,
-			icon_padding_left = 3,
-			label_padding_right = settings.item_padding,
-			background_color = colors.spaces.active,
-		})
-	end)
+	set_front_app_state({
+		icon_scale = 0.5,
+		icon_padding_left = 3,
+		label_padding_right = settings.item_padding,
+		background_color = colors.spaces.active,
+	})
 end)
 
 -- Add a spacer after the front app

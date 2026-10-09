@@ -3,8 +3,8 @@ local colors = require("colors")
 
 -- Equivalent to the --bar domain
 sbar.bar({
-  sticky = on,
-  position = top,
+  sticky = true,
+  position = "top",
   height = settings.bar_height,
   margin = settings.bar_margin,
   color = colors.bar.bg,

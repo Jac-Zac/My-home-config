@@ -33,7 +33,7 @@ sbar.default({
 			corner_radius = settings.item_corner_radius,
 		},
 	},
-	-- TODO: Add a popup menu styles
+	-- Popup menu styles
 	popup = {
 		background = {
 			drawing = true,
@@ -53,5 +53,5 @@ sbar.default({
 	},
 	padding_left = settings.paddings,
 	padding_right = settings.paddings,
-	scroll_texts = true,
+	scroll_texts = false,
 })

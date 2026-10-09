@@ -1,11 +1,9 @@
 local colors = require("colors")
 local settings = require("settings")
-local events = require("events") -- Event subscription
 
 -- Constants
 local MAX_ITEMS = 7
-local MENU_SCRIPT = "$CONFIG_DIR/helpers/menus/bin/menus"
-local ANIMATION_TIME = 5
+local MENU_SCRIPT = os.getenv("HOME") .. "/.config/sketchybar/helpers/menus/bin/menus"
 
 -- Initialize the menu watcher
 local menu_watcher = sbar.add("item", { drawing = false, updates = false })
@@ -29,18 +27,10 @@ end
 -- Padding item to handle spacing
 local menu_padding = sbar.add("item", "menu.padding", { drawing = false, width = 5 })
 
--- Animate the appearance of menu labels
-local function animate_menu_labels()
-	for i, menu_item in ipairs(menu_items) do
-		local delay = (i - 1) * 0.030 -- Stagger animations by 0.030 seconds per item
-		sbar.exec("sleep " .. delay, function()
-			sbar.animate("tanh", ANIMATION_TIME, function()
-				menu_item:set({
-					label = { color = colors.quicksilver },
-					drawing = true,
-				})
-			end)
-		end)
+-- Show menu labels instantly (no staggered animation timers)
+local function show_menu_labels()
+	for _, menu_item in ipairs(menu_items) do
+		menu_item:set({ drawing = true })
 	end
 end
 
@@ -95,7 +85,7 @@ local function update_menus(space_id)
 		end
 
 		-- Animate menu label appearance
-		animate_menu_labels()
+		show_menu_labels()
 	end)
 end
 

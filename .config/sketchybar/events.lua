@@ -1,17 +1,8 @@
- -- Create all events here
+-- Custom events (native events like front_app_switched, volume_change,
+-- power_source_change, wifi_change, system_woke, mouse.* need no declaration)
 local events = {
-    -- Front app events
-    front_app_switched = sbar.add("event", "front_app_switched"),
-    swap_menus_and_spaces = sbar.add("event", "swap_menus_and_spaces"),
-    
-    -- System monitor events
-    cpu_update = sbar.add("event", "cpu_update"),
-    memory_update = sbar.add("event", "memory_update"),
-    disk_update = sbar.add("event", "disk_update"),
-    network_update = sbar.add("event", "network_update"),
-    
-    -- Media player events
-    media_change = sbar.add("event", "media_change")
+	swap_menus_and_spaces = sbar.add("event", "swap_menus_and_spaces"),
+	volume_refresh = sbar.add("event", "volume_refresh"),
 }
 
 return events

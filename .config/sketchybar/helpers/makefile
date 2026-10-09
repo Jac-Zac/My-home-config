@@ -1,9 +1,19 @@
-# all:
-# 	@echo "SketchyBar: Compiling event monitors..."
-# 	@(cd event_providers && $(MAKE)) >/dev/null && echo "✓ Event monitors ready"
-# 	@echo "SketchyBar: Compiling menu helpers..."
-# 	@(cd menus && $(MAKE)) >/dev/null && echo "✓ Menu helpers ready"
+all: menus audio events kbswitch
 
-all:
-	@(cd event_providers && $(MAKE))
+menus:
 	@(cd menus && $(MAKE))
+
+audio: audio.swift
+	swiftc -O $< -o $@
+
+events: events.swift
+	swiftc -O $< -o $@
+
+kbswitch: kbswitch.swift
+	swiftc -O $< -o $@
+
+clean:
+	rm -f audio events kbswitch
+	@(cd menus && $(MAKE) clean)
+
+.PHONY: all menus clean

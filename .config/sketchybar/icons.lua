@@ -51,7 +51,8 @@ local icons = {
 			download = "􀄩",
 			connected = "􀙇",
 			disconnected = "􀙈",
-			hotspost = "􀉤",
+			hotspot = "􀉤",
+			hotspost = "􀉤", -- deprecated alias (typo kept for compat)
 			vpn = "􀞛",
 			router = "􁓤",
 		},
@@ -105,8 +106,8 @@ local icons = {
 	},
 }
 
-if not (settings.icons == "NerdFont") then
-	return icons.sf_symbols
-else
+if settings.icons == "nerdfont" then
 	return icons.nerdfont
+else
+	return icons.sf_symbols
 end

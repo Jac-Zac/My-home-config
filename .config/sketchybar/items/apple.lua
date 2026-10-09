@@ -19,31 +19,3 @@ local apple = sbar.add("item", "apple.logo", {
 	},
 	align = "center",
 })
-
--- Track menu visibility
-local menu_visible = false
-
--- Functions to handle menu visibility
-local function toggle_menu()
-	if menu_visible then
-		menu_visible = false
-	else
-		sbar.exec("~/.config/sketchybar/helpers/event_providers/bin/apple_menu app=menu")
-		menu_visible = true
-	end
-end
-
--- Toggle menu on click
-apple:subscribe("mouse.clicked", function(env)
-	toggle_menu()
-end)
-
--- Add this to prevent window from closing when clicking inside it
-apple:subscribe("mouse.clicked.inside", function(env)
-	return
-end)
-
--- Remove or comment out the mouse.exited.global subscription
-apple:subscribe("mouse.exited.global", function(env)
-	menu_visible = false
-end)
