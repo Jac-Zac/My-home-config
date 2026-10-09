@@ -1,31 +1,43 @@
+-- tina-config: everything is Catppuccin Mocha (https://catppuccin.com/palette).
+-- The old Nord key names are kept so every item picks the theme up unchanged.
+local M = {
+	base = 0xff1e1e2e,
+	mantle = 0xff181825,
+	crust = 0xff11111b,
+	surface0 = 0xff313244,
+	surface1 = 0xff45475a,
+	overlay0 = 0xff6c7086,
+	subtext0 = 0xffa6adc8,
+	text = 0xffcdd6f4,
+	lavender = 0xffb4befe,
+	mauve = 0xffcba6f7,
+	pink = 0xfff5c2e7,
+	blush = 0xfff9d5ec, -- softer pink (pink lifted toward white)
+	rosewater = 0xfff5e0dc,
+	green = 0xffa6e3a1,
+	yellow = 0xfff9e2af,
+	peach = 0xfffab387,
+	red = 0xfff38ba8,
+}
+
 return {
-	white = 0xffeceff4, -- Nord6 (bar + primary text)
-	red = 0xffbf616a, -- Nord11
-	green = 0xffa3be8c, -- Nord14
-	yellow = 0xffebcb8b, -- Nord13
-	orange = 0xffd08770, -- Nord12
-	grey = 0xff4c566a, -- Nord3
-	quicksilver = 0xffa4a4a4,
+	white = M.text, -- bar + primary text
+	red = M.red,
+	green = M.green,
+	yellow = M.yellow,
+	orange = M.peach,
+	grey = M.overlay0,
+	quicksilver = M.subtext0,
 	transparent = 0x00000000,
+	accent = M.blush, -- popup underline
 
 	bar = {
-		bg = 0xff000000, -- Completely black
+		bg = 0xff000000, -- completely black
 	},
-	-- Catppuccin Mocha (https://catppuccin.com/palette): the popup theme
-	-- (helpers/popup.lua maps these to its H tokens) and a few accents
-	catppuccin = {
-		base = 0xff1e1e2e, -- popup bg
-		surface0 = 0xff313244, -- next-event pill
-		surface1 = 0xff45475a, -- popup border · empty gauge · slider track
-		overlay0 = 0xff6c7086, -- inactive glyphs
-		subtext0 = 0xffa6adc8, -- dim labels
-		green = 0xffa6e3a1,
-		yellow = 0xfff9e2af,
-		peach = 0xfffab387,
-		red = 0xfff38ba8,
-	},
+	-- popup theme (helpers/popup.lua maps these to its H tokens) and accents
+	catppuccin = M,
 	spaces = {
-		active = 0xff2e3440, -- Nord0
-		inactive = 0x002e3440, -- Nord0, transparent
+		active = M.surface0,
+		inactive = 0x00313244, -- surface0, transparent
 	},
 }

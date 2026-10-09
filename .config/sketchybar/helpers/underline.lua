@@ -7,7 +7,7 @@ local M = {}
 M.Y = -15 -- 2px line at the bar's bottom edge (33pt bar, center coords)
 
 function M.show(target)
-	target:set({ background = { drawing = true, color = colors.white, height = 2, y_offset = M.Y } })
+	target:set({ background = { drawing = true, color = colors.accent or colors.white, height = 2, y_offset = M.Y } })
 end
 
 function M.hide(target)

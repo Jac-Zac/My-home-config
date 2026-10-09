@@ -54,7 +54,7 @@ looks off.
 
 ## What's in the bar
 
-**Left:** Apple (system stats, power actions) · spaces · front app · app menus
+**Left:** pixel cat (system stats, power actions) · spaces · front app · app menus
 
 **Right:** next meeting (shows up 30 min before) · Claude / Codex usage ·
 keyboard layout · Control Center (Wi-Fi, Bluetooth, Focus, brightness,
@@ -62,6 +62,22 @@ keyboard light, sound) · volume + outputs · Wi-Fi + saved networks + Tailscale
 battery · date/time + calendar
 
 Click a cell to open its popup; click it again or anywhere else to close.
+
+### The cat
+
+The Apple logo is a pixel cat that reacts to CPU load (checked every 5s):
+
+| CPU | Cat | Colour |
+|---|---|---|
+| under 50% | sits and bats a ball; sleeps after 2 min of quiet | white |
+| 50–80% | strolls | soft pink |
+| 80–95% | walks fast | pink |
+| 95%+ | sprints | lilac |
+
+Walking speeds up with load. Memory at 85%+ turns a walking cat at least pink.
+The cat pauses while the Mac sleeps. Tweak it in `helpers/cat.lua`: `REST`, the
+`STAGES` table, `SLOW`/`FAST` speeds and the sleep delay in `MOODS`. The theme is
+Catppuccin Mocha (`colors.lua`).
 
 ## Configure
 

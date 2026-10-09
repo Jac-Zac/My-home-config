@@ -1,7 +1,7 @@
-local icons = require("icons")
 local colors = require("colors")
 local settings = require("settings")
 local P = require("helpers.popup")
+local cat = require("helpers.cat")
 
 -- Apple logo + SYSTEM popup: macOS version · uptime · cpu / memory / disk
 -- with gauges, then actions (About · Settings · Activity Monitor · Lock ·
@@ -20,15 +20,22 @@ local G = { -- Nerd Font (Material Design) by codepoint
 local apple = sbar.add("item", "apple.logo", {
 	padding_left = settings.bar_margin_padding,
 	padding_right = settings.item_padding,
+	-- tina-config: a walking pixel cat (helpers/cat.lua). It lives on the
+	-- icon's background because the item background is the popup underline
 	icon = {
-		font = { size = settings.font.sizes.icons },
-		string = icons.apple,
-		color = colors.white,
+		string = "",
 		padding_left = 0,
 		padding_right = 0,
+		background = {
+			drawing = true,
+			color = colors.transparent,
+			image = { drawing = true }, -- size set by helpers/cat.lua
+		},
 	},
 	label = { drawing = false },
 })
+
+cat.start(apple, settings.bar_margin_padding)
 
 local pop = P.new("apple", apple, { align = "left" })
 pop:header("SYSTEM")
@@ -51,14 +58,7 @@ local actions = {
 for _, a in ipairs(actions) do pop:on_click(pop:glyph(a[1], a[2]), a[3], true) end
 pop:done()
 
--- Load scale, like the battery gauge read the other way round:
--- green < 50% · yellow < 70% · orange < 85% · red above
-local function level_color(pct)
-	if pct < 50 then return colors.catppuccin.green end
-	if pct < 70 then return colors.catppuccin.yellow end
-	if pct < 85 then return colors.catppuccin.peach end
-	return colors.catppuccin.red
-end
+local level_color = cat.color_for -- white · soft pink · pink · lilac, like the cat
 
 local function set_stat(k, pct, text)
 	stats[k].row:set({ label = { string = P.spread(string.format("%d%%", pct), text), color = level_color(pct) } })
