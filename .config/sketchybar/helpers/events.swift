@@ -35,6 +35,11 @@ func isHoliday(_ c: EKCalendar) -> Bool {
   let t = c.title.lowercased()
   return ["holiday", "festiv", "feiertag", "férié", "feriados"].contains { t.contains($0) }
 }
+// Cancelled, or an invite you declined: Google keeps those in the calendar ("deleting" an invite in Notion
+// Calendar / Google declines it), so EventKit still returns them — hide them like Notion Calendar does
+func gone(_ e: EKEvent) -> Bool {
+  e.status == .canceled || e.attendees?.first(where: { $0.isCurrentUser })?.participantStatus == .declined
+}
 
 //   events refresh                     → ask macOS to sync calendar accounts now (Google only syncs on an interval,
 //                                         so events just made in Notion Calendar lag). Prints "changed" if the store
@@ -47,6 +52,24 @@ if a.count > 1 && a[1] == "refresh" {
   RunLoop.main.run(until: Date().addingTimeInterval(10))
   NotificationCenter.default.removeObserver(obs)
   exit(0)
+}
+//   events watch "<command>"           → run the command whenever the calendar store changes (an event added,
+//                                         edited or deleted locally, or a sync bringing that in). Stays running;
+//                                         bursts are coalesced into one run. Exits when SketchyBar is gone
+if a.count > 2 && a[1] == "watch" {
+  let cmd = a[2]
+  var pending: DispatchWorkItem?
+  NotificationCenter.default.addObserver(forName: .EKEventStoreChanged, object: s, queue: .main) { _ in
+    pending?.cancel()
+    let w = DispatchWorkItem { let t = Process(); t.launchPath = "/bin/sh"; t.arguments = ["-c", cmd]; try? t.run() }
+    pending = w
+    DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: w)
+  }
+  Timer.scheduledTimer(withTimeInterval: 60, repeats: true) { _ in   // no orphans
+    let t = Process(); t.launchPath = "/usr/bin/pgrep"; t.arguments = ["-x", "sketchybar"]; try? t.run(); t.waitUntilExit()
+    if t.terminationStatus != 0 { exit(0) }
+  }
+  RunLoop.main.run()
 }
 
 let d = DateFormatter(); d.dateFormat = "yyyy-MM-dd"
@@ -62,7 +85,7 @@ if a.count > 1 && a[1] == "today" {
   let hm = DateFormatter(); hm.dateFormat = "HH:mm"
   var seen = Set<String>()  // the same event shared into two calendars shows once
   for e in s.events(matching: s.predicateForEvents(withStart: st, end: en, calendars: cals))
-      .filter({ $0.isAllDay || $0.endDate > now })
+      .filter({ ($0.isAllDay || $0.endDate > now) && !gone($0) })
       .sorted(by: { ($0.isAllDay ? 0 : 1, $0.startDate) < ($1.isAllDay ? 0 : 1, $1.startDate) }) {
     let when = e.isAllDay ? "all day" : (e.startDate <= now ? "now" : hm.string(from: e.startDate))
     let title = (e.title ?? "").replacingOccurrences(of: "\t", with: " ").replacingOccurrences(of: "\n", with: " ")
@@ -81,7 +104,7 @@ if a.count > 2 && a[1] == "days" {
   let cals = names.isEmpty ? nil : s.calendars(for: .event).filter { names.contains($0.title) }
   var ev = Set<Int>(), hol = Set<Int>()
   if cals?.isEmpty != true {
-    for e in s.events(matching: s.predicateForEvents(withStart: from, end: to, calendars: cals)) {
+    for e in s.events(matching: s.predicateForEvents(withStart: from, end: to, calendars: cals)) where !gone(e) {
       // an all-day end is 23:59 that day; a timed event ending at midnight belongs to the day before
       var day = max(cal.startOfDay(for: e.startDate), from)
       let last = min(cal.startOfDay(for: e.endDate.addingTimeInterval(e.isAllDay ? 0 : -1)), cal.date(byAdding: .day, value: -1, to: to)!)

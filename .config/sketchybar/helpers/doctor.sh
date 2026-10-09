@@ -15,7 +15,6 @@ pgrep -x sketchybar >/dev/null && pass "sketchybar running" || fix "sketchybar n
 font "SF-Pro" && pass "SF Pro" || fix "SF Pro font missing" "brew install --cask font-sf-pro"
 font "SF-Mono" && pass "SF Mono" || fix "SF Mono font missing" "brew install --cask font-sf-mono"
 font "HackNerdFont" && pass "Hack Nerd Font" || fix "Hack Nerd Font missing (agent, Wi-Fi, device glyphs)" "brew install --cask font-hack-nerd-font"
-font "sketchybar-app-font" && pass "sketchybar-app-font" || fix "sketchybar-app-font missing (front-app icons)" "bash $DIR/helpers/install.sh"
 missing=""
 for b in audio events kbswitch cc clickaway calgrid menus/bin/menus; do [ -x "$DIR/helpers/$b" ] || missing="$missing $b"; done
 [ -z "$missing" ] && pass "helper binaries built" || fix "helpers not built:$missing" "make -C $DIR/helpers"
@@ -25,7 +24,7 @@ if ipconfig getsummary en0 2>/dev/null | grep -q " SSID : <redacted>"; then
   fix "Wi-Fi name hidden (popup can't mark the current network)" "sudo ipconfig setverbose 1"
 else pass "Wi-Fi name visible"; fi
 info "Calendar: open the calendar popup once and allow sketchybar (it shows 'Allow Calendar access ↗' if denied)"
-info "Control Center: macOS asks once for Bluetooth and System Events the first time you use those toggles"
+info "Control Center: macOS asks once for Bluetooth the first time you use that toggle"
 
 echo "Optional (widgets hide when absent)"
 { [ -f "$HOME/.claude.json" ] && pass "Claude Code (agent cell)"; } || info "Claude Code not found — Claude cell hidden"

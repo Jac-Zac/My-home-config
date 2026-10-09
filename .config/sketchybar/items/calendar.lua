@@ -7,7 +7,8 @@ local tx = require("helpers.text")
 -- calendars Notion Calendar syncs, read locally via EventKit), holidays red.
 -- Today's timed events are shared with items/widgets/next_event.lua (the
 -- "next meeting" widget) through the returned module: M.upcoming is filled by
--- build_today (every 10 min via that widget, on wake, on open — 47ms each).
+-- build_today (on any calendar change via `events watch`, every 10 min via
+-- that widget as a backup, on wake, on open — ~35ms each).
 -- The grid is a PNG from helpers/calgrid (a text field has one color; a week
 -- needs several): Sundays + holidays red, Saturdays blue, past days dimmed,
 -- today bold in [ ], a dot under days with events. Cached by content in
@@ -141,10 +142,21 @@ local function build_today()
 end
 
 -- Wiring ---------------------------------------------------------------------------
-time:subscribe({ "forced", "routine", "system_woke" }, function()
+local function tick()
 	time:set({ label = os.date("%H:%M") })
 	date:set({ label = os.date("%a %b %d") })
-end)
+end
+time:subscribe({ "forced", "routine", "system_woke" }, tick)
+
+-- Flip right on the minute (the 30s routine alone lags up to 30s; it stays
+-- as the safety net, e.g. after sleep)
+local function on_minute()
+	sbar.delay(60 - tonumber(os.date("%S")) + 0.05, function()
+		tick()
+		on_minute()
+	end)
+end
+on_minute()
 
 M.toggle = pop:bind({ time, date }, function()
 	offset = 0 -- fresh open starts at this month
@@ -169,6 +181,7 @@ next_row:subscribe("mouse.clicked", step(1))
 pop:on_click(link_row, string.format("open -a '%s' || open -a Calendar", settings.calendar_app), true)
 
 M.refresh = build_today
+M.EVENTS = EVENTS
 build_today() -- feeds the next-event widget, so at load
 P.later(build_grid) -- popup prefill after the first paint
 

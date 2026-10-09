@@ -1,13 +1,13 @@
 // Control Center helper: state + toggles the CLI doesn't expose.
-//   cc status             → "wifi=1 bt=1 dark=1 bright=63 kbd=40" (display / keyboard backlight %, -1 if none,
-//                            kbd=auto while automatic keyboard brightness is on)
+//   cc status             → "wifi=1 bt=1 bright=63 kbd=40 focus=Work" (display / keyboard backlight %, -1 if none,
+//                            kbd=auto while automatic keyboard brightness is on; focus last, may hold spaces, "" = off)
 //   cc bt on|off          → Bluetooth power (the private IOBluetooth calls blueutil uses)
 //   cc bright <0-100>     → built-in display brightness (DisplayServices, as the brightness keys do)
 //   cc kbd <0-100>        → keyboard backlight (CoreBrightness KeyboardBrightnessClient, as the F-keys do)
 //   cc stats              → "cpu=12 mem=61 memgb=14.6 memtotal=24 disk=46 diskfree=260" — the Activity Monitor
 //                            numbers: CPU from per-core tick deltas over 300ms, memory = app + wired + compressed,
 //                            disk free = "available for important usage" (what Finder shows, purgeable counts as free)
-// Wi-Fi power and dark mode are read here too, but switched from Lua with networksetup / System Events.
+// Wi-Fi power is read here too, but switched from Lua with networksetup.
 import CoreGraphics
 import CoreWLAN
 import Foundation
@@ -69,6 +69,23 @@ func kbdSet(_ v: Float) {
   _ = set(c, ss, max(0, min(100, v)) / 100, 0, true, id)
 }
 
+// Current Focus name, "" when off. No API: read the DoNotDisturb DB (what Control Center shows). The Focus daemon
+// keeps storeAssertionRecords current itself (a record is removed the moment its Focus ends), so every record there
+// is active — don't second-guess lifetimes/schedules, they can't be read reliably.
+func focus() -> String {
+  let db = NSHomeDirectory() + "/Library/DoNotDisturb/DB/"
+  func json(_ f: String) -> [String: Any]? {
+    guard let d = FileManager.default.contents(atPath: db + f), let o = try? JSONSerialization.jsonObject(with: d),
+          let data = (o as? [String: Any])?["data"] as? [[String: Any]] else { return nil }
+    return data.first
+  }
+  guard let records = json("Assertions.json")?["storeAssertionRecords"] as? [[String: Any]],
+        let id = records.lazy.compactMap({ ($0["assertionDetails"] as? [String: Any])?["assertionDetailsModeIdentifier"] as? String }).first
+  else { return "" }
+  let modes = json("ModeConfigurations.json")?["modeConfigurations"] as? [String: [String: Any]]
+  return (modes?[id]?["mode"] as? [String: Any])?["name"] as? String ?? "Focus"
+}
+
 func cpuTicks() -> (busy: UInt64, total: UInt64) {
   var count: natural_t = 0, info: processor_info_array_t?, n: mach_msg_type_number_t = 0
   guard host_processor_info(mach_host_self(), PROCESSOR_CPU_LOAD_INFO, &count, &info, &n) == KERN_SUCCESS, let info else { return (0, 0) }
@@ -107,9 +124,7 @@ let a = CommandLine.arguments
 switch a.count > 1 ? a[1] : "" {
 case "status":
   let wifi = CWWiFiClient.shared().interface()?.powerOn() == true ? 1 : 0
-  let g = UserDefaults.standard.persistentDomain(forName: UserDefaults.globalDomain)
-  let dark = (g?["AppleInterfaceStyle"] as? String) == "Dark" ? 1 : 0
-  print("wifi=\(wifi) bt=\(btGet() == 1 ? 1 : 0) dark=\(dark) bright=\(brightness()) kbd=\(kbdStatus())")
+  print("wifi=\(wifi) bt=\(btGet() == 1 ? 1 : 0) bright=\(brightness()) kbd=\(kbdStatus()) focus=\(focus())")
 case "bt" where a.count > 2:
   btSet(a[2] == "on" ? 1 : 0)
 case "bright" where a.count > 2:

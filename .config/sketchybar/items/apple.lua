@@ -15,13 +15,17 @@ local G = { -- Nerd Font (Material Design) by codepoint
 	lock = U(0xF033E), sleep = U(0xF04B2), restart = U(0xF0709), power = U(0xF0425),
 }
 
+-- Screen-edge gap is ITEM padding (outside the bounds), like the clock, so the
+-- underline and the left-aligned popup stop short of the edge
 local apple = sbar.add("item", "apple.logo", {
+	padding_left = settings.bar_margin_padding,
+	padding_right = settings.item_padding,
 	icon = {
 		font = { size = settings.font.sizes.icons },
 		string = icons.apple,
 		color = colors.white,
-		padding_left = settings.bar_margin_padding,
-		padding_right = settings.item_padding,
+		padding_left = 0,
+		padding_right = 0,
 	},
 	label = { drawing = false },
 })

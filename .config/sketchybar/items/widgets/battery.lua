@@ -32,7 +32,7 @@ local settings_row = pop:kv("open", "Battery Settings ↗", { color = H.dim })
 pop:done()
 
 -- Bar --------------------------------------------------------------------------
-local LEVELS = { -- above pct → glyph, color (on battery)
+local LEVELS = { -- above pct → glyph, color (on battery); the popup gauge uses the same colors
 	{ 80, icons.battery._100, colors.white },
 	{ 60, icons.battery._75, colors.white },
 	{ 40, icons.battery._50, colors.white },
@@ -41,18 +41,18 @@ local LEVELS = { -- above pct → glyph, color (on battery)
 	{ -1, icons.battery._0, colors.red },
 }
 
+local function level(pct)
+	for _, l in ipairs(LEVELS) do
+		if pct > l[1] then return l[2], l[3] end
+	end
+end
+
 local function update_bar()
 	sbar.exec("pmset -g batt", function(out)
 		local charge = tonumber((out or ""):match("(%d+)%%"))
 		if not charge then return end
-		local icon, color
-		if out:find("AC Power") then
-			icon, color = icons.battery.charging, colors.green
-		else
-			for _, l in ipairs(LEVELS) do
-				if charge > l[1] then icon, color = l[2], l[3]; break end
-			end
-		end
+		local icon, color = level(charge)
+		if out:find("AC Power") then icon, color = icons.battery.charging, colors.green end
 		battery:set({ icon = { string = icon, color = color }, label = string.format("%02d%%", charge) })
 	end)
 end
@@ -70,9 +70,8 @@ local function refresh_details()
 		local chg, ext, rem = yes("IsCharging"), yes("ExternalConnected"), num("TimeRemaining")
 
 		charge_row:set({ label = { string = P.spread(pct .. "%", chg and "charging" or (ext and "on AC" or "on battery")) } })
-		-- green whenever on AC (like the bar glyph); thresholds only on battery
-		local lit = (chg or ext) and colors.green or (pct > 20 and H.text or (pct > 10 and colors.yellow or colors.red))
-		P.set_gauge(gauge_row, pct, lit)
+		-- same colors as the bar glyph: green on AC, else the LEVELS thresholds
+		P.set_gauge(gauge_row, pct, (chg or ext) and colors.green or select(2, level(pct)))
 
 		local t = "—"
 		if rem and rem > 0 and rem < 65535 then

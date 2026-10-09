@@ -13,10 +13,8 @@ brew tap FelixKratz/formulae
 brew install sketchybar lua@5.4
 
 # Fonts: SF Pro/Mono + SF Symbols (text, icons), Hack Nerd Font (Claude/OpenAI,
-# Wi-Fi, speaker glyphs), sketchybar-app-font (front-app icons)
+# Wi-Fi, speaker glyphs)
 brew install --cask sf-symbols font-sf-pro font-sf-mono font-hack-nerd-font
-curl -fsSL https://github.com/kvndrsslr/sketchybar-app-font/releases/download/v2.0.28/sketchybar-app-font.ttf \
-  -o "$HOME/Library/Fonts/sketchybar-app-font.ttf"
 
 # SbarLua (the Lua module sketchybarrc loads)
 TMP=$(mktemp -d)

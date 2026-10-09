@@ -13,20 +13,6 @@ local settings = {
 	-- Right-side items all use padding_left = padding_right = item_padding,
 	-- so every pair of neighbours sits 2 × item_padding (16pt) apart.
 
-	group_spacing = 16,
-	popup_border_width = 3,
-	popup_border_radius = 4,
-	popup_blur_radius = 6,
-	-- popup_y_offset = 4,
-	popup_y_offset = 0,
-	popup_padding = 16,
-	popup_image_padding = 0,
-
-	-- Defaults settings
-	paddings = 0,
-
-	icons = "sf-symbols", -- Options: "sf-symbols", "nerdfont"
-
 	font = require("helpers.default_font"),
 
 	-- Calendar: events come from every account in System Settings → Internet

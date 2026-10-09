@@ -32,7 +32,7 @@ local MAXPEER = 4
 local G_TS = U(0xF099D) -- md-shield-lock
 local G_OS = { macOS = U(0xF0035), iOS = U(0xF0035), linux = U(0xF033D), windows = U(0xF05B3), android = U(0xF0032) }
 
-local wifi = sbar.add("item", "widgets.wifi.padding", {
+local wifi = sbar.add("item", "widgets.wifi", {
 	position = "right",
 	update_freq = 60, -- also catches Tailscale going up/down (no event for that)
 	padding_left = settings.item_padding - 2,

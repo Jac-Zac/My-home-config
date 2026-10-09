@@ -1,5 +1,5 @@
 -- Add the sketchybar module to the package cpath
-package.cpath = package.cpath .. ";/Users/" .. os.getenv("USER") .. "/.local/share/sketchybar_lua/?.so"
+package.cpath = package.cpath .. ";" .. os.getenv("HOME") .. "/.local/share/sketchybar_lua/?.so"
 
 -- Rebuild helper binaries only when a source is newer than its binary.
 -- A bare `make` on every load blocks startup and recompiles needlessly.

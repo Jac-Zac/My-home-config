@@ -29,11 +29,12 @@ P.VW = P.CELLS * P.CW -- value column width
 P.W = math.ceil(P.PAD * 2 + P.KW + P.VW)
 P.FULL = math.floor((P.W - P.PAD * 2) / P.CW) -- cells across a key-less row
 P.BLOCKS = 40 -- gauge blocks (2.5% each) spanning exactly the value column
--- Menlo's ▋ advances 5.9001pt at 9.8pt; size it so BLOCKS fill VW exactly
-local GAUGE_FONT = string.format("Menlo:Regular:%.3f", 9.8 * (P.VW / P.BLOCKS) / 5.9001)
+-- Menlo's ▋ advances 5.9001pt at 9.8pt but inks only its left 5/8; size it so
+-- the last block's ink (not its advance) ends flush with VW
+local GAUGE_FONT = string.format("Menlo:Regular:%.3f", 9.8 * (P.VW / (P.BLOCKS - 3 / 8)) / 5.9001)
 
 function P.mono(size, style)
-	return { family = settings.font.numbers, style = settings.font.style_map[style or "Regular"], size = size or 12 }
+	return { family = settings.font.numbers, style = style or "Regular", size = size or 12 }
 end
 function P.nerd(size)
 	return { family = settings.font.nerd, style = "Regular", size = size or 15 }
@@ -196,16 +197,26 @@ function Pop:text(text, color)
 	return self:row({ label = { string = P.fit(text, P.FULL), color = color or P.H.dim, font = P.mono(), padding_left = P.PAD } })
 end
 
-local function key_icon(s, color, font, nudge)
+local function key_icon(s, color, font)
 	return {
 		string = s,
 		color = color,
 		font = font,
 		width = P.PAD + P.KW,
 		align = "left",
-		padding_left = P.PAD + (nudge or 0),
+		padding_left = P.PAD,
 		padding_right = 0,
 	}
+end
+
+-- Nerd glyph centered in a GW slot at the left of the key column, so glyphs of
+-- different widths share one center line (PAD + GW/2) in every popup.
+-- SketchyBar centers on (width + padding_left - padding_right) / 2.
+local GW = 20
+local function glyph_icon(s, color, font)
+	local i = key_icon(s, color, font)
+	i.align, i.padding_right = "center", P.KW - GW
+	return i
 end
 
 -- dim key in the key column, value in the value column
@@ -218,12 +229,12 @@ function Pop:kv(key, value, o)
 	}, o.height)
 end
 
--- Nerd glyph in the key column (nudged 1pt: glyphs have no left bearing)
+-- Nerd glyph in the key column
 function Pop:glyph(glyph, value, o)
 	o = o or {}
 	return self:row({
 		drawing = o.drawing,
-		icon = key_icon(glyph, o.glyph_color or P.H.dim, o.font or P.nerd(), 1),
+		icon = glyph_icon(glyph, o.glyph_color or P.H.dim, o.font or P.nerd()),
 		label = { string = value or "", color = o.color or P.H.dim, font = P.mono(), padding_left = 0, padding_right = 0 },
 	}, o.height)
 end
@@ -253,7 +264,7 @@ function Pop:slider(glyph, o)
 		position = "popup." .. self.anchor.name,
 		width = P.W,
 		drawing = o.drawing,
-		icon = key_icon(glyph, P.H.dim, P.nerd(), 1),
+		icon = glyph_icon(glyph, P.H.dim, P.nerd()),
 		label = { string = "—", color = P.H.text, font = P.mono(), width = 5 * P.CW, align = "right", padding_left = 0, padding_right = 0 },
 		slider = {
 			highlight_color = P.H.text,
@@ -268,8 +279,6 @@ function Pop:slider(glyph, o)
 	return item
 end
 
-
--- Closing spacer; call once after the last row
 -- One entry of a pick-one list (networks, outputs, layouts): the current one
 -- is bold + bright with a ✓ flush right, the rest dim. Same look everywhere.
 function P.set_choice(row, name, current, glyph)

@@ -17,7 +17,7 @@ On a fresh Mac (Apple silicon, macOS 14+):
    git clone <this repo> ~/.config/sketchybar
    ```
 4. **Run the installer** — installs SketchyBar, Lua 5.4, SbarLua, the fonts
-   (SF Pro, SF Mono, SF Symbols, Hack Nerd Font, sketchybar-app-font), builds
+   (SF Pro, SF Mono, SF Symbols, Hack Nerd Font), builds
    the helpers and starts the bar:
    ```sh
    bash ~/.config/sketchybar/helpers/install.sh
@@ -31,7 +31,7 @@ On a fresh Mac (Apple silicon, macOS 14+):
    - **Wi-Fi name** — macOS hides it from scripts; to mark the current
      network run `sudo ipconfig setverbose 1` (or create a Shortcut named
      *SketchyBar Wi-Fi* that returns the network name).
-   - **Bluetooth / System Events** — the Control Center toggles.
+   - **Bluetooth** — the Control Center toggle.
 
 Re-run `bash ~/.config/sketchybar/helpers/doctor.sh` any time something
 looks off.
@@ -57,7 +57,7 @@ looks off.
 **Left:** Apple (system stats, power actions) · spaces · front app · app menus
 
 **Right:** next meeting (shows up 30 min before) · Claude / Codex usage ·
-keyboard layout · Control Center (Wi-Fi, Bluetooth, dark mode, brightness,
+keyboard layout · Control Center (Wi-Fi, Bluetooth, Focus, brightness,
 keyboard light, sound) · volume + outputs · Wi-Fi + saved networks + Tailscale ·
 battery · date/time + calendar
 
@@ -103,7 +103,6 @@ Logs: `/opt/homebrew/var/log/sketchybar/sketchybar.out.log`.
 [SbarLua](https://github.com/FelixKratz/SbarLua) by Felix Kratz;
 [sketchybar-island](https://github.com/garamnohhh/sketchybar-island) for the
 popup design, agent-usage idea and the `audio`/`events` helpers;
-[sketchybar-app-font](https://github.com/kvndrsslr/sketchybar-app-font);
 [Nerd Fonts](https://www.nerdfonts.com).
 
 ## License

@@ -43,7 +43,7 @@ local function cell(name, glyph, brand, freq, pad_right)
 end
 local claude = cell("widgets.agents.claude", G_CLAUDE, CLAUDE, 60, settings.item_padding)
 local codex = cell("widgets.agents.codex", G_OPENAI, H.text, nil, 4)
-local bracket = sbar.add("bracket", "widgets.agents.bracket", { claude.name, codex.name }, {})
+local bracket = sbar.add("bracket", "widgets.agents.bracket", { claude.name, codex.name }, { background = { drawing = false } }) -- {} would send an empty --set (logged error)
 
 -- Popup: per agent a brand header, then 5h / week rows (remaining % · reset
 -- flush right) each over a gauge spanning exactly the value column.
