@@ -163,51 +163,9 @@ function tmux_stop() {
 alias t='tmux_start'        # start/switch
 alias tq='tmux_stop'        # quit session or server
 
-# Start an ngrok tunnel and print its public URL as soon as it is assigned.
-# Examples: ngshare 7575; ngshare http 3000; ngshare tcp 22; ngshare start my-tunnel
-ngshare() (
-  if [ "$#" -eq 0 ]; then
-    printf 'Usage: ngshare PORT_OR_URL [ngrok options]\n       ngshare http|tcp|tls|start ...\n' >&2
-    return 2
-  fi
-  case "$1" in
-    http|tcp|tls|start) ;;
-    *) set -- http "$@" ;;
-  esac
-  # Rewrite HTTP Host to the upstream authority; preserve explicit policies and allow opt-out.
-  if [ "$1" = http ] && [ "${NGSHARE_PRESERVE_HOST:-0}" != 1 ]; then
-    local ngshare_has_policy=0 ngshare_arg
-    for ngshare_arg in "$@"; do
-      case "$ngshare_arg" in
-        --traffic-policy-file|--traffic-policy-file=*|--traffic-policy-url|--traffic-policy-url=*)
-          ngshare_has_policy=1 ;;
-      esac
-    done
-    if [ "$ngshare_has_policy" = 0 ] && [ "$#" -ge 2 ]; then
-      local ngshare_authority="$2" ngshare_policy
-      case "$ngshare_authority" in
-        file://*|-*) ngshare_authority= ;;
-        http://*) ngshare_authority="${ngshare_authority#http://}" ;;
-        https://*) ngshare_authority="${ngshare_authority#https://}" ;;
-        *[!0-9]*) ;;
-        *) ngshare_authority="localhost:$ngshare_authority" ;;
-      esac
-      ngshare_authority="${ngshare_authority%%/*}"
-      if [ -n "$ngshare_authority" ]; then
-        ngshare_policy=$(mktemp "${TMPDIR:-/tmp}/ngshare-policy.XXXXXXXX") || return
-        trap 'rm -f "$ngshare_policy"' EXIT
-        printf 'on_http_request:\n  - actions:\n      - type: add-headers\n        config:\n          headers:\n            host: "%s"\n' "$ngshare_authority" > "$ngshare_policy"
-        set -- "$@" --traffic-policy-file "$ngshare_policy"
-      fi
-    fi
-  fi
-  set -o pipefail
-  command ngrok "$@" --log stdout --log-format json 2>&1 |
-    command jq --unbuffered -Rr '
-      fromjson? // {msg: ., lvl: "error"}
-      | if .msg == "started tunnel" then
-          "\nPublic URL: \(.url)\nKeep this terminal running; Ctrl+C stops sharing.\n"
-        elif (.lvl == "error" or .lvl == "eror" or .lvl == "crit" or .lvl == "warn") then
-          "ngrok: \(.msg)\(if .err then " — " + (.err | tostring) else "" end)"
-        else empty end'
-)
+# ngrok http, but print the public URL (e.g. ngshare 3000)
+ngshare() {
+  ngrok http "$@" --log stdout --log-format json |
+    jq --unbuffered -r 'if .msg == "started tunnel" then "Public URL: \(.url)"
+      elif .lvl == "eror" or .lvl == "crit" then "ngrok: \(.err // .msg)" else empty end'
+}

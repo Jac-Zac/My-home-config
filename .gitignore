@@ -13,8 +13,6 @@
 
 # Personal / may contain secrets
 .config/git/gitconfig
-.config/claude/*
-!.config/claude/settings.json
 .config/opencode/*
 !.config/opencode/opencode.jsonc
 .config/netrc/
