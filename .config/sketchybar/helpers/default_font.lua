@@ -3,6 +3,7 @@ return {
 	numbers = "SF Mono",              -- Used for numbers
 	icons = "SF Pro Text",            -- Used for icons (or NerdFont)
 	app_icons = "sketchybar-app-font", -- Used for app icons
+	nerd = "Hack Nerd Font Propo",    -- Brand/device glyphs (Claude, OpenAI, Wi-Fi, speakers)
 	sizes = {
 		text = 13.0,
 		numbers = 12.0,

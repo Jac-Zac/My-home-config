@@ -1,10 +1,8 @@
--- Right items (R to L)
+-- Right items (R to L): each one lands left of the previous
 require("items.widgets.battery")
 require("items.widgets.wifi")
 require("items.widgets.volume")
 require("items.widgets.control_center")
 require("items.widgets.keyboard")
 require("items.widgets.agents")
-
--- require("items.widgets.metrics")
--- require("items.widgets.media")
+require("items.widgets.next_event") -- leftmost: the next meeting, when one is near

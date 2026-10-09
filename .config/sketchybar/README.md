@@ -1,97 +1,110 @@
 # sketchybar
 
-A Lua ([SbarLua](https://github.com/FelixKratz/SbarLua)) configuration for
-[SketchyBar](https://felixkratz.github.io/SketchyBar) on macOS: full-width top
-bar, SF Symbols throughout, dark popups. Every popup opens and closes by
-clicking its bar cell; opening one closes the rest (`helpers/popups.lua`,
-exclusive like the reference setup — SketchyBar has no click-outside event).
+A Lua ([SbarLua](https://github.com/FelixKratz/SbarLua)) config for [SketchyBar](https://felixkratz.github.io/SketchyBar): a full-width top bar with dark, click-to-open popups.
 
-## Layout
+## Full install
 
-Left to right: Apple · spaces · front app · app menus.
-Right to left: calendar/date · battery · wifi · volume · control center ·
-passwords · keyboard layout · **agent usage**.
+On a fresh Mac (Apple silicon, macOS 14+):
 
-## Widgets of note
+1. **Homebrew** — https://brew.sh
+2. **Xcode Command Line Tools** (the helpers are small Swift/C programs):
+   ```sh
+   xcode-select --install
+   ```
+3. **Clone to `~/.config/sketchybar`** (paths are fixed) — move any existing
+   config out of the way first:
+   ```sh
+   git clone <this repo> ~/.config/sketchybar
+   ```
+4. **Run the installer** — installs SketchyBar, Lua 5.4, SbarLua, the fonts
+   (SF Pro, SF Mono, SF Symbols, Hack Nerd Font, sketchybar-app-font), builds
+   the helpers and starts the bar:
+   ```sh
+   bash ~/.config/sketchybar/helpers/install.sh
+   ```
+   It ends with `helpers/doctor.sh`, a checklist of anything still missing
+   with the exact command to fix it.
+5. **Hide the macOS menu bar** — System Settings → Control Center →
+   *Automatically hide and show the menu bar* → **Always**.
+6. **One-time permissions** (macOS asks the first time you use each):
+   - **Calendars** — open the calendar popup and allow `sketchybar`.
+   - **Wi-Fi name** — macOS hides it from scripts; to mark the current
+     network run `sudo ipconfig setverbose 1` (or create a Shortcut named
+     *SketchyBar Wi-Fi* that returns the network name).
+   - **Bluetooth / System Events** — the Control Center toggles.
 
-**Agent usage** (`items/widgets/agents.lua`, `helpers/agents_usage.py`) — Claude
-Code + Codex quota, shown as **remaining** (like the ChatGPT app). One cell per
-engine, auto-hiding when its source is absent:
+Re-run `bash ~/.config/sketchybar/helpers/doctor.sh` any time something
+looks off.
 
-- data is read from local files only (`~/.claude.json`,
-  `~/.codex/sessions`), no network;
-- the helper scans only the 12 newest session files and picks the record with
-  the latest event timestamp (~0.09 s cold), then the bar caches on file mtime;
-- bar cell: `◎ 49%`, amber ≤ 20 %, red ≤ 5 %;
-- popup: per-engine 5h/week rows with 50-cell gauges and precise reset
-  countdown (`5d 23h 38m reset`), reset right-aligned with the gauge end.
+### Optional
 
-**Volume** (`items/widgets/volume.lua`) — bar glyph plus dark `VOLUME` popup:
-slider, mute toggle, `OUTPUT` device list (click to switch, `✓` marks the
-current); mute and device changes are pushed by the resident `audio watch`
-daemon (`volume_refresh` event) with a 30 s safety-net poll. Devices, real transport kinds and
-switching come from the CoreAudio helper (`helpers/audio.swift`, built with
-`swiftc -O helpers/audio.swift -o helpers/audio`).
+- **Live Claude usage** — Claude Code passes its current rate limits to a
+  statusline script on every update. Add to `~/.claude/settings.json`:
+  ```json
+  "statusLine": { "type": "command", "command": "~/.config/sketchybar/helpers/claude_statusline.py" }
+  ```
+  (it also shows `ctx · 5h · wk` in Claude Code). Without it the bar uses what
+  Claude Code / the desktop app last saved, and the popup shows its age.
+- **Calendar** — events come from every account in System Settings →
+  Internet Accounts (Google, iCloud, Exchange…), i.e. whatever Calendar.app
+  or Notion Calendar shows. *Calendar ↗* opens Notion Calendar, or
+  Calendar.app if it isn't installed.
+- [yabai](https://github.com/koekeishiya/yabai) — click a space to switch to it.
+- Claude Code, Codex, Tailscale — their parts hide when not installed.
 
-**Battery** (`items/widgets/battery.lua`) — bar glyph + `%`, dark `BATTERY`
-popup: status (`99% · Charging`), 40-cell gauge, time remaining/to-full, and
-health / cycle count / temperature from `ioreg`.
+## What's in the bar
 
-**Calendar** (`items/calendar.lua`) — date + time cell with a dark month-grid
-popup on click: today as `[dd]`, `‹ prev` / `next ›` rows, `●` jumps back to
-this month, plus upcoming events from Apple Calendar via his `events` helper
-(local EventKit, no network).
+**Left:** Apple (system stats, power actions) · spaces · front app · app menus
 
-**Keyboard** (`items/widgets/keyboard.lua`) — bar shows the current layout,
-click opens a dark `KEYBOARD` popup listing enabled layouts (`✓` marks the
-current) to switch between them. Switching uses the local `kbswitch` helper
-(TextInput API, built with `swiftc -O helpers/kbswitch.swift -o
-helpers/kbswitch`).
+**Right:** next meeting (shows up 30 min before) · Claude / Codex usage ·
+keyboard layout · Control Center (Wi-Fi, Bluetooth, dark mode, brightness,
+keyboard light, sound) · volume + outputs · Wi-Fi + saved networks + Tailscale ·
+battery · date/time + calendar
 
-**Wi-Fi** (`items/widgets/wifi.lua`) — bar glyph,
-dark `WI-FI` popup on click: current ssid / ip / router plus the preferred
-(saved) networks with the current one marked `✓`; clicking another joins it
-via `networksetup` (keychain password for known networks). Network calls are
-alarm-guarded and the wake refresh is staggered so a cold network stack after
-lid-open can't stall the bar — nothing here ever touches the network itself.
+Click a cell to open its popup; click it again or anywhere else to close.
 
-## Files
+## Configure
 
-- `sketchybarrc` — entry point (Lua 5.4), enables hot reload
-- `init.lua` — loads `bar`, `default`, `items`
-- `bar.lua` / `default.lua` / `settings.lua` / `colors.lua` / `icons.lua` —
-  bar geometry, defaults, fonts, theme, icon set
-- `items/` — left/right widgets (`items/widgets/agents.lua`,
-  `items/widgets/volume.lua`, `keyboard.lua`, …)
-- `helpers/` — `agents_usage.py` extractor, `audio.swift` CoreAudio helper,
-  `events.swift` calendar helper and `kbswitch.swift` keyboard helper (+ built
-  binaries), `wake.lua` post-wake blackout, `underline.lua` active-popup
-   binaries), `wake.lua` post-wake blackout, `underline.lua` active-popup
-   underline, `popups.lua` exclusive-popup registry, `menus` binary. All
-   helpers build via `helpers/makefile`, rebuilt only when their sources are
-   newer than the binaries
+`settings.lua`:
 
-## Requirements
+| Setting | Meaning |
+|---|---|
+| `calendars` | limit the calendar to these calendar names (as in Calendar.app); empty = all |
+| `calendar_app` | app opened by *Calendar ↗* (default Notion Calendar) |
+| `next_event_minutes` | how early the next meeting appears (0 = only while it runs) |
 
-- macOS, Homebrew, [SketchyBar](https://felixkratz.github.io/SketchyBar),
-  Lua 5.4 with [SbarLua](https://github.com/FelixKratz/SbarLua)
-- Xcode Command Line Tools (only to build `helpers/audio` once)
-- Optional: Claude Code and/or Codex — the agent cell appears only for the
-  engines actually installed
+Keep personal choices out of the repo in `settings.local.lua` (git-ignored);
+it returns only the keys you change:
+
+```lua
+return { calendars = { "Work", "Holidays in Italy" }, calendar_app = "Calendar" }
+```
+
+Fonts are in `helpers/default_font.lua`, colors in `colors.lua`. Reload with
+`sketchybar --reload`.
+
+## How it fits together
+
+- `items/` — one file per widget; `helpers/popup.lua` builds every popup
+  (one grid, batched updates, rows created after the bar's first paint).
+- `helpers/` — small native helpers (calendar, audio, keyboard, Control
+  Center, click-away, calendar grid) rebuilt automatically when changed, and
+  the Claude/Codex usage reader.
+- Updates are event-driven where macOS offers events; the few timers are
+  cheap (clock 30s, Wi-Fi and Claude/Codex usage 60s, battery/volume 2 min);
+  popups read their data
+  only when opened.
+
+Logs: `/opt/homebrew/var/log/sketchybar/sketchybar.out.log`.
 
 ## Credits
 
-- [SketchyBar](https://felixkratz.github.io/SketchyBar) and
-  [SbarLua](https://github.com/FelixKratz/SbarLua) by Felix Kratz — the bar
-  itself; this repo is only configuration
-- [garamnohhh/sketchybar-island](https://github.com/garamnohhh/sketchybar-island) —
-  the agent-cell concept (local usage parsing, remaining %, gauge popup), the
-  volume/calendar popup structures, and the CoreAudio `audio` helper source;
-  adapted here to Lua with SF/Menlo fonts
-- Fonts: Apple SF Pro / SF Mono / Menlo (macOS),
-  [sketchybar-app-font](https://github.com/kvndrsslr/sketchybar-app-font) for
-  app icons, [Nerd Fonts](https://www.nerdfonts.com) (Material Design device
-  glyphs only)
+[SketchyBar](https://felixkratz.github.io/SketchyBar) and
+[SbarLua](https://github.com/FelixKratz/SbarLua) by Felix Kratz;
+[sketchybar-island](https://github.com/garamnohhh/sketchybar-island) for the
+popup design, agent-usage idea and the `audio`/`events` helpers;
+[sketchybar-app-font](https://github.com/kvndrsslr/sketchybar-app-font);
+[Nerd Fonts](https://www.nerdfonts.com).
 
 ## License
 

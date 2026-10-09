@@ -35,7 +35,7 @@ local function show_menu_labels()
 end
 
 -- Update the menu items dynamically
-local function update_menus(space_id)
+local function update_menus()
 	sbar.exec(MENU_SCRIPT .. " -l", function(menus)
 		-- Hide all menus initially
 		sbar.set("/menu\\..*/", { drawing = false })
@@ -103,9 +103,7 @@ space_menu_swap:subscribe("swap_menus_and_spaces", function()
 		-- Show the menus if they are not already visible
 		menu_visible = true
 		menu_watcher:set({ updates = true })
-		sbar.exec("yabai -m query --windows --window | jq -r '.space'", function(space_id)
-			update_menus(space_id)
-		end)
+		update_menus()
 	end
 end)
 
@@ -114,9 +112,7 @@ space_menu_swap:subscribe("front_app_switched", function(env)
 		-- Hide all old menu items
 		menu_watcher:set({ updates = true })
 		-- Change to the new menus
-		sbar.exec("yabai -m query --windows --window | jq -r '.space'", function(space_id)
-			update_menus(space_id)
-		end)
+		update_menus()
 	else
 		menu_watcher:set({ updates = false })
 		sbar.set("/menu\\..*/", { drawing = false })

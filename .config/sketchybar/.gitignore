@@ -1,2 +1,4 @@
 .env
 .vscode
+.claude/
+settings.local.lua

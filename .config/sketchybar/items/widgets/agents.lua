@@ -1,300 +1,180 @@
 local colors = require("colors")
 local settings = require("settings")
-local ul = require("helpers.underline")
 local wake = require("helpers.wake")
-local popups = require("helpers.popups")
+local P = require("helpers.popup")
 
 -- Agent usage cell (Lua port of the bash "agent cell"): Claude + Codex 5h/week,
 -- shown as REMAINING (matches the ChatGPT app) with battery-fill gauges.
 -- Conditional display: single cell when only one source exists, dual when both
 -- do, hidden when neither does. Sits left of the keyboard switcher (required
 -- after keyboard in widgets/init.lua, position="right" stacks leftwards).
--- Data comes from helpers/agents_usage.py (local files only, no network).
--- Efficiency: the helper (~0.09s cold) runs only when the newest Codex rollout
--- mtime, newest Claude transcript mtime, or ~/.claude.json mtime changed;
--- otherwise the tick is a cheap async stat that never blocks the event loop.
+-- Data comes from helpers/agents_usage.py (local files only, no network);
+-- freshest is Claude Code's own statusline feed (helpers/claude_statusline.py,
+-- event-driven via agents_refresh) when enabled. Other sources:
+-- Claude is read from ~/.claude.json cachedUsageUtilization (five_hour /
+-- seven_day, the same cache /usage shows), plus the desktop app's
+-- plan-usage-history.json when fresher; Codex from rollout-*.jsonl tails.
+-- (Transcripts are NOT watched: they change on every message without moving
+-- the numbers, which only refresh when /usage refetches.)
+-- Efficiency: the helper (~0.03s cold) runs only when ~/.claude.json, the
+-- desktop history, or the newest Codex rollout mtime changed; otherwise the
+-- tick is a cheap async stat that never blocks the event loop.
 --
--- Icons: the reference setup renders its Claude/OpenAI marks via Nerd Font
--- codepoints U+E281/U+E282, but in every shipping Nerd Fonts release (checked
--- locally, incl. a fresh 3.5.1 install) those slots are fae-banana/fae-bath —
--- using them would put a banana in the bar. So this widget stays in the
--- config's own fonts (SF + Menlo) with ✳/◎ marks and takes only his palette.
+-- Icons: Nerd Fonts brand marks — U+EC82 Claude, U+EC81 OpenAI (NOT
+-- U+E281/E282, those are fae-banana/fae-bath), in settings.font.nerd.
 
-local CLAUDE = 0xfffab387 -- Catppuccin Peach (claude brand, readable on Mocha)
--- Catppuccin Mocha popup palette (mirrors colors.catppuccin): Base surface,
--- Surface1 hairline, Text/Subtext labels, Yellow/Red thresholds.
-local H = {
-	bg = 0xff1e1e2e,
-	line = 0xff45475a,
-	text = 0xffeceff4, -- Nord6
-	dim = 0xffa6adc8,
-	warn = 0xfff9e2af,
-	err = 0xfff38ba8,
-}
+local H = P.H
+local CLAUDE = colors.catppuccin.peach -- claude brand, readable on Mocha
 local HELPER = os.getenv("HOME") .. "/.config/sketchybar/helpers/agents_usage.py"
 local H5, WK = 5 * 3600, 7 * 86400
-local MONO = settings.font.numbers -- SF Mono: fixed pitch, keeps value/reset columns aligned
-
-local function num_font(size)
-	return { family = MONO, style = settings.font.style_map["Regular"], size = size }
-end
+local G_CLAUDE, G_OPENAI = utf8.char(0xEC82), utf8.char(0xEC81)
 
 -- Bar items -------------------------------------------------------------
-local claude = sbar.add("item", "widgets.agents.claude", {
-	position = "right",
-	icon = {
-		string = "✳",
-		color = CLAUDE,
+-- The two cells read as one pair: 12pt between them, 16pt to neighbours
+local function cell(name, glyph, brand, freq, pad_right)
+	return sbar.add("item", name, {
+		position = "right",
+		update_freq = freq,
 		padding_left = settings.item_padding,
-		padding_right = settings.item_padding,
-	},
-	label = { string = "—", color = colors.grey, font = num_font(settings.font.sizes.numbers) },
-	update_freq = 45,
-})
-
-local codex = sbar.add("item", "widgets.agents.codex", {
-	position = "right",
-	icon = {
-		string = "◎",
-		color = colors.white,
-		padding_left = settings.item_padding,
-		padding_right = settings.item_padding,
-	},
-	label = { string = "—", color = colors.grey, font = num_font(settings.font.sizes.numbers) },
-})
-
-local bracket = sbar.add("bracket", "widgets.agents.bracket", { claude.name, codex.name }, {
-	popup = {
-		drawing = false,
-		align = "center",
-		height = 1, -- row-height minimum: lets each row's background.height drive (his rc sets popup.height=1)
-		background = { color = H.bg, border_color = H.line, border_width = 1 },
-		y_offset = 2,
-	},
-})
-popups.track("agents", bracket)
-
--- Popup: full-gauge clone. Rows: header / 5h value / 5h gauge / week value /
--- week gauge per agent (bash rows 0-4 claude, 5-9 codex). Value+reset share one
--- label (one color = pace color); gauges split lit (icon) / empty (label).
-local function popup_row(opts)
-	return sbar.add("item", {
-		position = "popup." .. bracket.name,
-		icon = opts.icon,
-		label = opts.label,
-		background = opts.background,
+		padding_right = pad_right,
+		icon = { string = glyph, color = brand, font = P.nerd(14), padding_left = 0, padding_right = 4 },
+		label = { string = "—", color = colors.grey, font = P.mono(settings.font.sizes.numbers), padding_left = 0, padding_right = 0 },
 	})
 end
+local claude = cell("widgets.agents.claude", G_CLAUDE, CLAUDE, 60, settings.item_padding)
+local codex = cell("widgets.agents.codex", G_OPENAI, H.text, nil, 4)
+local bracket = sbar.add("bracket", "widgets.agents.bracket", { claude.name, codex.name }, {})
 
-local hdr_font = { family = settings.font.text, style = settings.font.style_map["Regular"], size = 12 }
-
--- Every popup row shares the same side padding so headers, values and gauges
--- start/end on one edge (the clipped "codex" came from rows with no padding).
-local POP_L, POP_R = 16, 12
-local GAUGE_FONT = "Menlo:Regular:9.8"
-
-local function gauge_row(color)
-	return popup_row({
-		icon = { string = "", color = color, font = GAUGE_FONT, padding_left = POP_L, padding_right = 0, y_offset = 2 },
-		label = { string = "", color = H.line, font = GAUGE_FONT, padding_right = POP_R, y_offset = 2 },
-		background = { drawing = true, color = 0x00000000, height = 18 },
-	})
+-- Popup: per agent a brand header, then 5h / week rows (remaining % · reset
+-- flush right) each over a gauge spanning exactly the value column.
+local pop = P.new("agents", bracket)
+local title = pop:header("AGENTS")
+local function section(glyph, name, brand)
+	return {
+		name = name,
+		brand = brand,
+		rows = {
+			pop:glyph(glyph, name, { glyph_color = brand, color = H.text, height = 30 }),
+			pop:kv("5h", ""),
+			pop:gauge(brand),
+			pop:kv("week", ""),
+			pop:gauge(brand),
+		},
+	}
 end
-
-local function value_row()
-	return popup_row({
-		icon = { drawing = false },
-		label = { string = "", font = num_font(12), padding_left = POP_L, padding_right = POP_R, y_offset = -2 },
-		background = { drawing = true, color = 0x00000000, height = 26 },
-	})
-end
-
-local rows = {
-	title = popup_row({
-		icon = { drawing = false },
-		label = { string = "AGENTS", color = H.dim, font = hdr_font, padding_left = POP_L, padding_right = POP_R },
-		background = { drawing = true, color = 0x00000000, height = 24 },
-	}),
-	claude_hdr = popup_row({
-		icon = { string = "✳", color = CLAUDE, padding_left = POP_L, padding_right = 4, font = { family = settings.font.icons, style = settings.font.style_map["Regular"], size = 12 } },
-		label = { string = "claude", color = CLAUDE, font = hdr_font, padding_right = POP_R },
-		background = { drawing = true, color = 0x00000000, height = 24 },
-	}),
-	claude_5h = value_row(),
-	claude_5h_g = gauge_row(CLAUDE),
-	claude_wk = value_row(),
-	claude_wk_g = gauge_row(CLAUDE),
-	codex_hdr = popup_row({
-		icon = { string = "◎", color = H.text, padding_left = POP_L, padding_right = 4, font = { family = settings.font.icons, style = settings.font.style_map["Regular"], size = 12 } },
-		label = { string = "codex", color = H.text, font = hdr_font, padding_right = POP_R },
-		background = { drawing = true, color = 0x00000000, height = 24 },
-	}),
-	codex_5h = value_row(),
-	codex_5h_g = gauge_row(H.text),
-	codex_wk = value_row(),
-	codex_wk_g = gauge_row(H.text),
-	-- Bottom pad (his p.z): keeps the last gauge off the popup border
-	pad_bot = popup_row({
-		icon = { drawing = false },
-		label = { drawing = false },
-		background = { drawing = true, color = 0x00000000, height = 8 },
-	}),
-}
+local sec = { claude = section(G_CLAUDE, "claude", CLAUDE), codex = section(G_OPENAI, "codex", H.text) }
+local pad_bot = pop:spacer(8)
 
 -- Formatting helpers ------------------------------------------------------
--- Everything below works in REMAINING (100 - used), battery style: a full
--- gauge is a full quota. Steps mirror his bash thresholds on used
--- (used ≥95 err, used ≥80 warn) → remaining ≤5 err, remaining ≤20 warn.
+-- Everything works in REMAINING (100 - used), battery style: a full gauge is
+-- a full quota. used ≥95 err, used ≥80 warn → remaining ≤5 err, ≤20 warn.
 local function rem(pct)
-	if pct == nil then return nil end
-	return math.max(0, math.min(100, 100 - pct))
+	return pct and math.max(0, math.min(100, 100 - pct))
 end
 
 local function col(r)
 	if r == nil then return H.dim end
-	if r <= 5 then return H.err end
+	if r <= 5 then return H.red end
 	if r <= 20 then return H.warn end
 	return H.text
 end
 
-local function icon_col(brand, r) -- brand color at rest, threshold tint on warn
-	if r ~= nil and r <= 20 then return col(r) end
-	return brand
-end
-
-local function pace(r, reset) -- remaining color + behind-pace warn (burning faster than time)
-	if r == nil then return H.dim end
+-- Value color: threshold color, else warn when clearly ahead of pace — used
+-- more than PACE_MARGIN points beyond the share of the window already gone
+-- (at that burn rate the quota runs out before the reset). The margin keeps
+-- the first minutes of a fresh window from flashing yellow.
+local PACE_MARGIN = 10
+local function pace(r, at, span)
 	if col(r) ~= H.text then return col(r) end
-	if reset ~= nil then
-		local span = reset.span
-		local left = reset.at - os.time()
-		if left >= 0 then
-			local elapsed = math.max(0, math.min(100, (span - left) / span * 100))
-			if (100 - r) > elapsed then return H.warn end
-		end
+	local left = at and (at - os.time())
+	if left and left >= 0 then
+		local elapsed = math.max(0, math.min(100, (span - left) / span * 100))
+		if (100 - r) > elapsed + PACE_MARGIN then return H.warn end
 	end
 	return H.text
 end
 
 local function fmt_reset(epoch, span)
-	if epoch == nil then return "—" end
-	local left = epoch - os.time()
-	if left < 0 then return "—" end -- past-reset shows —
+	local left = epoch and (epoch - os.time())
+	if not left or left < 0 then return "—" end -- unknown or past reset
 	if span == H5 then return os.date("%H:%M reset", epoch) end
-	local h = math.floor(left / 3600)
-	local m = math.floor((left % 3600) / 60)
+	local h, m = math.floor(left / 3600), math.floor((left % 3600) / 60)
 	if h >= 24 then return string.format("%dd %dh %dm reset", math.floor(h / 24), h % 24, m) end
 	return string.format("%dh %dm reset", h, m)
 end
 
-local function set_gauge(row, brand, r) -- lit cells = remaining (battery fill)
-	local n = 0
-	if r ~= nil then n = math.floor((r + 1) / 2) end -- 2% per cell, 50 cells
-	if n < 0 then n = 0 end
-	if n > 50 then n = 50 end
-	row:set({
-		icon = { string = string.rep("▋", n), color = icon_col(brand, r) },
-		label = { string = string.rep("▋", 50 - n) },
-	})
+-- Data age next to the agent name: local files only refresh when Claude Code
+-- / the desktop app fetch usage (or on every Codex turn), so say how old it is
+local asof = {}
+local function ago(t)
+	if not t then return "" end
+	local m = math.max(0, os.time() - t) // 60
+	if m < 1 then return "now" end
+	if m < 60 then return m .. "m ago" end
+	if m < 1440 then return (m // 60) .. "h ago" end
+	return (m // 1440) .. "d ago"
+end
+local function paint_ages()
+	for k, s in pairs(sec) do
+		s.rows[1]:set({ label = { string = P.spread(s.name, ago(asof[k])), color = H.text } })
+	end
 end
 
--- Display-cell count (UTF-8 aware: "—" ✓ are 1 cell, not 3 bytes)
-local function cells(s)
-	local _, cont = s:gsub("[\128-\191]", "")
-	return #s - cont
+local function pct(r)
+	return r and string.format("%d%%", math.floor(r + 0.5)) or "—"
 end
 
--- Reset right-aligned to the gauge end, his GW method: pad with as many
--- spaces as fit the remaining span. Advances are CoreText-measured, not
--- guessed (50 Menlo-9.8 cells = 295.0pt; SF Mono 12 = 7.418pt/cell).
-local GW, SPC = 295.0, 7.418 -- SPC=SF Mono 12 advance; GW=Menlo-9.8 50-cell gauge
-
-local function value_text(name, r)
-	local p = r ~= nil and string.format("%d%%", math.floor(r + 0.5)) or "—"
-	return name .. "  " .. p
-end
-
-local function set_value_section(defs)
-	for _, d in ipairs(defs) do
-		local left, reset = value_text(d.name, d.r), fmt_reset(d.re, d.span)
-		local n = math.max(2, math.floor((GW - SPC * (cells(left) + cells(reset))) / SPC + 0.5))
-		-- NBSP padding (his recipe): sketchybar can trim/collapse plain spaces
-		local c = pace(d.r, d.re ~= nil and { at = d.re, span = d.span } or nil)
-		d.row:set({ label = { string = left .. string.rep(" ", n) .. reset, color = c } })
+-- One agent's section: value rows (pace-colored) + gauges
+local function fill(s, show, used5, reset5, usedW, resetW)
+	for _, r in ipairs(s.rows) do r:set({ drawing = show }) end
+	if not show then return end
+	for i, w in ipairs({ { rem(used5), reset5, H5 }, { rem(usedW), resetW, WK } }) do
+		local r, at, span = w[1], w[2], w[3]
+		s.rows[2 * i]:set({ label = { string = P.spread(pct(r), fmt_reset(at, span)), color = pace(r, at, span) } })
+		P.set_gauge(s.rows[2 * i + 1], r or 0, s.brand) -- gauges + icons stay brand; only the % warns
 	end
 end
 
 -- Update ------------------------------------------------------------------
 local cache = { key = nil }
 
--- Async mtime stat: newest rollout mtime + newest Claude transcript mtime +
--- claude json mtime; "none" when absent. (The old io.popen version blocked
--- the event loop while listing the sessions dir on every tick.)
+-- Async mtime stat over the helper's real inputs: ~/.claude.json (the /usage
+-- cache) + desktop plan-usage-history.json + newest Codex rollout mtime
+-- (recursive find, tail-scanned by the helper); "none" when all absent.
+-- (Claude transcripts are deliberately NOT watched: they append on every
+-- message while the numbers only move when /usage refetches the cache.)
 local function refresh_key(on_key)
 	sbar.exec(
-		"n=$(ls -t $HOME/.codex/sessions/*/*/*.jsonl $HOME/.codex/sessions/*/*/*/*.jsonl 2>/dev/null | head -n 1);"
-			.. ' [ -n "$n" ] && stat -f %m "$n" 2>/dev/null;'
-			.. "c=$(ls -t $HOME/.claude/projects/*/*.jsonl 2>/dev/null | head -n 1);"
-			.. ' [ -n "$c" ] && stat -f %m "$c" 2>/dev/null;'
-			.. " stat -f %m $HOME/.claude.json 2>/dev/null; true",
+		"stat -f %m $HOME/.claude.json $HOME/.cache/sketchybar/claude-usage.json 2>/dev/null;"
+			.. " stat -f %m $HOME'/Library/Application Support/Claude/plan-usage-history.json' 2>/dev/null;"
+			.. " find $HOME/.codex/sessions $HOME/.codex/archived_sessions -name 'rollout-*.jsonl'"
+			.. " -exec stat -f %m {} + 2>/dev/null | sort -rn | head -n 1; true",
 		function(out)
-			if out == nil then
-				return
-			end
-			if out:gsub("%s", "") == "" then
-				on_key("none")
-			else
-				on_key(out)
-			end
+			if out == nil then return end
+			on_key(out:gsub("%s", "") == "" and "none" or out)
 		end
 	)
 end
 
-local function apply(cx5, cx5r, cxW, cxWr, c5, c5r, cW, cWr)
+local function apply(cx5, cx5r, cxW, cxWr, c5, c5r, cW, cWr, cxa, ca)
+	asof.codex, asof.claude = cxa, ca
+	paint_ages()
 	local has_claude = c5 ~= nil or cW ~= nil
 	local has_codex = cx5 ~= nil or cxW ~= nil
-	-- Bar drives off 5h for claude, week for codex (bash anim_label); as remaining
+	-- Bar drives off 5h for claude, week for codex; as remaining
 	local rC5, rX = rem(c5), rem(cxW ~= nil and cxW or cx5)
-
-	claude:set({ drawing = has_claude, icon = { color = icon_col(CLAUDE, rC5) }, label = {
-		string = rC5 ~= nil and string.format("%d%%", math.floor(rC5 + 0.5)) or "—",
-		color = col(rC5),
-	} })
-	codex:set({ drawing = has_codex, icon = { color = icon_col(H.text, rX) }, label = {
-		string = rX ~= nil and string.format("%d%%", math.floor(rX + 0.5)) or "—",
-		color = col(rX),
-	} })
+	-- low quota colors only the percentage; the brand icons never change
+	claude:set({ drawing = has_claude, label = { string = pct(rC5), color = col(rC5) } })
+	codex:set({ drawing = has_codex, label = { string = pct(rX), color = col(rX) } })
 	bracket:set({ drawing = has_claude or has_codex })
-
-	-- Popup sections follow availability (title + bottom pad show when either agent does)
-	rows.title:set({ drawing = has_claude or has_codex })
-	rows.pad_bot:set({ drawing = has_claude or has_codex })
-	for _, r in ipairs({ rows.claude_hdr, rows.claude_5h, rows.claude_5h_g, rows.claude_wk, rows.claude_wk_g }) do
-		r:set({ drawing = has_claude })
-	end
-	for _, r in ipairs({ rows.codex_hdr, rows.codex_5h, rows.codex_5h_g, rows.codex_wk, rows.codex_wk_g }) do
-		r:set({ drawing = has_codex })
-	end
-	-- Value rows share one reset column across both agents (his GW alignment)
-	local defs = {}
-	if has_claude then
-		defs[#defs + 1] = { row = rows.claude_5h, name = "5h", r = rem(c5), re = c5r, span = H5 }
-		defs[#defs + 1] = { row = rows.claude_wk, name = "week", r = rem(cW), re = cWr, span = WK }
-		set_gauge(rows.claude_5h_g, CLAUDE, rem(c5))
-		set_gauge(rows.claude_wk_g, CLAUDE, rem(cW))
-	end
-	if has_codex then
-		defs[#defs + 1] = { row = rows.codex_5h, name = "5h", r = rem(cx5), re = cx5r, span = H5 }
-		defs[#defs + 1] = { row = rows.codex_wk, name = "week", r = rem(cxW), re = cxWr, span = WK }
-		set_gauge(rows.codex_5h_g, H.text, rem(cx5))
-		set_gauge(rows.codex_wk_g, H.text, rem(cxW))
-	end
-	set_value_section(defs)
+	title:set({ drawing = has_claude or has_codex })
+	pad_bot:set({ drawing = has_claude or has_codex })
+	fill(sec.claude, has_claude, c5, c5r, cW, cWr)
+	fill(sec.codex, has_codex, cx5, cx5r, cxW, cxWr)
 end
 
 local function num(s)
-	if s == nil or s == "-" or s == "" then return nil end
-	return tonumber(s)
+	return (s ~= nil and s ~= "-" and s ~= "") and tonumber(s) or nil
 end
 
 local function update_all()
@@ -302,42 +182,35 @@ local function update_all()
 	refresh_key(function(key)
 		if key == "none" then -- neither source present: hide everything, no helper run
 			cache.key = key
-			apply(nil, nil, nil, nil, nil, nil, nil, nil)
-			return
+			return apply()
 		end
 		if key == cache.key then return end -- unchanged: skip the parse
 		-- alarm-guarded (a cold post-wake disk should never stall the bar loop)
-		sbar.exec("perl -e 'alarm 10; exec @ARGV' /usr/bin/python3 " .. HELPER, function(out)
-			if out == nil or out == "" then return end
-			out = out:gsub("[\r\n]+$", "")
-			local f = {}
+		P.exec("perl -e 'alarm 10; exec @ARGV' /usr/bin/python3 " .. HELPER, function(out)
+			out = (out or ""):gsub("[\r\n]+$", "")
+			if select(2, out:gsub("\t", "")) < 7 then return end -- need all 8 TSV fields
+			local f, i = {}, 0
 			for tok in (out .. "\t"):gmatch("(.-)\t") do
-				local v = tok:gsub("^%s*(.-)%s*$", "%1")
-				if v == "" then v = "-" end
-				f[#f + 1] = v
+				i = i + 1
+				f[i] = num(tok:match("^%s*(.-)%s*$"))
 			end
-			if #f < 8 then return end
 			cache.key = key
-			apply(num(f[1]), num(f[2]), num(f[3]), num(f[4]), num(f[5]), num(f[6]), num(f[7]), num(f[8]))
+			apply(f[1], f[2], f[3], f[4], f[5], f[6], f[7], f[8], f[9], f[10])
 		end)
 	end)
 end
 
--- Single routine owner (claude ticks every 45s): codex shares the bracket
+-- Single routine owner (claude ticks every 60s; the statusline hook pushes sooner): codex shares the bracket
 -- and would otherwise run update_all (and its stat) twice per tick.
-claude:subscribe({ "routine" }, update_all)
-claude:subscribe({ "system_woke" }, wake.arm)
-codex:subscribe({ "system_woke" }, wake.arm)
+claude:subscribe("routine", function()
+	paint_ages() -- ages tick even when the data didn't change
+	update_all()
+end)
+claude:subscribe("system_woke", wake.arm)
+-- Claude Code's statusline hook pokes this the moment its limits change
+claude:subscribe("agents_refresh", update_all)
 
-local function toggle_popup()
-	popups.close_others("agents")
-	local drawing = bracket:query().popup.drawing
-	bracket:set({ popup = { drawing = "toggle", align = "center" } })
-	if drawing == "off" then ul.show(bracket) else ul.hide(bracket) end
-end
-
--- Click-only open AND close (no hover, no leave-close): rows stay pressable
-claude:subscribe("mouse.clicked", toggle_popup)
-codex:subscribe("mouse.clicked", toggle_popup)
+-- Click-only open AND close: rows stay pressable
+pop:bind({ claude, codex }, paint_ages)
 
 update_all() -- initial paint (routine also covers subsequent ticks)
