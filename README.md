@@ -83,7 +83,7 @@ _You should always keep your configuration up to date, luckily there is a straig
 
 - I also suggest to Automatically Hide & Show the Menu Bar and also set show scroll bar in all the application only when scrolling (system Preferences -> General)
 - Absolutely disable wallpaper tinting in windows inside system preferences > general on macOS Big Sur
-- Enable Reduce Motion (System Settings -> Accessibility -> Motion). It swaps the space-switch slide for a fast fade, which feels instant with yabai tiling and lowers WindowServer work. Note: yabai itself doesn't require it — the fast path is the scripting addition (`sudo yabai --load-sa`); keep `skip_window_focus_animation` off while SA loads. Applied automatically by `installer.sh -p`.
+<!-- - Enable Reduce Motion (System Settings -> Accessibility -> Motion). It swaps the space-switch slide for a fast fade, which feels instant with yabai tiling and lowers WindowServer work. Note: yabai itself doesn't require it — the fast path is the scripting addition (`sudo yabai --load-sa`); keep `skip_window_focus_animation` off while SA loads. Applied automatically by `installer.sh -p`. -->
 
 ![showcase](.assets/preference.png)
 

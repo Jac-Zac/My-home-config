@@ -255,8 +255,8 @@ _macSystemPrefs_() {
   # with yabai tiling and lowers WindowServer work. Personal preference,
   # not a yabai requirement (the fast path is `sudo yabai --load-sa`;
   # keep yabai `skip_window_focus_animation` off while SA loads).
-  echo "Enabling Reduce Motion..."
-  defaults write com.apple.universalaccess reduceMotion -bool true
+  # echo "Enabling Reduce Motion..."
+  # defaults write com.apple.universalaccess reduceMotion -bool true
 
   echo "Configuring screenshot settings..."
   defaults write com.apple.screencapture type -string "png"
