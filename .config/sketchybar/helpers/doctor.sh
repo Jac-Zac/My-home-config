@@ -30,8 +30,8 @@ echo "Optional (widgets hide when absent)"
 { [ -f "$HOME/.claude.json" ] && pass "Claude Code (agent cell)"; } || info "Claude Code not found — Claude cell hidden"
 { [ -d "$HOME/.codex" ] && pass "Codex (agent cell)"; } || info "Codex not found — Codex cell hidden"
 if [ -f "$HOME/.claude.json" ]; then
-  grep -q "claude_statusline.py" "$HOME/.claude/settings.json" 2>/dev/null && pass "Claude live usage (statusline feed)" \
-    || info "Claude usage updates only when Claude Code/desktop fetch it — for live numbers add to ~/.claude/settings.json: \"statusLine\": {\"type\": \"command\", \"command\": \"~/.config/sketchybar/helpers/claude_statusline.py\"}"
+  grep -q "claude_statusline.lua" "$HOME/.claude/settings.json" 2>/dev/null && pass "Claude live usage (statusline feed)" \
+    || info "Claude usage updates only when Claude Code/desktop fetch it — for live numbers add to ~/.claude/settings.json: \"statusLine\": {\"type\": \"command\", \"command\": \"~/.config/sketchybar/helpers/claude_statusline.lua\"}"
 fi
 { [ -x /Applications/Tailscale.app/Contents/MacOS/Tailscale ] && pass "Tailscale (Wi-Fi popup section)"; } || info "Tailscale not found — section hidden"
 { command -v yabai >/dev/null && pass "yabai (click a space to switch)"; } || info "yabai not installed — clicking spaces does nothing"

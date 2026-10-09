@@ -8,8 +8,8 @@ local P = require("helpers.popup")
 -- Conditional display: single cell when only one source exists, dual when both
 -- do, hidden when neither does. Sits left of the keyboard switcher (required
 -- after keyboard in widgets/init.lua, position="right" stacks leftwards).
--- Data comes from helpers/agents_usage.py (local files only, no network);
--- freshest is Claude Code's own statusline feed (helpers/claude_statusline.py,
+-- Data comes from helpers/agents_usage.lua (local files only, no network);
+-- freshest is Claude Code's own statusline feed (helpers/claude_statusline.lua,
 -- event-driven via agents_refresh) when enabled. Other sources:
 -- Claude is read from ~/.claude.json cachedUsageUtilization (five_hour /
 -- seven_day, the same cache /usage shows), plus the desktop app's
@@ -25,7 +25,7 @@ local P = require("helpers.popup")
 
 local H = P.H
 local CLAUDE = colors.catppuccin.peach -- claude brand, readable on Mocha
-local HELPER = os.getenv("HOME") .. "/.config/sketchybar/helpers/agents_usage.py"
+local HELPER = os.getenv("HOME") .. "/.config/sketchybar/helpers/agents_usage.lua"
 local H5, WK = 5 * 3600, 7 * 86400
 local G_CLAUDE, G_OPENAI = utf8.char(0xEC82), utf8.char(0xEC81)
 
@@ -186,7 +186,7 @@ local function update_all()
 		end
 		if key == cache.key then return end -- unchanged: skip the parse
 		-- alarm-guarded (a cold post-wake disk should never stall the bar loop)
-		P.exec("perl -e 'alarm 10; exec @ARGV' /usr/bin/python3 " .. HELPER, function(out)
+		P.exec("perl -e 'alarm 10; exec @ARGV' " .. HELPER, function(out)
 			out = (out or ""):gsub("[\r\n]+$", "")
 			if select(2, out:gsub("\t", "")) < 7 then return end -- need all 8 TSV fields
 			local f, i = {}, 0

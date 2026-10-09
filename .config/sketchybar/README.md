@@ -41,7 +41,7 @@ looks off.
 - **Live Claude usage** — Claude Code passes its current rate limits to a
   statusline script on every update. Add to `~/.claude/settings.json`:
   ```json
-  "statusLine": { "type": "command", "command": "~/.config/sketchybar/helpers/claude_statusline.py" }
+  "statusLine": { "type": "command", "command": "~/.config/sketchybar/helpers/claude_statusline.lua" }
   ```
   (it also shows `ctx · 5h · wk` in Claude Code). Without it the bar uses what
   Claude Code / the desktop app last saved, and the popup shows its age.

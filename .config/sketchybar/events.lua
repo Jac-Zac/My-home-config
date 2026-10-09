@@ -3,6 +3,6 @@
 sbar.add("event", "swap_menus_and_spaces")
 sbar.add("event", "volume_refresh")
 sbar.add("event", "popups_close") -- fired by helpers/clickaway
-sbar.add("event", "agents_refresh") -- fired by helpers/claude_statusline.py
+sbar.add("event", "agents_refresh") -- fired by helpers/claude_statusline.lua
 -- macOS broadcasts this when the keyboard layout changes: no polling needed
 sbar.add("event", "input_change", "AppleSelectedInputSourcesChangedNotification")
