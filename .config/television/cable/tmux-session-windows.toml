@@ -1,0 +1,26 @@
+[metadata]
+name = "tmux-session-windows"
+description = "List and switch between windows in the current tmux session"
+requirements = ["tmux"]
+
+[source]
+command = "tmux list-windows -t \"$(tmux display-message -p -F '#{session_name}')\" -F '#{window_id}\t#{session_name}\t#{window_index}\t#{window_name}\t#{pane_current_command}'"
+display = "{split:\t:2} - {split:\t:3} ({split:\t:4})"
+output = "{split:\t:0}"
+
+[preview]
+command = "tmux capture-pane -t '{split:\t:0}' -p 2>/dev/null || echo 'No preview available'"
+
+[keybindings]
+enter = "actions:select"
+ctrl-n = "actions:new_window"
+
+[actions.select]
+description = "Switch to the selected window"
+command = "tmux switch-client -t '{split:\t:0}' || tmux select-window -t '{split:\t:0}'"
+mode = "execute"
+
+[actions.new_window]
+description = "Create a new window in the current session"
+command = '''tmux new-window -t "$(tmux display-message -p -F '#{session_name}')" -c "$PWD"'''
+mode = "execute"

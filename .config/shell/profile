@@ -6,11 +6,11 @@ if [[ "$TERM_PROGRAM" == "ghostty" ]]; then
     export TERM=xterm-256color
 fi
 
-# force snacks.nvim to detect Ghostty inside tmux
-export SNACKS_GHOSTTY=1
-
 # Adding syntax  highlighting for man pages
 export MANPAGER="nvim +Man!"
+
+# force snacks.nvim to detect Ghostty inside tmux
+export SNACKS_GHOSTTY=1
 
 # clean up
 export ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh"
@@ -29,14 +29,14 @@ export HOMEBREW_BREWFILE="${XDG_CONFIG_HOME:-$HOME/.config}/brewfile/Brewfile"
 export NETRC="${XDG_CONFIG_HOME:-$HOME/.config}/netrc/netrc"
 export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"
 export NPM_CONFIG_PREFIX="$XDG_CONFIG_HOME/npm"
+export OLLAMA_MODELS="$XDG_CONFIG_HOME/ollama/models"
+# export CLAUDE_CONFIG_DIR="$XDG_CONFIG_HOME/claude"
+
+# Adding lmstudio
+PATH="$PATH:$HOME/.lmstudio/bin"
 
 # Adding scripts to path
 PATH="${XDG_CONFIG_HOME:-$HOME/.config}/scripts:$PATH"
-
-# FZF default color theme (Nord)
-export FZF_DEFAULT_OPTS='
---color fg:#D8DEE9,bg:#2E3440,hl:#A3BE8C,fg+:#D8DEE9,bg+:#434C5E,hl+:#A3BE8C
---color pointer:#BF616A,info:#4C566A,spinner:#4C566A,header:#4C566A,prompt:#81A1C1,marker:#EBCB8B'
 
 # Homebrew PATH
 PATH="/opt/homebrew/bin:$PATH"

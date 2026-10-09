@@ -35,7 +35,7 @@ alias ask='noglob _ask'
 alias q='noglob _q'
 
 alias todo="vim ~/Github/University/TODO.md"
-alias ptodo="vim /Users/jaczac/Github/Parallx/TODO.md"
+alias ptodo="vim ~/Github/Parallx/TODO.md"
 alias safari="open /Applications/Safari.app"
 alias showD="defaults write com.apple.finder CreateDesktop -bool true;killall Finder" # show the Dock
 alias hideD="defaults write com.apple.finder CreateDesktop -bool false;killall Finder" # hide the Dock
@@ -174,6 +174,33 @@ ngshare() (
     http|tcp|tls|start) ;;
     *) set -- http "$@" ;;
   esac
+  # Rewrite HTTP Host to the upstream authority; preserve explicit policies and allow opt-out.
+  if [ "$1" = http ] && [ "${NGSHARE_PRESERVE_HOST:-0}" != 1 ]; then
+    local ngshare_has_policy=0 ngshare_arg
+    for ngshare_arg in "$@"; do
+      case "$ngshare_arg" in
+        --traffic-policy-file|--traffic-policy-file=*|--traffic-policy-url|--traffic-policy-url=*)
+          ngshare_has_policy=1 ;;
+      esac
+    done
+    if [ "$ngshare_has_policy" = 0 ] && [ "$#" -ge 2 ]; then
+      local ngshare_authority="$2" ngshare_policy
+      case "$ngshare_authority" in
+        file://*|-*) ngshare_authority= ;;
+        http://*) ngshare_authority="${ngshare_authority#http://}" ;;
+        https://*) ngshare_authority="${ngshare_authority#https://}" ;;
+        *[!0-9]*) ;;
+        *) ngshare_authority="localhost:$ngshare_authority" ;;
+      esac
+      ngshare_authority="${ngshare_authority%%/*}"
+      if [ -n "$ngshare_authority" ]; then
+        ngshare_policy=$(mktemp "${TMPDIR:-/tmp}/ngshare-policy.XXXXXXXX") || return
+        trap 'rm -f "$ngshare_policy"' EXIT
+        printf 'on_http_request:\n  - actions:\n      - type: add-headers\n        config:\n          headers:\n            host: "%s"\n' "$ngshare_authority" > "$ngshare_policy"
+        set -- "$@" --traffic-policy-file "$ngshare_policy"
+      fi
+    fi
+  fi
   set -o pipefail
   command ngrok "$@" --log stdout --log-format json 2>&1 |
     command jq --unbuffered -Rr '

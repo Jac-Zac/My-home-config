@@ -2,6 +2,10 @@ fastfetch
 
 [[ -f ~/.zprofile ]] && source ~/.zprofile
 
+# Allow Ctrl+J and Ctrl+K to pass through to programs like tv
+bindkey -r "^J"
+bindkey -r "^K"
+
 # History in cache directory:
 HISTSIZE=5000
 SAVEHIST=5000
@@ -115,9 +119,7 @@ eval "$(zoxide init zsh)"
 # eval "$(tv init zsh)"
 eval "$(tv init zsh | sed 's/history -n -1 0/fc -ln -1 0/')"
 
-# Ghoosty shell integration
-# if [ -n "${GHOSTTY_RESOURCES_DIR}" ]; then
-#   source "${GHOSTTY_RESOURCES_DIR}/shell-integration/zsh/ghostty-integration"
-# fi
-
 export PATH="$HOME/.local/bin:$PATH"
+
+# Claude switching
+export PATH="${XDG_CONFIG_HOME:-$HOME/.config}/npm/bin:$PATH"

@@ -4,7 +4,7 @@
 [
   {
     "label": "Open Typst Preview",
-    "command": "open -a Safari http://127.0.0.1:23635/",
+    "command": "open http://127.0.0.1:23635/",
     "use_new_terminal": true,
     "allow_concurrent_runs": false,
     "reveal": "never",

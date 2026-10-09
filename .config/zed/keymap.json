@@ -182,7 +182,8 @@
   {
     "context": "((Editor && jupyter) && !ContextEditor)",
     "bindings": {
-      "cmd-enter": "repl::RunInPlace",
+      "cmd-enter": "repl::Run", // Run and advance to the next cel
+      // "cmd-enter": "repl::RunInPlace",
     },
   },
   {

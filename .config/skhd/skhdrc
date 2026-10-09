@@ -9,10 +9,10 @@ cmd + shift - return: open -a ghostty
 cmd - 0 : open -a /Applications/Helium.app
 
 # open WhatsApp
-cmd - m : open -a /Applications/WhatsApp.app/; yabai -m space --focus 5
+cmd - m : open -a /Applications/WhatsApp.app
 
 # open GPT 
-cmd - g : open -a /Applications/ChatGPT.app;
+cmd - g : open -a /Applications/ChatGPT.app
 
 # swap window
 cmd + shift - h : $HOME/.config/skhd/cycle_clockwise.sh

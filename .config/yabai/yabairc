@@ -29,12 +29,12 @@ yabai -m config right_padding                13
 yabai -m config window_gap                   13
 
 # Rules to move open applications in a specific space
-yabai -m rule --add app="^Zen Browser$"           space=1
-yabai -m rule --add app="^Helium$"                space=1
+# yabai -m rule --add app="^Zen Browser$"           space=1
+# yabai -m rule --add app="^Helium$"                space=1
 yabai -m rule --add app="^Ghostty$"               space=2
 yabai -m rule --add app="^T3 Code$"               space=3
-yabai -m rule --add app="^WhatsApp$"              space=5
 yabai -m rule --add app="Slack"                   space=5
+# yabai -m rule --add app="^WhatsApp$"              space=5
 
 # NOTE: This is not set because I want it to be flexible in case I'm using another monitor
 # If I do use another monitor I would ideally keep it in the page 1

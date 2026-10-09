@@ -3,7 +3,7 @@
 </h1>
 
 <p align="center">
-  <img width="60%" hight="100%" src="https://raw.githubusercontent.com/Jac-Zac/My-home-config/master/.assets/logo.png"/>
+  <img width="60%" height="100%" src="https://raw.githubusercontent.com/Jac-Zac/My-home-config/master/.assets/logo.png"/>
 </p>
 
 <p align="center">
@@ -28,17 +28,19 @@
 :octocat: _Those are some details about my setup_
 
 - **OS** • `MacOS/Arch Linux`
-- **WM** • [`yabai`](https://github.com/koekeishiya/yabai)
+- **WM** • [`yabai`](https://github.com/asmvik/yabai) + [`skhd`](https://github.com/asmvik/skhd)
+- **Bar** • [`SketchyBar`](https://github.com/FelixKratz/SketchyBar) + [`JankyBorders`](https://github.com/FelixKratz/JankyBorders)
 - **Shell** • [`zsh`](https://www.zsh.org/) -> [`powerlevel10k`](https://github.com/romkatv/powerlevel10k)
 - **Terminal** • [`Ghostty`](https://github.com/ghostty-org/ghostty)
 - **Fuzzy Finder** • [`Television`](https://github.com/alexpasmantier/television)
 - **Session Manager** • [`sesh`](https://github.com/joshmedeski/sesh) + [`tmux`](https://github.com/tmux/tmux)
-- **Editor** • [`Neovim`](https://github.com/neovim/neovim/)
+- **Editor** • [`Neovim`](https://github.com/neovim/neovim/) / [`Zed`](https://zed.dev)
+- **AI tools** • [`Claude Code`](https://claude.com/claude-code) / [`opencode`](https://opencode.ai)
 - **Theme** • [`Nord`](https://github.com/arcticicestudio/nord-iterm2)
 - **Font** • [`Inconsolata Nerd`](https://github.com/ryanoasis/nerd-fonts)
 - **System information** • [`fastfetch`](https://github.com/fastfetch-cli/fastfetch)
 - **Launcher** • [`Raycast`](https://www.raycast.com/)
-- **Browser** • [`Helium`](https://github.com/imputnet/helium) / [`Zen Browser`](https://www.zen-browser.app/)
+- **Browser** • [`Helium`](https://github.com/imputnet/helium)
 - **Wallpapers** • [`Southern Live Oak`](https://www.unitus.it/wp-content/uploads/2024/09/pexels-veeterzy-38136-scaled.jpg)
 
 ## Motivation 💭
@@ -47,7 +49,7 @@ _I mainly created this to always have my config with me, but I would really be h
 
 ### Updating :calendar:
 
-**Have you already installed everything but your version lacks behind?** :thinking:
+**Have you already installed everything but your version lags behind?** :thinking:
 
 _You should always keep your configuration up to date, luckily there is a straightforward and noob-proof solution._
 
@@ -72,9 +74,7 @@ _You should always keep your configuration up to date, luckily there is a straig
 
 ### Customizations 🔧
 
-##### This setup is made for macOS, and perhaps GNU\Linux in the future
-
-> YouTube from the terminal can be watched thanks to [`ytfzf`](https://github.com/pystardust/ytfzf)
+##### This setup is made for macOS (with a minimal Arch Linux setup as well)
 
 <details>
 	<summary><strong>System Preferences</strong></summary>
@@ -105,7 +105,9 @@ _You can also edit your prompt in the [`~/.config/zsh/.p10k.zsh`](.config/zsh/.p
 
 > I use [`Television`](https://github.com/alexpasmantier/television) as my fuzzy finder with the [`sesh`](https://github.com/joshmedeski/sesh) channel for session management.
 
-- Press `prefix + t` in tmux to open the sesh session picker
+- Press `prefix + s` in tmux to open the sesh session picker
+- Press `prefix + t` to jump between windows of the current session (custom `tmux-session-windows` channel)
+- Press `prefix + S` to pick an ssh host and open it in a new window
 - Television also provides shell integration with `Ctrl+T` for file picking and `Ctrl+R` for history
 
 ### Recommended Configuration
@@ -126,43 +128,30 @@ tv update-channels
 <details>
 	<summary><strong>Helium Browser</strong></summary>
 
-> [`Helium`](https://github.com/imputnet/helium) is a privacy-first, fast Chromium-based browser. I use it alongside Zen Browser for different use cases.
+> [`Helium`](https://github.com/imputnet/helium) is a privacy-first, fast Chromium-based browser and my main browser (<kbd>command + 0</kbd>). Furthermore use 1.1.1.1 as your DNS Server
 
-- Privacy-focused with unbiased ad-blocking
+- Privacy-focused with uBlock Origin built in
 - No bloat or unnecessary features
-- Available at [helium.computer](https://helium.computer/)
+- Available at [helium.computer](https://helium.computer/) or with `brew install --cask helium-browser`
+
+### Extensions I suggest
+
+- I suggest the [0xMH YouTube Shorts blocker](https://github.com/0xMH/ublock-youtube-shorts) filter list for uBlock to hide Shorts.
+- [`SponsorBlock`](https://sponsor.ajay.app/)
+- [`Vimium`](https://github.com/philc/vimium) with custom [nord theme](https://github.com/Foldex/vimium-dark-themes/tree/master)
+- [`Stylus`](https://github.com/openstyles/stylus) with [nord theme for youtube](https://github.com/MajesticWaffle/Youtube-Nord-Theme) and this for [whatsapp](https://github.com/vednoc/dark-whatsapp)
 
 </details>
 
 <details>
-	<summary><strong>Zen Browser</strong></summary>
+	<summary><strong>Zen Browser (secondary)</strong></summary>
 
-> My Zen configuration allows me to browse the web with more freedom than ever before. Furthermore use 1.1.1.1 as your DNS Server
-
-I run Zen in compact mode and use the following keybindings
-
-### Mappings
+> I still keep [`Zen`](https://www.zen-browser.app/) around as a Firefox-based alternative. I run it in compact mode with these keybindings:
 
 | Command | Description |
 | ------- | ----------- |
 | Cmd - S | Sidebar     |
 | Cmd - B | Topbar      |
-
-### A possible good idea is to use:
-
-_I use [nord theme](https://addons.mozilla.org/en-US/firefox/addon/nord-theme-cool/?utm_source=addons.mozilla.org&utm_medium=referral&utm_content=search) and I changed my new tabs to black pages. And I use brave search_
-
-- [`uBlock Origin`](https://ublockorigin.com)
-  - I suggest the [0xMH YouTube Shorts blocker](https://github.com/0xMH/ublock-youtube-shorts) to hide Shorts.
-- [`LocalCDN`](https://www.localcdn.org/)
-- [`HTTPS Everywhere`](https://www.eff.org/https-everywhere)
-- [`Privacy Badger`](https://privacybadger.org/)
-- [`SponsorBlock`](https://sponsor.ajay.app/)
-- [`Temp Mail`](https://addons.mozilla.org/en-US/firefox/addon/temp-mail/)
-- [`Stylus`](https://addons.mozilla.org/en-US/firefox/addon/styl-us/)
-- [`Vimium`](https://addons.mozilla.org/en-US/firefox/addon/vimium-ff/) with custom [nord theme](https://github.com/Foldex/vimium-dark-themes/tree/master)
-
-> And use [nord theme for youtube](https://github.com/MajesticWaffle/Youtube-Nord-Theme) and this for [whatsapp](https://github.com/vednoc/dark-whatsapp)
 
 ![showcase](.assets/zen.png)
 
@@ -173,11 +162,21 @@ _I use [nord theme](https://addons.mozilla.org/en-US/firefox/addon/nord-theme-co
 
 ![showcase](.assets/nvim.png)
 
-Look into https://github.com/AstroNvim/AstroNvim
+My Neovim config lives in its own repo: [`astronvim_jaczac`](https://github.com/Jac-Zac/astronvim_jaczac), built on top of [AstroNvim](https://github.com/AstroNvim/AstroNvim). The installer clones it with `./installer.sh -n`.
 
-I use my custom fork of [luavim](https://github.com/elairavi/luavim)
+</details>
 
-_I have also added latex compiling on the fly with_ [`neotex`](https://github.com/donRaphaco/neotex), and [`zathura`](https://github.com/zegervdv/homebrew-zathura)
+<details>
+	<summary><strong>Zed</strong></summary>
+
+> I also use [`Zed`](https://zed.dev) with vim mode, mostly for remote development over ssh and notebooks. The config is in [`.config/zed`](.config/zed) (settings, keymap and a task to preview Typst documents).
+
+</details>
+
+<details>
+	<summary><strong>SketchyBar</strong></summary>
+
+> My [`SketchyBar`](https://github.com/FelixKratz/SketchyBar) config is written in Lua ([`.config/sketchybar`](.config/sketchybar)) and shows spaces, the front app, battery, volume, wifi, keyboard layout, a calendar and AI agent usage.
 
 </details>
 
@@ -219,12 +218,12 @@ _You should try to keep your system up to date, also follow the [`instruction un
 
 ###### And I also use:
 
-- [`this`](https://github.com/mengfeng/clean-my-mac) script to clean up any junk that has built up.
-- [`ncdu`](https://github.com/rofl0r/ncdu) to check for big files and directory that I can delete
+- [`mole`](https://github.com/tw93/Mole) to clean up any junk that has built up.
+- [`ncdu`](https://github.com/rofl0r/ncdu) / [`gdu`](https://github.com/dundee/gdu) to check for big files and directory that I can delete
 - [`upterm`](https://upterm.dev/) for instant terminal sharing and pair programming
 - [`sesh`](https://github.com/joshmedeski/sesh) to improve my tmux experience
-- [`atuin`](https://github.com/atuinsh/atuin) better command for history with `Ctrl-r`
-- [`Television`](https://github.com/alexpasmantier/television) a fast, fuzzy picker for everything
+- [`Television`](https://github.com/alexpasmantier/television) a fast, fuzzy picker for everything (including history with `Ctrl-r`)
+- [`lazygit`](https://github.com/jesseduffield/lazygit) for git (`prefix + g` opens it in a tmux popup)
 
 ## Keybinds
 
@@ -232,44 +231,43 @@ I use <kbd>command</kbd> AKA super key (on GNU/Linux) as my main modifier
 
 #### Keyboard ⌨️
 
-| Keybind                             | Action                              |
-| ----------------------------------- | ----------------------------------- |
-| <kbd>command + shift + enter</kbd>  | Spawn terminal                      |
-| <kbd>command + n</kbd>              | Swap new windows                    |
-| <kbd>command + 0</kbd>              | Open Browser                        |
-| <kbd>command + space</kbd>          | Launch Raycast                      |
-| <kbd>command + w</kbd>              | Close Window                        |
-| <kbd>command + q</kbd>              | Close Application                   |
-| <kbd>control + [1-0]</kbd>           | Change workspace                    |
-| <kbd>command + shift + [1-0]</kbd>  | Move focused window to workspace    |
-| <kbd>command + shift + [hjkl]</kbd> | Resize client                       |
-| <kbd>command + [h-l]</kbd>          | Change focus by direction           |
-| <kbd>command + shift + space</kbd>  | Set window to floating mode         |
-| <kbd>command + shift + t</kbd>      | Set window in the center (and back) |
-| <kbd>lctrl + alt + cmd + q</kbd>    | Restart yabai                       |
-| <kbd>prefix + t</kbd>               | Open sesh (tmux)                    |
-| <kbd>Ctrl + t</kbd>                | Shell autocomplete (tv)             |
-| <kbd>Ctrl + r</kbd>                | Shell history (tv)                  |
+| Keybind                                 | Action                              |
+| --------------------------------------- | ----------------------------------- |
+| <kbd>command + shift + enter</kbd>      | Spawn terminal (Ghostty)            |
+| <kbd>command + 0</kbd>                  | Open browser (Helium)               |
+| <kbd>command + m</kbd>                  | Open WhatsApp                       |
+| <kbd>command + g</kbd>                  | Open ChatGPT                        |
+| <kbd>command + space</kbd>              | Launch Raycast                      |
+| <kbd>command + w</kbd>                  | Close Window                        |
+| <kbd>command + q</kbd>                  | Close Application                   |
+| <kbd>command + [1-9]</kbd>              | Change workspace                    |
+| <kbd>command + [j/k]</kbd>              | Previous / next workspace           |
+| <kbd>command + [h/l]</kbd>              | Focus window west / east            |
+| <kbd>command + shift + [1-9]</kbd>      | Move focused window to workspace    |
+| <kbd>command + shift + [j/k]</kbd>      | Move window to prev / next space    |
+| <kbd>command + shift + [h/l]</kbd>      | Cycle windows (counter)clockwise    |
+| <kbd>command + shift + f</kbd>          | Toggle float layout                 |
+| <kbd>command + shift + space</kbd>      | Toggle bsp layout                   |
+| <kbd>command + shift + t</kbd>          | Float window in the center (and back) |
+| <kbd>lctrl + alt + cmd + q</kbd>        | Restart yabai, skhd, borders, bar   |
+
+#### tmux (prefix is <kbd>Ctrl + a</kbd>)
+
+| Keybind                  | Action                         |
+| ------------------------ | ------------------------------ |
+| <kbd>prefix + s</kbd>    | Sesh session picker (tv)       |
+| <kbd>prefix + t</kbd>    | Window picker (tv)             |
+| <kbd>prefix + S</kbd>    | SSH host picker (tv)           |
+| <kbd>prefix + L</kbd>    | Last sesh session              |
+| <kbd>prefix + g</kbd>    | lazygit popup                  |
+| <kbd>prefix + [j/k]</kbd> | Next / previous window        |
+| <kbd>Ctrl + t</kbd>      | Shell autocomplete (tv)        |
+| <kbd>Ctrl + r</kbd>      | Shell history (tv)             |
 
 ## Other things 📚
 
-I'd like to slowly switch away from powerlevel10k to get a faster feeling shell, but now I will be focusing on other things but also better my configuration for M1 Mac. For the README.md I took inspiration from [this repo](https://github.com/owl4ce/dotfiles), and for the bootstrap script I took inspiration from [this repo instead](https://github.com/natelandau/dotfiles).
-I also have many aliases for example if you write `intel` in front of any command it will run the under Rosetta. I have also started using updog to run simple https python servers.
-I have added fj to move very fast.
-
-I have just added support for other Linux distros at least to have a decent configuration.
-
-> Other possible interesting things:
-
-- https://github.com/Patato777/dotfiles
-- https://github.com/terroo/wallset.git
-
-```bash
-sudo nvram boot-args=-arm64e_preview_abi
-```
-
-Create a certificate and compile yabai to then switch it s
-https://www.simple-bar.com/
+For the README.md I took inspiration from [this repo](https://github.com/owl4ce/dotfiles), and for the bootstrap script I took inspiration from [this repo instead](https://github.com/natelandau/dotfiles).
+I also have many aliases ([`.config/aliases/aliasrc`](.config/aliases/aliasrc)), for example if you write `intel` in front of any command it will run under Rosetta, and `ngshare <port>` exposes a local port through ngrok.
 
 <h2 align="center">
 <hr>

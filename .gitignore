@@ -1,4 +1,27 @@
-.config/tmux/themes/nord-tmux
-.config/nvim/plugged
-.config/git
 .DS_Store
+
+# Plugins / generated state
+.config/tmux/themes/nord-tmux
+.config/tmux/plugins
+.config/nvim/
+
+# Shell history & caches (never commit)
+.config/zsh/.zsh_sessions/
+.config/zsh/.zsh_history
+.config/zsh/.zcompdump*
+.config/htop/htop_history
+
+# Personal / may contain secrets
+.config/git/gitconfig
+.config/claude/*
+!.config/claude/settings.json
+.config/opencode/*
+!.config/opencode/opencode.jsonc
+.config/netrc/
+.config/gh/
+.config/github-copilot/
+.config/raycast/
+.config/docker/
+.config/scripts/access_cineca
+*.before-*
+.config/brewfile/Brewfile.lock.json

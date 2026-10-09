@@ -776,7 +776,7 @@ c = get_config()  # noqa
 #                        standard library module, which allows setting of the
 #                        BROWSER environment variable to override it.
 #  Default: ''
-c.ServerApp.browser = 'open -na "Zen Browser" --args --new-window %s'
+c.ServerApp.browser = 'open -na "Helium" --args --new-window %s'
 
 ## The full path to an SSL/TLS certificate file.
 #  Default: ''
