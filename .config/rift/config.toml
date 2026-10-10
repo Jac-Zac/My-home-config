@@ -1,0 +1,208 @@
+# rift config. Reference: https://acsandmann.github.io/rift-docs/reference/configuration/
+#
+# rift workspaces are *virtual* and 0-based (cmd-1 -> workspace 0); each macOS
+# desktop has its own set. Desktop 1 = bsp; desktop 2 and external displays =
+# the scrolling "strip" (enforced by sketchybar/helpers/rift.lua, keys in
+# strip_key.sh).
+
+[settings]
+animate = false
+animation_duration = 0.2
+animation_fps = 120.0 # NOTE: 0.0 crashes rift 0.6.9 (1/0 Duration panic)
+
+# Manage every space by default (rift's default is opt-in per space).
+default_disable = false
+
+focus_follows_mouse = false
+mouse_follows_focus = false
+mouse_hides_on_focus = false
+
+# Raycast shouldn't steal focus / trigger workspace switches.
+auto_focus_blacklist = ["com.raycast.macos"]
+
+# sketchybar workspace indicators + layout (sketchybar/helpers/rift.lua).
+# A switch fires all three; sketchybar collapses them into one query.
+# Restart the service after changing this: `rift service restart`.
+run_on_start = [
+  "rift-cli subscribe cli --event workspace_changed --command sh --args -c --args 'sketchybar --trigger rift_workspace_changed'",
+  "rift-cli subscribe cli --event windows_changed --command sh --args -c --args 'sketchybar --trigger rift_workspace_changed'",
+  "rift-cli subscribe cli --event layout_changed --command sh --args -c --args 'sketchybar --trigger rift_workspace_changed'",
+]
+
+hot_reload = true
+
+[settings.layout]
+mode = "bsp"
+window_insertion_point = "next_to_selection"
+
+# bsp: every new window halves the focused one exactly 50/50. rift has no bsp auto_balance: 3 windows = 50/25/25, and a
+# manual resize sticks until windows close. equalize_nodes below only applies
+# to the "traditional" (i3-style) mode.
+[settings.layout.traditional]
+equalize_nodes = true
+
+# Desktop 2 strip: 1 window = full width, 2+ = halves side by side, scroll on.
+# cmd-shift-r cycles the focused column 1/2 -> 2/3 -> full.
+[settings.layout.scrolling]
+column_width_ratio = 0.5
+preset_column_widths = [0.5, 0.6667, 1.0]
+preserve_window_sizes = false
+expand_single_column = true
+min_column_width_ratio = 0.3
+max_column_width_ratio = 1.0
+alignment = "center"
+focus_navigation_style = "niri"
+
+# master-stack (cmd-shift-e): 2 windows = 50/50, more = master half + the
+# rest split evenly in the stack. cmd-shift-p promotes the focused window.
+[settings.layout.master_stack]
+master_ratio = 0.5
+
+[settings.layout.stack]
+stack_offset = 40.0
+default_orientation = "perpendicular"
+
+# Menu bar is auto-hidden: rift already reserves the notch height (where
+# sketchybar sits). NOTE: a display without a notch has no such reserve, so
+# windows there can sit under the bar.
+[settings.layout.gaps.outer]
+top = 13
+left = 13
+bottom = 13
+right = 13
+
+[settings.layout.gaps.inner]
+horizontal = 13
+vertical = 13
+
+[settings.ui.mission_control]
+enabled = false
+
+[settings.ui.menu_bar]
+# off: sketchybar already shows workspaces + layout
+enabled = false
+show_empty = false
+mode = "all"
+active_label = "index"
+display_style = "layout"
+
+[settings.ui.stack_line]
+enabled = false
+
+[settings.gestures]
+enabled = false
+
+# alt + drag moves a window; dropping it on another swaps them.
+[settings.drag_drop]
+enabled = true
+modifier = "alt"
+action1 = "move"
+drop_action = "swap"
+drop_zone_fraction = 0.25
+preview = true
+
+[virtual_workspaces]
+enabled = true
+default_workspace_count = 9 # cmd-1 .. cmd-9
+auto_assign_windows = true
+preserve_focus_per_workspace = true
+workspace_auto_back_and_forth = false
+prevent_wrapping = false # cmd-j/k wrap around like space_cycle_*.sh
+reapply_app_rules_on_title_change = false
+default_workspace = 0
+workspace_names = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+workspace_rules = []
+
+# Workspace indices are 0-based (workspace 1 = "02" in the bar).
+app_rules = [
+  # Placement
+  { app_id = "com.mitchellh.ghostty", workspace = 1 },           # 02 terminal
+  { app_id = "com.openai.codex", workspace = 2 },                # 03 ChatGPT
+  { app_id = "com.anthropic.claudefordesktop", workspace = 3 },  # 04 Claude
+  { app_id = "com.tinyspeck.slackmacgap", workspace = 4 },       # 05 Slack
+  # WhatsApp: no rule, opens on the current workspace (cmd-m)
+
+  # Floating
+  { app_name = "System Preferences", floating = true },
+  { app_name = "System Settings", floating = true },
+  { app_name = "Clock", floating = true },
+  { app_name = "App Store", floating = true },
+  { app_name = "Activity Monitor", floating = true },
+  { app_name = "Raycast", title_substring = "Raycast Settings", floating = true },
+  { app_name = "Canary Mail", floating = true },
+  { app_id = "com.apple.mail", floating = true },
+  { app_name = "Calculator", floating = true },
+  { app_name = "Dictionary", floating = true },
+  { title_substring = "Software Update", floating = true },
+  { app_name = "Time Machine", floating = true },
+  { app_name = "System Information", title_substring = "About This Mac", floating = true },
+  { app_name = "Finder", floating = true },
+]
+
+[modifier_combinations]
+hyper = "Ctrl + Alt + Meta"
+
+[keys]
+# ---- apps ----
+"Meta + Shift + Enter" = { exec = ["open", "-a", "Ghostty"] }
+"Meta + 0" = { exec = ["open", "-a", "/Applications/Helium.app"] }
+"Meta + M" = { exec = ["open", "-a", "/Applications/WhatsApp.app"] }
+"Meta + G" = { exec = ["open", "-a", "/Applications/ChatGPT.app"] }
+
+# ---- focus ----
+"Meta + H" = { move_focus = "left" }
+"Meta + L" = { move_focus = "right" }
+
+# swap window one step
+"Meta + Shift + H" = { move_node = "left" }
+"Meta + Shift + L" = { move_node = "right" }
+
+# ---- workspaces ----
+# cmd-N / cmd-j / cmd-k: workspace N / prev / next, or column N / prev / next
+# in the strip (desktop 2 or an external display) — see strip_key.sh
+"Meta + J" = { exec = ["sh", "-c", "$HOME/.config/rift/strip_key.sh prev"] }
+"Meta + K" = { exec = ["sh", "-c", "$HOME/.config/rift/strip_key.sh next"] }
+"Meta + 1" = { exec = ["sh", "-c", "$HOME/.config/rift/strip_key.sh 1"] }
+"Meta + 2" = { exec = ["sh", "-c", "$HOME/.config/rift/strip_key.sh 2"] }
+"Meta + 3" = { exec = ["sh", "-c", "$HOME/.config/rift/strip_key.sh 3"] }
+"Meta + 4" = { exec = ["sh", "-c", "$HOME/.config/rift/strip_key.sh 4"] }
+"Meta + 5" = { exec = ["sh", "-c", "$HOME/.config/rift/strip_key.sh 5"] }
+"Meta + 6" = { exec = ["sh", "-c", "$HOME/.config/rift/strip_key.sh 6"] }
+"Meta + 7" = { exec = ["sh", "-c", "$HOME/.config/rift/strip_key.sh 7"] }
+"Meta + 8" = { exec = ["sh", "-c", "$HOME/.config/rift/strip_key.sh 8"] }
+"Meta + 9" = { exec = ["sh", "-c", "$HOME/.config/rift/strip_key.sh 9"] }
+
+"Meta + Shift + J" = { move_window_to_workspace = { workspace = "prev", follow = true } }
+"Meta + Shift + K" = { move_window_to_workspace = { workspace = "next", follow = true } }
+
+"Meta + Shift + 1" = { move_window_to_workspace = { workspace = 0, follow = true } }
+"Meta + Shift + 2" = { move_window_to_workspace = { workspace = 1, follow = true } }
+"Meta + Shift + 3" = { move_window_to_workspace = { workspace = 2, follow = true } }
+"Meta + Shift + 4" = { move_window_to_workspace = { workspace = 3, follow = true } }
+"Meta + Shift + 5" = { move_window_to_workspace = { workspace = 4, follow = true } }
+"Meta + Shift + 6" = { move_window_to_workspace = { workspace = 5, follow = true } }
+"Meta + Shift + 7" = { move_window_to_workspace = { workspace = 6, follow = true } }
+"Meta + Shift + 8" = { move_window_to_workspace = { workspace = 7, follow = true } }
+"Meta + Shift + 9" = { move_window_to_workspace = { workspace = 8, follow = true } }
+
+# macOS desktops: ctrl-left / ctrl-right (macOS shortcut) or a trackpad swipe.
+
+# ---- layout ----
+# per workspace
+"Meta + Shift + F" = { set_workspace_layout = { mode = "floating" } }
+"Meta + Shift + Space" = { set_workspace_layout = { mode = "bsp" } }
+"Meta + Shift + S" = { set_workspace_layout = { mode = "scrolling" } }
+"Meta + Shift + E" = { set_workspace_layout = { mode = "master_stack" } }
+"Meta + Shift + P" = "promote_to_master"
+
+# maximize focused window within the gaps (toggle; any layout incl. scrolling)
+"Meta + Shift + M" = "toggle_fullscreen_within_gaps"
+# scrolling strip: cycle focused column width 1/2 -> 2/3 -> full
+"Meta + Shift + R" = "switch_preset_column_width"
+
+# float / unfloat window and center it
+"Meta + Shift + T" = { toggle_window_floating = { center = true, size = "smart" } }
+
+# ---- session ----
+"hyper + Q" = { exec = ["/bin/sh", "-c", "rift service restart; brew services restart swiftborders; brew services restart sketchybar"] }
+"hyper + Shift + Q" = { exec = ["osascript", "-e", "tell app \"System Events\" to log out"] }

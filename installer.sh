@@ -174,29 +174,9 @@ _packagesInstallation_() {
   _info_ "Installing Brewfile packages (this takes a while)"
   # Third-party taps need a one-time trust before their formulae load
   brew trust albibenni/swiftborders 2>/dev/null || true
+  brew trust acsandmann/tap 2>/dev/null || true
   brew bundle install --file="$REPO/.config/brewfile/Brewfile" \
     || _warn_ "Some Brewfile entries failed, re-run: brew bundle --file=~/.config/brewfile/Brewfile"
-}
-
-# yabai's scripting addition needs a sudoers entry pinned to the binary hash,
-# so it must be refreshed after every yabai upgrade.
-_yabaiSudoers_() {
-  command -v yabai >/dev/null || return 0
-  local yabai_bin hash tmp
-  yabai_bin=$(command -v yabai)
-  hash=$(shasum -a 256 "$yabai_bin" | cut -d " " -f 1)
-  if sudo grep -q "$hash" /private/etc/sudoers.d/yabai 2>/dev/null; then
-    return 0
-  fi
-  _info_ "Updating yabai sudoers entry"
-  tmp=$(mktemp)
-  echo "$(whoami) ALL=(root) NOPASSWD: sha256:$hash $yabai_bin --load-sa" >"$tmp"
-  if sudo visudo -cf "$tmp" >/dev/null; then
-    sudo install -m 0440 -o root -g wheel "$tmp" /private/etc/sudoers.d/yabai
-  else
-    _warn_ "Generated yabai sudoers file is invalid, skipping"
-  fi
-  rm -f "$tmp"
 }
 
 _sketchybarExtras_() {
@@ -214,12 +194,12 @@ _sketchybarExtras_() {
 }
 
 _startServices_() {
-  _info_ "Starting yabai, skhd, SwiftBorders and sketchybar"
-  yabai --start-service 2>/dev/null || yabai --restart-service
-  skhd --start-service 2>/dev/null || skhd --restart-service
+  _info_ "Starting rift, SwiftBorders and sketchybar"
+  rift service install 2>/dev/null || true
+  rift service start 2>/dev/null || rift service restart
   brew services restart albibenni/swiftborders/swiftborders
   brew services restart sketchybar
-  _warn_ "Grant Accessibility permissions to yabai, skhd and SwiftBorders in System Settings if asked"
+  _warn_ "Grant Accessibility permissions to rift and SwiftBorders in System Settings if asked"
 }
 
 _macSystemPrefs_() {
@@ -244,8 +224,15 @@ _macSystemPrefs_() {
   defaults write com.apple.dock autohide-time-modifier -float 0
   defaults write com.apple.dock autohide -bool true
   defaults write com.apple.dock static-only -bool true
-  # Keep spaces in a fixed order (yabai space indexes rely on it)
+  # Keep desktops in a fixed order (desktop 2 is the rift scrolling strip)
   defaults write com.apple.dock mru-spaces -bool false
+
+  echo "Configuring desktop switching (ctrl + left / right)..."
+  defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 79 \
+    '{enabled = 1; value = {parameters = (65535, 123, 8650752); type = standard;};}'
+  defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 81 \
+    '{enabled = 1; value = {parameters = (65535, 124, 8650752); type = standard;};}'
+  /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
 
   echo "Configuring Finder..."
   # Avoid creating .DS_Store files on network or USB volumes
@@ -253,10 +240,8 @@ _macSystemPrefs_() {
   defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
   defaults write com.apple.finder DisableAllAnimations -bool true
 
-  # Reduce Motion: space-switch slide becomes a fast fade — feels instant
-  # with yabai tiling and lowers WindowServer work. Personal preference,
-  # not a yabai requirement (the fast path is `sudo yabai --load-sa`;
-  # keep yabai `skip_window_focus_animation` off while SA loads).
+  # Reduce Motion: desktop-switch slide becomes a fast fade and lowers
+  # WindowServer work. Personal preference.
   # echo "Enabling Reduce Motion..."
   # defaults write com.apple.universalaccess reduceMotion -bool true
 
@@ -309,7 +294,6 @@ _update_() {
     _info_ "Updating Homebrew packages"
     brew update && brew bundle install --file="$REPO/.config/brewfile/Brewfile" && brew upgrade
     brew cleanup
-    _yabaiSudoers_
   elif command -v pacman >/dev/null; then
     sudo pacman -Syu
   elif command -v apt-get >/dev/null; then
@@ -334,10 +318,9 @@ _mainScript_() {
     _commandLineTools_
     _brewInstallation_
     _shellConfig_
-    if _seekConfirmation_ "Do you want to install everything I have on my mac (Brewfile, yabai, sketchybar...)?"; then
+    if _seekConfirmation_ "Do you want to install everything I have on my mac (Brewfile, rift, sketchybar...)?"; then
       _packagesInstallation_
       _sketchybarExtras_
-      _yabaiSudoers_
       _startServices_
     fi
     _macSystemPrefs_

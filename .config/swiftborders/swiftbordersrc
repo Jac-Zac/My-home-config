@@ -1,12 +1,8 @@
-# SwiftBorders — replaced JankyBorders (old bordersrc: style=round,
-# width=4.0, active 0xFFA3BE8C, inactive 0xFF4C566A). No hidpi key: AppKit
-# handles scaling. File is live-reloaded (no restart needed).
-# Rollback: `brew services stop swiftborders; brew services start borders`.
-
-# NOTE: radius=auto matches the OS outer radius (~26pt on Tahoe) which looks
-# much rounder than JankyBorders' tight hug — hence the explicit small radius.
-# Width 3.0 compensates: SwiftBorders draws the ring fully outside the frame,
-# so equal pt values read thicker than JankyBorders.
+# SwiftBorders: active-window borders. Live-reloaded (no restart needed);
+# AppKit handles hidpi scaling.
+# radius=auto would match the OS window radius (~26pt on Tahoe) and look too
+# round, hence the explicit 14. The ring is drawn fully outside the frame,
+# so a thin width already reads bold.
 active_color=0xFFA3BE8C
 inactive_color=0xFF4C566A
 width=2.5

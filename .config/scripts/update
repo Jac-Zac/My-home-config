@@ -11,15 +11,6 @@ done
 ~/.config/tmux/plugins/tpm/bin/update_plugins all >/dev/null
 tv update-channels
 
-# yabai's sudoers entry is pinned to the binary hash: refresh it after upgrades
-yabai_bin=$(command -v yabai)
-hash=$(shasum -a 256 "$yabai_bin" | cut -d " " -f 1)
-if ! sudo grep -q "$hash" /private/etc/sudoers.d/yabai 2>/dev/null; then
-  echo "$(whoami) ALL=(root) NOPASSWD: sha256:$hash $yabai_bin --load-sa" |
-    sudo tee /private/etc/sudoers.d/yabai >/dev/null
-  sudo yabai --load-sa
-fi
-
 brew doctor
 mole
 rm -rf ~/.npm

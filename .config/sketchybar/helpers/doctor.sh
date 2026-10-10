@@ -34,7 +34,7 @@ if [ -f "$HOME/.claude.json" ]; then
     || info "Claude usage updates only when Claude Code/desktop fetch it — for live numbers add to ~/.claude/settings.json: \"statusLine\": {\"type\": \"command\", \"command\": \"~/.config/sketchybar/helpers/claude_statusline.lua\"}"
 fi
 { [ -x /Applications/Tailscale.app/Contents/MacOS/Tailscale ] && pass "Tailscale (Wi-Fi popup section)"; } || info "Tailscale not found — section hidden"
-{ command -v yabai >/dev/null && pass "yabai (click a space to switch)"; } || info "yabai not installed — clicking spaces does nothing"
+{ command -v rift-cli >/dev/null && pass "rift (workspace indicators, click to switch)"; } || info "rift not installed — workspace indicators stay empty"
 { [ -d "/Applications/Notion Calendar.app" ] && pass "Notion Calendar (Calendar ↗ link)"; } || info "Notion Calendar not found — Calendar ↗ opens Calendar.app (settings.lua: calendar_app)"
 
 echo

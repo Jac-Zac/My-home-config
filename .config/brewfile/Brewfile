@@ -1,15 +1,14 @@
 # Install with: brew bundle install --file=~/.config/brewfile/Brewfile
 
 # ─── Taps ────────────────────────────────────────────────────────────────────
-tap "asmvik/formulae"                  # yabai + skhd (formerly koekeishiya)
+tap "acsandmann/tap"                   # rift (tiling window manager)
 tap "felixkratz/formulae"              # sketchybar
 tap "albibenni/swiftborders"           # SwiftBorders (active-window borders)
 tap "anomalyco/tap"                    # opencode
 tap "owenthereal/upterm"
 
 # ─── Window management / bar ─────────────────────────────────────────────────
-brew "asmvik/formulae/yabai"
-brew "asmvik/formulae/skhd"
+brew "acsandmann/tap/rift"
 brew "felixkratz/formulae/sketchybar"
 brew "albibenni/swiftborders/swiftborders"
 brew "nowplaying-cli"

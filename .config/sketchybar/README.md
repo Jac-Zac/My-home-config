@@ -49,7 +49,7 @@ looks off.
   Internet Accounts (Google, iCloud, Exchange…), i.e. whatever Calendar.app
   or Notion Calendar shows. *Calendar ↗* opens Notion Calendar, or
   Calendar.app if it isn't installed.
-- [yabai](https://github.com/koekeishiya/yabai) — click a space to switch to it.
+- [rift](https://github.com/acsandmann/rift) — workspace indicators + layout; click a workspace to switch to it.
 - Claude Code, Codex, Tailscale — their parts hide when not installed.
 
 ## What's in the bar

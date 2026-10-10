@@ -6,3 +6,4 @@ sbar.add("event", "popups_close") -- fired by helpers/clickaway
 sbar.add("event", "agents_refresh") -- fired by helpers/claude_statusline.lua
 -- macOS broadcasts this when the keyboard layout changes: no polling needed
 sbar.add("event", "input_change", "AppleSelectedInputSourcesChangedNotification")
+sbar.add("event", "rift_workspace_changed") -- fired by rift run_on_start (rift/config.toml)

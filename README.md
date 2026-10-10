@@ -28,7 +28,7 @@
 :octocat: _Those are some details about my setup_
 
 - **OS** • `MacOS/Arch Linux`
-- **WM** • [`yabai`](https://github.com/asmvik/yabai) + [`skhd`](https://github.com/asmvik/skhd)
+- **WM** • [`rift`](https://github.com/acsandmann/rift) (tiling + hotkeys, no SIP changes needed)
 - **Bar** • [`SketchyBar`](https://github.com/FelixKratz/SketchyBar) + [`SwiftBorders`](https://github.com/albibenni/SwiftBorders)
 - **Shell** • [`zsh`](https://www.zsh.org/) -> [`powerlevel10k`](https://github.com/romkatv/powerlevel10k)
 - **Terminal** • [`Ghostty`](https://github.com/ghostty-org/ghostty)
@@ -83,7 +83,7 @@ _You should always keep your configuration up to date, luckily there is a straig
 
 - I also suggest to Automatically Hide & Show the Menu Bar and also set show scroll bar in all the application only when scrolling (system Preferences -> General)
 - Absolutely disable wallpaper tinting in windows inside system preferences > general on macOS Big Sur
-<!-- - Enable Reduce Motion (System Settings -> Accessibility -> Motion). It swaps the space-switch slide for a fast fade, which feels instant with yabai tiling and lowers WindowServer work. Note: yabai itself doesn't require it — the fast path is the scripting addition (`sudo yabai --load-sa`); keep `skip_window_focus_animation` off while SA loads. Applied automatically by `installer.sh -p`. -->
+<!-- - Enable Reduce Motion (System Settings -> Accessibility -> Motion). It swaps the desktop-switch slide for a fast fade and lowers WindowServer work. Applied automatically by `installer.sh -p`. -->
 
 ![showcase](.assets/preference.png)
 
@@ -175,9 +175,26 @@ My Neovim config lives in its own repo: [`astronvim_jaczac`](https://github.com/
 </details>
 
 <details>
+	<summary><strong>rift (window manager)</strong></summary>
+
+> [`rift`](https://github.com/acsandmann/rift) tiles windows and handles every hotkey itself (no skhd, no SIP changes). Config: [`.config/rift`](.config/rift).
+
+- **Workspaces** — rift workspaces are virtual: each macOS desktop has nine of them (`01`–`09` in the bar). Switching is instant because nothing moves between macOS Spaces.
+- **Desktop 1 — bsp.** Every new window splits the focused one exactly 50/50. Close one and its neighbour takes the space back.
+- **Desktop 2 and any external display — the "strip".** A niri-style scrolling layout: windows sit side by side as columns (one window fills the screen, two are half and half), and the strip scrolls sideways. Here <kbd>cmd + 1-9</kbd> jumps to column N and <kbd>cmd + j/k</kbd> steps through columns (wrapping) instead of changing workspace, and the bar hides empty workspaces. The layout is re-applied automatically, swipes included.
+- **Other layouts**, per workspace: master-stack (master half + the rest stacked evenly), floating, and back to bsp — see the keybinds below. The bar shows the current one next to the app name.
+- **App rules** — Ghostty opens on `02`, ChatGPT on `03`, Claude on `04`, Slack on `05`. Settings-like apps (System Settings, Finder, Mail, Calculator, Activity Monitor…) always float.
+- **Mouse** — <kbd>alt</kbd> + drag moves a window; drop it on another to swap them. Resize by dragging window edges.
+- **macOS desktops** — switch with <kbd>ctrl + ←/→</kbd> (the macOS shortcut) or a trackpad swipe.
+
+The strip logic lives in [`rift/strip_key.sh`](.config/rift/strip_key.sh) (the keys) and [`sketchybar/helpers/rift.lua`](.config/sketchybar/helpers/rift.lua) (detects desktop 2 / external display and keeps the scrolling layout there).
+
+</details>
+
+<details>
 	<summary><strong>SketchyBar</strong></summary>
 
-> My [`SketchyBar`](https://github.com/FelixKratz/SketchyBar) config is written in Lua ([`.config/sketchybar`](.config/sketchybar)) and shows spaces, the front app, battery, volume, wifi, keyboard layout, a calendar and AI agent usage.
+> My [`SketchyBar`](https://github.com/FelixKratz/SketchyBar) config is written in Lua ([`.config/sketchybar`](.config/sketchybar)) and shows the rift workspaces (click one to switch), the front app with the workspace layout (`bsp`, `scroll`, `master`…) in one pill, battery, volume, wifi, keyboard layout, a calendar and AI agent usage. One `rift-cli` query per workspace switch feeds the whole bar.
 
 </details>
 
@@ -207,7 +224,7 @@ chmod +x installer.sh
 
 > You should close your terminal windows and open a new one, to reload the configurations
 
-_Run `./installer.sh -r` on a machine that already has the packages to only restore the configuration (shell, tmux, yabai, sketchybar...)_
+_Run `./installer.sh -r` on a machine that already has the packages to only restore the configuration (shell, tmux, rift, sketchybar...)_
 
 **Installation Completed !**
 
@@ -232,25 +249,50 @@ I use <kbd>command</kbd> AKA super key (on GNU/Linux) as my main modifier
 
 #### Keyboard ⌨️
 
-| Keybind                                 | Action                              |
-| --------------------------------------- | ----------------------------------- |
-| <kbd>command + shift + enter</kbd>      | Spawn terminal (Ghostty)            |
-| <kbd>command + 0</kbd>                  | Open browser (Helium)               |
-| <kbd>command + m</kbd>                  | Open WhatsApp                       |
-| <kbd>command + g</kbd>                  | Open ChatGPT                        |
-| <kbd>command + space</kbd>              | Launch Raycast                      |
-| <kbd>command + w</kbd>                  | Close Window                        |
-| <kbd>command + q</kbd>                  | Close Application                   |
-| <kbd>command + [1-9]</kbd>              | Change workspace                    |
-| <kbd>command + [j/k]</kbd>              | Previous / next workspace           |
-| <kbd>command + [h/l]</kbd>              | Focus window west / east            |
-| <kbd>command + shift + [1-9]</kbd>      | Move focused window to workspace    |
-| <kbd>command + shift + [j/k]</kbd>      | Move window to prev / next space    |
-| <kbd>command + shift + [h/l]</kbd>      | Cycle windows (counter)clockwise    |
-| <kbd>command + shift + f</kbd>          | Toggle float layout                 |
-| <kbd>command + shift + space</kbd>      | Toggle bsp layout                   |
-| <kbd>command + shift + t</kbd>          | Float window in the center (and back) |
-| <kbd>lctrl + alt + cmd + q</kbd>        | Restart yabai, skhd, borders, bar   |
+<kbd>hyper</kbd> = <kbd>ctrl + alt + command</kbd>. "Strip" = desktop 2 or an external display (see *rift* above).
+
+**Apps**
+
+| Keybind                            | Action                       |
+| ---------------------------------- | ---------------------------- |
+| <kbd>command + shift + enter</kbd> | Terminal (Ghostty)           |
+| <kbd>command + 0</kbd>             | Browser (Helium)             |
+| <kbd>command + m</kbd>             | WhatsApp                     |
+| <kbd>command + g</kbd>             | ChatGPT                      |
+| <kbd>command + space</kbd>         | Raycast                      |
+| <kbd>command + w</kbd> / <kbd>q</kbd> | Close window / quit app   |
+
+**Windows and workspaces**
+
+| Keybind                             | Normal desktop                     | In the strip                      |
+| ----------------------------------- | ---------------------------------- | --------------------------------- |
+| <kbd>command + [h/l]</kbd>          | Focus window left / right          | Focus column left / right         |
+| <kbd>command + shift + [h/l]</kbd>  | Swap window left / right           | Move column left / right          |
+| <kbd>command + [1-9]</kbd>          | Go to workspace 1-9                | Focus column 1-9                  |
+| <kbd>command + [j/k]</kbd>          | Previous / next workspace (wraps)  | Previous / next column (wraps)    |
+| <kbd>command + shift + [1-9]</kbd>  | Move window to workspace 1-9 and follow | same                         |
+| <kbd>command + shift + [j/k]</kbd>  | Move window to previous / next workspace and follow | same             |
+| <kbd>command + shift + t</kbd>      | Float / unfloat window, centred    | same                              |
+| <kbd>command + shift + m</kbd>      | Maximize window within the gaps (toggle) | same                        |
+| <kbd>ctrl + [←/→]</kbd>             | Previous / next macOS desktop      | same                              |
+
+**Layouts** (apply to the current workspace)
+
+| Keybind                            | Action                                              |
+| ---------------------------------- | --------------------------------------------------- |
+| <kbd>command + shift + space</kbd> | bsp (each split 50/50)                              |
+| <kbd>command + shift + s</kbd>     | Scrolling strip                                     |
+| <kbd>command + shift + e</kbd>     | Master-stack (master 50%, the rest stacked evenly)  |
+| <kbd>command + shift + p</kbd>     | Promote focused window to master                    |
+| <kbd>command + shift + f</kbd>     | Floating                                            |
+| <kbd>command + shift + r</kbd>     | Strip: cycle column width 1/2 → 2/3 → full          |
+
+**Session**
+
+| Keybind                           | Action                                |
+| --------------------------------- | ------------------------------------- |
+| <kbd>hyper + q</kbd>              | Restart rift, SwiftBorders and the bar |
+| <kbd>hyper + shift + q</kbd>      | Log out                               |
 
 #### tmux (prefix is <kbd>Ctrl + a</kbd>)
 
