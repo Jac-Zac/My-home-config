@@ -28,7 +28,7 @@
 :octocat: _Those are some details about my setup_
 
 - **OS** • `MacOS/Arch Linux`
-- **WM** • [`rift`](https://github.com/acsandmann/rift) (tiling + hotkeys, no SIP changes needed)
+- **WM** • [`rift`](https://github.com/acsandmann/rift) (tiling + hotkeys)
 - **Bar** • [`SketchyBar`](https://github.com/FelixKratz/SketchyBar) + [`SwiftBorders`](https://github.com/albibenni/SwiftBorders)
 - **Shell** • [`zsh`](https://www.zsh.org/) -> [`powerlevel10k`](https://github.com/romkatv/powerlevel10k)
 - **Terminal** • [`Ghostty`](https://github.com/ghostty-org/ghostty)
@@ -185,7 +185,7 @@ My Neovim config lives in its own repo: [`astronvim_jaczac`](https://github.com/
 - **Other layouts**, per workspace: master-stack (master half + the rest stacked evenly), floating, and back to bsp — see the keybinds below. The bar shows the current one next to the app name.
 - **App rules** — Ghostty opens on `02`, ChatGPT on `03`, Claude on `04`, Slack on `05`. Settings-like apps (System Settings, Finder, Mail, Calculator, Activity Monitor…) always float.
 - **Mouse** — <kbd>alt</kbd> + drag moves a window; drop it on another to swap them. Resize by dragging window edges.
-- **macOS desktops** — switch with <kbd>ctrl + ←/→</kbd> (the macOS shortcut) or a trackpad swipe.
+- **macOS desktops** — switch with <kbd>ctrl + ←/→</kbd> or a trackpad swipe.
 
 The strip logic lives in [`rift/strip_key.sh`](.config/rift/strip_key.sh) (the keys) and [`sketchybar/helpers/rift.lua`](.config/sketchybar/helpers/rift.lua) (detects desktop 2 / external display and keeps the scrolling layout there).
 
@@ -245,67 +245,18 @@ _You should try to keep your system up to date, also follow the [`instruction un
 
 ## Keybinds
 
-I use <kbd>command</kbd> AKA super key (on GNU/Linux) as my main modifier
+All shortcuts, and how they change inside the scrolling strip, are in
+**[docs/keybindings.md](docs/keybindings.md)**. The essentials:
 
-#### Keyboard ⌨️
-
-<kbd>hyper</kbd> = <kbd>ctrl + alt + command</kbd>. "Strip" = desktop 2 or an external display (see *rift* above).
-
-**Apps**
-
-| Keybind                            | Action                       |
-| ---------------------------------- | ---------------------------- |
-| <kbd>command + shift + enter</kbd> | Terminal (Ghostty)           |
-| <kbd>command + 0</kbd>             | Browser (Helium)             |
-| <kbd>command + m</kbd>             | WhatsApp                     |
-| <kbd>command + g</kbd>             | ChatGPT                      |
-| <kbd>command + space</kbd>         | Raycast                      |
-| <kbd>command + w</kbd> / <kbd>q</kbd> | Close window / quit app   |
-
-**Windows and workspaces**
-
-| Keybind                             | Normal desktop                     | In the strip                      |
-| ----------------------------------- | ---------------------------------- | --------------------------------- |
-| <kbd>command + [h/l]</kbd>          | Focus window left / right          | Focus column left / right         |
-| <kbd>command + shift + [h/l]</kbd>  | Swap window left / right           | Move column left / right          |
-| <kbd>command + [1-9]</kbd>          | Go to workspace 1-9                | Focus column 1-9                  |
-| <kbd>command + [j/k]</kbd>          | Previous / next workspace (wraps)  | Previous / next column (wraps)    |
-| <kbd>command + shift + [1-9]</kbd>  | Move window to workspace 1-9 and follow | same                         |
-| <kbd>command + shift + [j/k]</kbd>  | Move window to previous / next workspace and follow | same             |
-| <kbd>command + shift + t</kbd>      | Float / unfloat window, centred    | same                              |
-| <kbd>command + shift + m</kbd>      | Maximize window within the gaps (toggle) | same                        |
-| <kbd>ctrl + [←/→]</kbd>             | Previous / next macOS desktop      | same                              |
-
-**Layouts** (apply to the current workspace)
-
-| Keybind                            | Action                                              |
-| ---------------------------------- | --------------------------------------------------- |
-| <kbd>command + shift + space</kbd> | bsp (each split 50/50)                              |
-| <kbd>command + shift + s</kbd>     | Scrolling strip                                     |
-| <kbd>command + shift + e</kbd>     | Master-stack (master 50%, the rest stacked evenly)  |
-| <kbd>command + shift + p</kbd>     | Promote focused window to master                    |
-| <kbd>command + shift + f</kbd>     | Floating                                            |
-| <kbd>command + shift + r</kbd>     | Strip: cycle column width 1/2 → 2/3 → full          |
-
-**Session**
-
-| Keybind                           | Action                                |
-| --------------------------------- | ------------------------------------- |
-| <kbd>hyper + q</kbd>              | Restart rift, SwiftBorders and the bar |
-| <kbd>hyper + shift + q</kbd>      | Log out                               |
-
-#### tmux (prefix is <kbd>Ctrl + a</kbd>)
-
-| Keybind                  | Action                         |
-| ------------------------ | ------------------------------ |
-| <kbd>prefix + s</kbd>    | Sesh session picker (tv)       |
-| <kbd>prefix + t</kbd>    | Window picker (tv)             |
-| <kbd>prefix + S</kbd>    | SSH host picker (tv)           |
-| <kbd>prefix + L</kbd>    | Last sesh session              |
-| <kbd>prefix + g</kbd>    | lazygit popup                  |
-| <kbd>prefix + [j/k]</kbd> | Next / previous window        |
-| <kbd>Ctrl + t</kbd>      | Shell autocomplete (tv)        |
-| <kbd>Ctrl + r</kbd>      | Shell history (tv)             |
+| Keybind                             | Action                                                   |
+| ----------------------------------- | -------------------------------------------------------- |
+| <kbd>command + 1-9</kbd> / <kbd>j/k</kbd> | Workspace N / previous / next — column N / previous / next in the strip |
+| <kbd>command + h/l</kbd>            | Focus window (or column) left / right                    |
+| <kbd>command + shift + 1-9</kbd>    | Send window to workspace N                               |
+| <kbd>command + shift + space / e / s / f</kbd> | Layout: bsp / master-stack / scrolling / floating |
+| <kbd>ctrl + ←/→</kbd>               | Previous / next macOS desktop                            |
+| <kbd>command + shift + enter</kbd>  | Terminal (Ghostty)                                       |
+| <kbd>prefix + s</kbd> (tmux, prefix <kbd>ctrl + a</kbd>) | Sesh session picker                 |
 
 ## Other things 📚
 

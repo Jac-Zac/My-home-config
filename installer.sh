@@ -233,6 +233,7 @@ _macSystemPrefs_() {
   defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 81 \
     '{enabled = 1; value = {parameters = (65535, 124, 8650752); type = standard;};}'
   /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
+  _warn_ "If ctrl + left/right don't switch desktops, re-tick 'Move left/right a space' in System Settings > Keyboard > Keyboard Shortcuts > Mission Control"
 
   echo "Configuring Finder..."
   # Avoid creating .DS_Store files on network or USB volumes
