@@ -1,0 +1,11 @@
+#!/bin/bash
+# JankyBorders: matches the previous look (Nord green active, grey inactive).
+options=(
+  style=round
+  width=3.0
+  hidpi=on
+  order=above
+  active_color=0xffa3be8c
+  inactive_color=0xff4c566a
+)
+borders "${options[@]}"

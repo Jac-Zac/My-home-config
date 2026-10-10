@@ -173,7 +173,6 @@ _brewInstallation_() {
 _packagesInstallation_() {
   _info_ "Installing Brewfile packages (this takes a while)"
   # Third-party taps need a one-time trust before their formulae load
-  brew trust albibenni/swiftborders 2>/dev/null || true
   brew trust acsandmann/tap 2>/dev/null || true
   brew bundle install --file="$REPO/.config/brewfile/Brewfile" \
     || _warn_ "Some Brewfile entries failed, re-run: brew bundle --file=~/.config/brewfile/Brewfile"
@@ -194,12 +193,12 @@ _sketchybarExtras_() {
 }
 
 _startServices_() {
-  _info_ "Starting rift, SwiftBorders and sketchybar"
+  _info_ "Starting rift, borders and sketchybar"
   rift service install 2>/dev/null || true
   rift service start 2>/dev/null || rift service restart
-  brew services restart albibenni/swiftborders/swiftborders
+  brew services restart borders
   brew services restart sketchybar
-  _warn_ "Grant Accessibility permissions to rift and SwiftBorders in System Settings if asked"
+  _warn_ "Grant Accessibility permissions to rift in System Settings if asked"
 }
 
 _macSystemPrefs_() {

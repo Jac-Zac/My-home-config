@@ -105,7 +105,7 @@ manual resize stays until windows close. Master-stack is the balanced option.
 | <kbd>ctrl + ← / →</kbd>          | Previous / next macOS desktop *(macOS)*        |
 | three-finger swipe               | Same, on the trackpad *(macOS)*                |
 | <kbd>alt</kbd> + drag            | Move a window; drop it on another to swap them |
-| <kbd>hyper + q</kbd>             | Restart rift, SwiftBorders and sketchybar      |
+| <kbd>hyper + q</kbd>             | Restart rift, borders and sketchybar           |
 | <kbd>hyper + shift + q</kbd>     | Log out                                        |
 
 ## tmux and shell

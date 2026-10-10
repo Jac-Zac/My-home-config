@@ -29,7 +29,7 @@
 
 - **OS** • `MacOS/Arch Linux`
 - **WM** • [`rift`](https://github.com/acsandmann/rift) (tiling + hotkeys)
-- **Bar** • [`SketchyBar`](https://github.com/FelixKratz/SketchyBar) + [`SwiftBorders`](https://github.com/albibenni/SwiftBorders)
+- **Bar** • [`SketchyBar`](https://github.com/FelixKratz/SketchyBar) + [`JankyBorders`](https://github.com/FelixKratz/JankyBorders)
 - **Shell** • [`zsh`](https://www.zsh.org/) -> [`powerlevel10k`](https://github.com/romkatv/powerlevel10k)
 - **Terminal** • [`Ghostty`](https://github.com/ghostty-org/ghostty)
 - **Fuzzy Finder** • [`Television`](https://github.com/alexpasmantier/television)

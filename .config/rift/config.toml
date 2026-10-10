@@ -27,6 +27,7 @@ run_on_start = [
   "rift-cli subscribe cli --event workspace_changed --command sh --args -c --args 'sketchybar --trigger rift_workspace_changed'",
   "rift-cli subscribe cli --event windows_changed --command sh --args -c --args 'sketchybar --trigger rift_workspace_changed'",
   "rift-cli subscribe cli --event layout_changed --command sh --args -c --args 'sketchybar --trigger rift_workspace_changed'",
+  "sketchybar --trigger rift_workspace_changed", # resync the bar after a rift restart
 ]
 
 hot_reload = true
@@ -204,5 +205,5 @@ hyper = "Ctrl + Alt + Meta"
 "Meta + Shift + T" = { toggle_window_floating = { center = true, size = "smart" } }
 
 # ---- session ----
-"hyper + Q" = { exec = ["/bin/sh", "-c", "rift service restart; brew services restart swiftborders; brew services restart sketchybar"] }
+"hyper + Q" = { exec = ["sh", "-c", "$HOME/.config/rift/restart.sh"] }
 "hyper + Shift + Q" = { exec = ["osascript", "-e", "tell app \"System Events\" to log out"] }
