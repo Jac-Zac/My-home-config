@@ -172,6 +172,8 @@ _brewInstallation_() {
 
 _packagesInstallation_() {
   _info_ "Installing Brewfile packages (this takes a while)"
+  # Third-party taps need a one-time trust before their formulae load
+  brew trust albibenni/swiftborders 2>/dev/null || true
   brew bundle install --file="$REPO/.config/brewfile/Brewfile" \
     || _warn_ "Some Brewfile entries failed, re-run: brew bundle --file=~/.config/brewfile/Brewfile"
 }
@@ -212,12 +214,12 @@ _sketchybarExtras_() {
 }
 
 _startServices_() {
-  _info_ "Starting yabai, skhd, borders and sketchybar"
+  _info_ "Starting yabai, skhd, SwiftBorders and sketchybar"
   yabai --start-service 2>/dev/null || yabai --restart-service
   skhd --start-service 2>/dev/null || skhd --restart-service
-  brew services restart borders
+  brew services restart albibenni/swiftborders/swiftborders
   brew services restart sketchybar
-  _warn_ "Grant Accessibility permissions to yabai and skhd in System Settings if asked"
+  _warn_ "Grant Accessibility permissions to yabai, skhd and SwiftBorders in System Settings if asked"
 }
 
 _macSystemPrefs_() {

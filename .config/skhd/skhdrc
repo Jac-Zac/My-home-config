@@ -61,5 +61,5 @@ cmd + shift - t : yabai -m window --toggle float;\
            yabai -m window --grid 4:4:1:1:2:2
 
 # Restart Yabai
-lctrl + alt + cmd - q : yabai --restart-service && skhd --restart-service && brew services restart borders && brew services restart sketchybar
+lctrl + alt + cmd - q : yabai --restart-service && skhd --restart-service && brew services restart swiftborders && brew services restart sketchybar
 lctrl + alt + cmd + shift - q : osascript -e 'tell app "System Events" to log out'

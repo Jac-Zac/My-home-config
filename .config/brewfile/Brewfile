@@ -2,7 +2,8 @@
 
 # ─── Taps ────────────────────────────────────────────────────────────────────
 tap "asmvik/formulae"                  # yabai + skhd (formerly koekeishiya)
-tap "felixkratz/formulae"              # sketchybar + borders
+tap "felixkratz/formulae"              # sketchybar
+tap "albibenni/swiftborders"           # SwiftBorders (active-window borders)
 tap "anomalyco/tap"                    # opencode
 tap "owenthereal/upterm"
 
@@ -10,7 +11,7 @@ tap "owenthereal/upterm"
 brew "asmvik/formulae/yabai"
 brew "asmvik/formulae/skhd"
 brew "felixkratz/formulae/sketchybar"
-brew "felixkratz/formulae/borders"
+brew "albibenni/swiftborders/swiftborders"
 brew "nowplaying-cli"
 brew "switchaudio-osx"
 
