@@ -57,9 +57,9 @@ local function update_bar()
 	end)
 end
 
--- Popup details (one ioreg call: source, time, health, cycles, temperature) --
+-- Popup details (ioreg + pmset on open: source, time, health, cycles, temp) --
 local function refresh_details()
-	P.exec("ioreg -rn AppleSmartBattery", function(out)
+	P.exec("ioreg -rn AppleSmartBattery; pmset -g batt", function(out)
 		out = out or ""
 		local function num(key) return tonumber(out:match('"' .. key .. '" = (%d+)')) end
 		local function yes(key) return out:match('"' .. key .. '" = (%a+)') == "Yes" end
@@ -67,7 +67,12 @@ local function refresh_details()
 		local cur, max, design = num("CurrentCapacity"), num("MaxCapacity"), num("DesignCapacity")
 		if not (cur and max and max > 0) then return end
 		local pct = math.floor(cur / max * 100 + 0.5)
-		local chg, ext, rem = yes("IsCharging"), yes("ExternalConnected"), num("TimeRemaining")
+		local chg, ext = yes("IsCharging"), yes("ExternalConnected")
+		-- time from pmset (what macOS shows); ioreg's TimeRemaining is a raw
+		-- short-term average that can be hours off
+		local h, m = out:match("(%d+):(%d+) remaining")
+		local rem = h and (tonumber(h) * 60 + tonumber(m)) or nil
+		if rem == nil and out:match("charged") then rem = 0 end
 
 		charge_row:set({ label = { string = P.spread(pct .. "%", chg and "charging" or (ext and "on AC" or "on battery")) } })
 		-- same colors as the bar glyph: green on AC, else the LEVELS thresholds
@@ -76,7 +81,7 @@ local function refresh_details()
 		local t = "—"
 		if rem and rem > 0 and rem < 65535 then
 			t = string.format("%dh %dm %s", rem // 60, rem % 60, chg and "to full" or "left")
-		elseif rem == 0 and chg then
+		elseif rem == 0 and (chg or ext) then
 			t = "full"
 		end
 		time_row:set({ label = t })
