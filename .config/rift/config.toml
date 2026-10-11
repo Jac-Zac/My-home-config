@@ -3,7 +3,7 @@
 # rift workspaces are *virtual* and 0-based (cmd-1 -> workspace 0); each macOS
 # desktop has its own set. Desktop 1 = bsp; desktop 2 and external displays =
 # the scrolling "strip" (enforced by sketchybar/helpers/rift.lua, keys in
-# strip_key.sh).
+# strip_key.sh and strip_move.sh).
 
 [settings]
 animate = false
@@ -173,8 +173,10 @@ hyper = "Ctrl + Alt + Meta"
 "Meta + 8" = { exec = ["sh", "-c", "$HOME/.config/rift/strip_key.sh 8"] }
 "Meta + 9" = { exec = ["sh", "-c", "$HOME/.config/rift/strip_key.sh 9"] }
 
-"Meta + Shift + J" = { move_window_to_workspace = { workspace = "prev", follow = true } }
-"Meta + Shift + K" = { move_window_to_workspace = { workspace = "next", follow = true } }
+# cmd-shift-j / cmd-shift-k: move window to prev / next workspace, or move it
+# left / right in the strip (like cmd-shift-h/l) — see strip_move.sh
+"Meta + Shift + J" = { exec = ["sh", "-c", "$HOME/.config/rift/strip_move.sh prev"] }
+"Meta + Shift + K" = { exec = ["sh", "-c", "$HOME/.config/rift/strip_move.sh next"] }
 
 "Meta + Shift + 1" = { move_window_to_workspace = { workspace = 0, follow = true } }
 "Meta + Shift + 2" = { move_window_to_workspace = { workspace = 1, follow = true } }
