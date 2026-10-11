@@ -32,6 +32,9 @@ export NPM_CONFIG_PREFIX="$XDG_CONFIG_HOME/npm"
 export OLLAMA_MODELS="$XDG_CONFIG_HOME/ollama/models"
 # export CLAUDE_CONFIG_DIR="$XDG_CONFIG_HOME/claude"
 
+# Fix for python / nvim
+PATH="$HOME/.local/share/uv/python/cpython-3.13.9-macos-aarch64-none/bin:$PATH"
+
 # Adding lmstudio
 PATH="$PATH:$HOME/.lmstudio/bin"
 
