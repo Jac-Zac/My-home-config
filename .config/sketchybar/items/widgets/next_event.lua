@@ -27,6 +27,7 @@ local SOON = 5 * 60 -- yellow countdown; also when a running meeting gives way t
 local next_ev = sbar.add("item", "widgets.next_event", {
 	position = "right",
 	drawing = false,
+	updates = true, -- keep the countdown running while the pill is hidden
 	update_freq = 30,
 	padding_left = settings.item_padding,
 	padding_right = settings.item_padding,

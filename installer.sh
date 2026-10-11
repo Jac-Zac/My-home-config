@@ -93,7 +93,8 @@ EOF
 #          Config          #
 ############################
 
-# Copy repo/.config into ~/.config. Files that differ get a .before-<stamp>
+# Copy tracked configuration files into ~/.config, excluding generated files.
+# Files that differ get a .before-<stamp>
 # backup so local edits are never silently lost.
 _syncConfig_() {
   _info_ "Syncing configuration into ~/.config"
@@ -101,7 +102,8 @@ _syncConfig_() {
   _link_ "$HOME/.config/shell/profile" "$HOME/.zprofile"
 
   local changes
-  changes=$(rsync -aicn --exclude '.DS_Store' "$REPO/.config/" "$HOME/.config/" | grep '^[>c]' || true)
+  changes=$(rsync -aicn --from0 --files-from=<(git -C "$REPO/.config" ls-files -z -- .) \
+    "$REPO/.config/" "$HOME/.config/" | grep '^[>c]' || true)
   if [ -z "$changes" ]; then
     _ok_ "Config already up to date"
   else
@@ -110,7 +112,8 @@ _syncConfig_() {
       _warn_ "Skipped config sync"
       return 0
     fi
-    rsync -ac --exclude '.DS_Store' --backup --suffix=".before-$STAMP" \
+    rsync -ac --from0 --files-from=<(git -C "$REPO/.config" ls-files -z -- .) \
+      --backup --suffix=".before-$STAMP" \
       "$REPO/.config/" "$HOME/.config/"
     _ok_ "Config synced (overwritten files backed up with suffix .before-$STAMP)"
   fi

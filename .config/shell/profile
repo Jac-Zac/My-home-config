@@ -42,6 +42,13 @@ PATH="${XDG_CONFIG_HOME:-$HOME/.config}/scripts:$PATH"
 PATH="/opt/homebrew/bin:$PATH"
 PATH="/opt/homebrew/sbin:$PATH"
 
+# Use installed uv-managed Python 3.13 for Python / nvim.
+if command -v uv >/dev/null 2>&1; then
+    _config_python=$(uv python find --managed-python --no-project --no-config --offline 3.13 2>/dev/null) &&
+        PATH="${_config_python:h}:$PATH"
+    unset _config_python
+fi
+
 # Adding local bin to my path for pipx
 PATH="$HOME/.local/bin:$PATH"
 

@@ -21,7 +21,7 @@ mouse_hides_on_focus = false
 auto_focus_blacklist = ["com.raycast.macos"]
 
 # sketchybar workspace indicators + layout (sketchybar/helpers/rift.lua).
-# A switch fires all three; sketchybar collapses them into one query.
+# Sketchybar debounces bursts and shares one snapshot between its items.
 # Restart the service after changing this: `rift service restart`.
 run_on_start = [
   "rift-cli subscribe cli --event workspace_changed --command sh --args -c --args 'sketchybar --trigger rift_workspace_changed'",
@@ -63,11 +63,10 @@ master_ratio = 0.5
 stack_offset = 40.0
 default_orientation = "perpendicular"
 
-# Menu bar is auto-hidden: rift already reserves the notch height (where
-# sketchybar sits). NOTE: a display without a notch has no such reserve, so
-# windows there can sit under the bar.
+# External displays reserve the 33pt bar plus a 13pt gap. The laptop already
+# reserves its notch height, so its UUID override below keeps the 13pt gap.
 [settings.layout.gaps.outer]
-top = 13
+top = 46
 left = 13
 bottom = 13
 right = 13
@@ -75,6 +74,12 @@ right = 13
 [settings.layout.gaps.inner]
 horizontal = 13
 vertical = 13
+
+[settings.layout.gaps.per_display."37D8832A-2D66-02CA-B9F7-8F30A301B230".outer]
+top = 13
+left = 13
+bottom = 13
+right = 13
 
 [settings.ui.mission_control]
 enabled = false
@@ -108,7 +113,7 @@ default_workspace_count = 9 # cmd-1 .. cmd-9
 auto_assign_windows = true
 preserve_focus_per_workspace = true
 workspace_auto_back_and_forth = false
-prevent_wrapping = false # cmd-j/k wrap around like space_cycle_*.sh
+prevent_wrapping = false # cmd-j/k wrap around via strip_key.sh
 reapply_app_rules_on_title_change = false
 default_workspace = 0
 workspace_names = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]

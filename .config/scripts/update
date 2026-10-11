@@ -1,16 +1,17 @@
 #!/usr/bin/env bash
 # Routine maintenance: packages, plugins, cleanup.
 # To also pull and apply the latest dotfiles run `installer.sh -u` in the repo.
+set -euo pipefail
 
-brew update && brew upgrade
+brew update
+brew upgrade
 brew cleanup
 
 for plugin in fast-syntax-highlighting powerlevel10k zsh-autosuggestions; do
   git -C ~/.config/shell/$plugin pull --ff-only --quiet
 done
-~/.config/tmux/plugins/tpm/bin/update_plugins all >/dev/null
+~/.config/tmux/plugins/tpm/bin/update_plugins all
 tv update-channels
 
 brew doctor
 mole
-rm -rf ~/.npm

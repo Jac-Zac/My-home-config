@@ -14,26 +14,36 @@ function M.decode(s)
 	end
 
 	local function str()
+		if s:sub(i, i) ~= '"' then error("expected string at " .. i) end
 		local out, j = {}, i + 1
 		while true do
 			local k = s:find('["\\]', j)
 			if not k then error("unterminated string") end
-			out[#out + 1] = s:sub(j, k - 1)
+			local part = s:sub(j, k - 1)
+			if part:find("[%z\1-\31]") then error("control character in string") end
+			out[#out + 1] = part
 			if s:sub(k, k) == '"' then
 				i = k + 1
 				return table.concat(out)
 			end
 			local c = s:sub(k + 1, k + 1)
 			if c == "u" then
+				if not s:sub(k + 2, k + 5):match("^%x%x%x%x$") then error("bad unicode escape") end
 				local cp = tonumber(s:sub(k + 2, k + 5), 16)
 				j = k + 6
-				if cp >= 0xD800 and cp < 0xDC00 and s:sub(j, j + 1) == "\\u" then -- surrogate pair
-					cp = 0x10000 + (cp - 0xD800) * 0x400 + (tonumber(s:sub(j + 2, j + 5), 16) - 0xDC00)
+				if cp >= 0xD800 and cp < 0xDC00 then -- surrogate pair
+					local low = s:sub(j, j + 5):match("^\\u(%x%x%x%x)$")
+					low = low and tonumber(low, 16)
+					if not low or low < 0xDC00 or low > 0xDFFF then error("bad surrogate pair") end
+					cp = 0x10000 + (cp - 0xD800) * 0x400 + (low - 0xDC00)
 					j = j + 6
+				elseif cp >= 0xDC00 and cp <= 0xDFFF then
+					error("unpaired surrogate")
 				end
 				out[#out + 1] = utf8.char(cp)
 			else
-				out[#out + 1] = escapes[c] or c
+				if not escapes[c] then error("bad string escape") end
+				out[#out + 1] = escapes[c]
 				j = k + 2
 			end
 		end
@@ -51,10 +61,12 @@ function M.decode(s)
 				ws()
 				local k = str()
 				ws()
+				if s:sub(i, i) ~= ":" then error("expected colon at " .. i) end
 				i = i + 1 -- ':'
 				t[k] = value()
 				ws()
 				c = s:sub(i, i)
+				if c ~= "," and c ~= "}" then error("expected object delimiter at " .. i) end
 				i = i + 1
 			until c ~= ","
 			return t
@@ -68,6 +80,7 @@ function M.decode(s)
 				t[n] = value()
 				ws()
 				c = s:sub(i, i)
+				if c ~= "," and c ~= "]" then error("expected array delimiter at " .. i) end
 				i = i + 1
 			until c ~= ","
 			return t
@@ -77,13 +90,32 @@ function M.decode(s)
 		elseif s:sub(i, i + 4) == "false" then i = i + 5 return false
 		elseif s:sub(i, i + 3) == "null" then i = i + 4 return nil
 		end
-		local num = s:match("^-?%d+%.?%d*[eE]?[-+]?%d*", i)
-		if not num or num == "" then error("bad json at " .. i) end
-		i = i + #num
-		return tonumber(num)
+		local start = i
+		if c == "-" then i = i + 1 end
+		if s:sub(i, i) == "0" then
+			i = i + 1
+		elseif s:sub(i, i):match("[1-9]") then
+			repeat i = i + 1 until not s:sub(i, i):match("%d")
+		else error("bad number at " .. i) end
+		local function digits()
+			if not s:sub(i, i):match("%d") then error("expected digit at " .. i) end
+			repeat i = i + 1 until not s:sub(i, i):match("%d")
+		end
+		if s:sub(i, i) == "." then i = i + 1; digits() end
+		if s:sub(i, i):match("[eE]") then
+			i = i + 1
+			if s:sub(i, i):match("[+-]") then i = i + 1 end
+			digits()
+		end
+		local n = tonumber(s:sub(start, i - 1))
+		if not n or n == math.huge or n == -math.huge then error("number out of range") end
+		return n
 	end
 
-	return value()
+	local result = value()
+	ws()
+	if i <= #s then error("trailing content at " .. i) end
+	return result
 end
 
 function M.encode(v)

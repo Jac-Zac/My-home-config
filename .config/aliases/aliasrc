@@ -41,7 +41,14 @@ alias showD="defaults write com.apple.finder CreateDesktop -bool true;killall Fi
 alias hideD="defaults write com.apple.finder CreateDesktop -bool false;killall Finder" # hide the Dock
 alias noDSS="defaults write com.apple.desktopservices DSDontWriteNetworkStores true"
 alias locate_update="sudo /usr/libexec/locate.updatedb" # Update locate database
-alias pip3-update="pip3 list --outdated | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U"
+unalias pip3-update 2>/dev/null
+pip3-update() (
+  set -o pipefail
+  local packages
+  packages=$(pip3 list --outdated --format=json | jq -r '.[].name') || return
+  [ -n "$packages" ] || return 0
+  printf '%s\n' "$packages" | xargs pip3 install --upgrade
+)
 alias weather="curl http://wttr.in/trieste"
 alias DSSdelete="find . -name '.DS_Store' -type f -delete"
 
@@ -128,12 +135,14 @@ alias github="open https://github.com/"
 # Set up fast movement with fuzzy finding
 show_file_or_dir_preview="if [ -d {} ]; then lsd --tree {} --color=always --icon=always | head -200; else bat -n --color=always --line-range :500 {}; fi"
 
-# Set Up zoxide Functions 
-# f() {
-#     cd "$(zoxide query --list | fzf --height 40% --reverse --border --ansi --preview $show_file_or_dir_preview)"
-# }
-
-alias f="tv zoxide --inline"
+# Change directory in the current shell after the picker returns.
+unalias f 2>/dev/null
+f() {
+  local directory
+  directory=$(tv zoxide --inline "$@") || return
+  [ -n "$directory" ] || return 0
+  builtin cd -- "$directory"
+}
 
 # 1. Start or switch to a tmux session named after the current directory
 function tmux_start() {
@@ -164,8 +173,9 @@ alias t='tmux_start'        # start/switch
 alias tq='tmux_stop'        # quit session or server
 
 # ngrok http, but print the public URL (e.g. ngshare 3000)
-ngshare() {
+ngshare() (
+  set -o pipefail
   ngrok http "$@" --log stdout --log-format json |
     jq --unbuffered -r 'if .msg == "started tunnel" then "Public URL: \(.url)"
       elif .lvl == "eror" or .lvl == "crit" then "ngrok: \(.err // .msg)" else empty end'
-}
+)

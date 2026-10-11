@@ -16,9 +16,8 @@ local P = require("helpers.popup")
 -- plan-usage-history.json when fresher; Codex from rollout-*.jsonl tails.
 -- (Transcripts are NOT watched: they change on every message without moving
 -- the numbers, which only refresh when /usage refetches.)
--- Efficiency: the helper (~0.03s cold) runs only when ~/.claude.json, the
--- desktop history, or the newest Codex rollout mtime changed; otherwise the
--- tick is a cheap async stat that never blocks the event loop.
+-- Routine ticks check both sources; Claude statusline events check Claude only.
+-- Cached reset times are evaluated in Lua, without rescanning unchanged files.
 --
 -- Icons: Nerd Fonts brand marks — U+EC82 Claude, U+EC81 OpenAI (NOT
 -- U+E281/E282, those are fae-banana/fae-bath), in settings.font.nerd.
@@ -35,6 +34,7 @@ local function cell(name, glyph, brand, freq, pad_right)
 	return sbar.add("item", name, {
 		position = "right",
 		update_freq = freq,
+		updates = freq and true or "when_shown", -- Claude owns polling for both cells
 		padding_left = settings.item_padding,
 		padding_right = pad_right,
 		icon = { string = glyph, color = brand, font = P.nerd(14), padding_left = 0, padding_right = 4 },
@@ -136,24 +136,18 @@ local function fill(s, show, used5, reset5, usedW, resetW)
 end
 
 -- Update ------------------------------------------------------------------
-local cache = { key = nil }
+local data, cache = {}, {}
+local KEYS = {
+	claude = [[stat -f '%m:%z' "$HOME/.claude.json" "$HOME/.cache/sketchybar/claude-usage.json" "$HOME/Library/Application Support/Claude/plan-usage-history.json" 2>/dev/null; true]],
+	codex = [[find "$HOME/.codex/sessions" "$HOME/.codex/archived_sessions" -name 'rollout-*.jsonl' -exec stat -f '%m:%z' {} + 2>/dev/null | sort -rn | head -n 1; true]],
+}
 
--- Async mtime stat over the helper's real inputs: ~/.claude.json (the /usage
--- cache) + desktop plan-usage-history.json + newest Codex rollout mtime
--- (recursive find, tail-scanned by the helper); "none" when all absent.
--- (Claude transcripts are deliberately NOT watched: they append on every
--- message while the numbers only move when /usage refetches the cache.)
-local function refresh_key(on_key)
-	sbar.exec(
-		"stat -f %m $HOME/.claude.json $HOME/.cache/sketchybar/claude-usage.json 2>/dev/null;"
-			.. " stat -f %m $HOME'/Library/Application Support/Claude/plan-usage-history.json' 2>/dev/null;"
-			.. " find $HOME/.codex/sessions $HOME/.codex/archived_sessions -name 'rollout-*.jsonl'"
-			.. " -exec stat -f %m {} + 2>/dev/null | sort -rn | head -n 1; true",
-		function(out)
-			if out == nil then return end
-			on_key(out:gsub("%s", "") == "" and "none" or out)
-		end
-	)
+-- An expired snapshot cannot tell us how much has been used since the reset.
+-- Sources without reset times also become unknown after their window length.
+local function live(used, reset, fetched, span)
+	local expires = reset or (fetched and fetched + span)
+	if expires and expires <= os.time() then return nil end
+	return used
 end
 
 local function apply(cx5, cx5r, cxW, cxWr, c5, c5r, cW, cWr, cxa, ca)
@@ -161,8 +155,11 @@ local function apply(cx5, cx5r, cxW, cxWr, c5, c5r, cW, cWr, cxa, ca)
 	paint_ages()
 	local has_claude = c5 ~= nil or cW ~= nil
 	local has_codex = cx5 ~= nil or cxW ~= nil
+	cx5, cxW = live(cx5, cx5r, cxa, H5), live(cxW, cxWr, cxa, WK)
+	c5, cW = live(c5, c5r, ca, H5), live(cW, cWr, ca, WK)
 	-- Bar drives off 5h for claude, week for codex; as remaining
-	local rC5, rX = rem(c5), rem(cxW ~= nil and cxW or cx5)
+	local rC5, rX = rem(c5), rem(cx5)
+	if data[3] ~= nil then rX = rem(cxW) end
 	-- low quota colors only the percentage; the brand icons never change
 	claude:set({ drawing = has_claude, label = { string = pct(rC5), color = col(rC5) } })
 	codex:set({ drawing = has_codex, label = { string = pct(rX), color = col(rX) } })
@@ -177,40 +174,64 @@ local function num(s)
 	return (s ~= nil and s ~= "-" and s ~= "") and tonumber(s) or nil
 end
 
-local function update_all()
-	if wake.quiet() then return end -- post-wake: painted state stays, converge later
-	refresh_key(function(key)
-		if key == "none" then -- neither source present: hide everything, no helper run
-			cache.key = key
-			return apply()
+local function paint()
+	apply(data[1], data[2], data[3], data[4], data[5], data[6], data[7], data[8], data[9], data[10])
+end
+
+local busy, pending = {}, {}
+local function update_agent(agent)
+	if busy[agent] then pending[agent] = true; return end
+	busy[agent] = true
+	local function done()
+		busy[agent] = false
+		if pending[agent] then pending[agent] = false; update_agent(agent) end
+	end
+	sbar.exec(KEYS[agent], function(out, code)
+		if code ~= 0 or type(out) ~= "string" then return done() end
+		local key = out:gsub("%s", "") == "" and "none" or out
+		if key == cache[agent] then return done() end
+		local first, age = agent == "claude" and 5 or 1, agent == "claude" and 10 or 9
+		local function save(fields)
+			for i = first, first + 3 do data[i] = fields[i] end
+			data[age] = fields[age]
+			cache[agent] = key
+			paint()
+			done()
 		end
-		if key == cache.key then return end -- unchanged: skip the parse
-		-- alarm-guarded (a cold post-wake disk should never stall the bar loop)
-		P.exec("perl -e 'alarm 10; exec @ARGV' " .. HELPER, function(out)
-			out = (out or ""):gsub("[\r\n]+$", "")
-			if select(2, out:gsub("\t", "")) < 7 then return end -- need all 8 TSV fields
-			local f, i = {}, 0
-			for tok in (out .. "\t"):gmatch("(.-)\t") do
+		if key == "none" then return save({}) end
+		P.exec("perl -e 'alarm 10; exec @ARGV' " .. HELPER .. " --" .. agent, function(result, status)
+			if status ~= 0 or type(result) ~= "string" then return done() end
+			result = result:gsub("[\r\n]+$", "")
+			if select(2, result:gsub("\t", "")) ~= 9 then return done() end
+			local fields, i = {}, 0
+			for tok in (result .. "\t"):gmatch("(.-)\t") do
 				i = i + 1
-				f[i] = num(tok:match("^%s*(.-)%s*$"))
+				fields[i] = num(tok:match("^%s*(.-)%s*$"))
 			end
-			cache.key = key
-			apply(f[1], f[2], f[3], f[4], f[5], f[6], f[7], f[8], f[9], f[10])
+			save(fields)
 		end)
 	end)
+end
+
+local function update_all()
+	paint() -- reset expiry changes with time even when source files do not
+	if wake.quiet() then return end
+	update_agent("claude")
+	update_agent("codex")
 end
 
 -- Single routine owner (claude ticks every 60s; the statusline hook pushes sooner): codex shares the bracket
 -- and would otherwise run update_all (and its stat) twice per tick.
 claude:subscribe("routine", function()
-	paint_ages() -- ages tick even when the data didn't change
 	update_all()
 end)
 claude:subscribe("system_woke", wake.arm)
 -- Claude Code's statusline hook pokes this the moment its limits change
-claude:subscribe("agents_refresh", update_all)
+claude:subscribe("agents_refresh", function()
+	update_agent("claude") -- never scan Codex history for a Claude update
+end)
 
 -- Click-only open AND close: rows stay pressable
-pop:bind({ claude, codex }, paint_ages)
+pop:bind({ claude, codex }, paint)
 
 update_all() -- initial paint (routine also covers subsequent ticks)

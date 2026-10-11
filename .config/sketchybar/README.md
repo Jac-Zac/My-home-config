@@ -86,7 +86,7 @@ Fonts are in `helpers/default_font.lua`, colors in `colors.lua`. Reload with
 ## How it fits together
 
 - `items/` — one file per widget; `helpers/popup.lua` builds every popup
-  (one grid, batched updates, rows created after the bar's first paint).
+  (one grid, batched updates, rows created when each popup is first opened).
 - `helpers/` — small native helpers (calendar, audio, keyboard, Control
   Center, click-away, calendar grid) rebuilt automatically when changed, and
   the Claude/Codex usage reader.

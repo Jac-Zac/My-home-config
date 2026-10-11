@@ -1,7 +1,8 @@
 #!/opt/homebrew/opt/lua@5.4/bin/lua
 --[[ agents_usage.lua: bounded offline usage snapshot for the agents widget.
 
-Reads local files only (no network). Like garamnohhh/sketchybar-island's
+Reads local files only (no network). --claude / --codex reads only that source.
+Like garamnohhh/sketchybar-island's
 plugins/usage.py, the canonical Claude source is used first:
 
   - Claude: cachedUsageUtilization in ~/.claude.json
@@ -20,9 +21,8 @@ plugins/usage.py, the canonical Claude source is used first:
 Freshest of all (when enabled): ~/.cache/sketchybar/claude-usage.json, written
 by helpers/claude_statusline.lua on every Claude Code statusline update.
 
-A value whose reset time already passed belongs to a finished window, so it
-is reported as 0 with no reset (fresh window, nothing used yet) rather than
-a stale percent.
+Snapshots retain their reset times. The widget marks expired windows unknown
+until fresh data arrives, even when the files do not change.
 
 Prints one TSV line (missing values are '-'):
   cx5  cx5reset_epoch  cxW  cxWreset_epoch  c5  c5reset_epoch  cW  cWreset_epoch
@@ -35,7 +35,6 @@ package.path = arg[0]:match("^(.*)/") .. "/?.lua;" .. package.path
 local json = require("json")
 
 local HOME = os.getenv("HOME")
-local NOW = os.time()
 local TAIL = 200000
 
 local function num(v) return type(v) == "number" end
@@ -77,11 +76,6 @@ local function iso_epoch(s)
 	return math.tointeger(t)
 end
 
-local function live_iso(s)
-	local e = iso_epoch(s)
-	return e ~= nil and e > NOW
-end
-
 -- Files from a shell `find`, as { path, mtime } records
 local function find(cmd)
 	local files, p = {}, io.popen(cmd .. " -exec stat -f '%m %N' {} + 2>/dev/null")
@@ -96,12 +90,9 @@ end
 local out = {}
 
 -- Claude ------------------------------------------------------------------
+if arg[1] ~= "--codex" then
 local function claude_slot(key, pct, rst)
-	if live_iso(rst) then
-		out[key], out[key .. "r"] = round(pct), iso_epoch(rst)
-	else -- reset passed (or unparseable): fresh window at 0
-		out[key], out[key .. "r"] = 0, nil
-	end
+	out[key], out[key .. "r"] = round(pct), iso_epoch(rst)
 end
 
 local function limit_slot(lim)
@@ -145,25 +136,26 @@ if type(samples) == "table" and type(samples[#samples]) == "table" then
 	if t > fetched then
 		local su = type(s0.u) == "table" and s0.u or {}
 		if next(su) then out.ca = math.floor(t) end
-		if NOW - t < 5 * 3600 and num(su.fh) then out.c5 = round(su.fh) end
-		if NOW - t < 7 * 86400 and num(su.sd) then out.cW = round(su.sd) end
+		for name, key in pairs({ fh = "c5", sd = "cW" }) do
+			if num(su[name]) then
+				out[key] = round(su[name])
+				-- A newer sample may be from a different window; its reset is unknown.
+				if out[key .. "r"] and t >= out[key .. "r"] then out[key .. "r"] = nil end
+			end
+		end
 	end
 end
 
 -- Freshest source when enabled: helpers/claude_statusline.lua saves
 -- rate_limits (used %, reset epoch) on every Claude Code update. Wins whenever
--- it is newer than what the sources above gave; a window past its reset reads 0.
+-- it is newer than what the sources above gave.
 local st = load_json(HOME .. "/.cache/sketchybar/claude-usage.json")
 if st and (tonumber(st.t) or 0) > (out.ca or 0) then
 	local limits = type(st.limits) == "table" and st.limits or {}
 	for name, key in pairs({ ["5h"] = "c5", week = "cW" }) do
 		local w = limits[name]
 		if type(w) == "table" and num(w.used) then
-			if num(w.resets_at) and w.resets_at > NOW then
-				out[key], out[key .. "r"] = round(w.used), math.floor(w.resets_at)
-			else
-				out[key], out[key .. "r"] = 0, nil
-			end
+			out[key], out[key .. "r"] = round(w.used), num(w.resets_at) and math.floor(w.resets_at) or nil
 		end
 	end
 	out.ca = math.floor(st.t)
@@ -195,8 +187,10 @@ if out.c5 == nil and out.cW == nil then
 		end
 	end
 end
+end -- Claude
 
 -- Codex -------------------------------------------------------------------
+if arg[1] ~= "--claude" then
 -- Recursive rollout files; newest record by line timestamp; mapping by
 -- window_minutes (primary is the 10080-minute weekly window on current
 -- plans, but fall back positionally when the field is absent).
@@ -240,15 +234,12 @@ if best then
 			local key = "cx" .. slot
 			if out[key] == nil then -- both parts come from the same record: first wins
 				local rst = num(p.resets_at) and math.floor(p.resets_at) or nil
-				if rst and rst <= NOW then
-					out[key], out[key .. "r"] = 0, nil
-				else
-					out[key], out[key .. "r"] = p.used_percent, rst
-				end
+				out[key], out[key .. "r"] = p.used_percent, rst
 			end
 		end
 	end
 end
+end -- Codex
 
 local cols = {}
 for k, key in ipairs({ "cx5", "cx5r", "cxW", "cxWr", "c5", "c5r", "cW", "cWr", "cxa", "ca" }) do

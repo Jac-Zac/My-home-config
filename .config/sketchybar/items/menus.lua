@@ -25,10 +25,14 @@ for i = 1, MAX_ITEMS do
 end
 
 local menu_padding = sbar.add("item", "menu.padding", { drawing = false, width = 5 })
+local menu_visible, request = false, 0
 
 -- Only as many items as the app has menus: no stale labels from the last app
 local function update_menus()
-	sbar.exec(MENU_SCRIPT .. " -l", function(menus)
+	request = request + 1
+	local current = request
+	sbar.exec(MENU_SCRIPT .. " -l", function(menus, code)
+		if not menu_visible or current ~= request or code ~= 0 then return end
 		sbar.set("/menu\\..*/", { drawing = false })
 		menu_padding:set({ drawing = true })
 		local id = 0
@@ -41,7 +45,6 @@ local function update_menus()
 	end)
 end
 
-local menu_visible = false
 local watcher = sbar.add("item", { drawing = false, updates = true })
 
 watcher:subscribe("swap_menus_and_spaces", function()

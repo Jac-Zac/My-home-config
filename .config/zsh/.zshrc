@@ -27,7 +27,7 @@ autoload -U compinit
 ZSH_COMPDUMP="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompdump"
 zstyle ':completion:*' menu select matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 zmodload zsh/complist
-compinit -C
+compinit -C -d "$ZSH_COMPDUMP"
 _comp_options+=(globdots)		# Include hidden files.
 
 # VIM

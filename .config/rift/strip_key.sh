@@ -21,4 +21,5 @@ id=$(rift-cli query workspaces | jq -c --arg k "$key" '
 	  elif $k == "prev" then (($cur // 0) - 1 + $n) % $n
 	  else ($k | tonumber) - 1 end
 	| $cols[.] // empty | min_by(.frame.origin.y) | .id')
-[ -n "$id" ] && rift-cli execute window focus --window-id "$id" >/dev/null
+[ -z "$id" ] && exit 0 # no column to focus
+exec rift-cli execute window focus --window-id "$id" >/dev/null

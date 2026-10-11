@@ -70,11 +70,8 @@ function P.later(fn)
 end
 
 -- Lazy rows --------------------------------------------------------------------
--- Every item is a window on every display (~18ms each to create): ~100 popup
--- rows made startup take 5s. So a row starts as a Lazy stand-in that records
--- :set() (merged into its options) and :subscribe(); the real items are made
--- in one batch per popup — in the background just after startup, or at once
--- when that popup is first opened. Widgets use rows exactly like items.
+-- Cache row updates and subscriptions until the popup is first opened.
+-- Its real items are then created in one batch and reused on later opens.
 local function merge(dst, src)
 	for k, v in pairs(src) do
 		if type(dst[k]) == "table" and type(v) == "table" then
@@ -106,8 +103,6 @@ function Lazy:materialize()
 	self.subs = nil
 end
 
-local pending_pops = {} -- popups not built yet, in creation order
-
 local Pop = {}
 Pop.__index = Pop
 
@@ -119,19 +114,6 @@ function Pop:build()
 		for _, r in ipairs(self.rows) do r:materialize() end
 	end)
 end
-
--- After startup: build the remaining popups one at a time, 0.3s apart, so
--- the bar's first paint never waits on them
-local function build_next()
-	while #pending_pops > 0 do
-		local pop = table.remove(pending_pops, 1)
-		if not pop.built then
-			pop:build()
-			return sbar.delay(0.3, build_next)
-		end
-	end
-end
-sbar.delay(1, build_next)
 
 -- anchor: bar item or bracket that owns the popup · opts.underline: extra
 -- bar items sharing the open-underline · opts.align: popup alignment
@@ -147,7 +129,6 @@ function P.new(name, anchor, opts)
 		},
 	})
 	local self = setmetatable({ name = name, anchor = anchor, rows = {}, uls = { anchor, table.unpack(opts.underline or {}) } }, Pop)
-	pending_pops[#pending_pops + 1] = self
 	popups.track(name, anchor, opts.underline)
 	self:gap(6)
 	return self
@@ -305,6 +286,7 @@ function Pop:done()
 end
 
 function Pop:is_open()
+	if not self.built then return false end
 	return self.anchor:query().popup.drawing == "on"
 end
 
@@ -317,6 +299,7 @@ function Pop:close()
 end
 
 function Pop:open()
+	self:build()
 	P.batch(function()
 		popups.close_others(self.name)
 		self.anchor:set({ popup = { drawing = true } })
@@ -329,7 +312,6 @@ end
 function Pop:bind(items, on_open)
 	local function toggle()
 		if self:is_open() then return self:close() end
-		self:build() -- opened before the background build got to it
 		if on_open then on_open() end
 		self:open()
 	end

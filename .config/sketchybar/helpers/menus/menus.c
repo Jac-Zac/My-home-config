@@ -79,10 +79,12 @@ void ax_print_menu_options(AXUIElementRef app) {
         CFTypeRef title = ax_get_title(item);
 
         if (title) {
-          uint32_t buffer_len = 2*CFStringGetLength(title);
-          char buffer[2*CFStringGetLength(title)];
-          CFStringGetCString(title, buffer, buffer_len, kCFStringEncodingUTF8);
-          printf("%s\n", buffer);
+          CFIndex buffer_len = CFStringGetMaximumSizeForEncoding(CFStringGetLength(title), kCFStringEncodingUTF8) + 1;
+          char *buffer = malloc(buffer_len);
+          if (buffer && CFStringGetCString(title, buffer, buffer_len, kCFStringEncodingUTF8)) {
+            printf("%s\n", buffer);
+          }
+          free(buffer);
           CFRelease(title);
         }
       }
