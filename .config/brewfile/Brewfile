@@ -32,6 +32,7 @@ brew "pam-reattach"                    # Touch ID sudo inside tmux
 # ─── Editors & dev tools ─────────────────────────────────────────────────────
 brew "neovim"
 brew "lazygit"
+brew "git-delta"
 brew "lazydocker"
 brew "gh"
 brew "git-filter-repo"

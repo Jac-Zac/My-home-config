@@ -1,0 +1,6 @@
+git:
+  # Use Delta inside LazyGit, sharing the theme from the Git config.
+  diffRenderers:
+    # LazyGit handles scrolling itself, so disable Delta's pager.
+    - command: delta --config ~/.config/git/config --paging=never
+      colorArg: always
