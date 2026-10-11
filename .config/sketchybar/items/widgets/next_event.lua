@@ -29,6 +29,7 @@ local next_ev = sbar.add("item", "widgets.next_event", {
 	drawing = false,
 	updates = true, -- keep the countdown running while the pill is hidden
 	update_freq = 30,
+	scroll_texts = true,
 	padding_left = settings.item_padding,
 	padding_right = settings.item_padding,
 	icon = {
@@ -38,7 +39,7 @@ local next_ev = sbar.add("item", "widgets.next_event", {
 		padding_left = 8,
 		padding_right = settings.item_spacing,
 	},
-	label = { font = P.mono(settings.font.sizes.numbers), color = H.text, padding_left = 0, padding_right = 8 },
+	label = { font = P.mono(settings.font.sizes.numbers), color = H.text, padding_left = 0, padding_right = 8, max_chars = 16 },
 	background = { drawing = true, color = colors.catppuccin.surface0, corner_radius = 6, height = 22 },
 })
 
@@ -66,7 +67,7 @@ local function paint()
 	next_ev:set({
 		drawing = true,
 		icon = { color = (e.st > now and e.st - now <= SOON) and H.warn or H.dim },
-		label = { string = (e.st <= now and "now" or ("in " .. math.ceil((e.st - now) / 60) .. "m")) .. " · " .. P.fit(title, 24) },
+		label = { string = (e.st <= now and "now" or ("in " .. math.ceil((e.st - now) / 60) .. "m")) .. " · " .. title },
 	})
 end
 cal.on_change = paint
