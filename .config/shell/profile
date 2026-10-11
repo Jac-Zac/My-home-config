@@ -29,9 +29,14 @@ export HOMEBREW_BREWFILE="${XDG_CONFIG_HOME:-$HOME/.config}/brewfile/Brewfile"
 export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"
 export NPM_CONFIG_PREFIX="$XDG_CONFIG_HOME/npm"
 export NPM_CONFIG_CACHE="${XDG_CACHE_HOME:-$HOME/.cache}/npm"
-export CLAUDE_CONFIG_DIR="$XDG_CONFIG_HOME/claude"
-export CODEX_HOME="$XDG_CONFIG_HOME/codex"
-export T3CODE_HOME="$XDG_CONFIG_HOME/t3"
+export OLLAMA_MODELS="$XDG_CONFIG_HOME/ollama/models"
+# export CLAUDE_CONFIG_DIR="$XDG_CONFIG_HOME/claude"
+
+# Fix for python / nvim
+PATH="$HOME/.local/share/uv/python/cpython-3.13.9-macos-aarch64-none/bin:$PATH"
+
+# Adding lmstudio
+PATH="$PATH:$HOME/.lmstudio/bin"
 
 # Adding scripts to path
 PATH="${XDG_CONFIG_HOME:-$HOME/.config}/scripts:$PATH"
