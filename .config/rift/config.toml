@@ -64,7 +64,8 @@ stack_offset = 40.0
 default_orientation = "perpendicular"
 
 # External displays reserve the 33pt bar plus a 13pt gap. The laptop already
-# reserves its notch height, so its UUID override below keeps the 13pt gap.
+# usually reserves its notch height; helpers/rift.lua adjusts the laptop's
+# top gap when macOS changes that reservation after a display change.
 [settings.layout.gaps.outer]
 top = 46
 left = 13
@@ -129,7 +130,6 @@ app_rules = [
   # WhatsApp: no rule, opens on the current workspace (cmd-m)
 
   # Floating
-  { app_name = "System Preferences", floating = true },
   { app_name = "System Settings", floating = true },
   { app_name = "Clock", floating = true },
   { app_name = "App Store", floating = true },
@@ -193,12 +193,17 @@ hyper = "Ctrl + Alt + Meta"
 "Meta + Shift + 8" = { move_window_to_workspace = { workspace = 7, follow = true } }
 "Meta + Shift + 9" = { move_window_to_workspace = { workspace = 8, follow = true } }
 
+# cmd-shift-up / cmd-shift-down: move window to the display above (external) /
+# below (laptop). Dragging Helium/Ghostty there snaps back; alt-drag works.
+"Meta + Shift + ArrowUp" = { move_window_to_display = { selector = "up" } }
+"Meta + Shift + ArrowDown" = { move_window_to_display = { selector = "down" } }
+
 # macOS desktops: ctrl-left / ctrl-right (macOS shortcut) or a trackpad swipe.
 
 # ---- layout ----
 # per workspace
 "Meta + Shift + F" = { set_workspace_layout = { mode = "floating" } }
-"Meta + Shift + Space" = { set_workspace_layout = { mode = "bsp" } }
+"Meta + Shift + B" = { set_workspace_layout = { mode = "bsp" } }
 "Meta + Shift + S" = { set_workspace_layout = { mode = "scrolling" } }
 "Meta + Shift + E" = { set_workspace_layout = { mode = "master_stack" } }
 "Meta + Shift + P" = "promote_to_master"
@@ -210,6 +215,8 @@ hyper = "Ctrl + Alt + Meta"
 
 # float / unfloat window and center it
 "Meta + Shift + T" = { toggle_window_floating = { center = true, size = "smart" } }
+# jump focus between the floating and tiled windows (raises a buried float)
+"Meta + Shift + O" = "toggle_focus_floating"
 
 # ---- session ----
 "hyper + Q" = { exec = ["sh", "-c", "$HOME/.config/rift/restart.sh"] }

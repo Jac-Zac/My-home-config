@@ -53,6 +53,8 @@ Calculator, Activity Monitor…) always float.
 | <kbd>command + shift + j / k</kbd> | Send window to previous / next workspace and follow | same                    |
 | <kbd>command + shift + t</kbd>     | Float / unfloat the window, centred     | same                                |
 | <kbd>command + shift + m</kbd>     | Maximize the window within the gaps (toggle) | same                           |
+| <kbd>command + shift + o</kbd>     | Jump focus between floating and tiled windows (raises a buried float) | same     |
+| <kbd>command + shift + ↑ / ↓</kbd> | Move window to the display above (external) / below (laptop) | same             |
 
 A number with no column behind it (say <kbd>command + 7</kbd> with three
 columns) does nothing.
@@ -80,8 +82,9 @@ right (the [niri](https://github.com/YaLTeR/niri) model).
 How it works: [`sketchybar/helpers/rift.lua`](../.config/sketchybar/helpers/rift.lua)
 notices desktop 2 / an external display and switches the workspace to the
 scrolling layout; [`rift/strip_key.sh`](../.config/rift/strip_key.sh) makes the
-number keys and <kbd>j/k</kbd> pick columns there. (If sketchybar isn't
-running, the keys fall back to switching workspaces.)
+number keys and <kbd>j/k</kbd> pick columns in any workspace whose layout is
+scrolling. (If sketchybar isn't running, desktop 2 isn't switched to scrolling
+automatically — use <kbd>command + shift + s</kbd>.)
 
 ## Layouts
 
@@ -89,7 +92,7 @@ These change the **current workspace** only.
 
 | Keybind                            | Layout / action                                          |
 | ---------------------------------- | -------------------------------------------------------- |
-| <kbd>command + shift + space</kbd> | **bsp** — every new window halves the focused one, 50/50 |
+| <kbd>command + shift + b</kbd>     | **bsp** — every new window halves the focused one, 50/50 |
 | <kbd>command + shift + e</kbd>     | **master-stack** — master on the left half, the rest stacked evenly on the right |
 | <kbd>command + shift + p</kbd>     | Master-stack: make the focused window the master         |
 | <kbd>command + shift + s</kbd>     | **scrolling** strip (automatic on desktop 2 / external displays) |

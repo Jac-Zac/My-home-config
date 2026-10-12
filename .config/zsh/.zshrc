@@ -2,14 +2,14 @@ fastfetch
 
 [[ -f ~/.zprofile ]] && source ~/.zprofile
 
-# Allow Ctrl+J and Ctrl+K to pass through to programs like tv
+# Allow Ctrl+J and Ctrl+K to pass through to programs like TV
 bindkey -r "^J"
 bindkey -r "^K"
 
 # History in cache directory:
-HISTSIZE=5000
-SAVEHIST=5000
-HISTFILE=~/.cache/zsh/zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+HISTFILE=${ZDOTDIR}/.zsh_history
 
 # Additional recommended options
 setopt SHARE_HISTORY

@@ -5,6 +5,8 @@
 //   cc bright <0-100>     → built-in display brightness (DisplayServices, as the brightness keys do)
 //   cc desktop            → selected desktop's 1-based position on the built-in display; 0 in clamshell
 //   cc kbd <0-100>        → keyboard backlight (CoreBrightness KeyboardBrightnessClient, as the F-keys do)
+//   cc mouse              → cursor position "x y" (global, top-left origin)
+//   cc warp <x> <y>       → move the cursor there (undoes rift's display-focus centring)
 //   cc stats              → "cpu=12 mem=61 memgb=14.6 memtotal=24 disk=46 diskfree=260" — the Activity Monitor
 //                            numbers: CPU from per-core tick deltas over 300ms, memory = app + wired + compressed,
 //                            disk free = "available for important usage" (what Finder shows, purgeable counts as free)
@@ -159,9 +161,16 @@ case "stats":
 case "desktop":
   guard let index = desktop() else { exit(1) }
   print(index)
+case "mouse":
+  guard let p = CGEvent(source: nil)?.location else { exit(1) }
+  print(p.x, p.y)
+case "warp" where a.count > 3:
+  guard let x = Double(a[2]), let y = Double(a[3]) else { exit(1) }
+  CGWarpMouseCursorPosition(CGPoint(x: x, y: y))
+  CGAssociateMouseAndMouseCursorPosition(1) // no ~0.25s input freeze after the warp
 case "kbd" where a.count > 2:
   guard let v = Float(a[2]) else { exit(1) }
   kbdSet(v)
 default:
-  print("usage: cc status | stats | desktop | bt on|off | bright <0-100> | kbd <0-100>"); exit(1)
+  print("usage: cc status | stats | desktop | bt on|off | bright <0-100> | kbd <0-100> | mouse | warp <x> <y>"); exit(1)
 }

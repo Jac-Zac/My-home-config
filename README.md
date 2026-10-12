@@ -253,7 +253,7 @@ All shortcuts, and how they change inside the scrolling strip, are in
 | <kbd>command + 1-9</kbd> / <kbd>j/k</kbd> | Workspace N / previous / next — column N / previous / next in the strip |
 | <kbd>command + h/l</kbd>            | Focus window (or column) left / right                    |
 | <kbd>command + shift + 1-9</kbd>    | Send window to workspace N                               |
-| <kbd>command + shift + space / e / s / f</kbd> | Layout: bsp / master-stack / scrolling / floating |
+| <kbd>command + shift + b / e / s / f</kbd>     | Layout: bsp / master-stack / scrolling / floating |
 | <kbd>ctrl + ←/→</kbd>               | Previous / next macOS desktop                            |
 | <kbd>command + shift + enter</kbd>  | Terminal (Ghostty)                                       |
 | <kbd>prefix + s</kbd> (tmux, prefix <kbd>ctrl + a</kbd>) | Sesh session picker                 |

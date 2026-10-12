@@ -38,19 +38,46 @@ local modes = {
 	master_stack = { utf8.char(0xF0574), "master" }, -- md-view-quilt
 }
 
-local layout = sbar.add("item", "front_app.layout", {
-	icon = { font = P.nerd(13), color = P.H.dim, padding_left = settings.item_padding, padding_right = settings.item_spacing },
-	label = { font = font, color = P.H.dim, padding_right = 8 },
-})
+local layout_anchor = sbar.add("item", "front_app.layout_anchor", { width = 0, drawing = false })
+local layouts, layout_states = {}, {}
 
-local pill = sbar.add("bracket", "front_app.pill", { front_app.name, divider.name, layout.name }, {
+local pill_style = {
 	background = { color = colors.catppuccin.surface0, corner_radius = 6, height = 22 },
-})
+}
+local pill = sbar.add("bracket", "front_app.pill", { front_app.name, divider.name }, pill_style)
 
 rift.on_change(function(r)
-	local m = r.active and (modes[r.active.layout_mode] or { "", r.active.layout_mode })
-	layout:set({ drawing = m ~= nil, icon = { string = m and m[1] }, label = { string = m and m[2] } })
-	divider:set({ drawing = m ~= nil })
+	local present, changed = {}, false
+	for _, d in ipairs(r.displays) do
+		local name = "front_app.layout." .. d.uuid
+		present[name] = true
+		if not layouts[name] then
+			layouts[name] = sbar.add("item", name, {
+				drawing = false,
+				icon = { font = P.nerd(13), color = P.H.dim, padding_left = settings.item_padding, padding_right = settings.item_spacing },
+				label = { font = font, color = P.H.dim, padding_right = 8 },
+			})
+			sbar.exec("sketchybar --move " .. name .. " before " .. layout_anchor.name)
+			changed = true
+		end
+		local m = d.active and (modes[d.active.layout_mode] or { "", d.active.layout_mode })
+		local state = d.arrangement .. ":" .. tostring(d.active and d.active.layout_mode)
+		if layout_states[name] ~= state then
+			layout_states[name] = state
+			layouts[name]:set({ display = d.arrangement, drawing = m ~= nil,
+				icon = { string = m and m[1] }, label = { string = m and m[2] } })
+		end
+	end
+	for name in pairs(layouts) do
+		if not present[name] then sbar.remove(name); layouts[name], layout_states[name] = nil, nil; changed = true end
+	end
+	if changed then
+		local members = { front_app.name, divider.name }
+		for name in pairs(layouts) do members[#members + 1] = name end
+		sbar.remove(pill.name)
+		pill = sbar.add("bracket", "front_app.pill", members, pill_style)
+	end
+	divider:set({ drawing = #r.displays > 0 })
 end)
 
 local function set_state(hover, scale)
