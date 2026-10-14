@@ -1,17 +1,14 @@
 -- Shared Rift state. A short debounce combines event bursts; changes arriving
 -- during a query request one follow-up snapshot. Each CLI has a real timeout.
 -- Each display has its own workspace snapshot and bar association.
--- Desktop 2 on the laptop and all external displays use the scrolling strip.
--- helpers/cc reads the laptop desktop directly on startup, space/display change
--- and wake, so neither a reload nor display reordering leaves stale shortcuts.
+-- The main display (menu bar, at 0,0) defaults to bsp (cmd-shift-s opts a
+-- workspace into scrolling); every other display always uses the scrolling strip.
 local M = { displays = {} }
 local settings = require("settings")
 local laptop_top, gap_busy = nil, false
 
-local desktop2 = false
 local listeners = {}
 local busy, pending, scheduled, retries = false, false, false, 0
-local CC = os.getenv("HOME") .. "/.config/sketchybar/helpers/cc"
 -- Timeout each executable directly: killing a shell alone leaves its children.
 local T = "perl -e 'alarm 2; exec @ARGV' "
 local QUERY = "d=$(" .. T .. "rift-cli query displays) && b=$(sketchybar --query displays) && "
@@ -25,7 +22,7 @@ M.quote = quote
 local function apply(displays)
 	M.displays = displays
 	for _, d in ipairs(displays) do
-		d.strip = not tostring(d.name):find("Built-in", 1, true) or desktop2
+		d.strip = not d.main
 		-- macOS sometimes stops reserving the laptop's menu/notch area when
 		-- another display becomes primary. Keep the bar plus a 13pt gap clear.
 		if tostring(d.name):find("Built-in", 1, true) and d.native_top then
@@ -81,6 +78,7 @@ local function query()
 				if d.uuid == b.UUID then
 					d.arrangement = b["arrangement-id"]
 					d.native_top = d.frame.origin.y - b.frame.y
+					d.main = b.frame.x == 0 and b.frame.y == 0
 				end
 			end
 			if d.arrangement and d.space then displays[#displays + 1] = d end
@@ -107,28 +105,6 @@ function M.refresh()
 	sbar.delay(0.04, query)
 end
 
-local desktop_busy, desktop_pending, desktop_retries = false, false, 0
-local function sync_desktop()
-	if desktop_busy then desktop_pending = true; return end
-	desktop_busy = true
-	sbar.exec(T .. CC .. " desktop", function(out, code)
-		desktop_busy = false
-		if desktop_pending then
-			desktop_pending = false
-			return sync_desktop() -- discard an answer from before the latest event
-		end
-		local index = tonumber(out)
-		if code == 0 and index then
-			desktop_retries = 0
-			desktop2 = index == 2
-		elseif desktop_retries < 2 then
-			desktop_retries = desktop_retries + 1
-			sbar.delay(1, sync_desktop)
-		end
-		M.refresh()
-	end)
-end
-
 function M.on_change(f)
 	listeners[#listeners + 1] = f
 	f(M)
@@ -142,11 +118,11 @@ local watcher = sbar.add("item", "rift.watcher", { drawing = false, updates = tr
 -- Work areas can settle after the space/display event, especially around
 -- the notch. Re-check once after Rift and macOS finish the transition.
 watcher:subscribe({ "space_change", "display_change", "system_woke" }, function()
-	sync_desktop()
-	sbar.delay(1, sync_desktop)
+	M.refresh()
+	sbar.delay(1, M.refresh)
 end)
 watcher:subscribe({ "rift_workspace_changed", "front_app_switched", "forced" }, M.refresh)
 
-sync_desktop()
+M.refresh()
 
 return M

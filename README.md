@@ -180,14 +180,15 @@ My Neovim config lives in its own repo: [`astronvim_jaczac`](https://github.com/
 > [`rift`](https://github.com/acsandmann/rift) tiles windows and handles every hotkey itself (no skhd, no SIP changes). Config: [`.config/rift`](.config/rift).
 
 - **Workspaces** — rift workspaces are virtual: each macOS desktop has nine of them (`01`–`09` in the bar). Switching is instant because nothing moves between macOS Spaces.
-- **Desktop 1 — bsp.** Every new window splits the focused one exactly 50/50. Close one and its neighbour takes the space back.
-- **Desktop 2 and any external display — the "strip".** A niri-style scrolling layout: windows sit side by side as columns (one window fills the screen, two are half and half), and the strip scrolls sideways. Here <kbd>cmd + 1-9</kbd> jumps to column N and <kbd>cmd + j/k</kbd> steps through columns (wrapping) instead of changing workspace, and the bar hides empty workspaces. The layout is re-applied automatically, swipes included.
+- **Main display — bsp.** Every new window splits the focused one exactly 50/50. Close one and its neighbour takes the space back. <kbd>cmd + shift + s</kbd> turns the current workspace into the strip.
+- **Second display — the "strip".** When the laptop is connected to a monitor, the display without the menu bar (the laptop) always uses a niri-style scrolling layout: windows sit side by side as columns (one window fills the screen, two are half and half), and the strip scrolls sideways. <kbd>cmd + j/k</kbd> step through the columns and then on to the next workspace.
+- **Trackpad** — a three-finger swipe moves between rift workspaces; in the strip it scrolls through the columns first, then carries on to the next workspace. Four fingers still move between macOS desktops.
 - **Other layouts**, per workspace: master-stack (master half + the rest stacked evenly), floating, and back to bsp — see the keybinds below. The bar shows the current one next to the app name.
 - **App rules** — Ghostty opens on `02`, ChatGPT on `03`, Claude on `04`, Slack on `05`. Settings-like apps (System Settings, Finder, Mail, Calculator, Activity Monitor…) always float.
 - **Mouse** — <kbd>alt</kbd> + drag moves a window; drop it on another to swap them. Resize by dragging window edges.
-- **macOS desktops** — switch with <kbd>ctrl + ←/→</kbd> or a trackpad swipe.
+- **macOS desktops** — switch with <kbd>ctrl + ←/→</kbd> or a four-finger swipe.
 
-The strip logic lives in [`rift/strip_key.sh`](.config/rift/strip_key.sh) (the keys) and [`sketchybar/helpers/rift.lua`](.config/sketchybar/helpers/rift.lua) (detects desktop 2 / external display and keeps the scrolling layout there).
+The strip logic lives in [`rift/strip_key.sh`](.config/rift/strip_key.sh) (the keys) and [`sketchybar/helpers/rift.lua`](.config/sketchybar/helpers/rift.lua) (keeps the scrolling layout on the second display). The three-finger swipe needs macOS's own three-finger swipe turned off; `./installer.sh -p` does it.
 
 </details>
 
@@ -250,7 +251,7 @@ All shortcuts, and how they change inside the scrolling strip, are in
 
 | Keybind                             | Action                                                   |
 | ----------------------------------- | -------------------------------------------------------- |
-| <kbd>command + 1-9</kbd> / <kbd>j/k</kbd> | Workspace N / previous / next — column N / previous / next in the strip |
+| <kbd>command + 1-9</kbd> / <kbd>j/k</kbd> | Workspace N / previous / next — <kbd>j/k</kbd> walk the columns first in the strip |
 | <kbd>command + h/l</kbd>            | Focus window (or column) left / right                    |
 | <kbd>command + shift + 1-9</kbd>    | Send window to workspace N                               |
 | <kbd>command + shift + b / e / s / f</kbd>     | Layout: bsp / master-stack / scrolling / floating |

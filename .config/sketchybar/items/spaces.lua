@@ -9,8 +9,8 @@ local cells = {}
 rift.on_change(function(r)
 	local present, ordered, changed = {}, {}, false
 	for _, d in ipairs(r.displays) do
-		local scrolling = d.active and d.active.layout_mode == "scrolling"
-		local entries = scrolling and { d.active } or d.workspaces
+		-- Every workspace, whatever the layout: the bar never collapses.
+		local entries = d.workspaces
 		table.sort(entries, function(a, b) return a.index < b.index end)
 		for _, entry in ipairs(entries) do
 			local i = entry.index + 1
@@ -18,8 +18,7 @@ rift.on_change(function(r)
 			present[name] = true
 			ordered[#ordered + 1] = name
 			local selected = entry.is_active
-			local draw = scrolling or not d.strip or entry.is_active or entry.window_count > 0
-			local state = table.concat({ tostring(draw), tostring(selected), d.arrangement }, ":")
+			local state = tostring(selected) .. ":" .. d.arrangement
 			local cell = cells[name]
 			if not cell then
 				cell = { item = sbar.add("item", name, {
@@ -40,7 +39,7 @@ rift.on_change(function(r)
 			if cell.state ~= state then
 				cell.state = state
 				cell.item:set({
-					display = d.arrangement, drawing = draw,
+					display = d.arrangement, drawing = true,
 					label = { highlight = selected },
 					background = { color = selected and colors.spaces.active or colors.spaces.inactive },
 				})
