@@ -27,11 +27,11 @@ info "Calendar: open the calendar popup once and allow sketchybar (it shows 'All
 info "Control Center: macOS asks once for Bluetooth the first time you use that toggle"
 
 echo "Optional (widgets hide when absent)"
-{ [ -f "$HOME/.claude.json" ] && pass "Claude Code (agent cell)"; } || info "Claude Code not found — Claude cell hidden"
-{ [ -d "$HOME/.codex" ] && pass "Codex (agent cell)"; } || info "Codex not found — Codex cell hidden"
+{ [ -f "$HOME/.claude.json" ] && pass "Claude Code (usage credentials)"; } || info "Claude Code not found — Claude usage poll has no token"
+{ [ -d "$HOME/.codex" ] && pass "Codex (usage credentials)"; } || info "Codex not found — Codex usage poll has no token"
 if [ -f "$HOME/.claude.json" ]; then
   grep -q "claude_statusline.lua" "$HOME/.claude/settings.json" 2>/dev/null && pass "Claude live usage (statusline feed)" \
-    || info "Claude usage updates only when Claude Code/desktop fetch it — for live numbers add to ~/.claude/settings.json: \"statusLine\": {\"type\": \"command\", \"command\": \"~/.config/sketchybar/helpers/claude_statusline.lua\"}"
+    || info "No Claude Code statusline feed (optional): usage still refreshes from the 5-min OAuth poll; add it for instant updates: \"statusLine\": {\"type\": \"command\", \"command\": \"~/.config/sketchybar/helpers/claude_statusline.lua\"}"
 fi
 { [ -x /Applications/Tailscale.app/Contents/MacOS/Tailscale ] && pass "Tailscale (Wi-Fi popup section)"; } || info "Tailscale not found — section hidden"
 { command -v rift-cli >/dev/null && pass "rift (workspace indicators, click to switch)"; } || info "rift not installed — workspace indicators stay empty"

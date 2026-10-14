@@ -43,8 +43,10 @@ looks off.
   ```json
   "statusLine": { "type": "command", "command": "~/.config/sketchybar/helpers/claude_statusline.lua" }
   ```
-  (it also shows `ctx · 5h · wk` in Claude Code). Without it the bar uses what
-  Claude Code / the desktop app last saved, and the popup shows its age.
+  (it also shows `ctx · 5h · wk` in Claude Code). This is optional: the bar
+  also polls the CLIs' OAuth usage endpoints every 5 min. A failed pull keeps
+  the last good snapshot (the popup shows its age; after 30 min the number is
+  prefixed with `~`); local history is never scraped.
 - **Calendar** — events come from every account in System Settings →
   Internet Accounts (Google, iCloud, Exchange…), i.e. whatever Calendar.app
   or Notion Calendar shows. *Calendar ↗* opens Notion Calendar, or
@@ -91,9 +93,9 @@ Fonts are in `helpers/default_font.lua`, colors in `colors.lua`. Reload with
   Center, click-away, calendar grid) rebuilt automatically when changed, and
   the Claude/Codex usage reader.
 - Updates are event-driven where macOS offers events; the few timers are
-  cheap (clock 30s, Wi-Fi and Claude/Codex usage 60s, battery/volume 2 min);
-  popups read their data
-  only when opened.
+  cheap (clock 30s, Wi-Fi 60s, Claude/Codex usage 5 min, battery/volume 2 min);
+  popups read their data only when opened. Usage pulls are two small GETs per
+  tick; unchanged caches skip the reader entirely.
 
 Logs: `/opt/homebrew/var/log/sketchybar/sketchybar.out.log`.
 

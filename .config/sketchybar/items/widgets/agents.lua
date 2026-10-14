@@ -5,19 +5,20 @@ local P = require("helpers.popup")
 
 -- Agent usage cell (Lua port of the bash "agent cell"): Claude + Codex 5h/week,
 -- shown as REMAINING (matches the ChatGPT app) with battery-fill gauges.
+-- The bar number is the 5h quota; its color encodes the weekly quota (red when
+-- either is nearly gone, amber below 20% left), so one glance gives both.
 -- Conditional display: single cell when only one source exists, dual when both
 -- do, hidden when neither does. Sits left of the keyboard switcher (required
 -- after keyboard in widgets/init.lua, position="right" stacks leftwards).
--- Data comes from helpers/agents_usage.lua (local files only, no network);
--- freshest is Claude Code's own statusline feed (helpers/claude_statusline.lua,
--- event-driven via agents_refresh) when enabled. Other sources:
--- Claude is read from ~/.claude.json cachedUsageUtilization (five_hour /
--- seven_day, the same cache /usage shows), plus the desktop app's
--- plan-usage-history.json when fresher; Codex from rollout-*.jsonl tails.
--- (Transcripts are NOT watched: they change on every message without moving
--- the numbers, which only refresh when /usage refetches.)
--- Routine ticks check both sources; Claude statusline events check Claude only.
--- Cached reset times are evaluated in Lua, without rescanning unchanged files.
+-- Data comes from helpers/agents_usage.lua, which reads only the puller
+-- caches: ~/.cache/sketchybar/{claude,codex}-api.json (helpers/agents_api.py's
+-- ~5min poll of the CLIs' own OAuth endpoints) and claude-usage.json (Claude
+-- Code's event-driven statusline push, no network). There is no local-history
+-- fallback: a failed pull keeps the previous snapshot, whose age is shown in
+-- the popup (and marked "~" once it is 30min old). This is the same
+-- server-side usage T3 Code reads; local transcripts/rollouts are not scanned.
+-- Routine ticks check the cache files; Claude statusline events check Claude
+-- only. Cached reset times are evaluated in Lua, without rescanning anything.
 --
 -- Icons: Nerd Fonts brand marks — U+EC82 Claude, U+EC81 OpenAI (NOT
 -- U+E281/E282, those are fae-banana/fae-bath), in settings.font.nerd.
@@ -25,6 +26,21 @@ local P = require("helpers.popup")
 local H = P.H
 local CLAUDE = colors.catppuccin.peach -- claude brand, readable on Mocha
 local HELPER = os.getenv("HOME") .. "/.config/sketchybar/helpers/agents_usage.lua"
+local API_POLL = os.getenv("HOME") .. "/.config/sketchybar/helpers/agents_api.py"
+local API_EVERY = 300 -- seconds between network polls (T3 Code's balanced 5min)
+local STALE_AGE = 1800 -- mark the number "~" only after 30min without a fresh pull
+
+-- Seed the throttle from the cache so reloading the bar does not fire an
+-- extra request when the last pull is still fresh (dev reloads caused 429s).
+local CACHE = os.getenv("HOME") .. "/.cache/sketchybar/"
+local function cache_t(name)
+	local f = io.open(CACHE .. name)
+	if not f then return 0 end
+	local s = f:read("a")
+	f:close()
+	return tonumber(s:match('"t"%s*:%s*(%d+)')) or 0
+end
+local last_api = math.max(cache_t("claude-api.json"), cache_t("codex-api.json"))
 local H5, WK = 5 * 3600, 7 * 86400
 local G_CLAUDE, G_OPENAI = utf8.char(0xEC82), utf8.char(0xEC81)
 
@@ -103,8 +119,8 @@ local function fmt_reset(epoch, span)
 	return string.format("%dh %dm reset", h, m)
 end
 
--- Data age next to the agent name: local files only refresh when Claude Code
--- / the desktop app fetch usage (or on every Codex turn), so say how old it is
+-- Data age next to the agent name: a failed pull keeps the last snapshot, so
+-- say how old it is instead of pretending it is live.
 local asof = {}
 local function ago(t)
 	if not t then return "" end
@@ -120,8 +136,9 @@ local function paint_ages()
 	end
 end
 
-local function pct(r)
-	return r and string.format("%d%%", math.floor(r + 0.5)) or "—"
+local function pct(r, stale)
+	if not r then return "—" end
+	return (stale and "~" or "") .. string.format("%d%%", math.floor(r + 0.5))
 end
 
 -- One agent's section: value rows (pace-colored) + gauges
@@ -137,17 +154,22 @@ end
 
 -- Update ------------------------------------------------------------------
 local data, cache = {}, {}
+-- Only the puller caches matter now: no history/transcript scanning. stat is
+-- one cheap process per agent per tick; unchanged caches skip the helper.
 local KEYS = {
-	claude = [[stat -f '%m:%z' "$HOME/.claude.json" "$HOME/.cache/sketchybar/claude-usage.json" "$HOME/Library/Application Support/Claude/plan-usage-history.json" 2>/dev/null; true]],
-	codex = [[find "$HOME/.codex/sessions" "$HOME/.codex/archived_sessions" -name 'rollout-*.jsonl' -exec stat -f '%m:%z' {} + 2>/dev/null | sort -rn | head -n 1; true]],
+	claude = [[stat -f '%Fm:%z' "$HOME/.cache/sketchybar/claude-usage.json" "$HOME/.cache/sketchybar/claude-api.json" 2>/dev/null; true]],
+	codex = [[stat -f '%Fm:%z' "$HOME/.cache/sketchybar/codex-api.json" 2>/dev/null; true]],
 }
 
--- An expired snapshot cannot tell us how much has been used since the reset.
--- Sources without reset times also become unknown after their window length.
-local function live(used, reset, fetched, span)
-	local expires = reset or (fetched and fetched + span)
-	if expires and expires <= os.time() then return nil end
-	return used
+-- A snapshot old enough (or whose window has rolled over) is kept on screen
+-- as the last known value, with a "~" marker. No local fallback: a failed
+-- pull never replaces real server numbers with stale local history.
+local function stale(fetched, resets)
+	if not fetched or os.time() - fetched > STALE_AGE then return true end
+	for _, r in ipairs(resets) do
+		if r and r <= os.time() then return true end
+	end
+	return false
 end
 
 local function apply(cx5, cx5r, cxW, cxWr, c5, c5r, cW, cWr, cxa, ca)
@@ -155,14 +177,17 @@ local function apply(cx5, cx5r, cxW, cxWr, c5, c5r, cW, cWr, cxa, ca)
 	paint_ages()
 	local has_claude = c5 ~= nil or cW ~= nil
 	local has_codex = cx5 ~= nil or cxW ~= nil
-	cx5, cxW = live(cx5, cx5r, cxa, H5), live(cxW, cxWr, cxa, WK)
-	c5, cW = live(c5, c5r, ca, H5), live(cW, cWr, ca, WK)
-	-- Bar drives off 5h for claude, week for codex; as remaining
-	local rC5, rX = rem(c5), rem(cx5)
-	if data[3] ~= nil then rX = rem(cxW) end
+	local stC = stale(ca, { c5r, cWr })
+	local stX = stale(cxa, { cx5r, cxWr })
+	-- Bar number = 5h remaining, bar color = weekly remaining (the scarce
+	-- quota). Fall back to the weekly number only when the plan reports no 5h
+	-- window at all; a stale/expired 5h keeps its last value marked "~".
+	local rC5 = rem(c5) or (c5 == nil and rem(cW))
+	local rX5 = rem(cx5) or (cx5 == nil and rem(cxW))
+	local rCW, rXW = rem(cW), rem(cxW)
 	-- low quota colors only the percentage; the brand icons never change
-	claude:set({ drawing = has_claude, label = { string = pct(rC5), color = col(rC5) } })
-	codex:set({ drawing = has_codex, label = { string = pct(rX), color = col(rX) } })
+	claude:set({ drawing = has_claude, label = { string = pct(rC5, stC), color = col(rCW or rC5) } })
+	codex:set({ drawing = has_codex, label = { string = pct(rX5, stX), color = col(rXW or rX5) } })
 	bracket:set({ drawing = has_claude or has_codex })
 	title:set({ drawing = has_claude or has_codex })
 	pad_bot:set({ drawing = has_claude or has_codex })
@@ -213,20 +238,38 @@ local function update_agent(agent)
 	end)
 end
 
+local function maybe_poll(cb)
+	-- Throttled network refresh; cb runs immediately too (cached values),
+	-- and again when the new caches land.
+	local now = os.time()
+	if now - last_api < API_EVERY then return end
+	last_api = now
+	P.exec("perl -e 'alarm 60; exec @ARGV' " .. API_POLL .. " >/dev/null 2>&1", cb)
+end
+
 local function update_all()
-	paint() -- reset expiry changes with time even when source files do not
+	paint() -- age markers and reset countdowns change with time
 	if wake.quiet() then return end
+	-- Server-side truth first; stat picks up the new cache files. Failures
+	-- leave the old caches untouched, so the last snapshot stays on screen.
+	maybe_poll(function()
+		update_agent("claude")
+		update_agent("codex")
+	end)
 	update_agent("claude")
 	update_agent("codex")
 end
 
--- Single routine owner (claude ticks every 60s; the statusline hook pushes sooner): codex shares the bracket
--- and would otherwise run update_all (and its stat) twice per tick.
+-- Single routine owner (60s ticks, but the network is throttled to API_EVERY;
+-- the statusline hook pushes sooner): codex shares the bracket and would
+-- otherwise run update_all (and its stat) twice per tick.
 claude:subscribe("routine", function()
 	update_all()
 end)
 claude:subscribe("system_woke", wake.arm)
--- Claude Code's statusline hook pokes this the moment its limits change
+-- Claude Code's statusline hook pokes this the moment its limits change.
+-- That push is already the freshest data, so it only updates the reader;
+-- network polling stays on the routine timer.
 claude:subscribe("agents_refresh", function()
 	update_agent("claude") -- never scan Codex history for a Claude update
 end)

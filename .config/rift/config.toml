@@ -1,14 +1,15 @@
 # rift config. Reference: https://acsandmann.github.io/rift-docs/reference/configuration/
 #
 # rift workspaces are *virtual* and 0-based (cmd-1 -> workspace 0); each macOS
-# desktop has its own set. Desktop 1 = bsp; desktop 2 and external displays =
-# the scrolling "strip" (enforced by sketchybar/helpers/rift.lua, keys in
-# strip_key.sh and strip_move.sh).
+# desktop has its own set. The main display (menu bar) = bsp, cmd-shift-s
+# turns a workspace into the scrolling "strip"; any other display (the laptop
+# when docked) is always the strip (enforced by sketchybar/helpers/rift.lua,
+# keys in strip_key.sh and strip_move.sh).
 
 [settings]
 animate = false
 animation_duration = 0.2
-animation_fps = 120.0 # NOTE: 0.0 crashes rift 0.6.9 (1/0 Duration panic)
+animation_fps = 120.0 # not 0.0: crashed rift 0.6.9 (1/0 Duration panic)
 
 # Manage every space by default (rift's default is opt-in per space).
 default_disable = false
@@ -22,10 +23,11 @@ auto_focus_blacklist = ["com.raycast.macos"]
 
 # sketchybar workspace indicators + layout (sketchybar/helpers/rift.lua).
 # Sketchybar debounces bursts and shares one snapshot between its items.
+# No windows_changed: the bar shows workspaces + layout, never windows. The
+# `sh -c` wrapper swallows the event JSON rift appends as a last argument.
 # Restart the service after changing this: `rift service restart`.
 run_on_start = [
   "rift-cli subscribe cli --event workspace_changed --command sh --args -c --args 'sketchybar --trigger rift_workspace_changed'",
-  "rift-cli subscribe cli --event windows_changed --command sh --args -c --args 'sketchybar --trigger rift_workspace_changed'",
   "rift-cli subscribe cli --event layout_changed --command sh --args -c --args 'sketchybar --trigger rift_workspace_changed'",
   "sketchybar --trigger rift_workspace_changed", # resync the bar after a rift restart
 ]
@@ -36,13 +38,11 @@ hot_reload = true
 mode = "bsp"
 window_insertion_point = "next_to_selection"
 
-# bsp: every new window halves the focused one exactly 50/50. rift has no bsp auto_balance: 3 windows = 50/25/25, and a
-# manual resize sticks until windows close. equalize_nodes below only applies
-# to the "traditional" (i3-style) mode.
-[settings.layout.traditional]
-equalize_nodes = true
+# bsp: every new window halves the focused one exactly 50/50. rift has no bsp
+# auto_balance: 3 windows = 50/25/25, and a manual resize sticks until windows
+# close.
 
-# Desktop 2 strip: 1 window = full width, 2+ = halves side by side, scroll on.
+# Strip: 1 window = full width, 2+ = halves side by side, scroll on.
 # cmd-shift-r cycles the focused column 1/2 -> 2/3 -> full.
 [settings.layout.scrolling]
 column_width_ratio = 0.5
@@ -58,10 +58,6 @@ focus_navigation_style = "niri"
 # rest split evenly in the stack. cmd-shift-p promotes the focused window.
 [settings.layout.master_stack]
 master_ratio = 0.5
-
-[settings.layout.stack]
-stack_offset = 40.0
-default_orientation = "perpendicular"
 
 # External displays reserve the 33pt bar plus a 13pt gap. The laptop already
 # usually reserves its notch height; helpers/rift.lua adjusts the laptop's
@@ -82,22 +78,43 @@ left = 13
 bottom = 13
 right = 13
 
+# Rift's own overview of all workspaces (cmd-up): every workspace with live
+# window previews; click one to jump there, drag windows between them.
+# Enabling/disabling needs a rift restart (hyper-q).
 [settings.ui.mission_control]
-enabled = false
+enabled = true
+show_empty_workspaces = true
+window_previews = true
 
 [settings.ui.menu_bar]
-# off: sketchybar already shows workspaces + layout
-enabled = false
-show_empty = false
-mode = "all"
-active_label = "index"
-display_style = "layout"
+enabled = false # sketchybar already shows workspaces + layout
 
 [settings.ui.stack_line]
 enabled = false
 
+# 3-finger horizontal swipe = previous / next rift workspace. macOS must not
+# use 3 fingers itself: System Settings > Trackpad > More Gestures > "Swipe
+# between full-screen applications" off or four fingers (installer.sh -p does
+# this). On a scrolling workspace the same swipe scrolls the columns instead,
+# then carries on into the adjacent workspace past the strip's edge.
+# Gesture settings are read only at startup (hot_reload skips them): after
+# editing either gestures table, restart with hyper-q.
 [settings.gestures]
-enabled = false
+enabled = true
+fingers = 3
+consume_dock_swipe = true
+skip_empty = false
+
+[settings.layout.scrolling.gestures]
+enabled = true
+fingers = 3
+# Fingers right-to-left = next app, the same as the workspace swipe. Past the
+# last app the swipe carries on to the next workspace.
+invert_horizontal = true
+propagate_to_workspace_swipe = true
+# How far to swipe past the last app before switching workspace, in screen
+# widths (default 0.55); lower = easier.
+workspace_switch_threshold = 0.45
 
 # alt + drag moves a window; dropping it on another swaps them.
 [settings.drag_drop]
@@ -114,7 +131,7 @@ default_workspace_count = 9 # cmd-1 .. cmd-9
 auto_assign_windows = true
 preserve_focus_per_workspace = true
 workspace_auto_back_and_forth = false
-prevent_wrapping = false # cmd-j/k wrap around via strip_key.sh
+prevent_wrapping = false # cmd-j/k and swipes wrap 9 -> 1
 reapply_app_rules_on_title_change = false
 default_workspace = 0
 workspace_names = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
@@ -124,8 +141,7 @@ workspace_rules = []
 app_rules = [
   # Placement
   { app_id = "com.mitchellh.ghostty", workspace = 1 },           # 02 terminal
-  { app_id = "com.openai.codex", workspace = 2 },                # 03 ChatGPT
-  { app_id = "com.anthropic.claudefordesktop", workspace = 3 },  # 04 Claude
+  { app_id = "com.t3tools.t3code", workspace = 2, focus = true }, # 03 T3 Code
   { app_id = "com.tinyspeck.slackmacgap", workspace = 4 },       # 05 Slack
   # WhatsApp: no rule, opens on the current workspace (cmd-m)
 
@@ -153,7 +169,7 @@ hyper = "Ctrl + Alt + Meta"
 "Meta + Shift + Enter" = { exec = ["open", "-a", "Ghostty"] }
 "Meta + 0" = { exec = ["open", "-a", "/Applications/Helium.app"] }
 "Meta + M" = { exec = ["open", "-a", "/Applications/WhatsApp.app"] }
-"Meta + G" = { exec = ["open", "-a", "/Applications/ChatGPT.app"] }
+"Meta + G" = { exec = ["open", "-a", "/Applications/T3 Code (Beta).app"] }
 
 # ---- focus ----
 "Meta + H" = { move_focus = "left" }
@@ -164,22 +180,24 @@ hyper = "Ctrl + Alt + Meta"
 "Meta + Shift + L" = { move_node = "right" }
 
 # ---- workspaces ----
-# cmd-N / cmd-j / cmd-k: workspace N / prev / next, or column N / prev / next
-# in the strip (desktop 2 or an external display) — see strip_key.sh
+# cmd-N: workspace N (native, no script). cmd-j / cmd-k: prev / next workspace;
+# in the strip they walk the columns, then move on to the next workspace — see
+# strip_key.sh
 "Meta + J" = { exec = ["sh", "-c", "$HOME/.config/rift/strip_key.sh prev"] }
 "Meta + K" = { exec = ["sh", "-c", "$HOME/.config/rift/strip_key.sh next"] }
-"Meta + 1" = { exec = ["sh", "-c", "$HOME/.config/rift/strip_key.sh 1"] }
-"Meta + 2" = { exec = ["sh", "-c", "$HOME/.config/rift/strip_key.sh 2"] }
-"Meta + 3" = { exec = ["sh", "-c", "$HOME/.config/rift/strip_key.sh 3"] }
-"Meta + 4" = { exec = ["sh", "-c", "$HOME/.config/rift/strip_key.sh 4"] }
-"Meta + 5" = { exec = ["sh", "-c", "$HOME/.config/rift/strip_key.sh 5"] }
-"Meta + 6" = { exec = ["sh", "-c", "$HOME/.config/rift/strip_key.sh 6"] }
-"Meta + 7" = { exec = ["sh", "-c", "$HOME/.config/rift/strip_key.sh 7"] }
-"Meta + 8" = { exec = ["sh", "-c", "$HOME/.config/rift/strip_key.sh 8"] }
-"Meta + 9" = { exec = ["sh", "-c", "$HOME/.config/rift/strip_key.sh 9"] }
+"Meta + 1" = { switch_to_workspace = 0 }
+"Meta + 2" = { switch_to_workspace = 1 }
+"Meta + 3" = { switch_to_workspace = 2 }
+"Meta + 4" = { switch_to_workspace = 3 }
+"Meta + 5" = { switch_to_workspace = 4 }
+"Meta + 6" = { switch_to_workspace = 5 }
+"Meta + 7" = { switch_to_workspace = 6 }
+"Meta + 8" = { switch_to_workspace = 7 }
+"Meta + 9" = { switch_to_workspace = 8 }
 
 # cmd-shift-j / cmd-shift-k: move window to prev / next workspace, or move it
-# left / right in the strip (like cmd-shift-h/l) — see strip_move.sh
+# left / right in the strip (like cmd-shift-h/l), then on to the next
+# workspace from the strip's edge — see strip_move.sh
 "Meta + Shift + J" = { exec = ["sh", "-c", "$HOME/.config/rift/strip_move.sh prev"] }
 "Meta + Shift + K" = { exec = ["sh", "-c", "$HOME/.config/rift/strip_move.sh next"] }
 
@@ -195,10 +213,11 @@ hyper = "Ctrl + Alt + Meta"
 
 # cmd-shift-up / cmd-shift-down: move window to the display above (external) /
 # below (laptop). Dragging Helium/Ghostty there snaps back; alt-drag works.
+"Meta + ArrowUp" = "show_mission_control_all" # workspace overview
 "Meta + Shift + ArrowUp" = { move_window_to_display = { selector = "up" } }
 "Meta + Shift + ArrowDown" = { move_window_to_display = { selector = "down" } }
 
-# macOS desktops: ctrl-left / ctrl-right (macOS shortcut) or a trackpad swipe.
+# macOS desktops: ctrl-left / ctrl-right (macOS shortcut) or a 4-finger swipe.
 
 # ---- layout ----
 # per workspace
@@ -215,8 +234,8 @@ hyper = "Ctrl + Alt + Meta"
 
 # float / unfloat window and center it
 "Meta + Shift + T" = { toggle_window_floating = { center = true, size = "smart" } }
-# jump focus between the floating and tiled windows (raises a buried float)
-"Meta + Shift + O" = "toggle_focus_floating"
+# cycle all windows in the current workspace, including floating windows
+"Meta + Shift + O" = { exec = ["sh", "-c", "$HOME/.config/rift/cycle_focus.sh"] }
 
 # ---- session ----
 "hyper + Q" = { exec = ["sh", "-c", "$HOME/.config/rift/restart.sh"] }

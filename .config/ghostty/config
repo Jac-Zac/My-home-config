@@ -53,7 +53,8 @@ copy-on-select = true
 macos-option-as-alt = true
 
 # Map to Control A + t
-keybind = cmd+t=text:\x01t
+# keybind = cmd+t=text:\x01t
+
 # Map to Control A + s
 keybind = cmd+s=text:\x01s
 # Map to Control A + s
