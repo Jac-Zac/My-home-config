@@ -226,8 +226,21 @@ _macSystemPrefs_() {
   defaults write com.apple.dock autohide-time-modifier -float 0
   defaults write com.apple.dock autohide -bool true
   defaults write com.apple.dock static-only -bool true
-  # Keep desktops in a fixed order (desktop 2 is the rift scrolling strip)
+  # Keep desktops in a fixed order
   defaults write com.apple.dock mru-spaces -bool false
+
+  echo "Configuring trackpad swipes (3 fingers = rift, 4 fingers = macOS desktops)..."
+  # rift's workspace / column swipe uses 3 fingers, so macOS must not:
+  # System Settings > Trackpad > More Gestures > "Swipe between full-screen
+  # applications" = four fingers. Written to the built-in and Bluetooth
+  # trackpad domains and the per-host keys System Settings reads.
+  for domain in com.apple.AppleMultitouchTrackpad com.apple.driver.AppleBluetoothMultitouch.trackpad; do
+    defaults write "$domain" TrackpadThreeFingerHorizSwipeGesture -int 0
+    defaults write "$domain" TrackpadFourFingerHorizSwipeGesture -int 2
+  done
+  defaults -currentHost write -g com.apple.trackpad.threeFingerHorizSwipeGesture -int 0
+  defaults -currentHost write -g com.apple.trackpad.fourFingerHorizSwipeGesture -int 2
+  _warn_ "Trackpad swipes apply after logging out and back in"
 
   echo "Configuring desktop switching (ctrl + left / right)..."
   defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 79 \

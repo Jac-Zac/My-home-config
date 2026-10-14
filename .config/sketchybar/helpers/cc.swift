@@ -3,7 +3,6 @@
 //                            kbd=auto while automatic keyboard brightness is on; focus last, may hold spaces, "" = off)
 //   cc bt on|off          → Bluetooth power (the private IOBluetooth calls blueutil uses)
 //   cc bright <0-100>     → built-in display brightness (DisplayServices, as the brightness keys do)
-//   cc desktop            → selected desktop's 1-based position on the built-in display; 0 in clamshell
 //   cc kbd <0-100>        → keyboard backlight (CoreBrightness KeyboardBrightnessClient, as the F-keys do)
 //   cc mouse              → cursor position "x y" (global, top-left origin)
 //   cc warp <x> <y>       → move the cursor there (undoes rift's display-focus centring)
@@ -33,28 +32,6 @@ func builtinDisplay() -> CGDirectDisplayID? {
   var ids = [CGDirectDisplayID](repeating: 0, count: 8); var n: UInt32 = 0
   CGGetOnlineDisplayList(8, &ids, &n)
   return ids.prefix(Int(n)).first { CGDisplayIsBuiltin($0) != 0 }
-}
-
-// Read the built-in display directly; Mission Control's global indices and
-// SketchyBar's display arrangement IDs change when monitors are rearranged.
-func desktop() -> Int? {
-  guard let display = builtinDisplay() else { return 0 }
-  guard let uuid = CGDisplayCreateUUIDFromDisplayID(display)?.takeRetainedValue() else { return nil }
-  let identifier = CFUUIDCreateString(nil, uuid) as String
-  guard let sky = dlopen("/System/Library/PrivateFrameworks/SkyLight.framework/SkyLight", RTLD_LAZY),
-        let connectionSymbol = dlsym(sky, "SLSMainConnectionID"),
-        let spacesSymbol = dlsym(sky, "SLSCopyManagedDisplaySpaces") else { return nil }
-  defer { dlclose(sky) }
-  typealias Connection = @convention(c) () -> Int32
-  typealias Spaces = @convention(c) (Int32) -> Unmanaged<CFArray>?
-  let connection = unsafeBitCast(connectionSymbol, to: Connection.self)
-  let spaces = unsafeBitCast(spacesSymbol, to: Spaces.self)
-  guard let displays = spaces(connection())?.takeRetainedValue() as? [[String: Any]],
-        let builtIn = displays.first(where: { ($0["Display Identifier"] as? String) == identifier }),
-        let current = (builtIn["Current Space"] as? [String: Any])?["id64"] as? NSNumber,
-        let list = builtIn["Spaces"] as? [[String: Any]],
-        let index = list.firstIndex(where: { ($0["id64"] as? NSNumber) == current }) else { return nil }
-  return index + 1
 }
 
 func brightness() -> Int {
@@ -158,9 +135,6 @@ case "bright" where a.count > 2:
   _ = set(d, max(0, min(100, v)) / 100)
 case "stats":
   print(stats())
-case "desktop":
-  guard let index = desktop() else { exit(1) }
-  print(index)
 case "mouse":
   guard let p = CGEvent(source: nil)?.location else { exit(1) }
   print(p.x, p.y)
@@ -172,5 +146,5 @@ case "kbd" where a.count > 2:
   guard let v = Float(a[2]) else { exit(1) }
   kbdSet(v)
 default:
-  print("usage: cc status | stats | desktop | bt on|off | bright <0-100> | kbd <0-100> | mouse | warp <x> <y>"); exit(1)
+  print("usage: cc status | stats | bt on|off | bright <0-100> | kbd <0-100> | mouse | warp <x> <y>"); exit(1)
 }
