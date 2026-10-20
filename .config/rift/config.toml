@@ -9,7 +9,7 @@
 [settings]
 animate = false
 animation_duration = 0.2
-animation_fps = 120.0 # NOTE: 0.0 crashes rift 0.6.9 (1/0 Duration panic)
+animation_fps = 120.0 # not 0.0: crashed rift 0.6.9 (1/0 Duration panic)
 
 # Manage every space by default (rift's default is opt-in per space).
 default_disable = false
@@ -23,10 +23,11 @@ auto_focus_blacklist = ["com.raycast.macos"]
 
 # sketchybar workspace indicators + layout (sketchybar/helpers/rift.lua).
 # Sketchybar debounces bursts and shares one snapshot between its items.
+# No windows_changed: the bar shows workspaces + layout, never windows. The
+# `sh -c` wrapper swallows the event JSON rift appends as a last argument.
 # Restart the service after changing this: `rift service restart`.
 run_on_start = [
   "rift-cli subscribe cli --event workspace_changed --command sh --args -c --args 'sketchybar --trigger rift_workspace_changed'",
-  "rift-cli subscribe cli --event windows_changed --command sh --args -c --args 'sketchybar --trigger rift_workspace_changed'",
   "rift-cli subscribe cli --event layout_changed --command sh --args -c --args 'sketchybar --trigger rift_workspace_changed'",
   "sketchybar --trigger rift_workspace_changed", # resync the bar after a rift restart
 ]
@@ -37,11 +38,9 @@ hot_reload = true
 mode = "bsp"
 window_insertion_point = "next_to_selection"
 
-# bsp: every new window halves the focused one exactly 50/50. rift has no bsp auto_balance: 3 windows = 50/25/25, and a
-# manual resize sticks until windows close. equalize_nodes below only applies
-# to the "traditional" (i3-style) mode.
-[settings.layout.traditional]
-equalize_nodes = true
+# bsp: every new window halves the focused one exactly 50/50. rift has no bsp
+# auto_balance: 3 windows = 50/25/25, and a manual resize sticks until windows
+# close.
 
 # Strip: 1 window = full width, 2+ = halves side by side, scroll on.
 # cmd-shift-r cycles the focused column 1/2 -> 2/3 -> full.
@@ -59,10 +58,6 @@ focus_navigation_style = "niri"
 # rest split evenly in the stack. cmd-shift-p promotes the focused window.
 [settings.layout.master_stack]
 master_ratio = 0.5
-
-[settings.layout.stack]
-stack_offset = 40.0
-default_orientation = "perpendicular"
 
 # External displays reserve the 33pt bar plus a 13pt gap. The laptop already
 # usually reserves its notch height; helpers/rift.lua adjusts the laptop's
@@ -83,16 +78,16 @@ left = 13
 bottom = 13
 right = 13
 
+# Rift's own overview of all workspaces (cmd-up): every workspace with live
+# window previews; click one to jump there, drag windows between them.
+# Enabling/disabling needs a rift restart (hyper-q).
 [settings.ui.mission_control]
-enabled = false
+enabled = true
+show_empty_workspaces = true
+window_previews = true
 
 [settings.ui.menu_bar]
-# off: sketchybar already shows workspaces + layout
-enabled = false
-show_empty = false
-mode = "all"
-active_label = "index"
-display_style = "layout"
+enabled = false # sketchybar already shows workspaces + layout
 
 [settings.ui.stack_line]
 enabled = false
@@ -114,9 +109,7 @@ skip_empty = false
 enabled = true
 fingers = 3
 # Fingers right-to-left = next app, the same as the workspace swipe. Past the
-# last app the swipe carries on to the next workspace. rift 0.6.9 sends that
-# edge jump the wrong way with invert_horizontal (fixed upstream in #575; any
-# release after 0.6.9 has it).
+# last app the swipe carries on to the next workspace.
 invert_horizontal = true
 propagate_to_workspace_swipe = true
 # How far to swipe past the last app before switching workspace, in screen
@@ -188,19 +181,20 @@ hyper = "Ctrl + Alt + Meta"
 "Meta + Shift + L" = { move_node = "right" }
 
 # ---- workspaces ----
-# cmd-N: workspace N. cmd-j / cmd-k: prev / next workspace; in the strip they
-# walk the columns, then move on to the next workspace — see strip_key.sh
+# cmd-N: workspace N (native, no script). cmd-j / cmd-k: prev / next workspace;
+# in the strip they walk the columns, then move on to the next workspace — see
+# strip_key.sh
 "Meta + J" = { exec = ["sh", "-c", "$HOME/.config/rift/strip_key.sh prev"] }
 "Meta + K" = { exec = ["sh", "-c", "$HOME/.config/rift/strip_key.sh next"] }
-"Meta + 1" = { exec = ["sh", "-c", "$HOME/.config/rift/strip_key.sh 1"] }
-"Meta + 2" = { exec = ["sh", "-c", "$HOME/.config/rift/strip_key.sh 2"] }
-"Meta + 3" = { exec = ["sh", "-c", "$HOME/.config/rift/strip_key.sh 3"] }
-"Meta + 4" = { exec = ["sh", "-c", "$HOME/.config/rift/strip_key.sh 4"] }
-"Meta + 5" = { exec = ["sh", "-c", "$HOME/.config/rift/strip_key.sh 5"] }
-"Meta + 6" = { exec = ["sh", "-c", "$HOME/.config/rift/strip_key.sh 6"] }
-"Meta + 7" = { exec = ["sh", "-c", "$HOME/.config/rift/strip_key.sh 7"] }
-"Meta + 8" = { exec = ["sh", "-c", "$HOME/.config/rift/strip_key.sh 8"] }
-"Meta + 9" = { exec = ["sh", "-c", "$HOME/.config/rift/strip_key.sh 9"] }
+"Meta + 1" = { switch_to_workspace = 0 }
+"Meta + 2" = { switch_to_workspace = 1 }
+"Meta + 3" = { switch_to_workspace = 2 }
+"Meta + 4" = { switch_to_workspace = 3 }
+"Meta + 5" = { switch_to_workspace = 4 }
+"Meta + 6" = { switch_to_workspace = 5 }
+"Meta + 7" = { switch_to_workspace = 6 }
+"Meta + 8" = { switch_to_workspace = 7 }
+"Meta + 9" = { switch_to_workspace = 8 }
 
 # cmd-shift-j / cmd-shift-k: move window to prev / next workspace, or move it
 # left / right in the strip (like cmd-shift-h/l), then on to the next
@@ -220,6 +214,7 @@ hyper = "Ctrl + Alt + Meta"
 
 # cmd-shift-up / cmd-shift-down: move window to the display above (external) /
 # below (laptop). Dragging Helium/Ghostty there snaps back; alt-drag works.
+"Meta + ArrowUp" = "show_mission_control_all" # workspace overview
 "Meta + Shift + ArrowUp" = { move_window_to_display = { selector = "up" } }
 "Meta + Shift + ArrowDown" = { move_window_to_display = { selector = "down" } }
 

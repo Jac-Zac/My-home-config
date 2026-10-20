@@ -1,13 +1,12 @@
 #!/bin/sh
-# cmd-1..9 / cmd-j / cmd-k  ->  strip_key.sh N | prev | next
-# cmd-N: always workspace N.
-# cmd-j / cmd-k: previous / next workspace. In a scrolling layout they walk the
-# columns first and move on to the adjacent workspace past the first / last
-# one, like the trackpad swipe (settings.layout.scrolling.gestures).
+# cmd-j / cmd-k  ->  strip_key.sh prev | next   (cmd-1..9 are native keys)
+# Previous / next workspace. In a scrolling layout they walk the columns first
+# and move on to the adjacent workspace past the first / last one, like the
+# trackpad swipe (settings.layout.scrolling.gestures).
 key=$1
 case $key in
 prev | next) ;;
-*) exec rift-cli execute workspace switch $((key - 1)) >/dev/null ;;
+*) exit 2 ;;
 esac
 snapshot=$(rift-cli query workspaces) || exit 1
 # Logical columns stay stable while windows are scrolling/animating.

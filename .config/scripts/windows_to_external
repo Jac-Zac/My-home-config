@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+# Move every window from the laptop screen to the external display, keeping
+# its rift workspace (a window on laptop workspace 3 goes to workspace 3 on the
+# external). Run it by hand when macOS leaves windows behind after docking.
+set -euo pipefail
+
+displays=$(rift-cli query displays)
+read -r laptop_space external_uuid < <(python3 -c '
+import json, sys
+d = json.loads(sys.argv[1])
+laptop = next((x for x in d if "Built-in" in x["name"]), None)
+external = next((x for x in d if "Built-in" not in x["name"]), None)
+if laptop and external:
+    print(laptop["space"], external["uuid"])
+' "$displays")
+
+if [[ -z "${external_uuid:-}" ]]; then
+  echo "No external display connected." >&2
+  exit 1
+fi
+
+# One line per window: workspace index, window idx, app name.
+windows=$(rift-cli query workspaces --space-id "$laptop_space" | python3 -c '
+import json, sys
+for w in json.load(sys.stdin):
+    for x in w.get("windows", []):
+        print(w["index"], x["id"]["idx"], x["app_name"])
+')
+
+if [[ -z "$windows" ]]; then
+  echo "No windows on the laptop screen."
+  exit 0
+fi
+
+# `workspace move-window <ws> <id>` acts on the active display's workspaces,
+# so make the external display active once instead of focusing every window.
+rift-cli execute display focus --uuid "$external_uuid" >/dev/null
+
+while read -r ws idx app; do
+  echo "Moving $app to workspace $((ws + 1)) on the external display"
+  # Lands on the external's visible workspace, then goes straight to its own.
+  rift-cli execute display move-window --uuid "$external_uuid" --window-id "$idx" >/dev/null
+  rift-cli execute workspace move-window "$ws" "$idx" >/dev/null
+done <<< "$windows"

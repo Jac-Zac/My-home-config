@@ -198,6 +198,14 @@ _sketchybarExtras_() {
 _startServices_() {
   _info_ "Starting rift, borders and sketchybar"
   rift service install 2>/dev/null || true
+  # The generated service logs every command (RUST_LOG=...info, ~6MB/week in
+  # /tmp/rift_<user>.err.log): keep warnings and errors only, then reload.
+  local plist="$HOME/Library/LaunchAgents/git.acsandmann.rift.plist"
+  if [ -f "$plist" ] && plutil -replace EnvironmentVariables.RUST_LOG -string warn "$plist"; then
+    launchctl bootout "gui/$(id -u)/git.acsandmann.rift" 2>/dev/null || true
+    rm -f "/tmp/rift_$(id -un).out.log" "/tmp/rift_$(id -un).err.log"
+    launchctl bootstrap "gui/$(id -u)" "$plist" 2>/dev/null || true
+  fi
   rift service start 2>/dev/null || rift service restart
   brew services restart borders
   brew services restart sketchybar

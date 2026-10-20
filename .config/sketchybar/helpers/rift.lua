@@ -40,7 +40,7 @@ local function apply(displays)
 		for _, ws in ipairs(d.workspaces) do
 			if ws.is_active then d.active = ws end
 		end
-		-- Rift 0.6.9 can only change the active display's layout. Never focus
+		-- Rift can only change the active display's layout. Never focus
 		-- another display just to configure it, or move any of its windows.
 		if d.is_active_context and d.strip and d.active and d.active.layout_mode ~= "scrolling" then
 			local guard = T .. "rift-cli query displays | jq -e --arg uuid " .. quote(d.uuid)

@@ -8,8 +8,10 @@ local P = require("helpers.popup")
 -- Conditional display: single cell when only one source exists, dual when both
 -- do, hidden when neither does. Sits left of the keyboard switcher (required
 -- after keyboard in widgets/init.lua, position="right" stacks leftwards).
--- Data comes from helpers/agents_usage.lua (local files only, no network);
--- freshest is Claude Code's own statusline feed (helpers/claude_statusline.lua,
+-- Data comes from helpers/agents_usage.lua: server-side API snapshots
+-- (~/.cache/sketchybar/{claude,codex}-api.json, via helpers/agents_api.py's
+-- ~180s poll of the CLIs' own OAuth endpoints) when fresh, local files as
+-- offline fallback. Freshest local push is Claude Code's own statusline feed (helpers/claude_statusline.lua,
 -- event-driven via agents_refresh) when enabled. Other sources:
 -- Claude is read from ~/.claude.json cachedUsageUtilization (five_hour /
 -- seven_day, the same cache /usage shows), plus the desktop app's
@@ -25,6 +27,9 @@ local P = require("helpers.popup")
 local H = P.H
 local CLAUDE = colors.catppuccin.peach -- claude brand, readable on Mocha
 local HELPER = os.getenv("HOME") .. "/.config/sketchybar/helpers/agents_usage.lua"
+local API_POLL = os.getenv("HOME") .. "/.config/sketchybar/helpers/agents_api.py"
+local API_EVERY = 180 -- seconds between network polls (Claude 429s below this)
+local last_api = 0
 local H5, WK = 5 * 3600, 7 * 86400
 local G_CLAUDE, G_OPENAI = utf8.char(0xEC82), utf8.char(0xEC81)
 
@@ -138,8 +143,8 @@ end
 -- Update ------------------------------------------------------------------
 local data, cache = {}, {}
 local KEYS = {
-	claude = [[stat -f '%m:%z' "$HOME/.claude.json" "$HOME/.cache/sketchybar/claude-usage.json" "$HOME/Library/Application Support/Claude/plan-usage-history.json" 2>/dev/null; true]],
-	codex = [[find "$HOME/.codex/sessions" "$HOME/.codex/archived_sessions" -name 'rollout-*.jsonl' -exec stat -f '%m:%z' {} + 2>/dev/null | sort -rn | head -n 1; true]],
+	claude = [[stat -f '%m:%z' "$HOME/.claude.json" "$HOME/.cache/sketchybar/claude-usage.json" "$HOME/.cache/sketchybar/claude-api.json" "$HOME/Library/Application Support/Claude/plan-usage-history.json" 2>/dev/null; true]],
+	codex = [[{ find "$HOME/.codex/sessions" "$HOME/.codex/archived_sessions" -name 'rollout-*.jsonl' -exec stat -f '%m:%z' {} + 2>/dev/null | sort -rn | head -n 1; stat -f '%m:%z' "$HOME/.cache/sketchybar/codex-api.json" 2>/dev/null; } | sort -rn | head -n 1; true]],
 }
 
 -- An expired snapshot cannot tell us how much has been used since the reset.
@@ -158,8 +163,8 @@ local function apply(cx5, cx5r, cxW, cxWr, c5, c5r, cW, cWr, cxa, ca)
 	cx5, cxW = live(cx5, cx5r, cxa, H5), live(cxW, cxWr, cxa, WK)
 	c5, cW = live(c5, c5r, ca, H5), live(cW, cWr, ca, WK)
 	-- Bar drives off 5h for claude, week for codex; as remaining
-	local rC5, rX = rem(c5), rem(cx5)
-	if data[3] ~= nil then rX = rem(cxW) end
+	local rC5 = rem(c5)
+	local rX = rem(cxW ~= nil and cxW or cx5)
 	-- low quota colors only the percentage; the brand icons never change
 	claude:set({ drawing = has_claude, label = { string = pct(rC5), color = col(rC5) } })
 	codex:set({ drawing = has_codex, label = { string = pct(rX), color = col(rX) } })
@@ -213,9 +218,25 @@ local function update_agent(agent)
 	end)
 end
 
+local function maybe_poll(cb)
+	-- Throttled network refresh; cb runs immediately too (local mtimes),
+	-- and again when the new caches land.
+	local now = os.time()
+	if now - last_api < API_EVERY then return end
+	last_api = now
+	P.exec("perl -e 'alarm 60; exec @ARGV' " .. API_POLL .. " >/dev/null 2>&1", cb)
+end
+
 local function update_all()
 	paint() -- reset expiry changes with time even when source files do not
 	if wake.quiet() then return end
+	-- Server-side truth first; local mtimes pick up the new cache files.
+	-- Failures keep old caches; agents_usage.lua falls back to local files
+	-- once the API snapshot goes stale (API_TTL).
+	maybe_poll(function()
+		update_agent("claude")
+		update_agent("codex")
+	end)
 	update_agent("claude")
 	update_agent("codex")
 end
@@ -228,6 +249,7 @@ end)
 claude:subscribe("system_woke", wake.arm)
 -- Claude Code's statusline hook pokes this the moment its limits change
 claude:subscribe("agents_refresh", function()
+	maybe_poll(function() update_agent("claude") end)
 	update_agent("claude") -- never scan Codex history for a Claude update
 end)
 

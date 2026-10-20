@@ -21,6 +21,11 @@ plugins/usage.py, the canonical Claude source is used first:
 Freshest of all (when enabled): ~/.cache/sketchybar/claude-usage.json, written
 by helpers/claude_statusline.lua on every Claude Code statusline update.
 
+Freshest of all when present: ~/.cache/sketchybar/{claude,codex}-api.json,
+written by helpers/agents_api.py (~180s poll of the CLIs' own OAuth usage
+endpoints). Server-side, so cross-device and exact; local files stay as
+offline/rate-limited fallback.
+
 Snapshots retain their reset times. The widget marks expired windows unknown
 until fresh data arrives, even when the files do not change.
 
@@ -36,6 +41,9 @@ local json = require("json")
 
 local HOME = os.getenv("HOME")
 local TAIL = 200000
+-- Network snapshots from helpers/agents_api.py (same OAuth endpoints the CLIs
+-- use). Preferred when fresh; local files below stay as offline fallback.
+local API_TTL = 600 -- seconds: covers a missed 180s poll + backoff
 
 local function num(v) return type(v) == "number" end
 local function round(x) return math.floor(x + 0.5) end
@@ -161,6 +169,22 @@ if st and (tonumber(st.t) or 0) > (out.ca or 0) then
 	out.ca = math.floor(st.t)
 end
 
+-- API snapshot wins whenever it is both fresh and newer than the local
+-- sources above (it is server-side: cross-device, exact resets).
+local api = load_json(HOME .. "/.cache/sketchybar/claude-api.json")
+if api and (tonumber(api.t) or 0) > (out.ca or 0) and os.time() - api.t <= API_TTL then
+	local limits = type(api.limits) == "table" and api.limits or {}
+	local any = false
+	for name, key in pairs({ ["5h"] = "c5", week = "cW" }) do
+		local w = limits[name]
+		if type(w) == "table" and num(w.used) then
+			out[key], out[key .. "r"] = round(w.used), num(w.resets_at) and math.floor(w.resets_at) or nil
+			any = true
+		end
+	end
+	if any then out.ca = math.floor(api.t) end
+end
+
 -- Last resort: newest transcript tails (a /usage snapshot writes both the
 -- cache above and a usageReport line here, so this only helps when the cache
 -- is missing). Bounded: 6 newest files, tail only.
@@ -238,6 +262,21 @@ if best then
 			end
 		end
 	end
+end
+
+-- API snapshot (server-side, cross-device) wins when fresh and newer.
+local capi = load_json(HOME .. "/.cache/sketchybar/codex-api.json")
+if capi and (tonumber(capi.t) or 0) > (out.cxa or 0) and os.time() - capi.t <= API_TTL then
+	local any = false
+	for _, key in ipairs({ "cx5", "cxW" }) do
+		if num(capi[key]) then
+			out[key] = capi[key]
+			local rst = capi[key .. "r"]
+			out[key .. "r"] = num(rst) and math.floor(rst) or nil
+			any = true
+		end
+	end
+	if any then out.cxa = math.floor(capi.t) end
 end
 end -- Codex
 
