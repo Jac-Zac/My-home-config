@@ -90,12 +90,14 @@ Fonts are in `helpers/default_font.lua`, colors in `colors.lua`. Reload with
 - `items/` — one file per widget; `helpers/popup.lua` builds every popup
   (one grid, batched updates, rows created when each popup is first opened).
 - `helpers/` — small native helpers (calendar, audio, keyboard, Control
-  Center, click-away, calendar grid) rebuilt automatically when changed, and
+  Center, click-away, calendar grid) rebuilt in the background when changed
+  (the bar reloads after a successful build), and
   the Claude/Codex usage reader.
 - Updates are event-driven where macOS offers events; the few timers are
   cheap (clock 30s, Wi-Fi 60s, Claude/Codex usage 5 min, battery/volume 2 min);
   popups read their data only when opened. Usage pulls are two small GETs per
-  tick; unchanged caches skip the reader entirely.
+  tick, independently per provider; cached values render before network
+  replies arrive, and unchanged caches skip the reader entirely.
 
 Logs: `/opt/homebrew/var/log/sketchybar/sketchybar.out.log`.
 

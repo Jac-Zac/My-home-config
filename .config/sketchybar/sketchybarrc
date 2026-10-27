@@ -1,5 +1,5 @@
 #!/opt/homebrew/opt/lua@5.4/bin/lua
 
--- Load the sketchybar-package and prepare the helper binaries
+-- Set the module path; helpers are built after the bar's first paint.
 require("helpers")
 require("init")

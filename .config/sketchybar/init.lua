@@ -11,6 +11,8 @@ require("default")
 require("items")
 sbar.end_config()
 
+sbar.delay(0, require("helpers"))
+
 -- Enable hot reloading (must come before event_loop, which never returns)
 sbar.exec("sketchybar --hotload true")
 

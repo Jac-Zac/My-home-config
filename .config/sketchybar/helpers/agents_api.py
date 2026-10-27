@@ -152,7 +152,7 @@ def fetch_claude(force=False):
             d = json.loads(r.read().decode())
     except urllib.error.HTTPError as e:
         # 429 = rate-limited, 401 = expired token (Claude Code refreshes on run);
-        # keep old cache so the widget falls back to local files.
+        # Keep the last successful snapshot visible.
         backoff_set(CLAUDE_OUT, BACKOFF_429 if e.code == 429 else BACKOFF_ERR)
         print(f"claude: http {e.code}", file=sys.stderr)
         return False

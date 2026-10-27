@@ -1,9 +1,9 @@
 -- Add the sketchybar module to the package cpath
 package.cpath = package.cpath .. ";" .. os.getenv("HOME") .. "/.local/share/sketchybar_lua/?.so"
 
--- Rebuild helper binaries only when a source is newer than its binary.
--- A bare `make` on every load blocks startup and recompiles needlessly.
-do
+-- Called after the first configuration is committed. Checking and compiling
+-- both run in a child process; a cold Swift build must never delay the bar.
+return function()
 	local dir = os.getenv("HOME") .. "/.config/sketchybar/helpers"
 	local pairs_ = {
 		{ "menus/menus.c", "menus/bin/menus" },
@@ -14,25 +14,18 @@ do
 		{ "clickaway.swift", "clickaway" },
 		{ "calgrid.swift", "calgrid" },
 	}
-	-- One stat for every file (missing binaries print 0) instead of a popen per file
-	local files = {}
+	local checks = {}
 	for _, p in ipairs(pairs_) do
-		files[#files + 1] = p[1]
-		files[#files + 1] = p[2]
+		checks[#checks + 1] = '[ ! -x "' .. p[2] .. '" ] || [ "' .. p[1] .. '" -nt "' .. p[2] .. '" ]'
 	end
-	local h = io.popen("cd " .. dir .. " && for f in " .. table.concat(files, " ") .. "; do stat -f %m \"$f\" 2>/dev/null || echo 0; done")
-	local t = {}
-	if h then
-		for line in h:lines() do
-			t[#t + 1] = tonumber(line) or 0
+	local quoted_dir = "'" .. dir:gsub("'", "'\\''") .. "'"
+	sbar.exec("cd " .. quoted_dir .. " && if " .. table.concat(checks, " || ")
+		.. "; then make >&2 && printf rebuilt; fi", function(out, code)
+		if code ~= 0 then
+			print("Helper build failed; see the SketchyBar log.")
+		elseif out == "rebuilt" then
+			-- Restart watchers and readers that may have missed a missing helper.
+			sbar.exec("sketchybar --reload")
 		end
-		h:close()
-	end
-	for i = 1, #pairs_ do
-		local src, bin = t[2 * i - 1] or 0, t[2 * i] or 0
-		if bin < src then
-			os.execute("cd " .. dir .. " && make")
-			break
-		end
-	end
+	end)
 end

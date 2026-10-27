@@ -40,7 +40,7 @@ local function cache_t(name)
 	f:close()
 	return tonumber(s:match('"t"%s*:%s*(%d+)')) or 0
 end
-local last_api = math.max(cache_t("claude-api.json"), cache_t("codex-api.json"))
+local last_api = { claude = cache_t("claude-api.json"), codex = cache_t("codex-api.json") }
 local H5, WK = 5 * 3600, 7 * 86400
 local G_CLAUDE, G_OPENAI = utf8.char(0xEC82), utf8.char(0xEC81)
 
@@ -166,7 +166,7 @@ local KEYS = {
 -- pull never replaces real server numbers with stale local history.
 local function stale(fetched, resets)
 	if not fetched or os.time() - fetched > STALE_AGE then return true end
-	for _, r in ipairs(resets) do
+	for _, r in pairs(resets) do -- either reset may be absent
 		if r and r <= os.time() then return true end
 	end
 	return false
@@ -238,26 +238,25 @@ local function update_agent(agent)
 	end)
 end
 
-local function maybe_poll(cb)
-	-- Throttled network refresh; cb runs immediately too (cached values),
-	-- and again when the new caches land.
+local function maybe_poll(agent)
+	-- Each provider refreshes independently; a slow/missing provider never
+	-- delays the other's snapshot or suppresses its poll after a reload.
 	local now = os.time()
-	if now - last_api < API_EVERY then return end
-	last_api = now
-	P.exec("perl -e 'alarm 60; exec @ARGV' " .. API_POLL .. " >/dev/null 2>&1", cb)
+	if now - last_api[agent] < API_EVERY then return end
+	last_api[agent] = now
+	P.exec("perl -e 'alarm 45; exec @ARGV' " .. API_POLL .. " --" .. agent .. " >/dev/null 2>&1", function()
+		update_agent(agent)
+	end)
 end
 
 local function update_all()
 	paint() -- age markers and reset countdowns change with time
 	if wake.quiet() then return end
-	-- Server-side truth first; stat picks up the new cache files. Failures
-	-- leave the old caches untouched, so the last snapshot stays on screen.
-	maybe_poll(function()
-		update_agent("claude")
-		update_agent("codex")
-	end)
+	-- Read cached values immediately; network requests never gate rendering.
 	update_agent("claude")
 	update_agent("codex")
+	maybe_poll("claude")
+	maybe_poll("codex")
 end
 
 -- Single routine owner (60s ticks, but the network is throttled to API_EVERY;
@@ -277,4 +276,5 @@ end)
 -- Click-only open AND close: rows stay pressable
 pop:bind({ claude, codex }, paint)
 
-update_all() -- initial paint (routine also covers subsequent ticks)
+paint() -- placeholders only; background work starts after the first paint
+sbar.delay(0, update_all)
