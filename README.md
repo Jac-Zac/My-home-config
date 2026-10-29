@@ -35,7 +35,7 @@
 - **Fuzzy Finder** • [`Television`](https://github.com/alexpasmantier/television)
 - **Session Manager** • [`sesh`](https://github.com/joshmedeski/sesh) + [`tmux`](https://github.com/tmux/tmux)
 - **Editor** • [`Neovim`](https://github.com/neovim/neovim/) / [`Zed`](https://zed.dev)
-- **AI tools** • [`Claude Code`](https://claude.com/claude-code) / [`opencode`](https://opencode.ai)
+- **AI tools** • [`T3 Code`](https://t3.codes/)
 - **Theme** • [`Nord`](https://github.com/arcticicestudio/nord-iterm2)
 - **Font** • [`Inconsolata Nerd`](https://github.com/ryanoasis/nerd-fonts)
 - **System information** • [`fastfetch`](https://github.com/fastfetch-cli/fastfetch)
@@ -171,6 +171,17 @@ My Neovim config lives in its own repo: [`astronvim_jaczac`](https://github.com/
 	<summary><strong>Zed</strong></summary>
 
 > I also use [`Zed`](https://zed.dev) with vim mode, mostly for remote development over ssh and notebooks. The config is in [`.config/zed`](.config/zed) (settings, keymap and a task to preview Typst documents).
+
+</details>
+
+<details>
+	<summary><strong>T3 Code</strong></summary>
+
+> I use [`T3 Code`](https://t3.codes/) to work with coding agents.
+
+[Watch the video on YouTube](https://www.youtube.com/watch?v=uLGxb4F3SyI).
+
+![T3 Code on my desktop](.assets/t3-code.png)
 
 </details>
 
