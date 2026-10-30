@@ -1,21 +1,25 @@
 #!/usr/bin/env bash
 # Run in a CPU allocation on HPC; no root needed.
-# First install: HPC_ROOT=/path/to/scratch bash HPC_config/setup.sh
+# Optional cache root: HPC_ROOT=/path/to/scratch bash HPC_config/setup.sh
 set -euo pipefail
 
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 CONFIG="$HOME/.config"
 mkdir -p "$CONFIG/shell" "$CONFIG/zsh" "$HOME/.local/bin"
 
-if [ ! -f "$CONFIG/shell/local.sh" ]; then
-  : "${HPC_ROOT:?Set HPC_ROOT to your persistent scratch directory}"
-  printf 'export HPC_ROOT=%q\n' "$HPC_ROOT" > "$CONFIG/shell/local.sh"
+[ ! -f "$CONFIG/shell/local.sh" ] || . "$CONFIG/shell/local.sh"
+if [ -z "${HPC_ROOT:-}" ]; then
+  echo "warning: HPC_ROOT not set, using \$HOME for caches (mind your home quota)" >&2
 fi
-. "$CONFIG/shell/local.sh"
-: "${HPC_ROOT:?Set HPC_ROOT in ~/.config/shell/local.sh}"
+: "${HPC_ROOT:=$HOME}"
 if [ ! -d "$HPC_ROOT" ] || [ ! -w "$HPC_ROOT" ]; then
   echo "HPC_ROOT must be an existing writable directory: $HPC_ROOT" >&2
   exit 1
+fi
+
+# Persist only an explicitly supplied, validated root.
+if [ ! -f "$CONFIG/shell/local.sh" ] && [ "$HPC_ROOT" != "$HOME" ]; then
+  printf 'export HPC_ROOT=%q\n' "$HPC_ROOT" > "$CONFIG/shell/local.sh"
 fi
 
 install_file() {

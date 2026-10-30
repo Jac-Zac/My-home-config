@@ -1,5 +1,8 @@
 # Shared by Bash, zsh and batch jobs. local.sh is preserved by setup.sh.
-. "$HOME/.config/shell/local.sh"
+[ ! -f "$HOME/.config/shell/local.sh" ] || . "$HOME/.config/shell/local.sh"
+# Optional persistent cache root (scratch, /workspace, etc.) for small home quotas.
+# Set it in local.sh, which setup.sh preserves; otherwise use home.
+: "${HPC_ROOT:=$HOME}"
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HPC_ROOT/.cache"
 export XDG_STATE_HOME="$HOME/.local/state"

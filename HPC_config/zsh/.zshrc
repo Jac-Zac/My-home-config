@@ -57,7 +57,9 @@ PS1="%B%{$fg[cyan]%}[%{$fg[magenta]%}%n%{$fg[blue]%}@%{$fg[green]%}%m %{$fg[yell
 autoload -U compinit
 zstyle ':completion:*' menu select matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 zmodload zsh/complist
-compinit -d "$ZSH_COMPDUMP"
+# Skip insecure completion paths on shared clusters without prompting.
+# Run `autoload -Uz compaudit; compaudit` to inspect excluded paths.
+compinit -i -d "$ZSH_COMPDUMP"
 _comp_options+=(globdots)               # Include hidden files.
 
 # VIM
