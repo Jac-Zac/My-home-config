@@ -270,6 +270,22 @@ All shortcuts, and how they change inside the scrolling strip, are in
 | <kbd>command + shift + enter</kbd>  | Terminal (Ghostty)                                       |
 | <kbd>prefix + s</kbd> (tmux, prefix <kbd>ctrl + a</kbd>) | Sesh session picker                 |
 
+## HPC and remote Linux setup
+
+Run in a small CPU allocation on a cluster, or on a Runpod CPU machine:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Jac-Zac/My-home-config/master/HPC_config/bootstrap.sh | HPC_ROOT="$SCRATCH" bash
+```
+
+Use your assigned scratch path, or `/workspace` on Runpod after checking its persistent mount. 
+Needs Git, curl, tar, xz, `sha256sum`, make, a C compiler and ncurses development headers; no root access. 
+Installs missing uv/zsh under `~/.local` and configures scratch-backed caches without moving existing data. Log out and back in afterward.
+
+Change the storage root in `~/.config/shell/local.sh`. 
+Shared exports are in `~/.config/shell/profile` (source it in batch jobs); interactive config stays in `~/.config/zsh/.zshrc`. 
+Downloads/plugins are pinned; existing uv/zsh are reused. For an exact config revision, replace the final `bash` with `bash -s -- <commit>`. The bootstrap prints the commit it used.
+
 ## Other things 📚
 
 For the README.md I took inspiration from [this repo](https://github.com/owl4ce/dotfiles), and for the bootstrap script I took inspiration from [this repo instead](https://github.com/natelandau/dotfiles).

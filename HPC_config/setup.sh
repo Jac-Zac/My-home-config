@@ -1,50 +1,105 @@
 #!/usr/bin/env bash
-# Minimal shell setup for HPC / remote machines (no root needed).
-#   git clone --depth=1 https://github.com/Jac-Zac/My-home-config.git
-#   bash My-home-config/HPC_config/setup.sh
-# Safe to re-run to update: plugins are pulled, changed files are backed up
-# as <file>.before-<timestamp>.
-set -uo pipefail
+# Run in a CPU allocation on HPC; no root needed.
+# First install: HPC_ROOT=/path/to/scratch bash HPC_config/setup.sh
+set -euo pipefail
 
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-STAMP="$(date +%Y%m%d-%H%M%S)"
 CONFIG="$HOME/.config"
+mkdir -p "$CONFIG/shell" "$CONFIG/zsh" "$HOME/.local/bin"
 
-# Copy $1 to $2, backing up $2 if it exists and differs
+if [ ! -f "$CONFIG/shell/local.sh" ]; then
+  : "${HPC_ROOT:?Set HPC_ROOT to your persistent scratch directory}"
+  printf 'export HPC_ROOT=%q\n' "$HPC_ROOT" > "$CONFIG/shell/local.sh"
+fi
+. "$CONFIG/shell/local.sh"
+: "${HPC_ROOT:?Set HPC_ROOT in ~/.config/shell/local.sh}"
+if [ ! -d "$HPC_ROOT" ] || [ ! -w "$HPC_ROOT" ]; then
+  echo "HPC_ROOT must be an existing writable directory: $HPC_ROOT" >&2
+  exit 1
+fi
+
 install_file() {
   mkdir -p "$(dirname "$2")"
-  if [ -e "$2" ] && ! cmp -s "$1" "$2"; then
-    mv "$2" "$2.before-$STAMP"
-    echo "Backed up $2 -> $2.before-$STAMP"
-  fi
+  if [ ! -L "$2" ] && cmp -s "$1" "$2"; then return; fi
+  rm -f "$2"
   cp "$1" "$2"
 }
 
-# Clone a repo, or update it if it is already there
-git_sync() {
-  if [ -d "$2/.git" ]; then
-    git -C "$2" pull --ff-only --quiet || echo "Could not update $2"
-  else
-    git clone --depth=1 --quiet "$1" "$2" || echo "Could not clone $1"
+install_link() {
+  if [ -L "$2" ] && [ "$(readlink "$2")" = "$1" ]; then return; fi
+  rm -f "$2"
+  ln -s "$1" "$2"
+}
+
+add_source() {
+  local line="if [ -r \"\$HOME/.config/shell/$1\" ]; then . \"\$HOME/.config/shell/$1\"; fi"
+  if ! grep -Fqx "$line" "$2" 2>/dev/null; then
+    printf '\n%s\n' "$line" >> "$2"
   fi
 }
 
-command -v zsh >/dev/null || echo "WARNING: zsh not found, try 'module load zsh' or ask the admins"
+install_plugin() {
+  if [ ! -d "$2/.git" ]; then
+    git init --quiet "$2"
+    git -C "$2" remote add origin "$1"
+  fi
+  if ! git -C "$2" cat-file -e "$3^{commit}" 2>/dev/null; then
+    git -C "$2" fetch --quiet --depth=1 origin "$3"
+  fi
+  git -C "$2" checkout --quiet --detach "$3"
+}
 
-mkdir -p "$CONFIG/shell" "$HOME/.cache/zsh"
+# Install tools before changing login startup.
+build_dir=$(mktemp -d "${TMPDIR:-$HPC_ROOT}/hpc-setup.XXXXXX")
+trap 'rm -rf -- "$build_dir"' EXIT
+if [ ! -x "$HOME/.local/bin/uv" ]; then
+  curl -fsSL https://astral.sh/uv/0.13.6/install.sh -o "$build_dir/uv-install.sh"
+  UV_UNMANAGED_INSTALL="$HOME/.local/bin" sh "$build_dir/uv-install.sh"
+fi
+if ! command -v zsh >/dev/null 2>&1 && [ ! -x "$HOME/.local/bin/zsh" ]; then
+  curl -fsSL https://www.zsh.org/pub/zsh-5.9.2.tar.xz -o "$build_dir/zsh.tar.xz"
+  printf '%s  %s\n' 36fa734374b44783582cec09bcd67822e2f992c779ec1624ab5596df078d2f81 \
+    "$build_dir/zsh.tar.xz" | sha256sum -c -
+  tar -xJf "$build_dir/zsh.tar.xz" -C "$build_dir"
+  (
+    cd "$build_dir/zsh-5.9.2"
+    ./configure --prefix="$HOME/.local" --enable-multibyte
+    make -j "${SLURM_CPUS_PER_TASK:-2}"
+    make install
+  )
+fi
 
-install_file "$DIR/.zprofile" "$HOME/.zprofile"
-install_file "$DIR/.bash_profile" "$HOME/.bash_profile"
+install_file "$DIR/shell/profile" "$CONFIG/shell/profile"
+. "$CONFIG/shell/profile"
+mkdir -p "$XDG_CACHE_HOME/zsh" "$XDG_STATE_HOME/zsh" "$UV_CACHE_DIR" \
+  "$HF_HUB_CACHE" "$UV_PYTHON_INSTALL_DIR" "$UV_TOOL_DIR"
 install_file "$DIR/zsh/.zshrc" "$CONFIG/zsh/.zshrc"
 install_file "$DIR/aliases/aliasrc" "$CONFIG/aliases/aliasrc"
 install_file "$DIR/tmux/tmux.conf" "$CONFIG/tmux/tmux.conf"
 install_file "$DIR/vimrc" "$HOME/.vimrc"
 
-git_sync https://github.com/zsh-users/zsh-autosuggestions.git "$CONFIG/shell/zsh-autosuggestions"
-git_sync https://github.com/zdharma-continuum/fast-syntax-highlighting.git "$CONFIG/shell/fast-syntax-highlighting"
+install_plugin https://github.com/zsh-users/zsh-autosuggestions.git \
+  "$CONFIG/shell/zsh-autosuggestions" 85919cd1ffa7d2d5412f6d3fe437ebdbeeec4fc5
+install_plugin https://github.com/zdharma-continuum/fast-syntax-highlighting.git \
+  "$CONFIG/shell/fast-syntax-highlighting" 4672ad5dd9ad68a7effc1476d65afb7c584ce2b3
+install_plugin https://github.com/junegunn/fzf.git \
+  "$CONFIG/shell/fzf" 26ff936df038b6a62ec42cf18db27b2ea2bb8ec3
+"$CONFIG/shell/fzf/install" --bin
 
-# fzf binary (Ctrl+R history, Ctrl+T files), installed in user space
-git_sync https://github.com/junegunn/fzf.git "$CONFIG/shell/fzf"
-"$CONFIG/shell/fzf/install" --bin >/dev/null
-
-echo "Done. Log out and back in (bash login shells hand over to zsh automatically)."
+install_file "$DIR/.zshenv" "$HOME/.zshenv"
+install_link "$HOME/.zshenv" "$CONFIG/zsh/.zshenv"
+install_link "$CONFIG/shell/profile" "$HOME/.zprofile"
+install_link "$CONFIG/shell/profile" "$CONFIG/zsh/.zprofile"
+install_file "$DIR/.bash_profile" "$CONFIG/shell/bash-login"
+add_source profile "$HOME/.bashrc"
+if [ ! -e "$HOME/.bash_profile" ]; then
+  if [ -f "$HOME/.profile" ]; then
+    printf '. "$HOME/.profile"\n' > "$HOME/.bash_profile"
+  else
+    printf '[ ! -f "$HOME/.bashrc" ] || . "$HOME/.bashrc"\n' > "$HOME/.bash_profile"
+  fi
+fi
+add_source bash-login "$HOME/.bash_profile"
+zsh --version
+uv --version
+printf 'Cache root: %s\nDone. Log out and back in to use zsh.\n' "$XDG_CACHE_HOME"

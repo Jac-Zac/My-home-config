@@ -1,0 +1,32 @@
+# Shared by Bash, zsh and batch jobs. local.sh is preserved by setup.sh.
+. "$HOME/.config/shell/local.sh"
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_CACHE_HOME="$HPC_ROOT/.cache"
+export XDG_STATE_HOME="$HOME/.local/state"
+export HF_HOME="$XDG_CACHE_HOME/huggingface"
+export HF_HUB_CACHE="$HF_HOME/hub"
+export HF_DATASETS_CACHE="$HF_HOME/datasets"
+export HF_XET_CACHE="$HF_HOME/xet"
+export UV_CACHE_DIR="$XDG_CACHE_HOME/uv"
+export UV_PYTHON_INSTALL_DIR="$HPC_ROOT/.local/share/uv/python"
+export UV_TOOL_DIR="$HPC_ROOT/.local/share/uv/tools"
+export UV_TOOL_BIN_DIR="$HOME/.local/bin"
+export PIP_CACHE_DIR="$XDG_CACHE_HOME/pip"
+export TORCH_HOME="$XDG_CACHE_HOME/torch"
+export TRITON_CACHE_DIR="$XDG_CACHE_HOME/triton"
+export TORCHINDUCTOR_CACHE_DIR="$XDG_CACHE_HOME/torchinductor"
+export VLLM_CACHE_ROOT="$XDG_CACHE_HOME/vllm"
+export MPLCONFIGDIR="$XDG_CACHE_HOME/matplotlib"
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+export ZSH_COMPDUMP="$XDG_CACHE_HOME/zsh/.zcompdump"
+export EDITOR="vim"
+export LESSHISTFILE="-"
+case ":$PATH:" in
+    *:"$HOME/.local/bin":*) ;;
+    *) PATH="$HOME/.local/bin:$PATH" ;;
+esac
+case ":$PATH:" in
+    *:"$XDG_CONFIG_HOME/shell/fzf/bin":*) ;;
+    *) PATH="$PATH:$XDG_CONFIG_HOME/shell/fzf/bin" ;;
+esac
+export PATH

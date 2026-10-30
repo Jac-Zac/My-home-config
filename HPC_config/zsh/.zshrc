@@ -36,10 +36,11 @@ setopt COMPLETE_IN_WORD
 # CUSTOM CONFIG #
 #################
 
-# History in cache directory:
+# History survives cache cleanup.
 HISTSIZE=5000
 SAVEHIST=5000
-HISTFILE=~/.cache/zsh/zsh_history
+HISTFILE="$XDG_STATE_HOME/zsh/history"
+typeset -U path
 setopt SHARE_HISTORY HIST_IGNORE_DUPS HIST_IGNORE_SPACE EXTENDED_HISTORY
 unsetopt BEEP
 

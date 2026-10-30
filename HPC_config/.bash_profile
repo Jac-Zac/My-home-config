@@ -1,5 +1,6 @@
-# Keep the cluster's default bash setup (modules, paths)
-[ -f "$HOME/.bashrc" ] && . "$HOME/.bashrc"
+if [ -r "$HOME/.config/shell/profile" ]; then
+  . "$HOME/.config/shell/profile"
+fi
 
 # Hand interactive logins over to zsh (chsh is usually not allowed on HPC).
 # Skipped for non-interactive sessions (scp, rsync, ssh host cmd) and inside zsh.
