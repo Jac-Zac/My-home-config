@@ -14,6 +14,6 @@ done
 tv update-channels
 
 brew doctor
-mole
 rm -rf .npm/
+mole
 

@@ -222,7 +222,10 @@ hyper = "Ctrl + Alt + Meta"
 # ---- layout ----
 # per workspace
 "Meta + Shift + F" = { set_workspace_layout = { mode = "floating" } }
-"Meta + Shift + B" = { set_workspace_layout = { mode = "bsp" } }
+"Meta + Shift + B" = [
+  { set_workspace_layout = { mode = "bsp" } },
+  "balance",
+]
 "Meta + Shift + S" = { set_workspace_layout = { mode = "scrolling" } }
 "Meta + Shift + E" = { set_workspace_layout = { mode = "master_stack" } }
 "Meta + Shift + P" = "promote_to_master"
