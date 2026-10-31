@@ -87,12 +87,6 @@ install_plugin https://github.com/junegunn/fzf.git \
 
 install_file "$DIR/.zshenv" "$HOME/.zshenv"
 install_link "$HOME/.zshenv" "$CONFIG/zsh/.zshenv"
-# .zshenv already loads the profile; remove links from earlier installs.
-for profile_link in "$HOME/.zprofile" "$CONFIG/zsh/.zprofile"; do
-  if [ -L "$profile_link" ] && [ "$(readlink "$profile_link")" = "$CONFIG/shell/profile" ]; then
-    rm -- "$profile_link"
-  fi
-done
 install_file "$DIR/.bash_profile" "$CONFIG/shell/bash-login"
 if [ ! -e "$HOME/.bash_profile" ]; then
   if [ -f "$HOME/.bash_login" ]; then

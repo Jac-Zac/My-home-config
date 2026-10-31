@@ -29,7 +29,7 @@ autoload -U compinit
 zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 zmodload zsh/complist
-compinit -C
+compinit
 _comp_options+=(globdots)		# Include hidden files.
 
 # VIM
@@ -120,8 +120,3 @@ eval "$(zoxide init zsh)"
 # Tv shell integration
 # eval "$(tv init zsh)"
 eval "$(tv init zsh | sed 's/history -n -1 0/fc -ln -1 0/')"
-
-export PATH="$HOME/.local/bin:$PATH"
-
-# Claude switching
-export PATH="${XDG_CONFIG_HOME:-$HOME/.config}/npm/bin:$PATH"

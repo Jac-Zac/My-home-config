@@ -1,7 +1,6 @@
-# Set your own identity locally; these placeholders are inactive.
-# [user]
-#     name = Your Name
-#     email = you@example.com
+# Machine-specific identity and overrides stay out of the repository.
+[include]
+	path = local
 
 [pull]
 	rebase = true

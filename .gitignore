@@ -13,6 +13,7 @@
 
 # Personal / may contain secrets
 .config/git/gitconfig
+.config/git/local
 .config/opencode/*
 !.config/opencode/opencode.jsonc
 .config/netrc/
@@ -23,3 +24,6 @@
 .config/scripts/access_cineca
 *.before-*
 .config/brewfile/Brewfile.lock.json
+
+# Python test bytecode
+__pycache__/

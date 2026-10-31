@@ -73,7 +73,7 @@ _usage_() {
   ${underline}Run the script with no options to install everything${rm_underline}
 
   ${bold}$(basename "$0") [OPTION]${reset}
-  Configures a new computer running macOS (or a minimal Linux shell setup):
+  Configures macOS; on Linux uses HPC_config/setup.sh:
     * Xcode Command Line Tools + Homebrew
     * Packages and applications from the Brewfile
     * Shell / tmux / window manager configuration
@@ -82,8 +82,7 @@ _usage_() {
   ${bold}Options:${reset}
    ${yellow} -h, --help          Display this help and exit ${reset}
    ${green} -u, --update        Pull the repo, sync config, update plugins and packages ${reset}
-    -r, --restore       Only copy the config + shell plugins (no packages)
-    -s, --shell         Same as --restore (kept for compatibility)
+    -r, --restore       Configure shell and plugins (Linux installs missing uv/zsh)
     -n, --nvim          Install / update my nvim configuration
     -p, --preferences   Load my custom macOS preferences
 EOF
@@ -99,10 +98,29 @@ EOF
 _syncConfig_() {
   _info_ "Syncing configuration into ~/.config"
   mkdir -p "$HOME/.config" "$HOME/.cache/zsh" "$HOME/.cache/wget"
+  # Capture the active identity before replacing the shell profile or Git config.
+  local identity="$HOME/.config/git/local" name email
+  if [ ! -e "$identity" ]; then
+    name=$(git config --get user.name || true)
+    email=$(git config --get user.email || true)
+    if [ -n "$name" ] || [ -n "$email" ]; then
+      mkdir -p "$HOME/.config/git"
+      ( umask 077
+        touch "$identity"
+        [ -z "$name" ] || git config --file "$identity" user.name "$name"
+        [ -z "$email" ] || git config --file "$identity" user.email "$email"
+      )
+    fi
+  fi
+  # Existing Zed settings contain personal SSH connections and preferences.
+  local exclude=
+  if [ -e "$HOME/.config/zed/settings.json" ]; then
+    exclude=--exclude=/zed/settings.json
+  fi
   _link_ "$HOME/.config/shell/profile" "$HOME/.zprofile"
 
   local changes
-  changes=$(rsync -aicn --from0 --files-from=<(git -C "$REPO/.config" ls-files -z -- .) \
+  changes=$(rsync -aicn ${exclude:+"$exclude"} --from0 --files-from=<(git -C "$REPO/.config" ls-files -z -- .) \
     "$REPO/.config/" "$HOME/.config/" | grep '^[>c]' || true)
   if [ -z "$changes" ]; then
     _ok_ "Config already up to date"
@@ -112,7 +130,7 @@ _syncConfig_() {
       _warn_ "Skipped config sync"
       return 0
     fi
-    rsync -ac --from0 --files-from=<(git -C "$REPO/.config" ls-files -z -- .) \
+    rsync -ac ${exclude:+"$exclude"} --from0 --files-from=<(git -C "$REPO/.config" ls-files -z -- .) \
       --backup --suffix=".before-$STAMP" \
       "$REPO/.config/" "$HOME/.config/"
     _ok_ "Config synced (overwritten files backed up with suffix .before-$STAMP)"
@@ -136,6 +154,10 @@ _shellPlugins_() {
 }
 
 _shellConfig_() {
+  if [ "$OS" != "Darwin" ]; then
+    bash "$REPO/HPC_config/setup.sh"
+    return $?
+  fi
   _syncConfig_
   _shellPlugins_
   if [ "$(basename "${SHELL:-}")" != "zsh" ] && command -v zsh >/dev/null; then
@@ -287,23 +309,6 @@ _nvim_() {
 }
 
 ############################
-#       Linux install      #
-############################
-
-# Minimal shell setup for Linux machines (no window manager / GUI apps)
-_linuxPackages_() {
-  _info_ "Installing base packages"
-  local pkgs=(zsh git curl wget tmux neovim fzf ripgrep rsync)
-  if command -v pacman >/dev/null; then sudo pacman -Syu --needed "${pkgs[@]}" lsd bat zoxide fd
-  elif command -v apt-get >/dev/null; then sudo apt-get update && sudo apt-get install -y "${pkgs[@]}" bat fd-find
-  elif command -v dnf >/dev/null; then sudo dnf install -y "${pkgs[@]}" bat fd-find
-  elif command -v zypper >/dev/null; then sudo zypper install -y "${pkgs[@]}"
-  elif command -v apk >/dev/null; then sudo apk add --no-cache "${pkgs[@]}"
-  else _warn_ "No known package manager, install manually: ${pkgs[*]}"
-  fi
-}
-
-############################
 #          Update          #
 ############################
 
@@ -311,18 +316,16 @@ _update_() {
   _info_ "Pulling latest configuration"
   git -C "$REPO" pull --ff-only || _warn_ "git pull failed (local changes?), continuing with the current checkout"
 
-  _syncConfig_
-  _shellPlugins_
+  _shellConfig_ || return $?
 
-  if [ "$OS" = "Darwin" ]; then
-    _info_ "Updating Homebrew packages"
-    brew update && brew bundle install --file="$REPO/.config/brewfile/Brewfile" && brew upgrade
-    brew cleanup
-  elif command -v pacman >/dev/null; then
-    sudo pacman -Syu
-  elif command -v apt-get >/dev/null; then
-    sudo apt-get update && sudo apt-get upgrade -y
+  if [ "$OS" != "Darwin" ]; then
+    _ok_ "HPC configuration updated"
+    return 0
   fi
+
+  _info_ "Updating Homebrew packages"
+  brew update && brew bundle install --file="$REPO/.config/brewfile/Brewfile" && brew upgrade
+  brew cleanup
 
   command -v tv >/dev/null && tv update-channels
   [ -d "$HOME/.config/nvim/.git" ] && _nvim_
@@ -349,8 +352,8 @@ _mainScript_() {
     fi
     _macSystemPrefs_
   else
-    _linuxPackages_
     _shellConfig_
+    return $?
   fi
 
   _nvim_
@@ -365,7 +368,7 @@ case "${1:-}" in
   "") _mainScript_ ;;
   -h | --help) _usage_ ;;
   -u | --update) _update_ ;;
-  -r | --restore | -s | --shell) _shellConfig_ ;;
+  -r | --restore) _shellConfig_ ;;
   -n | --nvim) _nvim_ ;;
   -p | --preferences) _macSystemPrefs_ ;;
   *) _usage_ >&2; _die_ "invalid option: '$1'" ;;

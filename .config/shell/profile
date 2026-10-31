@@ -13,8 +13,8 @@ export MANPAGER="nvim +Man!"
 export SNACKS_GHOSTTY=1
 
 # clean up
-export ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh"
 export XDG_CONFIG_HOME="$HOME/.config"
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
 export LESSHISTFILE="-"
@@ -26,13 +26,12 @@ export MPLCONFIGDIR="${XDG_CONFIG_HOME:-$HOME/.config}/python_libraries/matplotl
 export JUPYTER_CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/python_libraries/jupyter"
 export GIT_CONFIG_GLOBAL="${XDG_CONFIG_HOME:-$HOME/.config}/git/config"
 export HOMEBREW_BREWFILE="${XDG_CONFIG_HOME:-$HOME/.config}/brewfile/Brewfile"
-export NETRC="${XDG_CONFIG_HOME:-$HOME/.config}/netrc/netrc"
 export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"
 export NPM_CONFIG_PREFIX="$XDG_CONFIG_HOME/npm"
 export NPM_CONFIG_CACHE="${XDG_CACHE_HOME:-$HOME/.cache}/npm"
-export OLLAMA_MODELS="$XDG_CONFIG_HOME/ollama/models"
 export CLAUDE_CONFIG_DIR="$XDG_CONFIG_HOME/claude"
 export CODEX_HOME="$XDG_CONFIG_HOME/codex"
+export T3CODE_HOME="$XDG_CONFIG_HOME/t3"
 
 # Adding lmstudio
 PATH="$PATH:$HOME/.lmstudio/bin"
@@ -58,5 +57,3 @@ PATH="$HOME/.local/bin:$PATH"
 typeset -U PATH
 
 export PATH
-
-export T3CODE_HOME="$HOME/.config/t3"

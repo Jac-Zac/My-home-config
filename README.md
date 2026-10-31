@@ -18,6 +18,10 @@
 	This configuration repo contains everything to set up my terminal from scratch in two scripts. It also has a very easy way to update your old configuration to keep it up to date.
 </p>
 
+Config sync preserves existing Zed user settings, including SSH connections. Git uses
+`~/.config/git/config` for shared defaults and includes an ignored `~/.config/git/local`
+for your identity and personal overrides. The installer preserves your current Git identity.
+
 ## Configuration :computer:<img alt="" align="right" src="https://img.shields.io/github/repo-size/Jac-Zac/My-Home-Config?color=gree&style=flat-square"/>
 
   <img href=".assets/new_showcase.png" src="https://raw.githubusercontent.com/Jac-Zac/My-home-config/master/.assets/new_showcase.png" alt="minimal" align="right" width="400px"/>
@@ -283,6 +287,8 @@ Needs Git, curl, tar, xz, `sha256sum`, make, a C compiler and ncurses developmen
 Installs missing uv/zsh under `~/.local` and configures scratch-backed caches without moving existing data.
 A small hook in `~/.bash_profile` starts zsh automatically for interactive logins;
 `~/.bashrc` is left untouched. Log out and back in afterward.
+
+On Linux, `installer.sh` uses this same HPC setup, including for `--restore` and `--update`.
 
 Change the storage root in `~/.config/shell/local.sh`. 
 Shared exports are in `~/.config/shell/profile` (source it in batch jobs); interactive config stays in `~/.config/zsh/.zshrc`. 
