@@ -7,7 +7,7 @@ Pro/Max plans that JSON carries rate_limits.five_hour / seven_day
   1. saves them to ~/.cache/sketchybar/claude-usage.json (only when changed),
   2. pokes sketchybar (`agents_refresh`) so the bar updates at once,
   3. prints a compact status line for Claude Code: "ctx 23% · 5h 30% · wk 4%".
-No network, no credentials. Enable in ~/.config/claude/settings.json:
+No network, no credentials. Enable in $CLAUDE_CONFIG_DIR/settings.json (default ~/.claude):
   "statusLine": {"type": "command", "command": "~/.config/sketchybar/helpers/claude_statusline.lua"} ]]
 
 package.path = arg[0]:match("^(.*)/") .. "/?.lua;" .. package.path

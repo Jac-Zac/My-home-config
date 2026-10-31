@@ -27,11 +27,16 @@ info "Calendar: open the calendar popup once and allow sketchybar (it shows 'All
 info "Control Center: macOS asks once for Bluetooth the first time you use that toggle"
 
 echo "Optional (widgets hide when absent)"
-claude_dir=${CLAUDE_CONFIG_DIR:-$HOME/.config/claude}
-codex_dir=${CODEX_HOME:-$HOME/.config/codex}
-{ [ -f "$claude_dir/.claude.json" ] && pass "Claude Code (usage credentials)"; } || info "Claude Code not found — Claude usage poll has no token"
+# $VAR, else the GUI session value (what sketchybar sees), else the tool default.
+config_dir() {
+  v=$(printenv "$1" || launchctl getenv "$1" 2>/dev/null)
+  printf '%s\n' "${v:-$HOME/$2}"
+}
+claude_dir=$(config_dir CLAUDE_CONFIG_DIR .claude)
+codex_dir=$(config_dir CODEX_HOME .codex)
+{ [ -d "$claude_dir" ] && pass "Claude Code (usage credentials)"; } || info "Claude Code not found — Claude usage poll has no token"
 { [ -f "$codex_dir/auth.json" ] && pass "Codex (usage credentials)"; } || info "Codex not found — Codex usage poll has no token"
-if [ -f "$claude_dir/.claude.json" ]; then
+if [ -d "$claude_dir" ]; then
   grep -q "claude_statusline.lua" "$claude_dir/settings.json" 2>/dev/null && pass "Claude live usage (statusline feed)" \
     || info "No Claude Code statusline feed (optional): usage still refreshes from the 5-min OAuth poll; add it for instant updates: \"statusLine\": {\"type\": \"command\", \"command\": \"~/.config/sketchybar/helpers/claude_statusline.lua\"}"
 fi

@@ -36,9 +36,23 @@ HOME = os.path.expanduser("~")
 CACHE_DIR = os.path.join(HOME, ".cache", "sketchybar")
 CLAUDE_OUT = os.path.join(CACHE_DIR, "claude-api.json")
 CODEX_OUT = os.path.join(CACHE_DIR, "codex-api.json")
-# launchd does not load the shell profile, so default to the same paths it sets.
-CLAUDE_DIR = os.environ.get("CLAUDE_CONFIG_DIR") or os.path.join(HOME, ".config", "claude")
-CODEX_AUTH = os.path.join(os.environ.get("CODEX_HOME") or os.path.join(HOME, ".config", "codex"), "auth.json")
+
+
+def config_dir(var, default):
+    """$var, else the GUI session's value (launchd skips the shell profile), else the tool default."""
+    value = os.environ.get(var)
+    if not value and sys.platform == "darwin":
+        try:
+            value = subprocess.run(
+                ["launchctl", "getenv", var], capture_output=True, text=True, timeout=2
+            ).stdout.strip()
+        except Exception:
+            value = None
+    return value or os.path.join(HOME, default)
+
+
+CLAUDE_DIR = config_dir("CLAUDE_CONFIG_DIR", ".claude")
+CODEX_AUTH = os.path.join(config_dir("CODEX_HOME", ".codex"), "auth.json")
 TIMEOUT = 10
 UA = "claude-code/2.0.36"
 CODEX_CLIENT_ID = "app_EMoamEEZ73f0CkXaXp7hrann"
