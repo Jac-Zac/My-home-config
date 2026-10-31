@@ -24,6 +24,3 @@
 .config/scripts/access_cineca
 *.before-*
 .config/brewfile/Brewfile.lock.json
-
-# Python test bytecode
-__pycache__/

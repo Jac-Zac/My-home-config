@@ -39,7 +39,7 @@ looks off.
 ### Optional
 
 - **Live Claude usage** — Claude Code passes its current rate limits to a
-  statusline script on every update. Add to `~/.claude/settings.json`:
+  statusline script on every update. Add to `~/.config/claude/settings.json`:
   ```json
   "statusLine": { "type": "command", "command": "~/.config/sketchybar/helpers/claude_statusline.lua" }
   ```

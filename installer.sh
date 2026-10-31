@@ -98,20 +98,6 @@ EOF
 _syncConfig_() {
   _info_ "Syncing configuration into ~/.config"
   mkdir -p "$HOME/.config" "$HOME/.cache/zsh" "$HOME/.cache/wget"
-  # Capture the active identity before replacing the shell profile or Git config.
-  local identity="$HOME/.config/git/local" name email
-  if [ ! -e "$identity" ]; then
-    name=$(git config --get user.name || true)
-    email=$(git config --get user.email || true)
-    if [ -n "$name" ] || [ -n "$email" ]; then
-      mkdir -p "$HOME/.config/git"
-      ( umask 077
-        touch "$identity"
-        [ -z "$name" ] || git config --file "$identity" user.name "$name"
-        [ -z "$email" ] || git config --file "$identity" user.email "$email"
-      )
-    fi
-  fi
   # Existing Zed settings contain personal SSH connections and preferences.
   local exclude=
   if [ -e "$HOME/.config/zed/settings.json" ]; then

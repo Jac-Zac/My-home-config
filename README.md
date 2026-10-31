@@ -18,10 +18,6 @@
 	This configuration repo contains everything to set up my terminal from scratch in two scripts. It also has a very easy way to update your old configuration to keep it up to date.
 </p>
 
-Config sync preserves existing Zed user settings, including SSH connections. Git uses
-`~/.config/git/config` for shared defaults and includes an ignored `~/.config/git/local`
-for your identity and personal overrides. The installer preserves your current Git identity.
-
 ## Configuration :computer:<img alt="" align="right" src="https://img.shields.io/github/repo-size/Jac-Zac/My-Home-Config?color=gree&style=flat-square"/>
 
   <img href=".assets/new_showcase.png" src="https://raw.githubusercontent.com/Jac-Zac/My-home-config/master/.assets/new_showcase.png" alt="minimal" align="right" width="400px"/>
@@ -241,6 +237,10 @@ chmod +x installer.sh
 > You should close your terminal windows and open a new one, to reload the configurations
 
 _Run `./installer.sh -r` on a machine that already has the packages to only restore the configuration (shell, tmux, rift, sketchybar...)_
+
+Config sync keeps your existing Zed settings, including SSH connections. Git reads shared
+defaults from `~/.config/git/config`, which includes the untracked `~/.config/git/local`
+for your name, email and personal overrides.
 
 **Installation Completed !**
 

@@ -33,9 +33,6 @@ export CLAUDE_CONFIG_DIR="$XDG_CONFIG_HOME/claude"
 export CODEX_HOME="$XDG_CONFIG_HOME/codex"
 export T3CODE_HOME="$XDG_CONFIG_HOME/t3"
 
-# Adding lmstudio
-PATH="$PATH:$HOME/.lmstudio/bin"
-
 # Adding scripts to path
 PATH="${XDG_CONFIG_HOME:-$HOME/.config}/scripts:$PATH"
 

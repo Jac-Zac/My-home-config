@@ -5,11 +5,11 @@ Polls the same server-side endpoints the CLIs (and T3 Code) use:
 
   Claude: GET https://api.anthropic.com/api/oauth/usage
     Bearer <keychain "Claude Code-credentials" accessToken>
-    (~/.claude/.credentials.json / CLAUDE_CODE_OAUTH_TOKEN fallback)
+    ($CLAUDE_CONFIG_DIR/.credentials.json / CLAUDE_CODE_OAUTH_TOKEN fallback)
     headers: anthropic-beta: oauth-2025-04-20,
              User-Agent: claude-code/<version> (required, else 429s)
   Codex:  GET https://chatgpt.com/backend-api/wham/usage
-    Bearer <~/.codex/auth.json tokens.access_token>
+    Bearer <$CODEX_HOME/auth.json tokens.access_token>
     + ChatGPT-Account-Id: <tokens.account_id>
     (401 -> refresh via POST https://auth.openai.com/oauth/token)
 
@@ -36,7 +36,9 @@ HOME = os.path.expanduser("~")
 CACHE_DIR = os.path.join(HOME, ".cache", "sketchybar")
 CLAUDE_OUT = os.path.join(CACHE_DIR, "claude-api.json")
 CODEX_OUT = os.path.join(CACHE_DIR, "codex-api.json")
-CODEX_AUTH = os.path.join(HOME, ".codex", "auth.json")
+# launchd does not load the shell profile, so default to the same paths it sets.
+CLAUDE_DIR = os.environ.get("CLAUDE_CONFIG_DIR") or os.path.join(HOME, ".config", "claude")
+CODEX_AUTH = os.path.join(os.environ.get("CODEX_HOME") or os.path.join(HOME, ".config", "codex"), "auth.json")
 TIMEOUT = 10
 UA = "claude-code/2.0.36"
 CODEX_CLIENT_ID = "app_EMoamEEZ73f0CkXaXp7hrann"
@@ -115,7 +117,7 @@ def claude_token():
     except Exception:
         pass
     # 2. credentials file (linux/alt)
-    for p in (os.path.join(HOME, ".claude", ".credentials.json"),):
+    for p in (os.path.join(CLAUDE_DIR, ".credentials.json"),):
         try:
             d = json.load(open(p))
             at = d.get("claudeAiOauth", {}).get("accessToken")
