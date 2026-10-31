@@ -4,7 +4,10 @@
 # Set it in local.sh, which setup.sh preserves; otherwise use home.
 : "${HPC_ROOT:=$HOME}"
 export XDG_CONFIG_HOME="$HOME/.config"
+export CLAUDE_CONFIG_DIR="$XDG_CONFIG_HOME/claude"
+export CODEX_HOME="$XDG_CONFIG_HOME/codex"
 export XDG_CACHE_HOME="$HPC_ROOT/.cache"
+export NPM_CONFIG_CACHE="${XDG_CACHE_HOME:-$HOME/.cache}/npm"
 export XDG_STATE_HOME="$HOME/.local/state"
 export HF_HOME="$XDG_CACHE_HOME/huggingface"
 export HF_HUB_CACHE="$HF_HOME/hub"
@@ -30,6 +33,6 @@ case ":$PATH:" in
 esac
 case ":$PATH:" in
     *:"$XDG_CONFIG_HOME/shell/fzf/bin":*) ;;
-    *) PATH="$PATH:$XDG_CONFIG_HOME/shell/fzf/bin" ;;
+    *) PATH="$XDG_CONFIG_HOME/shell/fzf/bin:$PATH" ;;
 esac
 export PATH

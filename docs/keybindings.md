@@ -37,8 +37,8 @@ workspaces.
 | <kbd>command + space</kbd>         | Raycast *(Raycast)*     |
 | <kbd>command + w</kbd> / <kbd>command + q</kbd> | Close window / quit app *(macOS)* |
 
-Some apps always open on their own workspace: Ghostty `02`, ChatGPT `03`,
-Claude `04`, Slack `05`. Settings-like apps (System Settings, Finder, Mail,
+Some apps always open on their own workspace: T3 Code `02`, Ghostty `03`,
+Slack `05`. Settings-like apps (System Settings, Finder, Mail,
 Calculator, Activity Monitor…) always float.
 
 ## Windows and workspaces

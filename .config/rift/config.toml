@@ -140,8 +140,8 @@ workspace_rules = []
 # Workspace indices are 0-based (workspace 1 = "02" in the bar).
 app_rules = [
   # Placement
-  { app_id = "com.mitchellh.ghostty", workspace = 1 },           # 02 terminal
-  { app_id = "com.t3tools.t3code", workspace = 2, focus = true }, # 03 T3 Code
+  { app_id = "com.t3tools.t3code", workspace = 1, focus = true }, # 02 T3 Code
+  { app_id = "com.mitchellh.ghostty", workspace = 2 },           # 03 terminal
   { app_id = "com.tinyspeck.slackmacgap", workspace = 4 },       # 05 Slack
   # WhatsApp: no rule, opens on the current workspace (cmd-m)
 

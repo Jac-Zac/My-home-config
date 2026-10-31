@@ -108,7 +108,7 @@ _You can also edit your prompt in the [`~/.config/zsh/.p10k.zsh`](.config/zsh/.p
 
 - Press `prefix + s` in tmux to open the sesh session picker
 - Press `prefix + t` to jump between windows of the current session (custom `tmux-session-windows` channel)
-- Press `prefix + S` to pick an ssh host and open it in a new window
+- Press `prefix + S` to pick an SSH host and create or switch to its tmux session
 - Television also provides shell integration with `Ctrl+T` for file picking and `Ctrl+R` for history
 
 ### Recommended Configuration
@@ -280,7 +280,9 @@ curl -fsSL https://raw.githubusercontent.com/Jac-Zac/My-home-config/master/HPC_c
 
 Use your assigned scratch path, or `/workspace` on Runpod after checking its persistent mount. 
 Needs Git, curl, tar, xz, `sha256sum`, make, a C compiler and ncurses development headers; no root access. 
-Installs missing uv/zsh under `~/.local` and configures scratch-backed caches without moving existing data. Log out and back in afterward.
+Installs missing uv/zsh under `~/.local` and configures scratch-backed caches without moving existing data.
+A small hook in `~/.bash_profile` starts zsh automatically for interactive logins;
+`~/.bashrc` is left untouched. Log out and back in afterward.
 
 Change the storage root in `~/.config/shell/local.sh`. 
 Shared exports are in `~/.config/shell/profile` (source it in batch jobs); interactive config stays in `~/.config/zsh/.zshrc`. 

@@ -1,6 +1,8 @@
 fastfetch
 
-[[ -f ~/.zprofile ]] && source ~/.zprofile
+if [[ ! -o login && -r ~/.zprofile ]]; then
+    source ~/.zprofile
+fi
 
 # Allow Ctrl+J and Ctrl+K to pass through to programs like TV
 bindkey -r "^J"
@@ -24,10 +26,10 @@ setopt INC_APPEND_HISTORY
 
 # # Basic auto/tab complete:
 autoload -U compinit
-ZSH_COMPDUMP="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompdump"
-zstyle ':completion:*' menu select matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*' menu select
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 zmodload zsh/complist
-compinit -C -d "$ZSH_COMPDUMP"
+compinit -C
 _comp_options+=(globdots)		# Include hidden files.
 
 # VIM

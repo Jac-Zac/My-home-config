@@ -35,17 +35,12 @@ install_link() {
   ln -s "$1" "$2"
 }
 
-add_source() {
-  local line="if [ -r \"\$HOME/.config/shell/$1\" ]; then . \"\$HOME/.config/shell/$1\"; fi"
-  if ! grep -Fqx "$line" "$2" 2>/dev/null; then
-    printf '\n%s\n' "$line" >> "$2"
-  fi
-}
-
 install_plugin() {
   if [ ! -d "$2/.git" ]; then
     git init --quiet "$2"
     git -C "$2" remote add origin "$1"
+  elif [ "$(git -C "$2" remote get-url origin)" != "$1" ]; then
+    git -C "$2" remote set-url origin "$1"
   fi
   if ! git -C "$2" cat-file -e "$3^{commit}" 2>/dev/null; then
     git -C "$2" fetch --quiet --depth=1 origin "$3"
@@ -53,7 +48,7 @@ install_plugin() {
   git -C "$2" checkout --quiet --detach "$3"
 }
 
-# Install tools before changing login startup.
+# Install tools before configuring zsh.
 build_dir=$(mktemp -d "${TMPDIR:-$HPC_ROOT}/hpc-setup.XXXXXX")
 trap 'rm -rf -- "$build_dir"' EXIT
 if [ ! -x "$HOME/.local/bin/uv" ]; then
@@ -92,18 +87,26 @@ install_plugin https://github.com/junegunn/fzf.git \
 
 install_file "$DIR/.zshenv" "$HOME/.zshenv"
 install_link "$HOME/.zshenv" "$CONFIG/zsh/.zshenv"
-install_link "$CONFIG/shell/profile" "$HOME/.zprofile"
-install_link "$CONFIG/shell/profile" "$CONFIG/zsh/.zprofile"
+# .zshenv already loads the profile; remove links from earlier installs.
+for profile_link in "$HOME/.zprofile" "$CONFIG/zsh/.zprofile"; do
+  if [ -L "$profile_link" ] && [ "$(readlink "$profile_link")" = "$CONFIG/shell/profile" ]; then
+    rm -- "$profile_link"
+  fi
+done
 install_file "$DIR/.bash_profile" "$CONFIG/shell/bash-login"
-add_source profile "$HOME/.bashrc"
 if [ ! -e "$HOME/.bash_profile" ]; then
-  if [ -f "$HOME/.profile" ]; then
+  if [ -f "$HOME/.bash_login" ]; then
+    printf '. "$HOME/.bash_login"\n' > "$HOME/.bash_profile"
+  elif [ -f "$HOME/.profile" ]; then
     printf '. "$HOME/.profile"\n' > "$HOME/.bash_profile"
   else
     printf '[ ! -f "$HOME/.bashrc" ] || . "$HOME/.bashrc"\n' > "$HOME/.bash_profile"
   fi
 fi
-add_source bash-login "$HOME/.bash_profile"
+login_hook='if [ -r "$HOME/.config/shell/bash-login" ]; then . "$HOME/.config/shell/bash-login"; fi'
+if ! grep -Fqx "$login_hook" "$HOME/.bash_profile"; then
+  printf '\n%s\n' "$login_hook" >> "$HOME/.bash_profile"
+fi
 zsh --version
 uv --version
-printf 'Cache root: %s\nDone. Log out and back in to use zsh.\n' "$XDG_CACHE_HOME"
+printf 'Cache root: %s\nDone. Log out and back in to start zsh automatically.\n' "$XDG_CACHE_HOME"

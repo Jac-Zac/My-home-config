@@ -55,10 +55,12 @@ PS1="%B%{$fg[cyan]%}[%{$fg[magenta]%}%n%{$fg[blue]%}@%{$fg[green]%}%m %{$fg[yell
 
 # # Basic auto/tab complete:
 autoload -U compinit
-zstyle ':completion:*' menu select matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*' menu select
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 zmodload zsh/complist
 # Skip insecure completion paths on shared clusters without prompting.
 # Run `autoload -Uz compaudit; compaudit` to inspect excluded paths.
+mkdir -p -- "${ZSH_COMPDUMP:h}"
 compinit -i -d "$ZSH_COMPDUMP"
 _comp_options+=(globdots)               # Include hidden files.
 
@@ -136,3 +138,6 @@ source $XDG_CONFIG_HOME/shell/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # zsh syntax highlighting
 source $XDG_CONFIG_HOME/shell/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+
+# Optional machine-specific interactive settings.
+[ ! -r "$ZDOTDIR/local.zsh" ] || source "$ZDOTDIR/local.zsh"

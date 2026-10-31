@@ -1,10 +1,10 @@
 [metadata]
 name = "ssh-switcher"
-description = "SSH host switcher with tmux window rename"
-requirements = ["grep", "tr", "cut", "awk"]
+description = "Create or switch to a tmux session for an SSH host"
+requirements = ["awk", "tmux"]
 
 [source]
-command = "grep -E '^Host(name)? ' $HOME/.ssh/config | tr -s ' ' | cut -d' ' -f2- | tr ' ' '\n' | grep -v '^$'"
+command = "awk 'tolower($1) == \"host\" { for (i=2; i<=NF && $i !~ /^#/; i++) if ($i !~ /[*?!]/ && !seen[$i]++) print $i }' \"$HOME/.ssh/config\""
 
 [preview]
 command = "awk '/^Host / { found=0 } /^Host (.*[[:space:]])?'{}'([[:space:]])?$/ { found=1 } found' $HOME/.ssh/config | bat -n --color=always -l ssh_config -p"
@@ -14,6 +14,10 @@ command = "awk '/^Host / { found=0 } /^Host (.*[[:space:]])?'{}'([[:space:]])?$/
 enter = "actions:connect"
 
 [actions.connect]
-description = "SSH into the selected host"
-command = "tmux rename-window '{}' && ssh '{}'"
+description = "Open the selected host's tmux session"
+command = "sh \"$HOME/.config/tmux/scripts/ssh-session.sh\" '{}'"
 mode = "execute"
+
+# Keep the standard Nord UI; only the channel badge uses muted yellow.
+[ui.theme_overrides]
+channel_mode_bg = "#D9C28F"

@@ -29,8 +29,10 @@ export HOMEBREW_BREWFILE="${XDG_CONFIG_HOME:-$HOME/.config}/brewfile/Brewfile"
 export NETRC="${XDG_CONFIG_HOME:-$HOME/.config}/netrc/netrc"
 export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"
 export NPM_CONFIG_PREFIX="$XDG_CONFIG_HOME/npm"
+export NPM_CONFIG_CACHE="${XDG_CACHE_HOME:-$HOME/.cache}/npm"
 export OLLAMA_MODELS="$XDG_CONFIG_HOME/ollama/models"
-# export CLAUDE_CONFIG_DIR="$XDG_CONFIG_HOME/claude"
+export CLAUDE_CONFIG_DIR="$XDG_CONFIG_HOME/claude"
+export CODEX_HOME="$XDG_CONFIG_HOME/codex"
 
 # Adding lmstudio
 PATH="$PATH:$HOME/.lmstudio/bin"
@@ -56,3 +58,5 @@ PATH="$HOME/.local/bin:$PATH"
 typeset -U PATH
 
 export PATH
+
+export T3CODE_HOME="$HOME/.config/t3"
